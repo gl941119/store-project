@@ -1,0 +1,204 @@
+* {box-sizing: border-box;}
+
+html {
+  width: 100%;
+  height: 100%;
+  touch-action: manipulation;
+  /* IE11+ 禁止双击缩放，关于移动端300ms延迟：https://github.com/ftlabs/fastclick */
+  -ms-touch-action: manipulation/* IE10+ 禁止双击缩放 */
+;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family:PingFangSC-Regular,PingFangSC,'Microsoft YaHei', STHeiti, Helvetica, Arial, sans-serif !important;
+  font-weight: 400;
+}
+
+img {
+  /*vertical-align: top;*/
+  /*border: 0;*/
+}
+
+ul,
+li,
+ol {
+  list-style-type: none;
+}
+
+a,
+blockquote,
+body,
+button,
+code,
+dd,
+div,
+dl,
+dt,
+em,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+iframe,
+
+input,
+label,
+li,
+object,
+ol,
+p,
+q,
+small,
+span,
+strong,
+table,
+tbody,
+td,
+th,
+tr,
+ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  line-height: normal;
+}
+
+textarea {
+  resize: none;
+  border: 0;
+}
+
+button,
+input,
+select,
+label {
+  vertical-align: middle;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+a {
+  color: #333;
+  outline: none;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: none;
+}
+
+.clearfix:before {
+  display: table;
+  content: '';
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: "";
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.my-price{
+  font-size:24px;
+  font-weight:500;
+  color:rgba(188,35,43,1);
+  line-height:34px;
+}
+.my-subPrice{
+  font-size:12px;
+  color:rgba(153,153,153,1);
+  line-height:17px;
+}
+
+.presentation-content p{
+  line-height: 20px;
+}
+.presentation-content img{
+  max-width: 375px;
+
+}
+/*!*vant样式修改*!*/
+.van-search {
+  padding: 0 !important;
+  background: rgba(244, 244, 244, 1) !important;
+  border-radius: 4px !important;
+}
+.van-cell{
+  padding: 0 !important;
+  background-color: #FFFFFF !important;
+
+}
+.van-cell__left-icon{
+  margin: 0px 10px !important;
+
+}
+/*.van-button--primary{*/
+  /*border: 1px solid #FFFFFF !important;*/
+/*}*/
+.van-field__body{
+  padding-right: 0.3rem !important;
+}
+
+.van-stepper__input{
+  width: 21px !important;
+  height: 21px !important;
+}
+.van-stepper__minus,.van-stepper__plus{
+  width: 25px !important;
+  height: 25px !important;
+}
+.van-button--danger{
+  /*background:rgba(113,179,255,1) !important;*/
+  border: 0 !important;
+}
+.van-button--primary{
+  border: 0 !important;
+}
+.van-button--normal{
+  padding: 0 !important;
+}
+#userManage-outBtn{
+  background-color: red !important;
+}
+.van-tabs__wrap{
+  /*border: 1px solid #D8D8D8 !important;*/
+}
+
+

@@ -1,0 +1,142 @@
+<template>
+  <div class="address">
+    <navbar :name="'收货地址'"></navbar>
+    <ul class="list">
+      <li v-for="item in listData" :key="item.id" class="list-card"  v-on:click="goChangeAddress(item.id)">
+        <div class="list-card-top">
+          <span class="list-card-top-realname">{{item.realname}}</span>
+          <span class="list-card-top-mobile">{{item.mobile}}</span>
+          <img src="../../../../../../assets/image/address.png" alt=""
+               class="list-card-top-img"
+          >
+        </div>
+        <div class="list-card-bottom">
+          <div class="list-card-bottom-default" v-if="item.isdefault==='1'">默认</div>
+          <span class="list-card-bottom-address">{{item.address}}</span>
+        </div>
+        <div class="fill"></div>
+      </li>
+    </ul>
+    <van-button type="primary" class="addAddress" v-on:click="goAddAddress">添加收货地址</van-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "Address",
+    data() {
+      return {
+        listData: []
+      }
+    },
+    mounted() {
+      this.request()
+    },
+    methods: {
+      goAddAddress(){
+        this.$router.push({name:"changeAddress",params:{id:0}})
+      },
+      goChangeAddress(id){
+          this.$router.push({name:"changeAddress",params:{id:id}})
+      },
+      request() {
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=88&act=addresslist',
+          type: 'get'
+        }).then((res) => {
+          this.listData = res.data.list
+        })
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .address {
+    height: 100%;
+    padding: 0 0 50px;
+    background-color: #F4F4F4;
+
+  }
+
+  .list {
+    margin-top: 10px;
+    width: 100%;
+
+    &-card {
+      position: relative;
+      padding: 12px 15px;
+      width: 375px;
+      height: 90px;
+      background: rgba(255, 255, 255, 1);
+      &-top {
+        overflow: hidden;
+        &-realname {
+          float: left;
+          font-size: 15px;
+          font-weight: 500;
+          color: rgba(51, 51, 51, 1);
+          line-height: 21px;
+        }
+        &-mobile {
+          float: left;
+          margin-left: 15px;
+          font-size: 15px;
+          font-weight: 500;
+          color: rgba(51, 51, 51, 1);
+          line-height: 21px;
+        }
+        &-img {
+          float: right;
+          width: 15px;
+          height: 15px;
+        }
+      }
+      &-bottom {
+        margin-top: 4px;
+        overflow: hidden;
+        width: 250px;
+        line-height: 5px;
+        display: block;
+        text-overflow: ellipsis;
+        &-default {
+          display: inline-block;
+          margin-right: 5px;
+          margin-top: 3px;
+          text-align: center;
+          width: 30px;
+          height: 15px;
+          line-height: 13px;
+          border-radius: 2px;
+          border: 1px solid rgba(231, 59, 61, 1);
+          font-size: 10px;
+          color: rgba(233, 88, 79, 1);
+        }
+        &-address {
+          font-size: 14px;
+          color: rgba(102, 102, 102, 1);
+          line-height: 20px;
+        }
+      }
+
+    }
+  }
+
+  .fill {
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    width: 345px;
+    height: 1px;
+    background: rgba(216, 216, 216, 1);
+  }
+
+  .addAddress {
+    position: fixed;
+    bottom: 0;
+    width: 375px;
+    height: 49px;
+    background: rgba(113, 179, 255, 1);
+    box-shadow: 0px 5px 7px 0px rgba(204, 226, 249, 1);
+  }
+</style>
