@@ -1,33 +1,33 @@
 <template>
   <div class="detali-product">
     <van-swipe :autoplay="300000000000000000" class="swipe">
-      <van-swipe-item v-if="goods.video">
-        <video :src="goods.video" autoplay muted class="swipe-img"/>
+      <van-swipe-item v-if="Data.video">
+        <video :src="Data.video" autoplay muted class="swipe-video"/>
       </van-swipe-item>
-      <van-swipe-item v-for="(item, index) in goods.thumb_url" :key="index">
+      <van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">
         <img :src="item" alt="" class="swipe-img">
       </van-swipe-item>
     </van-swipe>
     <div class="title">
       <div class="title-top">
-        <span class="title-top-name">{{goods.title}}</span>
+        <span class="title-top-name">{{Data.title}}</span>
         <div class="title-top-right">
-          <span>{{goods.collection}}人收藏</span>
+          <span>{{Data.collection}}人收藏</span>
           <img src="../../../assets/img/icon-star.png" alt="">
         </div>
       </div>
       <p class="title-middle">
-        {{goods.description}}
+        {{Data.description}}
       </p>
       <div class="title-bottom">
-        <span class="price">￥{{goods.marketprice}}</span>
-        <span class="notPrice">￥{{goods.productprice}}</span>
-        <span class="buy">{{goods.sales}}人已经购买</span>
+        <span class="price">￥{{Data.marketprice}}</span>
+        <span class="notPrice">￥{{Data.productprice}}</span>
+        <span class="buy">{{Data.sales}}人已经购买</span>
       </div>
     </div>
-    <my-cell :title="'已购'" :content="Alreadybought" v-on:click.native="ShowSpecification = true" style="margin-top: 10px;"></my-cell>
-
-    <div class="address-cell">
+    <my-cell :title="'已购'" :content="Alreadybought" v-on:click.native="SpecificationHandle"
+             style="margin-top: 10px;" v-if="type=== '1'"></my-cell>
+    <div class="address-cell" v-if="type=== '1'">
       <div class="address-cell-title">送至运费</div>
       <div class="address-cell-content">
         <p>{{address}}</p>
@@ -43,17 +43,16 @@
     <div class="presentation">
       <p class="presentation-title">产品详情</p>
       <!--<div class="presentation-fill"></div>-->
-      <div class="presentation-content" v-html="goods.content"></div>
+      <div class="presentation-content" v-html="Data.content"></div>
     </div>
     <!--评价-->
-    <ComEvaluation :good_rate="goods.good_rate" :discuss="discuss"></ComEvaluation>
-    <!--<van-popup v-model="ShowSpecification" position="bottom" :overlay="true" title="支持以下配送方式">-->
-      <!--&lt;!&ndash;购买时规格选择组件&ndash;&gt;-->
-      <!--<com-buy-specification></com-buy-specification>-->
-    <!--</van-popup>-->
-    <van-actionsheet v-model="ShowSpecification" title="选择规格">
+    <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
+    <!--选择规格-->
+    <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
       <com-buy-specification :goods_spec="goods_spec"></com-buy-specification>
     </van-actionsheet>
+    <!--购买栏-->
+    <com-buy :optionid = 'optionid' :id="id"></com-buy>
   </div>
 
 </template>
@@ -61,15 +60,19 @@
 <script>
   import ComEvaluation from './com/com-evaluation'
   import ComBuySpecification from './com/com-buySpecification'
+  import ComBuy from './com/com-buy'
 
   export default {
     name: "store",
     components: {
-      ComEvaluation,ComBuySpecification
+      ComEvaluation, ComBuySpecification,ComBuy,
     },
     data() {
       return {
-        goods: {
+        type: this.$route.params.type,
+        id:this.$route.params.id,
+        optionid:undefined,
+        Data: {
           "id": undefined,
           "title": undefined,
           "thumb": undefined,
@@ -83,10 +86,9 @@
           "collection": "0",
           "hasoption": "1",
           "good_rate": null,
-
         },
-        goods_spec:null,
-        discuss:{//评论
+        goods_spec: null,
+        discuss: {//评论
           card_id: undefined,
           content: undefined,
           createtime: undefined,
@@ -95,46 +97,68 @@
           nick: undefined,
           score: undefined
         },
+        discussType: 0,
         Alreadybought: undefined,//已购
         address: undefined,//收货地址
         goodsData: null,
-        ShowSpecification:false,
-        SpecificationData:null,
-        images: [
-          '../../../assets/img/保湿修护面膜.png',
-          'https://img.yzcdn.cn/2.jpg'
-        ],
+        SpecificationData: null,
 
+      }
+    },
+    computed:{
+      ShowSpecification: {//商品规格
+        set:function (val) {
+          this.$store.commit('setShowBuySpecification',false)
+        },
+        get:function () {
+          return this.$store.state.ShowBuySpecification
+        }
       }
     },
     mounted() {
       this.request()
     },
     methods: {
+      SpecificationHandle(){
+        this.$store.commit('setShowBuySpecification',true)
+      },
       request() {
+        let url
+        console.log(this.$route.params.type === '2')
+        if (this.type === '1') { // 商品列表
+          url = 'app/index.php?i=1&c=entry&eid=85&act=goods'
+        } else {
+          url = 'app/index.php?i=1&c=entry&eid=86&act=service'
+        }
         this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=85&act=goods',
+          url: url,
           type: 'get',
           data: {
             id: this.$route.params.id
           }
         }).then((res) => {
           if (res.code === 100) {
-            this.goods = res.data.goods
-            this.goods_spec = res.data.goods_spec //容量
-            this.discuss = res.data.discuss[0] //评论
-            this.Alreadybought = `${res.data.goods.title},1瓶` //已购
-            this.address = res.data.address
+            if (this.type === '2') {
+              this.Data = res.data.service
+            } else if (this.type === '1') {
+              this.Data = res.data.goods
+              this.goods_spec = res.data.goods_spec //容量
+              this.Alreadybought = `${res.data.goods.title},1瓶` //已购
+              this.address = res.data.address
+            }
+            // console.log(res.data.disucss.)
+            if (res.data.discuss.length === 0) {
+              this.discussType = 0
+            } else {
+              this.discussType = 1
+              this.discuss = res.data.discuss[0] //评论
+            }
 
-            // const Data =  res.data.goods
-            // this.video =  Data.video
-            // this.thumb_url = Data.thumb_url
-            // this.title = Data.title
           }
 
         })
       },
-      onFocus(){
+      onFocus() {
         console.log(123)
       }
     }
@@ -153,6 +177,11 @@
       &-img {
         height: 343px;
         width: 375px;
+      }
+      &-video {
+        object-fit: fill;
+        width: 375px;
+        height: 343px;
       }
     }
     .title {
@@ -251,49 +280,50 @@
       }
     }
   }
-.address-cell{
-  margin-top: 10px;
-  width: 100%;
-  padding: 12px 15px;
-  height:64px;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  &-title{
-    width:24px;
-    height: 100%;
-    font-size:12px;
-    color:rgba(153,153,153,1);
-  }
-  &-content{
-    width: 233px;
-    height: 100%;
-    font-size:14px;
-    color:rgba(51,51,51,1);
-    line-height:20px;
-    P:first-child{
-      width: 100%;
-      height: 50%;
-      overflow: hidden;
-      white-space: normal;
-      text-overflow: ellipsis;
-    }
-    p:last-child{
-      width: 100%;
-      height: 50%;
-    }
 
-  }
-  &-right{
-    >div{
-      width:2px;
-      height:2px;
-      background:rgba(102,102,102,1);
-      float: left;
-      margin-left: 4px;
+  .address-cell {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px 15px;
+    height: 64px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-title {
+      width: 24px;
+      height: 100%;
+      font-size: 12px;
+      color: rgba(153, 153, 153, 1);
+    }
+    &-content {
+      width: 233px;
+      height: 100%;
+      font-size: 14px;
+      color: rgba(51, 51, 51, 1);
+      line-height: 20px;
+      P:first-child {
+        width: 100%;
+        height: 50%;
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+      }
+      p:last-child {
+        width: 100%;
+        height: 50%;
+      }
+
+    }
+    &-right {
+      > div {
+        width: 2px;
+        height: 2px;
+        background: rgba(102, 102, 102, 1);
+        float: left;
+        margin-left: 4px;
+      }
     }
   }
-}
 
 </style>

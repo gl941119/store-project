@@ -13,15 +13,7 @@
     </div>
     <div class="select">
       <van-button type="default" class="select-btn">130</van-button>
-      <van-button type="default" class="select-btn">12312</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
-      <van-button type="default" class="select-btn">123213</van-button>
+
     </div>
     <div class="amount">
       <div class="amount-left">数量</div>
@@ -41,6 +33,7 @@
 <script>
   export default {
     name: "com-buySpecification",
+    props:['goods_spec'],
     data() {
       return {
         integer: true,

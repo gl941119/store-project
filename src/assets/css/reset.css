@@ -162,12 +162,10 @@ a:focus {
 }
 .van-cell{
   padding: 0 !important;
-  background-color: #FFFFFF !important;
-
+  /*background-color: #FFFFFF !important;*/
 }
 .van-cell__left-icon{
   margin: 0px 10px !important;
-
 }
 /*.van-button--primary{*/
   /*border: 1px solid #FFFFFF !important;*/
@@ -199,6 +197,19 @@ a:focus {
 }
 .van-tabs__wrap{
   /*border: 1px solid #D8D8D8 !important;*/
+}
+.van-stepper__input{
+  background-color: #71B3FF !important;
+  color: white !important;
+}
+.van-cell__right-icon{
+  display: inline-block !important;
+  line-height: 33px !important;
+
+
+}
+.van-cell:not(:last-child)::after{
+  border-bottom: 0 !important;
 }
 
 

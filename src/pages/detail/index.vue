@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <navbar :name="title"></navbar>
-    <van-tabs @click="onClick">
+    <van-tabs @click="onClick" swipeable>
       <van-tab title="商品">
         <product></product>
       </van-tab>
@@ -10,8 +10,7 @@
       </van-tab>
       <van-tab title="评价">内容 2</van-tab>
     </van-tabs>
-    <!--购买栏-->
-    <com-buy></com-buy>
+
 
   </div>
 </template>
@@ -19,14 +18,14 @@
 <script>
   import Product from './page/product'
   import ProductDetail from './page/productDetail'
-  import ComBuy from './com/com-buy'
+
 
 
 
   export default {
     name: "detail",
     components: {
-      Product,ProductDetail,ComBuy,
+      Product,ProductDetail,
     },
     data(){
       return{
@@ -34,7 +33,7 @@
         Data:null,
         id:this.$route.params.id,
         type:this.$route.params.type,
-        title:this.$route.params.type === 1? '商品详情':'服务详情',
+        title:this.$route.params.type === '1'? '商品详情':'服务详情',
       }
     },
     mounted(){

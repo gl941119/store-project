@@ -53,6 +53,7 @@
       this.handle()
     },
     methods: {
+
       handle(){
         if (this.type === '1') {//服务
           this.reqServer()

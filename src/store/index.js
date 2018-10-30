@@ -9,6 +9,7 @@ export default new Vuex.Store({
     showFooter: true,
     is: '2',
     ShowBuySpecification: false,
+    BuySpecification:undefined,
     uk: '',
   },
   mutations: {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     setShowBuySpecification(state, val) {
       state.ShowBuySpecification = val
+    },
+    setBuySpecification(state,val){
+      state.BuySpecification = val
     },
     setUk(state, val) {
       state.uk = val

@@ -25,6 +25,13 @@ import Subscribe from '@/pages/subscribe'
 //购物车
 import BuyCart from '../pages/buyCart'
 
+//订单确认
+import IndentConfirme from '../pages/pay/indentConfirme'
+//支付
+import Pay from '../pages/pay'
+
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -113,6 +120,18 @@ export default new Router({
       meta:{ keepAlive: false}, // 不需要被缓存
       component: MyIndent
     },
+    {//订单确认
+      path: '/indentConfirme',
+      name: 'indentConfirme',
+      meta:{ keepAlive: false}, // 不需要被缓存
+      component: IndentConfirme
+    },
+    {//支付
+      path: '/pay',
+      name: 'pay',
+      meta:{ keepAlive: false}, // 不需要被缓存
+      component: Pay
+    }
 
 
   ]

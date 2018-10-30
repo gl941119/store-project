@@ -7,7 +7,7 @@
       <p class="card-right-price my-price">￥{{Data.marketprice}}</p>
       <p class="card-right-comment">{{Data.discuss_total}}条评价 好评率{{Data.good_rate}}%</p>
     </div>
-    <van-button type="primary" class="cardSubmit" text="立即预约" @click="urlHandle"></van-button>
+    <van-button type="primary" class="cardSubmit" text="立即预约"  v-on:click="goDetail(Data.id)"></van-button>
   </div>
 </template>
 
@@ -18,9 +18,9 @@
     mounted(){
     },
     methods:{
-      urlHandle(){
-        
-      }
+      goDetail(id){
+        this.$router.push({name:'detail',params:{type:'2',id:id}})
+      },
     }
   }
 </script>

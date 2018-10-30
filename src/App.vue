@@ -24,6 +24,7 @@
     /*color: #2c3e50;*/
     /*margin-top: 60px;*/
     /*margin-bottom: 49px;*/
+    padding-top: 44px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -36,7 +37,8 @@
     /*overflow: auto;*/
     /*border: 1px solid red;*/
     /*background-color: #F4F4F4;*/
-
+    padding-bottom: 50px;
+    min-height: 100%;
     width: 375px;
     overflow: auto;
   }

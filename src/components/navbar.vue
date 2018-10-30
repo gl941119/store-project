@@ -27,6 +27,8 @@
 
 <style lang="scss" scoped>
   .navbar {
+    position: fixed;
+    top: 0;
     width: 375px;
     height: 44px;
     background-color: #ffffff;
