@@ -1,7 +1,8 @@
 <template>
   <div>
     <navbar :name="'S+艾司商城'"></navbar>
-    <van-search placeholder="请输入搜索关键词" v-model="value" class="search"/>
+    <search :value="value" class="search"></search>
+
     <div class="nav">
       <ul class="nav-left">
         <li @click="handleChangeComponent('recommend')">推荐</li>

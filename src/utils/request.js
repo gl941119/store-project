@@ -50,6 +50,11 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
  * @param params.flag -> json require, default false
  */
 function requestHandle(params) {
+  Toast.loading({
+    duration:0,
+    mask: true,
+    message: '加载中...'
+  });
   const {url, data, type, flag} = params;
   return new Promise((resolve, reject) => {
     ajaxRequest(url, data, type, flag).then(
@@ -60,6 +65,9 @@ function requestHandle(params) {
         }
         if (res.data.code === 108) {
           Toast.fail(res.data.message);
+        }
+        if(res.data.code === 100){
+          Toast.clear();
         }
         resolve(res.data);
         // const { data, success, message } = res.data;

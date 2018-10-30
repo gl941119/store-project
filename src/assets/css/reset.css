@@ -111,9 +111,8 @@ input[type="reset"] {
 }
 
 a {
-  color: #333;
-  outline: none;
-  text-decoration: none;
+
+
 }
 
 a:focus {
@@ -154,6 +153,48 @@ a:focus {
   max-width: 375px;
 
 }
+.mt8{
+  margin-top: 8px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+
+.mt13 {
+  margin-top: 13px;
+}
+
+.mt18 {
+  margin-top: 18px;
+}
+.mt19 {
+  margin-top: 19px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mt25 {
+  margin-top: 25px;
+}
+.mt27 {
+  margin-top: 27px;
+}
+
+.mt29 {
+  margin-top: 29px;
+}
+
+.mt35 {
+  margin-top: 35px;
+}
+.mt37 {
+  margin-top: 37px;
+}
+.h53{
+  height: 53px;
+}
+
+
 /*!*vant样式修改*!*/
 .van-search {
   padding: 0 !important;

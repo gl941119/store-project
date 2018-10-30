@@ -6,7 +6,7 @@
     <!--我的订单-->
     <com-my-indent></com-my-indent>
     <!--列表-->
-    <com-list :listData="listData" class="com-list"></com-list>
+    <com-list  class="com-list"></com-list>
   </div>
 </template>
 
@@ -34,31 +34,7 @@
           share_amount: undefined,
           signature: undefined,
         },
-        listData: [{
-          name: '会员卡',
-          url: null,
-          message: '123'
-        }, {
-          name: '我的收藏',
-          url: null,
-          message: undefined
-        }, {
-          name: '美的交流',
-          url: null,
-          message: undefined
-        }, {
-          name: '邀请好友',
-          url: null,
-          message: undefined
-        }, {
-          name: '我的评价',
-          url: null,
-          message: undefined
-        }, {
-          name: '地址管理',
-          url: null,
-          message: undefined
-        }]
+
       }
     },
     mounted() {

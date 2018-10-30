@@ -2,7 +2,8 @@
   <div class="index">
     <navbar :name="'S+艾司商城'"></navbar>
     <div class="search">
-      <van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>
+      <search :value.sync="value" class="search-left"></search>
+      <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
       <img src="../../assets/image/扫一扫.png" alt="" class="search-right">
     </div>
     <div class="banner">
@@ -34,9 +35,15 @@
     components: {
       ComModel,ComList
     },
+    watch:{
+      value:function (val) {
+
+      }
+    },
     mounted(){
       console.log(this.$ref.img)
     },
+
     data() {
       return {
         data: {},
@@ -79,10 +86,14 @@
     padding: 5px 15px;
     overflow: hidden;
     background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     &-left {
       float: left;
-      width: 308px;
-      height: 29px;
+      width: 308px ;
+      height: 29px ;
+
     }
     &-right {
       float: right;

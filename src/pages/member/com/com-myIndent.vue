@@ -1,7 +1,7 @@
 <template>
   <div class="my-indent">
     <router-link :to="{name:'myIndent',params:{type:0}}">
-      <cell :Data="nameData"></cell>
+      <cell :Data="nameData" class="cell"></cell>
     </router-link>
     <div class="fill"></div>
     <ul>
@@ -50,6 +50,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .cell{
+    height: 40px;
+  }
   .my-indent {
     padding: 0 15px;
     margin: 0 auto;

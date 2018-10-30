@@ -27,6 +27,7 @@ import MyCell from './components/myCell'
 import Cell from './components/cell'
 import SearchBar from './components/searchBar'
 import SelectBar from './components/selectBar'
+import Search from './components/search'
 
 Vue.component('my-footer', MyFooter);
 Vue.component('navbar', Navbar);
@@ -37,6 +38,7 @@ Vue.component('my-cell', MyCell);
 Vue.component('cell', Cell);
 Vue.component('search-bar', SearchBar);
 Vue.component('select-bar', SelectBar);
+Vue.component('Search', Search);
 
 
 
