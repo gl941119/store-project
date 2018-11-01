@@ -17,9 +17,9 @@
     <com-model :data="goods_essence"></com-model>
     <img :src="advOne" alt="" class="img">
     <!--热门体验卡-->
-    <com-model :data="expre_cards"></com-model>
+    <com-model :data="expre_cards" :type="false"></com-model>
     <!--会员专区-->
-    <com-model :data="member_cards"></com-model>
+    <com-model :data="member_cards" :type="false"></com-model>
     <img :src="advTwo"  alt="" class="img">
     <img :src="advThree"  alt="" class="img">
   </div>

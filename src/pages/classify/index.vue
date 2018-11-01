@@ -2,12 +2,14 @@
   <div>
     <navbar :name="'S+艾司商城'"></navbar>
     <search :value="value" class="search"></search>
-
     <div class="nav">
       <ul class="nav-left">
-        <li @click="handleChangeComponent('recommend')">推荐</li>
-        <li @click="handleChangeComponent('club-card')">会员卡</li>
-        <li v-for="item in category" :key="item.id">{{item.name}}</li>
+        <li @click="handleChangeComponent('recommend')"
+        >推荐</li>
+        <li @click="handleChangeComponent('club-card')"
+        >会员卡</li>
+        <li v-for="item,index in category" :key="item.id"
+            >{{item.name}}</li>
       </ul>
       <keep-alive>
         <component v-bind:is="isCurrentTabComponent" class="nav-right"></component>
@@ -28,6 +30,7 @@
         isCurrentTabComponent:'recommend',
         value:undefined,
         category:null,
+        hover:-2
       }
     },
     methods:{
@@ -81,7 +84,7 @@
         line-height: 60px;
       }
       li:hover {
-        color: rgba(113, 179, 255, 1);
+        color: #71B3FF;
       }
     }
     &-right{

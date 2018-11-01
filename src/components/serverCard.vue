@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" v-on:click="goDetail(Data.id)">
     <img :src="Data.thumb" alt="" class="card-left">
     <div class="card-right">
       <p class="card-right-name">{{Data.name}}</p>
@@ -7,20 +7,32 @@
       <p class="card-right-price my-price">￥{{Data.marketprice}}</p>
       <p class="card-right-comment">{{Data.discuss_total}}条评价 好评率{{Data.good_rate}}%</p>
     </div>
-    <van-button type="primary" class="cardSubmit" text="立即预约"  v-on:click="goDetail(Data.id)"></van-button>
+    <van-button type="primary" class="cardSubmit" text="立即预约"  v-on:click.stop="goAppoint(Data.id)" v-if="btn"></van-button>
   </div>
 </template>
 
 <script>
   export default {
     name: "serverCard",
-    props:['Data'],
+    props:{
+      Data:{
+        type:Object,
+      },
+      btn:{
+        default:true
+      }
+    },
     mounted(){
     },
     methods:{
       goDetail(id){
         this.$router.push({name:'detail',params:{type:'2',id:id}})
+
       },
+      goAppoint(id){
+        this.$router.push({name:'appoint',params:{sid:id}})
+
+      }
     }
   }
 </script>

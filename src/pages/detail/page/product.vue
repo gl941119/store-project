@@ -124,8 +124,8 @@
       },
       request() {
         let url
-        console.log(this.$route.params.type === '2')
-        if (this.type === '1') { // 商品列表
+        // console.log(this.$route.params.type === '2')
+        if (this.type == '1') { // 商品列表
           url = 'app/index.php?i=1&c=entry&eid=85&act=goods'
         } else {
           url = 'app/index.php?i=1&c=entry&eid=86&act=service'
@@ -138,9 +138,9 @@
           }
         }).then((res) => {
           if (res.code === 100) {
-            if (this.type === '2') {
+            if (this.type == '2') {
               this.Data = res.data.service
-            } else if (this.type === '1') {
+            } else if (this.type == '1') {
               this.Data = res.data.goods
               this.goods_spec = res.data.goods_spec //容量
               this.Alreadybought = `${res.data.goods.title},1瓶` //已购

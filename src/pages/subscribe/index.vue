@@ -2,7 +2,10 @@
   <div class="wrap">
     <navbar :name="name"></navbar>
     <div class="search">
-      <van-search placeholder="请输入搜索关键词" v-model="value" class="search-input"/>
+      <div class="search-input">
+        <van-icon name="search" class="icon"/>
+        <input type="text" v-model="value" placeholder="请输入关键字" class="input">
+      </div>
       <van-button type="primary" class="search-btn" @click="handle">搜索</van-button>
     </div>
     <div class="result" v-if="showSearch === 1">
@@ -19,7 +22,7 @@
         <product-card v-for="item in productData" :key="item.id" :Data="item"></product-card>
       </div>
     </div>
-    <div class="result" v-if="showSearch === 2">
+    <div class="notresult" v-show="showSearch === 2">
       <img src="../../assets/image/search.png" alt="" class="noResultImg">
       <p>您寻找的商品还没上架</p>
     </div>
@@ -72,6 +75,11 @@
         }).then((res) => {
           if (res.code === 100) {
               this.productData = res.data.goodslist
+              if(res.data.goodslist){
+                this.showSearch = 1
+              }else{
+                this.showSearch = 2
+              }
           }
         })
       },
@@ -86,6 +94,11 @@
         }).then((res) => {
           if (res.code === 100) {
               this.serverData = res.data.servicelist
+            if(res.data.servicelist){
+              this.showSearch = 1
+            }else{
+              this.showSearch = 2
+            }
           }
         })
       },
@@ -111,6 +124,7 @@
 <style lang="scss" scoped>
   .wrap {
     background-color: white;
+
   }
 
   .search {
@@ -120,9 +134,36 @@
     background: rgba(255, 255, 255, 1);
     display: flex;
     justify-content: space-between;
-    &-input {
+    &-input{
       width: 283px;
       height: 30px;
+      background:rgba(244,244,244,1);
+      border-radius:4px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .icon{
+        font-size: 15px;
+        margin-left: 10px;
+      }
+      .input{
+        margin-left: 8px;
+        height: 100%;
+        flex: 1;
+        background:rgba(244,244,244,1);
+        font-size:12px;
+        font-family:PingFangSC-Regular;
+        color:rgba(153,153,153,1);
+        line-height:17px;
+
+      }
+      .close{
+
+        font-size: 12px;
+        margin-right: 7px;
+      }
+
     }
     &-btn {
       margin-left: 10px;
@@ -137,11 +178,30 @@
       border: 1px solid #ffffff;
     }
   }
-
-  .result {
+  .notresult {
+    width: 100%;
+    height: 300px;
     padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    >img{
+      width: 124px;
+      height: 124px;
+    }
+    >p{
+      width:150px;
+      height:21px;
+      font-size:15px;
+      font-family:PingFangSC-Regular;
+      color:rgba(167,167,167,1);
+      line-height:21px;
+    }
 
   }
+
+
 
 
 </style>

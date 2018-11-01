@@ -2,16 +2,26 @@
   <div class="recommend">
     <img class="recommend-banner" src="../../../assets/image/classfiybanner.png" alt="">
     <div class="server">
-      <p class="server-title">推荐服务</p>
+      <div class="server-title">
+        <span class="server-title-name">推荐服务</span>
+        <span class="server-title-more" v-on:click="routerPush('/subscribe/1')">查看更多</span>
+        <van-icon name="arrow" class="server-title-icon"></van-icon>
+      </div>
       <div class="server-img">
-        <img v-for="item in services" :key="item.id" :src="item.simg" alt="">
+        <img v-for="item in services" :key="item.id" :src="item.simg" alt=""
+             v-on:click="routerPush('/detail/2/'+item.id)">
       </div>
     </div>
     <div class="product">
-      <p class="product-title">推荐精华</p>
+      <div class="product-title">
+        <span class="product-title-name">推荐精华</span>
+        <span class="product-title-more"  v-on:click="routerPush('/subscribe/2')">查看更多</span>
+        <van-icon name="arrow" class="product-title-icon"></van-icon>
+      </div>
       <ul>
         <li v-for="item in goods" :key="item.id">
-          <img :src="item.thumb" alt="">
+          <img :src="item.thumb" alt=""
+               v-on:click="routerPush('/detail/1/'+item.id)">
           <p>{{item.title}}</p>
         </li>
       </ul>
@@ -33,13 +43,15 @@
       this.request()
     },
     methods: {
+      routerPush(url){
+        this.$router.push({path:url})
+      },
+
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=category',
           type: 'get',
-          data: {
 
-          },
         }).then((res) => {
           this.services = res.data.services
           this.goods = res.data.goods
@@ -62,11 +74,26 @@
   .server {
     margin-top: 20px;
     &-title {
-      width: 60px;
+      width: 100%;
       height: 21px;
       font-size: 15px;
       color: rgba(60, 60, 60, 1);
-      line-height: 21px;
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      &-name{
+        flex: 1;
+      }
+      &-more{
+        font-size:13px;
+        font-family:PingFangSC-Regular;
+        color:rgba(153,153,153,1);
+      }
+      &-icon{
+        margin-top: 1px;
+        font-size: 9px;
+      }
     }
     &-img {
       margin-top: 7px;
@@ -86,11 +113,25 @@
   .product {
     margin-top: 17px;
     &-title {
-      width: 60px;
+      width: 100%;
       height: 21px;
       font-size: 15px;
       color: rgba(60, 60, 60, 1);
-      line-height: 21px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      &-name{
+        flex: 1;
+      }
+      &-more{
+        font-size:13px;
+        font-family:PingFangSC-Regular;
+        color:rgba(153,153,153,1);
+      }
+      &-icon{
+        margin-top: 1px;
+        font-size: 9px;
+      }
     }
     > ul {
       margin-top: 7px;

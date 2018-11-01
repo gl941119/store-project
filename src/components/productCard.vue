@@ -2,10 +2,11 @@
   <div class="card"  v-on:click="goDetail(Data.id)">
     <img :src="Data.thumb" alt="" class="card-left">
     <div class="card-right">
+      <span class="card-right-select" v-if="select">已选</span>
       <p class="card-right-name">{{Data.title}}</p>
       <p class="card-right-content">{{Data.description}}</p>
       <p class="card-right-price my-price">￥{{Data.price}}</p>
-      <p class="card-right-comment">{{Data.discuss_total}}条评价 好评率{{Data.good_rate}}%</p>
+      <p class="card-right-comment">{{Data.discuss_total}}条评价&nbsp;&nbsp;好评率{{Data.good_rate}}%</p>
     </div>
   </div>
 </template>
@@ -13,7 +14,14 @@
 <script>
   export default {
     name: "productCard",
-    props:['Data'],
+    props:{
+      Data:{
+        type:Object
+      },
+      select:{
+        default:false
+      }
+    },
     mounted(){
     },
     methods:{
@@ -42,7 +50,17 @@
     &-right {
       width: 230px;
       margin-left: 15px;
+      position: relative;
+      &-select{
+        position: absolute;
+        top: 13px;
+        right: 4px;
+        font-size:10px;
+        font-family:PingFangSC-Regular;
+        color:rgba(113,179,255,1);
+      }
       &-name {
+        height: 23px;
         margin-top: 9px;
         font-size: 16px;
         color: rgba(51, 51, 51, 1);
@@ -50,6 +68,7 @@
         font-weight: 400;
       }
       &-content {
+        height: 19px;
         width: 200px;
         margin-top: 6px;
         font-size: 10px;
@@ -61,17 +80,19 @@
         text-overflow: ellipsis;
       }
       &-price {
-        margin-top: 16px;
+        height: 23px;
+        margin-top: 12px;
         font-size: 16px;
         font-weight: 500;
         color: rgba(233, 58, 61, 1);
-        line-height: 22px;
+
       }
       &-comment{
+        height: 14px;
         margin-top: 4px;
         font-size:10px;
         color:rgba(153,153,153,1);
-        line-height:14px;
+
       }
 
     }

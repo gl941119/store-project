@@ -5,24 +5,24 @@
     <!--<com-list :listData="listData"></com-list>-->
     <ul class="list">
       <router-link tag="li" :to="{ path: '/member/userManage/userChange/0/'+nameData.message}" class="list-li">
-        <cell :Data="nameData"></cell>
-        <div class="fill"></div>
+        <cell :Data="nameData" class="cell"></cell>
+
       </router-link>
       <router-link tag="li" :to="{ path: '/member/userManage/userChange/1/'+sexData.message}" class="list-li">
-        <cell :Data="sexData"></cell>
-        <div class="fill"></div>
+        <cell :Data="sexData" class="cell"></cell>
+
       </router-link>
       <router-link tag="li" :to="{ path: '/member/userManage/userChange/2/'+birthdayDate}" class="list-li">
-        <cell :Data="birthdayData"></cell>
-        <div class="fill"></div>
+        <cell :Data="birthdayData" class="cell"></cell>
+
       </router-link>
       <router-link tag="li" :to="{ path: '/member/userManage/address'}" class="list-li">
-        <cell :Data="addressData"></cell>
-        <div class="fill"></div>
+        <cell :Data="addressData" class="cell"></cell>
+
       </router-link>
       <router-link tag="li" :to="{ path: '/member/userManage/userChange/4/'+signatureData.message}" class="list-li">
-        <cell :Data="signatureData"></cell>
-        <div class="fill"></div>
+        <cell :Data="signatureData" class="cell"></cell>
+
       </router-link>
     </ul>
     <div style="text-align: center;margin-top: 29px">
@@ -108,7 +108,9 @@
     width: 304px;
     height: 40px;
   }
-
+.cell{
+  height: 45px;
+}
   .list {
     background: rgba(255, 255, 255, 1);
     &-li {

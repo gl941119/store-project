@@ -1,16 +1,22 @@
 <template>
   <ul class="selectBar">
-    <li @click="clickHandle('1')">综合</li>
-    <li @click="clickHandle('2')">销量</li>
-    <li @click="clickHandle('3')">价格</li>
+    <li @click="clickHandle('1')" v-bind:class="{li_hover: hover=== '1' }">综合</li>
+    <li @click="clickHandle('2')" v-bind:class="{li_hover: hover=== '2' }">销量</li>
+    <li @click="clickHandle('3')" v-bind:class="{li_hover: hover=== '3' }">价格</li>
   </ul>
 </template>
 
 <script>
   export default {
     name: "selectBar",
+    data(){
+      return{
+        hover:'1'
+      }
+    },
     methods: {
       clickHandle(val) {
+        this.hover = val
         this.$emit('emitSort', val);
       }
     }
@@ -33,9 +39,8 @@
       line-height: 40px;
 
     }
-    li:hover {
+    .li_hover {
       color: #E4393B;
-
       background:url("../assets/image/selectBar.png") no-repeat;
       background-position: 75px center;
       background-size: 8px 5px;

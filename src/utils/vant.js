@@ -26,6 +26,7 @@ import {
   Area,//省市区选择器
   Switch,//开关
   Actionsheet,//Actionsheet
+  Dialog,//弹窗
 } from 'vant';
 Vue.use(Row).use(Col);
 Vue.use(Button);
@@ -48,3 +49,4 @@ Vue.use(DatetimePicker);
 Vue.use(Area);
 Vue.use(Switch);
 Vue.use(Actionsheet);
+Vue.use(Dialog);

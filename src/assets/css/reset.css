@@ -190,6 +190,9 @@ a:focus {
 .mt37 {
   margin-top: 37px;
 }
+.ml5{
+  margin-left: 5px;
+}
 .h53{
   height: 53px;
 }
@@ -253,4 +256,7 @@ a:focus {
   border-bottom: 0 !important;
 }
 
+.van-rate__item{
+  width: 17px !important;
+}
 
