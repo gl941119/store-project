@@ -191,6 +191,48 @@ export default new Router({
       name: 'pay',
       meta: {keepAlive: false}, // 不需要被缓存
       component:  resolve => require(['../pages/pay'], resolve)
+    },
+    {//美丽基金
+      path: '/member/beautyFund',
+      name: 'beautyFund',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund'], resolve)
+    },
+    {//我的一级美丽代言
+      path: '/beautyFund/oneEndorsement',
+      name: 'oneEndorsement',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/oneEndorsement'], resolve)
+    },
+    {//我的二级美丽代言
+      path: '/beautyFund/twoEndorsement',
+      name: 'twoEndorsement',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/twoEndorsement'], resolve)
+    },
+    {//我的上级美丽代言
+      path: '/beautyFund/superiorEndorsement',
+      name: 'superiorEndorsement',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/superiorEndorsement'], resolve)
+    },
+    {//积分兑换
+      path: '/beautyFund/exchange',
+      name: 'exchange',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/exchange'], resolve)
+    },
+    {//积分排行榜
+      path: '/beautyFund/IntegralRanking',
+      name: 'IntegralRanking',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/IntegralRanking'], resolve)
+    },
+    {//基金提现
+      path: '/beautyFund/fundPresentation',
+      name: 'fundPresentation',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/fundPresentation'], resolve)
     }
 
 
