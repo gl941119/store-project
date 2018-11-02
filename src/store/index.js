@@ -17,6 +17,7 @@ export default new Vuex.Store({
     SelectTime:undefined,
     Is_member:undefined,//是否会员 string
     Store:undefined,//是否美师 number
+    AppraiseImg:[],
 
   },
   mutations: {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     setUk(state, val) {
       state.uk = val
     },
+    setAppraiseImg(state,val){
+      state.AppraiseImg = val
+    }
 
   },
 });

@@ -49,7 +49,7 @@
     <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
     <!--选择规格-->
     <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
-      <com-buy-specification :goods_spec="goods_spec"></com-buy-specification>
+      <com-buy-specification :goods_spec="goods_spec" :goods="Data"></com-buy-specification>
     </van-actionsheet>
     <!--购买栏-->
     <com-buy :optionid = 'optionid' :id="id"></com-buy>

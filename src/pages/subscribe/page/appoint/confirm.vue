@@ -144,15 +144,16 @@
     margin-top: 100px;
     width:345px;
     height:40px;
-    background:rgba(34,194,50,1);
+    background-color:#71B3FF;
     border-radius:2px;
     color: white;
+
   }
   &-cancel{
     margin-top: 15px;
     width:345px;
     height:40px;
-    background:rgba(246,89,91,1);
+    background:#F6595B;
     border-radius:2px;
   }
 }

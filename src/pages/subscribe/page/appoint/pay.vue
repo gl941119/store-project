@@ -5,9 +5,7 @@
     <com-confirmhead :store="store" :user="user"></com-confirmhead>
     <!--商品-->
     <com-confirmmain :service="service" :type="'pay'"  :date="date" :beauty="beauty"></com-confirmmain>
-
     <van-button type="default" class="overBtn" v-on:click="overHandle">已完成预约</van-button>
-
   </div>
 </template>
 

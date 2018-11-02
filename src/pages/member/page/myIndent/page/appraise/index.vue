@@ -1,0 +1,284 @@
+<template>
+  <div class="wrap">
+    <navbar :name="'发表评论'"></navbar>
+    <div class="cell">
+      <a class="cell-left" v-on:click="cancelHandle">取消</a>
+      <a class="cell-right" v-on:click="confirmHandle">发布</a>
+    </div>
+    <div class="main" v-for="item,index in arr" :key="index">
+      <div class="appraise">
+        <img :src="item.thumb" alt="">
+        <span>描述相符</span>
+        <van-rate v-model="item.score"
+                  class="appraise-rate"
+                  color="#E93A3D"
+                  void-color="#C1C0CD"/>
+      </div>
+      <div class="fill"></div>
+      <textarea class="area" maxlength="200" placeholder="宝贝的效果如何呢？发表一下自己的感受吧"
+        v-model="item.tip"></textarea>
+      <div class="upload">
+        <img :src="val" alt="" v-for="val,num in item.imgs" :key="num">
+        <div class="upload-img">
+          <img src="../../../../../../assets/image/appraise.png" alt="">
+          <p>添加图片</p>
+          <input  name="file" type="file" accept="image/png,image/gif,image/jpeg"
+                  @change="uploadImg" class="upload-img-input" v-on:click="clickUpload(index)" />
+        </div>
+        <div class="upload-img">
+          <img src="../../../../../../assets/image/appraise1.png" alt="">
+          <p>添加视频</p>
+          <input  name="file" type="file" accept="video/mp4，video/avi"
+                  @change="uploadVideo" class="upload-img-input"/>
+        </div>
+
+      </div>
+
+      <div class="checkbox">
+        <van-checkbox v-model="checked" class="checkbox-icon">匿名</van-checkbox>
+      </div>
+    </div>
+
+
+  </div>
+</template>
+
+<script>
+  import cache from '../../../../../../utils/cache'
+  import axios from 'axios'
+  export default {
+    name: "index",
+    data() {
+      return {
+        value: 3,
+        checked: true,
+        arr:this.$route.params.data||JSON.parse(cache.getSession('appraise')),
+        area:undefined,
+        img:undefined,
+        index:undefined,//点击暂存
+    }
+    },
+    mounted(){
+      console.log(this.arr)
+
+
+      // this.arr.forEach((item)=>{
+      //   item = {
+      //     "goodsid": 1,
+      //     "content": "服务不错哟",
+      //     "score": 10,
+      //     "tip": 0,
+      //     "imgs": [
+      //       "images/1/2018/10/oa6II05NkKKewO6w6nxJB6n0wF5s0k.png",
+      //       "images/1/2018/10/D3rj93rDRTZaRp3Kdd85AR5kO55nyA.png",
+      //       "images/1/2018/10/EiB8ve8I1iSzAkV1EA5VB1KKBBScbI.png",
+      //       "images/1/2018/10/QE0Hsesth1sRDrtdt0rwn0sc27ttSe.png"
+      //     ]
+      //   }
+      // })
+
+    },
+    methods: {
+      clickUpload(index){
+        console.log(index)
+        this.index= index
+      },
+      uploadImg(e) {   // 上传照片
+        var self = this;
+        let file = e.target.files[0];
+        let param = new FormData();  // 创建form对象
+        param.append('file', file, file.name);  // 通过append向form对象添加数据
+        // param.append('chunk', '0') // 添加form表单中其他数据
+        // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        let config = {
+          headers: {'Content-Type': 'multipart/form-data'}
+        };
+        axios.defaults.withCredentials = true;
+        let uk = this.$store.state.uk || cache.getSession('uk');
+        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
+          .then(res => {
+            console.log(res)
+            if (res.data.code === 100) {
+              this.$toast('上传成功')
+              console.log(res.data.data.avatar)
+              this.arr[this.index].imgs.push(res.data.data.avatar)
+
+
+            }
+
+          })
+      },
+      uploadVideo(e){
+        var self = this;
+        let file = e.target.files[0];
+        let param = new FormData();  // 创建form对象
+        param.append('file', file, file.name);  // 通过append向form对象添加数据
+        // param.append('chunk', '0') // 添加form表单中其他数据
+        // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        let config = {
+          headers: {'Content-Type': 'multipart/form-data'}
+        };
+        axios.defaults.withCredentials = true;
+        let uk = this.$store.state.uk || cache.getSession('uk');
+        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=' + uk, param, config)
+          .then(res => {
+            console.log(res)
+            alert(res.data)
+            if (res.data.code === 100) {
+              this.$toast('上传成功')
+              this.$emit('Refresh')
+            }
+
+          })
+
+      },
+      changeValue(val) {
+        this.value = val
+      },
+      cancelHandle() {
+      },
+      confirmHandle() {
+
+        console.log(this.arr)
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .wrap {
+    background-color: #F4F4F4;
+  }
+
+  .main {
+    margin-top: 10px;
+    width: 100%;
+    padding: 0 15px;
+    background-color: white;
+  }
+
+  .appraise {
+    width: 100%;
+    height: 50px;
+    background: rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    > img {
+      width: 40px;
+      height: 40px;
+
+    }
+    > span {
+      margin-left: 10px;
+      width: 60px;
+      height: 21px;
+      font-size: 15px;
+      font-family: PingFangSC-Regular;
+      color: rgba(102, 102, 102, 1);
+      line-height: 21px;
+    }
+    &-rate {
+      margin-left: 10px;
+    }
+  }
+
+  .fill {
+    margin-left: -15px;
+    width: 375px;
+    height: 1px;
+    background: rgba(216, 216, 216, 1);
+  }
+
+  .area {
+    margin-top: 15px;
+    height: 100px;
+    width: 100%;
+    font-size: 15px;
+    font-family: PingFangSC-Regular;
+    color: rgba(193, 192, 205, 1);
+    line-height: 21px;
+  }
+
+  .upload {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+    &-img {
+      margin-right: 10px;
+      width: 80px;
+      height: 80px;
+      border: 1px solid #C1C0CD;
+      border-style: dashed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      > p {
+        margin-top: 5px;
+        width: 52px;
+        height: 19px;
+        font-size: 13px;
+        font-family: PingFangSC-Regular;
+        color: rgba(193, 192, 205, 1);
+        line-height: 19px;
+      }
+      &-input{
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        opacity: 0;
+      }
+    }
+    &-video {
+      margin-right: 10px;
+      width: 80px;
+      height: 80px;
+      border: 1px solid #979797;
+      border-style: dotted
+    }
+
+  }
+
+  .checkbox {
+    margin-top: 15px;
+    height: 46px;
+    border-top: 1px solid rgba(216, 216, 216, 1);
+    &-icon {
+      font-size: 15px;
+      font-family: PingFangSC-Regular;
+      color: rgba(51, 51, 51, 1);
+      line-height: 46px;
+    }
+
+  }
+
+  .cell {
+    background-color: #FFFFFF;
+    padding: 0 15px;
+    width: 375px;
+    height: 44px;
+    background: rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-left {
+      width: 30px;
+      height: 21px;
+      font-size: 15px;
+
+      font-weight: 500;
+      color: rgba(153, 153, 153, 1);
+      line-height: 21px;
+    }
+    &-right {
+      width: 30px;
+      height: 21px;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(113, 179, 255, 1);
+      line-height: 21px;
+    }
+  }
+</style>

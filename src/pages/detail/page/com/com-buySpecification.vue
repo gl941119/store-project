@@ -1,18 +1,29 @@
 <template>
   <div class="Specification">
     <div class="product">
-      <img src="" alt="" class="product-left">
+      <img :src="goods.thumb" alt="" class="product-left">
       <div class="product-right">
-        <span class="my-price">$1512</span>
-        <span class="my-subPrice">12312</span>
+        <span class="my-price">${{goods.marketprice}}</span>
+        <span class="my-subPrice">{{goods.productprice}}</span>
         <div class="product-right-content">
           <span class="product-right-content-left">已选</span>
-          <span class="product-right-content-right">泰伊莎保湿润肤露，123123123123123123123121瓶</span>
+          <span class="product-right-content-right">{{goods.title}}</span>
         </div>
       </div>
     </div>
-    <div class="select">
-      <van-button type="default" class="select-btn">130</van-button>
+    <div class="select" v-html="ht">
+      <dl>
+        <dt v-if="oneTitle">{{oneTitle}}</dt>
+        <dd>
+          <van-button type="default" class="select-btn"
+                      v-for="item in goods_spec"
+                      :key="item.id">
+            {{item.title}}
+          </van-button>
+        </dd>
+      </dl>
+      <div></div>
+
 
     </div>
     <div class="amount">
@@ -33,20 +44,30 @@
 <script>
   export default {
     name: "com-buySpecification",
-    props:['goods_spec'],
+    props: ['goods_spec', 'goods'],
     data() {
       return {
         integer: true,
-        value: 1
+        value: 1,
+        oneTitle:false,
+        ht:`<P></P>`
       }
-    }
+    },
+    mounted(){
+
+      try{
+        this.oneTitle = this.goods_spec[0].spectitle
+      }catch(e){
+
+      }
+    },
   }
 </script>
 
 <style lang="scss" scoped>
   .Specification {
     width: 375px;
-    height: 500px;
+    /*height: 500px;*/
     padding: 16px 15px 0;
     background: rgba(255, 255, 255, 1);
   }
@@ -57,7 +78,7 @@
       width: 90px;
       height: 90px;
       float: left;
-      border: 1px solid red;
+
     }
     &-right {
       float: left;
@@ -91,53 +112,60 @@
     }
 
   }
-  .select{
-    overflow: hidden;
+
+  .select {
+    /*overflow: hidden;*/
     margin-top: 26px;
-    &-btn{
-      border: 0;
-      margin-left: 15px;
-      margin-bottom: 11px;
-      width:81px;
-      height:27px;
-      background:rgba(247,247,247,1);
-      border-radius:2px;
-      font-size:12px;
-      font-weight: 500;
-      color:rgba(51,51,51,1);
-      line-height:17px;
-    }
-    &-btn:hover{
-      background:rgba(113,179,255,1);
-      color:rgba(255,255,255,1);
-    }
-  }
-  .amount{
-    margin-top: 10px;
-    &-left{
-      float: left;
-      font-size:12px;
-      color:rgba(153,153,153,1);
-      line-height:27px;
+    >dl{
 
     }
-    &-right{
+    /*&-btn {*/
+      /*border: 0;*/
+      /*margin-left: 15px;*/
+      /*margin-bottom: 11px;*/
+      /*width: 81px;*/
+      /*height: 27px;*/
+      /*background: rgba(247, 247, 247, 1);*/
+      /*border-radius: 2px;*/
+      /*font-size: 12px;*/
+      /*font-weight: 500;*/
+      /*color: rgba(51, 51, 51, 1);*/
+      /*line-height: 17px;*/
+    /*}*/
+    /*&-btn:hover {*/
+      /*background: rgba(113, 179, 255, 1);*/
+      /*color: rgba(255, 255, 255, 1);*/
+    /*}*/
+  }
+
+  .amount {
+    margin-top: 10px;
+    &-left {
+      float: left;
+      font-size: 12px;
+      color: rgba(153, 153, 153, 1);
+      line-height: 27px;
+
+    }
+    &-right {
       float: right;
-        /*width: 75px;*/
+      /*width: 75px;*/
       /*height: 25px;*/
     }
 
   }
-  .submit{
+
+  .submit {
     margin-top: 76px;
-    width:345px;
-    height:49px;
-    background:rgba(113,179,255,1);
-    border-radius:8px;
-    font-size:18px;
+    margin-bottom: 54px;
+    width: 345px;
+    height: 49px;
+    background: rgba(113, 179, 255, 1);
+    border-radius: 8px;
+    font-size: 18px;
     font-weight: 500;
-    color:rgba(255,255,255,1);
-    line-height:25px;
+    color: rgba(255, 255, 255, 1);
+    line-height: 25px;
   }
 
 </style>
