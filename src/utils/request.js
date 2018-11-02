@@ -63,6 +63,17 @@ function requestHandle(params) {
           store.commit('setUk', res.data.uk)
           Cache.setSession('uk', res.data.uk)
         }
+        if(res.data.user.is_member){
+          store.commit('setIs_member', res.data.user.is_member)
+          Cache.setSession('is_member', res.data.user.is_member)
+        }
+
+        if(res.data.user.store){
+          store.commit('setStore',res.data.user.store)
+          Cache.setSession('store', res.data.user.store)
+        }
+
+
         if (res.data.code === 108) {
           Toast.fail(res.data.message);
         }
@@ -70,6 +81,7 @@ function requestHandle(params) {
           Toast.clear();
         }
         resolve(res.data);
+
         // const { data, success, message } = res.data;
         // console.log('requestHandle-[%s]->', url, res.data);
         // if (success === 1) {
@@ -95,6 +107,7 @@ function requestHandle(params) {
       rej => {
 
         Toast.fail('网络错误!')
+
         reject(rej);
       }
     );

@@ -69,7 +69,6 @@ import cache from '../../utils/cache'
     },
     methods: {
       onSubmit(){//提交订单
-
         let goodslist = this.goodslist.filter(item=>{
           return item.checked === true
         })

@@ -14,11 +14,11 @@
       return {
         listData: [{
           name: '会员卡',
-          url: '/member/mamberCard',
+          url: '/member/memberCard',
           message: undefined
         }, {
           name: '我的收藏',
-          url: null,
+          url: '/member/myCollect',
           message: undefined
         }, {
           name: '美的交流',
@@ -26,7 +26,7 @@
           message: undefined
         }, {
           name: '邀请好友',
-          url: null,
+          url: '/member/invite',
           message: undefined
         }, {
           name: '我的评价',
@@ -34,7 +34,7 @@
           message: undefined
         }, {
           name: '地址管理',
-          url: null,
+          url: '/member/userManage/address',
           message: undefined
         }]
       }

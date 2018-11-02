@@ -10,10 +10,7 @@
           </div>
         </div>
         <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
+
       </div>
     </div>
   </div>

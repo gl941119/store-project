@@ -1,23 +1,34 @@
 <template>
   <div v-if="isShow" class="footer">
     <ul>
-      <router-link tag="li" :to="{ name: 'index'}">
-        <span class="icon-g"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></span>
+      <router-link tag="li" :to="{ name: 'index'}"
+                   v-bind:class="{li_hover:hover===0}"
+                   v-on:click.native="hover = 0">
+        <span class="icon-g"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span
+          class="path4"></span><span class="path5"></span><span class="path6"></span></span>
         <p>商城</p>
       </router-link>
-      <router-link tag="li" :to="{ name: 'classify'}">
+      <router-link tag="li" :to="{ name: 'classify'}"
+                   v-bind:class="{li_hover:hover===1}"
+                   v-on:click.native="hover = 1">
         <span class="icon-w"><span class="path1"></span><span class="path2"></span></span>
         <p>分类</p>
       </router-link>
-      <router-link tag="li" :to="{ path: 'subscribe/1'}">
+      <router-link tag="li" :to="{ path: 'subscribe/1'}"
+                   v-bind:class="{li_hover:hover===2}"
+                   v-on:click.native="hover = 2">
         <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>预约</p>
       </router-link>
-      <router-link tag="li" :to="{ name: 'buyCart'}">
+      <router-link tag="li" :to="{ name: 'buyCart'}"
+                   v-bind:class="{li_hover:hover===3}"
+                   v-on:click.native="hover = 3">
         <span class="icon-c"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>购物车</p>
       </router-link>
-      <router-link tag="li" :to="{ name: 'member'}">
+      <router-link tag="li" :to="{ name: 'member'}"
+                   v-bind:class="{li_hover:hover===4}"
+                   v-on:click.native="hover = 4">
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>会员中心</p>
       </router-link>
@@ -30,7 +41,9 @@
   export default {
     name: "MyFooter",
     data() {
-      return {}
+      return {
+        hover: 1
+      }
     },
     computed: {
       isShow() {
@@ -39,6 +52,11 @@
     },
     mounted() {
 
+    },
+    methods: {
+      onclick() {
+        console.log(123)
+      }
     }
   }
 </script>
@@ -69,7 +87,7 @@
           font-size: 10px;
         }
       }
-      li:hover{
+      .li_hover {
         color: #71B3FF;
 
       }

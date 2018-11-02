@@ -27,7 +27,7 @@
     padding-top: 44px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 375px;
     height: 100%;
     /*background-color: #F4F4F4;*/
   }

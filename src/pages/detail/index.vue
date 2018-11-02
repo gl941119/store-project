@@ -33,7 +33,7 @@
         Data:null,
         id:this.$route.params.id,
         type:this.$route.params.type,
-        title:this.$route.params.type === '1'? '商品详情':'服务详情',
+        title:this.$route.params.type == '1'? '商品详情':'服务详情',
       }
     },
     mounted(){

@@ -61,7 +61,7 @@ export default new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/index/page/list'], resolve),
     },
-    {
+    {//搜索
       path: '/search',
       name: 'search',
       meta: {keepAlive: false},
@@ -73,14 +73,38 @@ export default new Router({
       meta: {showFooter: true, keepAlive: true},
       component: resolve => require(['@/pages/classify'], resolve)
     },
-    {//预约
-      path: '/subscribe/:type',
+    {//热门商品and服务(预约)
+      path: '/subscribe/:type',//1 服务 2 商品
       name: 'subscribe',
       meta: {keepAlive: false},
       component: resolve => require(['@/pages/subscribe'], resolve)
     },
+    {//热门商品--预约美师
+      path: '/appoint/:sid',//sid 服务id
+      name: 'appoint',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribe/page/appoint'], resolve)
+    },
+    {//热门商品--选择时间
+      path: '/appoint/:sid/:id',//sid 服务id id 美师id
+      name: 'selectTime',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
+    },
+    {//热门商品--预约确认
+      path: '/appoint/:sid/:id/:time',//sid 服务id id 美师id  time选择的时间
+      name: 'confirm',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
+    },
+    {//热门商品--预约支付
+      path: '/appointPay/:orderid',//orderid 预约订单
+      name: 'appointPay',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribe/page/appoint/pay'], resolve)
+    },
     {//详情页
-      path: '/detail/:type/:id',
+      path: '/detail/:type/:id', // type 1 商品  2服务
       name: 'detail',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/detail'], resolve)
@@ -104,10 +128,22 @@ export default new Router({
       component: resolve => require(['../pages/member'], resolve)
     },
     {//会员中心--会员卡
-      path: '/member/mamberCard',
-      name: 'mamberCard',
-      meta: {showFooter: false, keepAlive: false},
+      path: '/member/memberCard',
+      name: 'memberCard',
+      meta: { keepAlive: false},
       component: resolve => require(['../pages/member/page/memberCard'], resolve)
+    },
+    {//会员中心--我的收藏
+      path: '/member/myCollect',
+      name: 'myCollect',
+      meta: { keepAlive: false},
+      component: resolve => require(['../pages/member/page/myCollect'], resolve)
+    },
+    {//会员中心--邀请好友
+      path: '/member/invite',
+      name: 'invite',
+      meta: { keepAlive: true},
+      component: resolve => require(['../pages/member/page/invite'], resolve)
     },
     {//会员中心--用户管理
       path: '/member/userManage',
@@ -129,19 +165,25 @@ export default new Router({
     {//会员中心--用户管理--修改+增加地址
       path: '/member/userManage/changeAddress/:id',
       name: 'changeAddress',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component:resolve => require(['../pages/member/page/userManage/page/address/chengAddress'], resolve)
     },
     {//会员中心--我的订单
-      path: '/member/myIndent/:type',
+      path: '/member/myIndent/:type', //type 订单状态
       name: 'myIndent',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component:  resolve => require(['../pages/member/page/myIndent'], resolve)
+    },
+    {//会员中心--我的订单--评价
+      path: '/member/myIndent/appraise/:id', //  id 订单号id
+      name: 'appraise',
+      meta: {keepAlive: false},
+      component:  resolve => require(['../pages/member/page/myIndent/page/appraise'], resolve)
     },
     {//订单确认
       path: '/indentConfirme',
       name: 'indentConfirme',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component:  resolve => require(['../pages/pay/indentConfirme'], resolve)
     },
     {//支付

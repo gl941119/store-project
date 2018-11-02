@@ -11,6 +11,13 @@ export default new Vuex.Store({
     ShowBuySpecification: false,
     BuySpecification:undefined,
     uk: '',
+    SelectDayStatus:undefined,
+    SelectDay:undefined,
+    SelectHour:undefined,
+    SelectTime:undefined,
+    Is_member:undefined,//是否会员 string
+    Store:undefined,//是否美师 number
+
   },
   mutations: {
     setShowFooter(state, val) {
@@ -20,7 +27,26 @@ export default new Vuex.Store({
       state.ShowBuySpecification = val
     },
     setBuySpecification(state,val){
+
       state.BuySpecification = val
+    },
+    setSelectDayStatus(state,val){//选择美师设置天数状态
+      state.SelectDayStatus = val
+    },
+    setSelectDay(state,val){//选择美师设置日期
+      state.SelectDay = val
+    },
+    setSelectHour(state,val){//选择美师设置小时
+      state.SelectHour = val
+    },
+    setSelectTime(state,val){//选择美师选择好的时间
+      state.SelectTime = val
+    },
+    setIs_member(state,val){
+      state.Is_member = val
+    },
+    setStore(state,val){
+      state.Store = val
     },
     setUk(state, val) {
       state.uk = val
