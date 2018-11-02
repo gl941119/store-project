@@ -40,7 +40,7 @@ export default new Router({
     {
       path: '/',
       redirect: {
-        name: 'appoint',
+        name: 'index',
       },
     },
     {//官网展示
@@ -165,19 +165,25 @@ export default new Router({
     {//会员中心--用户管理--修改+增加地址
       path: '/member/userManage/changeAddress/:id',
       name: 'changeAddress',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component:resolve => require(['../pages/member/page/userManage/page/address/chengAddress'], resolve)
     },
     {//会员中心--我的订单
-      path: '/member/myIndent/:type',
+      path: '/member/myIndent/:type', //type 订单状态
       name: 'myIndent',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component:  resolve => require(['../pages/member/page/myIndent'], resolve)
+    },
+    {//会员中心--我的订单--评价
+      path: '/member/myIndent/appraise/:id', //  id 订单号id
+      name: 'appraise',
+      meta: {keepAlive: false},
+      component:  resolve => require(['../pages/member/page/myIndent/page/appraise'], resolve)
     },
     {//订单确认
       path: '/indentConfirme',
       name: 'indentConfirme',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component:  resolve => require(['../pages/pay/indentConfirme'], resolve)
     },
     {//支付
