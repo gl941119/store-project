@@ -156,7 +156,8 @@ export default new Router({
       name: 'userChange',
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/member/page/userManage/page/userChange'], resolve)
-    }, {//会员中心--用户管理--地址
+    },
+    {//会员中心--用户管理--地址
       path: '/member/userManage/address',
       name: 'address',
       meta: {keepAlive: false}, // 不需要被缓存
@@ -177,7 +178,6 @@ export default new Router({
     {//会员中心--我的订单--评价
       path: '/member/myIndent/appraise/:id', //  id 订单号id
       name: 'appraise',
-      name: 'appraise',
       meta: {keepAlive: false},
       component:  resolve => require(['../pages/member/page/myIndent/page/appraise'], resolve)
     },
@@ -191,7 +191,8 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       meta: {keepAlive: false}, // 不需要被缓存
-      component:  resolve => require(['../pages/pay'], resolve)
+      component: resolve => require(['../pages/pay'], resolve)
+    },
     {//美丽基金
       path: '/member/beautyFund',
       name: 'beautyFund',
