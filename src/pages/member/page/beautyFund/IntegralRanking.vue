@@ -1,0 +1,106 @@
+<template>
+  <div class="beautyBody">
+    <navbar :name="'积分排行榜'"></navbar>
+    <div class="oneDyList" >
+      <div class="oneDyListImg"></div>
+      <div class="oneDyListL">
+        <p class="oneDyBottom">rrr</p>
+        <p class="oneDyTxt">排名123名</p>
+      </div>
+      <div>
+        <p class="oneDyBottom">销售额</p>
+        <p class="oneDyTxtJe">¥267878</p>
+      </div>
+    </div>
+    <div class="integralRanking">销售排行榜</div>
+    <div class="oneDyList integralRankingSolid">
+      <div class="oneDyListImg"></div>
+      <div class="oneDyListL">
+        <p class="oneDyBottom">rrr</p>
+        <p class="oneDyTxt">排名123名</p>
+      </div>
+      <div>
+        <p class="oneDyBottom">销售额</p>
+        <p class="oneDyTxtJe">¥267878</p>
+      </div>
+    </div>
+
+
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "IntegralRanking",
+  }
+</script>
+
+<style lang="scss" scoped>
+  .integralRanking{
+    background-color: rgba(244,244,244,1);
+    height: 30px;
+    line-height: 30px;
+    color: rgba(153,153,153,1);
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
+  }
+  .oneDy{
+    $width:345px !global;
+    $height:20px !global;
+    width: 100%;
+    background-color: rgba(244,244,244,1);
+  }
+
+  .oneDyTop{
+    width: $width;
+    height: $height;
+    line-height: $height;
+    font-size: 10px;
+    color: rgba(153,153,153,1);
+    margin: 0 auto;
+  }
+  .oneDyList{
+    width: $width;
+    margin: 10px auto 10px auto;
+    height: 81px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .integralRankingSolid{
+    border-bottom: 1px solid rgba(240,240,240,1);
+  }
+  .oneDyListImg{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 20px;
+  }
+  .oneDyListL{
+    padding-left: 15px;
+    width: 200px;
+  }
+  .oneDyBottom{
+    margin-bottom: 7px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(51,51,51,1);
+  }
+  .oneDyTxt{
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(3,6,5,1);
+  }
+  .oneDyTxtJe{
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(229,11,11,1);
+  }
+
+  .oneDyListImg img{
+    width: 50px;
+    height: 50px;
+  }
+</style>

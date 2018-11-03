@@ -16,13 +16,17 @@
     <div class="fill"></div>
     <div class="card-bottom">
       <div class="card-bottom-left">
-        <p class="card-bottom-left-name">美丽积分</p>
-        <p class="card-bottom-left-price">{{Data.score}}</p>
+        <router-link :to="{path:'member/beautyIntegral'}">
+          <p class="card-bottom-left-name">美丽积分</p>
+          <p class="card-bottom-left-price">{{Data.score}}</p>
+        </router-link>
       </div>
       <img src="../../../assets/image/menberSplit.png" class="card-bottom-fill"></img>
       <div class="card-bottom-left">
-        <p class="card-bottom-left-name">美丽基金</p>
-        <p class="card-bottom-left-price">{{Data.share_amount}}</p>
+        <router-link :to="{ path:'member/beautyFund'}">
+          <p class="card-bottom-left-name">美丽基金</p>
+          <p class="card-bottom-left-price">{{Data.share_amount}}</p>
+        </router-link>
       </div>
     </div>
   </div>
