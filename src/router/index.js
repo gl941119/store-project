@@ -158,7 +158,7 @@ export default new Router({
       component: resolve => require(['../pages/member/page/userManage/page/userChange'], resolve)
     },
     {//会员中心--用户管理--地址
-      path: '/member/userManage/address',
+      path: '/member/userManage/address/:type',//0 购物时选择状态 1 会员中心编辑状态
       name: 'address',
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/member/page/userManage/page/address/address'], resolve)

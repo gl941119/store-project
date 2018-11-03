@@ -2,12 +2,13 @@
   <div class="address">
     <navbar :name="'收货地址'"></navbar>
     <ul class="list">
-      <li v-for="item in listData" :key="item.id" class="list-card"  v-on:click="goChangeAddress(item.id)">
+      <li v-for="item in listData" :key="item.id" class="list-card" v-on:click="goIndentConfirme(item)" >
         <div class="list-card-top">
           <span class="list-card-top-realname">{{item.realname}}</span>
           <span class="list-card-top-mobile">{{item.mobile}}</span>
           <img src="../../../../../../assets/image/address.png" alt=""
                class="list-card-top-img"
+               v-on:click.stop="goChangeAddress(item.id)"
           >
         </div>
         <div class="list-card-bottom">
@@ -38,6 +39,14 @@
       },
       goChangeAddress(id){
           this.$router.push({name:"changeAddress",params:{id:id}})
+      },
+      goIndentConfirme(item){//购物车地址点击
+        if(this.$route.params.type === '0'){
+          window.sessionStorage.setItem('address',JSON.stringify(item))
+          this.$router.push({name:'indentConfirme'})
+        }
+
+
       },
       request() {
         this.$request({
@@ -71,23 +80,27 @@
       background: rgba(255, 255, 255, 1);
       &-top {
         overflow: hidden;
+        display: flex;
+        justify-content: space-between;
         &-realname {
-          float: left;
+
           font-size: 15px;
           font-weight: 500;
           color: rgba(51, 51, 51, 1);
-          line-height: 21px;
+          font-family:PingFangSC-Medium;
+
+
         }
         &-mobile {
-          float: left;
+         flex: 1;
           margin-left: 15px;
           font-size: 15px;
           font-weight: 500;
           color: rgba(51, 51, 51, 1);
-          line-height: 21px;
+
         }
         &-img {
-          float: right;
+          margin-top: 3px;
           width: 15px;
           height: 15px;
         }

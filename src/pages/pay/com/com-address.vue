@@ -1,14 +1,14 @@
 <template>
   <ul class="list">
-    <li v-for="item in address" :key="item.id" class="list-card" v-on:click="goChangeAddress(item.id)">
+    <li class="list-card" v-on:click="goChangeAddress(address.id)">
       <div class="list-card-top">
-        <span class="list-card-top-realname">{{item.realname}}</span>
-        <span class="list-card-top-mobile">{{item.mobile}}</span>
+        <span class="list-card-top-realname">{{address.realname}}</span>
+        <span class="list-card-top-mobile">{{address.mobile}}</span>
         <van-icon name="arrow" class="list-card-top-icon"/>
       </div>
       <div class="list-card-bottom">
-        <div class="list-card-bottom-default" v-if="item.isdefault==='1'">默认</div>
-        <span class="list-card-bottom-address">{{item.address}}</span>
+        <div class="list-card-bottom-default" v-if="address.isdefault==='1'">默认</div>
+        <span class="list-card-bottom-address">{{address.address}}</span>
       </div>
       <div class="fill"></div>
     </li>
@@ -18,7 +18,13 @@
 <script>
   export default {
     name: "com-address",
-    props: ['address']
+    props: ['address'],
+    methods:{
+      goChangeAddress(id){
+        this.$router.push({name:'address',params:{type:'0'}})
+      }
+
+    }
   }
 </script>
 

@@ -249,8 +249,6 @@ a:focus {
 .van-cell__right-icon{
   display: inline-block !important;
   line-height: 33px !important;
-
-
 }
 .van-cell:not(:last-child)::after{
   border-bottom: 0 !important;

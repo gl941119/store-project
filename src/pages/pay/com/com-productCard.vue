@@ -1,7 +1,6 @@
 <template>
   <!--购物车卡片-->
   <div class="card">
-
     <div class="content">
       <img :src="item.thumb" alt="">
       <div class="content-right">
@@ -20,6 +19,7 @@
             :max="item.stock"
             :step="1"
             @change="cheng"
+            v-on:click.native="saveGoodsid(item.goodsid,item)"
             class="stepper"
           />
         </div>
@@ -29,13 +29,36 @@
 </template>
 
 <script>
-    export default {
-        name: "productCard",
-      props:['item'],
-      methods:{
-        cheng(){}
+  export default {
+    name: "productCard",
+    props: ['item'],
+    data(){
+      return{
+        goodsid: undefined
+      }
+    },
+    methods: {
+      saveGoodsid(id,item){//暂存商品id
+        console.log(id,item)
+        this.goodsid= id
+
+      },
+      cheng(val) {  //修改订单数量
+
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=85&act=updateorder',
+          type: 'post',
+          data: {
+            ordersn:window.sessionStorage.getItem('ordersn'),
+            id: this.goodsid,
+            optionid:48,
+            num:val,
+          }
+      })
+
       }
     }
+  }
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="detali-product">
+  <div class="detali-product" >
     <van-swipe :autoplay="300000000000000000" class="swipe">
       <van-swipe-item v-if="Data.video">
         <video :src="Data.video" autoplay muted class="swipe-video"/>
@@ -117,6 +117,9 @@
     },
     mounted() {
       this.request()
+
+
+
     },
     methods: {
       SpecificationHandle(){

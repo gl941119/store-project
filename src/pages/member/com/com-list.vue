@@ -34,7 +34,7 @@
           message: undefined
         }, {
           name: '地址管理',
-          url: '/member/userManage/address',
+          url: '/member/userManage/address/1',
           message: undefined
         }]
       }

@@ -16,26 +16,30 @@
       </div>
       <div class="fill"></div>
       <textarea class="area" maxlength="200" placeholder="宝贝的效果如何呢？发表一下自己的感受吧"
-        v-model="item.tip"></textarea>
+        v-model="item.content"></textarea>
       <div class="upload">
-        <img :src="val" alt="" v-for="val,num in item.imgs" :key="num">
+        <video class="upload-img" :src="val" controls v-for="val,num in item.videos" :key="num"></video>
+        <img class="upload-img" :src="val" alt="" v-for="val,num in item.imgs" :key="num">
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
           <input  name="file" type="file" accept="image/png,image/gif,image/jpeg"
-                  @change="uploadImg" class="upload-img-input" v-on:click="clickUpload(index)" />
+                  @change="uploadImg" class="upload-img-input"
+                  v-on:click="clickUpload(index)" />
         </div>
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise1.png" alt="">
           <p>添加视频</p>
           <input  name="file" type="file" accept="video/mp4，video/avi"
-                  @change="uploadVideo" class="upload-img-input"/>
+                  @change="uploadVideo" class="upload-img-input"
+                  v-on:click="clickUpload(index)"
+          />
         </div>
 
       </div>
 
       <div class="checkbox">
-        <van-checkbox v-model="checked" class="checkbox-icon">匿名</van-checkbox>
+        <van-checkbox v-model="item.tip" class="checkbox-icon">匿名</van-checkbox>
       </div>
     </div>
 
@@ -80,7 +84,7 @@
     },
     methods: {
       clickUpload(index){
-        console.log(index)
+
         this.index= index
       },
       uploadImg(e) {   // 上传照片
@@ -113,20 +117,21 @@
         let file = e.target.files[0];
         let param = new FormData();  // 创建form对象
         param.append('file', file, file.name);  // 通过append向form对象添加数据
-        // param.append('chunk', '0') // 添加form表单中其他数据
+        // param.append('type', 'video') // 添加form表单中其他数据
         // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
         let config = {
-          headers: {'Content-Type': 'multipart/form-data'}
+          headers: {'Content-Type': 'multipart/form-data',
+                  }
         };
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || cache.getSession('uk');
-        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=' + uk, param, config)
+        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=87&act=fileuploadvideo&uk=' + uk, param, config)
           .then(res => {
             console.log(res)
             alert(res.data)
             if (res.data.code === 100) {
+              this.arr[this.index].videos.push(res.data.data.avatar)
               this.$toast('上传成功')
-              this.$emit('Refresh')
             }
 
           })
@@ -135,11 +140,49 @@
       changeValue(val) {
         this.value = val
       },
-      cancelHandle() {
-      },
-      confirmHandle() {
+      cancelHandle() {//取消返回
+        this.$dialog.confirm({
+          title: '是否放弃评论？',
+          message: ''
+        }).then(() => {
+          this.$router.go(-1)
+        }).catch(() => {
+          // on cancel
+        });
 
-        console.log(this.arr)
+      },
+      confirmHandle() { //确认上传
+
+        let arr = this.arr
+        arr.forEach(item=>{
+          item.tip =  item.tip === true? '1':'0'
+          item.score =  item.score*2
+        })
+
+        let result = [{
+          orderid:this.$route.params.id,
+          goods:arr,
+        }]
+
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=87&act=goodsdiscuss',
+          type:'post',
+          data:{
+            discuss: JSON.stringify(result)
+          }
+        }).then((res)=>{
+
+          if(res.code===100){
+            this.$toast.success('评论成功')
+            let thia = this
+            setTimeout(()=>{
+              thia.$router.push({name:'index'})
+            },500)
+
+          }
+        })
+
+
       }
     }
   }

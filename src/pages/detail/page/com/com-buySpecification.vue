@@ -22,9 +22,6 @@
           </van-button>
         </dd>
       </dl>
-      <div></div>
-
-
     </div>
     <div class="amount">
       <div class="amount-left">数量</div>
@@ -36,7 +33,7 @@
         class="amount-right"
       />
     </div>
-    <van-button type="default" class="submit">确认</van-button>
+    <van-button type="default" class="submit" v-on:click="submit">确认</van-button>
   </div>
 
 </template>
@@ -54,13 +51,17 @@
       }
     },
     mounted(){
-
       try{
         this.oneTitle = this.goods_spec[0].spectitle
       }catch(e){
 
       }
     },
+    methods:{
+      submit(){
+
+      }
+    }
   }
 </script>
 

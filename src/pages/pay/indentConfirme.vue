@@ -1,38 +1,57 @@
 <template>
   <div class="indentConfirme">
     <navbar :name="'订单确认'"></navbar>
-    <com-address :address="address"></com-address>
+    <!--收货地址-->
+    <com-address :address="address" v-on:click.native="goAddress"></com-address>
     <div class="main">
       <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" style=""></com-prodectcard>
       <div class="fill"></div>
       <van-cell title="美丽积分券:" is-link class="cell">
-        <span class="cell-default">无可用</span>
+        <span class="cell-default">{{score_nex=='0'? '不可用':'可用'}}</span>
       </van-cell>
       <div class="fill"></div>
       <van-cell title="美丽基金:" is-link class="cell">
-        <span>内容33</span>
+        <span>{{share_amount}}</span>
       </van-cell>
       <div class="fill"></div>
       <van-cell title="美丽余额:" is-link class="cell">
-        <span>内容33</span>
+        <span>{{money}}</span>
       </van-cell>
       <div class="fill"></div>
       <van-cell title="运送方式:" is-link class="cell">
-        <span class="cell-yunfei">自取¥0.00</span>
+        <span class="cell-yunfei">{{freight}}{{ishave=='1'? '元':''}}</span>
       </van-cell>
       <div class="fill"></div>
       <div class="cell">
         <span class="cell-name">买家留言:</span>
-        <input type="text" class="cell-input" placeholder="选填">
+        <input type="text" class="cell-input" placeholder="选填" v-model="leave">
       </div>
       <div class="fill"></div>
     </div>
 
-    <price-list></price-list>
-    <van-button class="submitBtn" type="primary">主要按钮</van-button>
-    <van-button class="submitBtn" type="danger">危险按钮</van-button>
-    <van-button class="submitBtn" type="default">默认按钮</van-button>
 
+    <div class="aggregate">
+      <van-cell title="商品金额" class="cell">
+        <span class="cell-right">￥&nbsp;{{allprice}}</span>
+      </van-cell>
+      <van-cell title="积分券减免" class="cell">
+        <span class="cell-right">-&nbsp;￥&nbsp;{{score_nex}}</span>
+      </van-cell>
+      <van-cell title="运费" class="cell">
+        <span class="cell-right">+&nbsp;￥&nbsp;{{freight}}</span>
+      </van-cell>
+      <div class="allPrice">
+        <span class="allPrice-title">总金额：</span>
+        <span class="cell-right">+&nbsp;￥&nbsp;{{allmoney}}</span>
+      </div>
+    </div>
+
+    <van-button class="submitBtn" type="default" v-if="allmoney == '0'"
+                style="background-color: #71B3FF;color: #FFFFFF;">提交订单</van-button>
+    <div v-else>
+    <van-button class="submitBtn" type="primary" >支付</van-button>
+    <van-button class="submitBtn" type="danger">取消</van-button>
+    </div>
   </div>
 </template>
 
@@ -48,25 +67,78 @@
     },
     data() {
       return {
-        address: undefined,
-        goodslist: []
+        address: {
+          address: undefined,
+          area: undefined,
+          city: undefined,
+          id: undefined,
+          isdefault: undefined,
+          mobile: undefined,
+          province: undefined,
+          realname: undefined,
+        },
+        goodslist: [],
+        share_amount:undefined,//基金
+        ishave: undefined,
+        freight: undefined,
+        leave: undefined,//买家留言
+        money: undefined,//美丽余额
+        allprice: undefined,//商品金额
+        score_nex:undefined,//积分券减免
+        allmoney:undefined,//总金额
       }
     },
     mounted() {
-      this.request()
+      console.log()
+
+      // if (window.sessionStorage.getItem('address')) {
+      //   this.address = JSON.parse(window.sessionStorage.getItem('address'))
+      //   console.log(this.address)
+      // } else {
+      //   this.request()
+      // }
+
+      //确认订单
       this.goodslist = JSON.parse(cache.getSession('buyCart'))
-      // console.log(JSON.parse(cache.getSession('buyCart')))
+      this.request()
+
     },
     methods: {
-      request() {
+      goAddress() {//去收货地址
+        this.$router.push({name: 'address', params: {type: '0'}})
+      },
+      request() {//通过订单号查询
+        let addressid = undefined
+
+        try {
+          addressid = JSON.parse(window.sessionStorage.getItem('address')).id
+
+        } catch (e) {
+
+        }
         this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=88&act=addresslist',
-          type: 'get'
+          url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
+          type: 'post',
+          data: {
+            ordersn: window.sessionStorage.getItem('ordersn'),
+            address: window.sessionStorage.getItem('address'),
+            addressid: addressid
+          }
         }).then((res) => {
-          let list = []
-          list.push(res.data.list[0])
-          this.address = list
+          this.address = res.data.user
+          this.score_nex = res.data.user.score_nex      //美丽
+          this.share_amount = res.data.user.share_amount   //基金
+          // this.amount = res.data.allrecord.amount // 美丽余额
+          this.money = res.data.user.money //美丽余额
+          this.ishave = res.data.freight.ishave //运费   1 元
+          this.freight = res.data.freight.freight
+          this.allprice = res.data.allrecord.allprice  //商品金额
+          this.score_nex = res.data.allrecord.score_nex  //积分券减免
+          this.allmoney = res.data.allrecord.money  //总金额
+
         })
+
+
       }
     }
   }
@@ -93,8 +165,8 @@
         display: flex;
         justify-items: center;
         margin: 0 auto;
-        font-size:14px;
-        color:rgba(51,51,51,1);
+        font-size: 14px;
+        color: rgba(51, 51, 51, 1);
 
         &-name {
           width: 70px;
@@ -128,7 +200,6 @@
     }
   }
 
-
   .submitBtn {
     width: 345px;
     height: 40px;
@@ -136,5 +207,41 @@
     margin: 18px auto 0;
 
   }
+
+  .aggregate {
+    width: 100%;
+    margin-top: 10px;
+    .cell {
+      /*border: 0 !important;*/
+      height: 25px !important;
+      display: flex;
+      align-items: center;
+      padding: 0 15px !important;
+      font-size: 15px;
+      color: rgba(51, 51, 51, 1);
+      &-right {
+        width: 69px;
+        height: 21px;
+        font-size: 15px;
+        color: rgba(231, 59, 61, 1);
+      }
+    }
+    .allPrice {
+      height: 25px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      &-title {
+        margin-right: 24px;
+        width: 60px;
+        height: 21px;
+        font-size: 15px;
+        color: rgba(51, 51, 51, 1);
+
+      }
+    }
+  }
+
 
 </style>

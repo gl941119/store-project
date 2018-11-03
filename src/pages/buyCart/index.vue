@@ -77,11 +77,29 @@ import cache from '../../utils/cache'
           this.$toast.fail('请勾选商品')
           return;
         }
-
         //购物车订单存本地
         cache.setSession('buyCart',goodslist)
-        this.$router.push({name:'indentConfirme'})
 
+        //生成订单
+        this.confirmIndent(goodslist)
+      },
+      confirmIndent(goodslist){//生成订单
+        goodslist.forEach((item)=>{
+          item['num']=item['total']
+        })
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
+          type:'post',
+          data:{
+            goods:JSON.stringify(goodslist)
+          }
+        }).then((res)=>{
+          if(res.code === 100){
+            window.sessionStorage.setItem('ordersn',res.data.ordersn)//保存订单号
+            this.$router.push({name:'indentConfirme',params:{ordersn:res.data.ordersn}})
+          }
+
+        })
       },
       changeCheckbox(val) {//点击全选
         this.goodslist.forEach(item => {
