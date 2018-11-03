@@ -45,7 +45,6 @@ Vue.component('price-list', PriceList);
 
 
 
-
 import request from './utils/request'
 
 Vue.prototype.$request = request

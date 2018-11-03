@@ -35,7 +35,7 @@ request() {
             url:'app/index.php?i=1&c=entry&eid=88&act=beautylist',
             type:'get',
             data:{
-              type:2
+              type:3
             }
           }).then((res) => {
             var data=res.data.share;

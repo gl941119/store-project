@@ -35,6 +35,7 @@ import Pay from '../pages/pay'
 
 Vue.use(Router)
 
+
 export default new Router({
   routes: [
     {
@@ -234,6 +235,24 @@ export default new Router({
       name: 'fundPresentation',
       meta: {keepAlive: false}, // 不需要被缓存
       component:  resolve => require(['../pages/member/page/beautyFund/fundPresentation'], resolve)
+    },
+    {//基金提现 - 成功
+      path: '/beautyFund/fundPresentationOk',
+      name: 'fundPresentationOk',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/fundPresentationOk'], resolve)
+    },
+    {//账号绑定
+      path: '/bindAccount',
+      name: 'bindAccount',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/bindAccount'], resolve)
+    },
+    {//美师主页
+      path: '/subscribe/page/appoint/DetailsBeautyDivision',
+      name: 'DetailsBeautyDivision',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/subscribe/page/appoint/DetailsBeautyDivision'], resolve)
     }
 
 

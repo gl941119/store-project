@@ -39,7 +39,9 @@
         name: "fundPresentation",
       data() {
           return{
-            money:''
+            money:'',
+            maxMoney:'',
+            minMoney:''
           }
       },
       mounted(){
@@ -52,14 +54,14 @@
               type:'get',
             }).then((res) => {
               var data=res.data;
-              console.log(data)
+              this.maxMoney=data.end_amount;//最大金额
+              this.minMoney=data.start_amount;//最小金额
+              console.log(res)
             })
           },
         fundPresentationMoney(){
           var tst=/^[1-9]\d*$/;
-
-          if(tst.test(this.money)&&this.money>0&&this.money<20000){
-
+          if(tst.test(this.money)&&this.money >= this.minMoney &&this.money <= this.maxMoney){
             this.$request({
               url:'app/index.php?i=1&c=entry&eid=88&act=withdraw',
               type:'post',
@@ -68,12 +70,14 @@
                 amount:this.money
               }
             }).then((res) => {
-              var data=res.data;
-              console.log(data)
+              if(res.status){
+                this.$router.push({name:'fundPresentationOk'}) //提交成功
+              }
             })
 
           }else{
-            Toast('提现金额格式不正确！整数且大于0小于20000！');
+            var msg="提现金额格式不正确！整数且大于"+this.minMoney+"小于"+this.maxMoney+"！";
+            Toast(msg);
           }
 
 

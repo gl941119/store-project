@@ -1,30 +1,33 @@
 <template>
-  <div class="beautyBody">
-    <navbar :name="'积分排行榜'"></navbar>
-    <div class="oneDyList" >
-      <div class="oneDyListImg"></div>
-      <div class="oneDyListL">
-        <p class="oneDyBottom">rrr</p>
-        <p class="oneDyTxt">排名123名</p>
+  <div class="jiFenPaiHang" ref="myBoxSrc" @scroll.passive="onScroll($event)">
+    <navbar ref="navs" :name="'积分排行榜'"></navbar>
+    <div ref="myDiv">
+      <div class="oneDyList" >
+        <div class="oneDyListImg"><img :src="imgSrc"></div>
+        <div class="oneDyListL">
+          <p class="oneDyBottom">{{ names }}</p>
+          <p class="oneDyTxt">排名{{ num }}名</p>
+        </div>
+        <div>
+          <p class="oneDyBottom">销售额</p>
+          <p class="oneDyTxtJe">¥{{ money }}</p>
+        </div>
       </div>
-      <div>
-        <p class="oneDyBottom">销售额</p>
-        <p class="oneDyTxtJe">¥267878</p>
+      <div class="integralRanking">销售排行榜</div>
+      <div class="oneDyList integralRankingSolid" v-for="item in arr">
+        <div class="oneDyListImg"><img :src="item.avatar"></div>
+        <div class="oneDyListL">
+          <p class="oneDyBottom">{{ item.name }}</p>
+          <p class="oneDyTxt">排名{{ item.num }}名</p>
+        </div>
+        <div>
+          <p class="oneDyBottom">销售额</p>
+          <p class="oneDyTxtJe">¥{{ item.allamount }}</p>
+        </div>
       </div>
-    </div>
-    <div class="integralRanking">销售排行榜</div>
-    <div class="oneDyList integralRankingSolid">
-      <div class="oneDyListImg"></div>
-      <div class="oneDyListL">
-        <p class="oneDyBottom">rrr</p>
-        <p class="oneDyTxt">排名123名</p>
-      </div>
-      <div>
-        <p class="oneDyBottom">销售额</p>
-        <p class="oneDyTxtJe">¥267878</p>
-      </div>
-    </div>
+<div class="morePage">加载更多</div>
 
+    </div>
 
   </div>
 </template>
@@ -32,6 +35,68 @@
 <script>
   export default {
     name: "IntegralRanking",
+    data(){
+      return {
+        imgSrc:'',
+        names:'',
+        money:'',
+        num:'',
+        arr:[],
+        myScroll:null,
+        myBox:null,
+        pages:null,
+        sizePage:0
+      }
+    },
+    mounted(){
+      this.meRequest();
+      this.myScroll=this.$refs.myDiv;
+      this.myBox=this.$refs.myBoxSrc;
+
+    },
+    methods:{
+      meRequest(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=scorelist',
+          type:"get"
+        }).then((res) => {
+          if(res.status){
+            var user=res.data.user;
+            var list=res.data.list;
+            this.imgSrc=user.avatar;
+            this.names=user.name;
+            this.money=user.allamount;
+            this.num=user.num;
+            this.arr=list;
+            this.pages=res.data.page.p;
+            // this.sizePage=res.data.page.size;
+          }
+        });
+      },
+      onScroll(e){
+
+        var listHeight=e.target.scrollTop+this.myBox.offsetHeight;
+        var listScrollTop=this.myScroll.offsetHeight;
+        var c=listScrollTop-listHeight;
+        console.log(c)
+        if(this.sizePage==0&&c < 100){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=scorelist',
+            type:"post",
+            data:{
+              p:this.pages+1
+            }
+          }).then((res) => {
+            if(res.status){
+
+            }
+          });
+        }
+
+      }
+
+
+    }
   }
 </script>
 
