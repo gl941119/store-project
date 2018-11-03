@@ -27,6 +27,7 @@ import {
   Switch,//开关
   Actionsheet,//Actionsheet
   Dialog,//弹窗
+  PullRefresh,//下拉
 } from 'vant';
 Vue.use(Row).use(Col);
 Vue.use(Button);
@@ -50,3 +51,4 @@ Vue.use(Area);
 Vue.use(Switch);
 Vue.use(Actionsheet);
 Vue.use(Dialog);
+Vue.use(PullRefresh);
