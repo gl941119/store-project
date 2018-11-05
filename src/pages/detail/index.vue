@@ -23,7 +23,7 @@
           <span class="title-top-name">{{Data.title}}</span>
           <div class="title-top-right">
             <span>{{Data.collection}}人收藏</span>
-            <img src="../../assets/img/icon-star.png" alt="">
+            <img src="../../assets/image/icon-star.png" alt="">
           </div>
         </div>
         <p class="title-middle">
@@ -36,10 +36,17 @@
         </div>
       </div>
       <!--已购-->
-      <my-cell :title="'已购'" :content="Alreadybought" v-on:click.native="SpecificationHandle"
-               style="margin-top: 10px;" v-if="type=== '1'"></my-cell>
+      <div class="myCell" v-on:click="SpecificationHandle" v-if="type== '1'">
+        <div class="myCell-title">{{'已选'}}</div>
+        <div class="myCell-content">{{Alreadybought}}</div>
+        <div class="myCell-right">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <!--运送至-->
-      <div class="address-cell" v-if="type=== '1'">
+      <div class="address-cell" v-if="type== '1'">
         <div class="address-cell-title">送至运费</div>
         <div class="address-cell-content">
           <p>{{address}}</p>
@@ -62,7 +69,7 @@
       <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
       <!--选择规格-->
       <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
-        <com-buy-specification :goods_spec="goods_spec" :goods="Data"></com-buy-specification>
+        <com-buy-specification :goods_spec="goods_spec" :goods="Data" :num="num"></com-buy-specification>
       </van-actionsheet>
       <!--购买栏-->
       <com-buy :optionid='optionid' :id="id"></com-buy>
@@ -85,6 +92,7 @@
     },
     data() {
       return {
+        num: undefined,
         show: true,
         id: this.$route.params.id,
         type: this.$route.params.type,
@@ -124,7 +132,7 @@
       }
     },
     mounted() {
-      console.log(this.$refs['evaluation'])
+      // console.log(this.$refs['evaluation'])
       this.request()
     },
     computed: {
@@ -169,13 +177,14 @@
           }
         }).then((res) => {
           if (res.code === 100) {
-            if (this.type == '2') {
+            if (this.type == '2') {//服务
               this.Data = res.data.service
-            } else if (this.type == '1') {
+            } else if (this.type == '1') {//商品
               this.Data = res.data.goods
               this.goods_spec = res.data.goods_spec //容量
               this.Alreadybought = `${res.data.goods.title},1瓶` //已购
               this.address = res.data.address
+              this.num = res.data.num //规格数量
             }
             // console.log(res.data.disucss.)
             if (res.data.discuss.length === 0) {
@@ -183,12 +192,13 @@
             } else {
               this.discussType = 1
               this.discuss = res.data.discuss[0] //评论
+
             }
           }
         })
       },
       onFocus() {
-        console.log(123)
+        // console.log(123)
       }
     }
   }
@@ -326,7 +336,7 @@
   }
 
   .address-cell {
-    margin-top: 10px;
+    margin-top: 10px !important;
     width: 100%;
     padding: 12px 15px;
     height: 64px;
@@ -341,7 +351,9 @@
       color: rgba(153, 153, 153, 1);
     }
     &-content {
-      width: 233px;
+      flex: 1;
+      margin-left: 10px;
+      /*width: 233px;*/
       height: 100%;
       font-size: 14px;
       color: rgba(51, 51, 51, 1);
@@ -357,7 +369,6 @@
         width: 100%;
         height: 50%;
       }
-
     }
     &-right {
       > div {
@@ -370,4 +381,37 @@
     }
   }
 
+  .myCell {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    &-title {
+      width: 24px;
+      height: 100%;
+      font-size: 12px;
+      color: rgba(153, 153, 153, 1);
+      line-height: 17px;
+    }
+    &-content {
+      margin-left: 10px;
+      flex: 1;
+      height: 100%;
+      font-size: 14px;
+      color: rgba(51, 51, 51, 1);
+      line-height: 20px;
+    }
+    &-right {
+      > div {
+        width: 2px;
+        height: 2px;
+        background: rgba(102, 102, 102, 1);
+        float: left;
+        margin-left: 4px;
+      }
+    }
+  }
 </style>

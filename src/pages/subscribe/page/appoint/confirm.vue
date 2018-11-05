@@ -65,7 +65,28 @@
           title: '是否取消预约',
           message: ''
         }).then(() => {
-          this.$router.go(-1)
+
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
+            type:'post',
+            data:{
+              orderid:this.orderid,
+            }
+          }).then(res=>{
+            if(res.code === 100){
+              this.$toast.success('取消成功')
+              setTimeout(()=>{
+                this.$router.go(-1)
+              },500)
+
+            }
+
+          })
+
+
+
+
+
         }).catch(() => {
           // on cancel
         });

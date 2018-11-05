@@ -11,16 +11,16 @@
         </div>
       </div>
     </div>
-    <div class="select" v-html="ht">
-      <dl>
-        <dt v-if="oneTitle">{{oneTitle}}</dt>
-        <dd>
-          <van-button type="default" class="select-btn"
-                      v-for="item in goods_spec"
-                      :key="item.id">
-            {{item.title}}
-          </van-button>
-        </dd>
+    <div class="select" ref="outer">
+      <dl :data-type="1" :data-son="type">
+        <dt>味道</dt>
+          <button v-for="item in goods_spec"
+                  :data-title="item.title" :key="item.id" v-on:click="clickHandle">{{item.title}}
+          </button>
+          <!--<van-button type="default" class="select-btn"  -->
+          <!---->
+          <!--v-on:click=""-->
+          <!--&gt;</van-button>-->
       </dl>
     </div>
     <div class="amount">
@@ -41,24 +41,64 @@
 <script>
   export default {
     name: "com-buySpecification",
-    props: ['goods_spec', 'goods'],
+    props: ['goods_spec', 'goods', 'num'],
     data() {
       return {
         integer: true,
         value: 1,
-        oneTitle:false,
-        ht:`<P></P>`
+        oneTitle: false,
+        select: [],
+        type:JSON.stringify(this.goods_spec)
       }
     },
-    mounted(){
-      try{
-        this.oneTitle = this.goods_spec[0].spectitle
-      }catch(e){
+    mounted() {
+      // for (let i=0 ,len=parseInt(this.num);i<len;i++){
+      //   this.select.push({})
+      // }
+      // console.log(this.select,this.goods_spec)
+      // this.select[0] = this.goods_spec
+      //
+      // let block = `<van-button type="default" class="select-btn">{{item.title}}</van-button>`
+      // let html = `<dl><dt>味道</dt><dd>${}</dd></dl>`
 
-      }
+
     },
-    methods:{
-      submit(){
+    methods: {
+      submit() {
+
+      },
+      clickHandle(e) {
+        console.log(this.$refs['outer'])
+        let outer = this.$refs['outer'],//select
+          curr = e.target.parentNode,//dl
+          son = JSON.parse(curr.getAttribute("data-son"));
+
+        if(outer.children.length == curr.getAttribute("data-type")){//兄弟节点添加
+          // var dl = document.createElement('dl'); //1、创建元素
+          JSON.parse(curr.getAttribute("data-son")).forEach((item,index)=>{
+            if(item.title == e.target.innerText){
+            son = son[index].son
+            }
+          })
+          console.log(son)
+          let newElement = document.createElement('dl')
+          let _dt = `<dt>味道</dt>`
+          son.forEach((item)=>{
+            _dt += `<button :data-title="item.title"  @click.native="clickHandle()">${item.title}</button>`
+          })
+          newElement.innerHTML = _dt
+          outer.appendChild(newElement)
+        }else{//兄弟节点替换
+
+
+
+        }
+
+        //
+        //
+        // console.log(e.target.parentNode.parentNode)
+        // e.target.parentNode.parentNode.insertBefore(span)
+
 
       }
     }
@@ -117,25 +157,25 @@
   .select {
     /*overflow: hidden;*/
     margin-top: 26px;
-    >dl{
+    > dl {
 
     }
     /*&-btn {*/
-      /*border: 0;*/
-      /*margin-left: 15px;*/
-      /*margin-bottom: 11px;*/
-      /*width: 81px;*/
-      /*height: 27px;*/
-      /*background: rgba(247, 247, 247, 1);*/
-      /*border-radius: 2px;*/
-      /*font-size: 12px;*/
-      /*font-weight: 500;*/
-      /*color: rgba(51, 51, 51, 1);*/
-      /*line-height: 17px;*/
+    /*border: 0;*/
+    /*margin-left: 15px;*/
+    /*margin-bottom: 11px;*/
+    /*width: 81px;*/
+    /*height: 27px;*/
+    /*background: rgba(247, 247, 247, 1);*/
+    /*border-radius: 2px;*/
+    /*font-size: 12px;*/
+    /*font-weight: 500;*/
+    /*color: rgba(51, 51, 51, 1);*/
+    /*line-height: 17px;*/
     /*}*/
     /*&-btn:hover {*/
-      /*background: rgba(113, 179, 255, 1);*/
-      /*color: rgba(255, 255, 255, 1);*/
+    /*background: rgba(113, 179, 255, 1);*/
+    /*color: rgba(255, 255, 255, 1);*/
     /*}*/
   }
 

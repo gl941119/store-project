@@ -104,10 +104,8 @@
             console.log(res)
             if (res.data.code === 100) {
               this.$toast('上传成功')
-              console.log(res.data.data.avatar)
-              this.arr[this.index].imgs.push(res.data.data.avatar)
-
-
+              console.log(res.data.data.imgs)
+              this.arr[this.index].imgs.push(res.data.data.imgs)
             }
 
           })
@@ -130,7 +128,7 @@
             console.log(res)
             alert(res.data)
             if (res.data.code === 100) {
-              this.arr[this.index].videos.push(res.data.data.avatar)
+              this.arr[this.index].videos.push(res.data.data.videos)
               this.$toast('上传成功')
             }
 

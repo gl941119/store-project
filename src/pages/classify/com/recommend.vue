@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <img class="recommend-banner" src="../../../assets/image/classfiybanner.png" alt="">
+    <img class="recommend-banner" :src="adv.bimg" alt="">
     <div class="server">
       <div class="server-title">
         <span class="server-title-name">推荐服务</span>
@@ -36,7 +36,12 @@
     data() {
       return {
         goods: null,
-        services: null
+        services: null,
+        adv:{
+          bimg:undefined,
+          link: undefined,
+          name: undefined
+        }
       }
     },
     mounted() {
@@ -55,6 +60,7 @@
         }).then((res) => {
           this.services = res.data.services
           this.goods = res.data.goods
+          this.adv = res.data.adv
         })
       }
     }

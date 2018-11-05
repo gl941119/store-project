@@ -5,10 +5,10 @@
     </router-link>
     <div class="fill"></div>
     <ul>
-      <li>
+      <router-link tag="li" :to="{name:'mySubscribe'}">
         <img src="../../../assets/image/预约.png" alt="">
         <p>预约</p>
-      </li>
+      </router-link>
       <router-link tag="li" :to="{name:'myIndent',params: {type:1}}">
         <img src="../../../assets/image/待付款.png" alt="">
         <p>待付款</p>

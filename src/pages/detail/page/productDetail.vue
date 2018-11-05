@@ -13,7 +13,7 @@
         <span class="title-top-name">{{Data.title}}</span>
         <div class="title-top-right">
           <span>{{Data.collection}}人收藏</span>
-          <img src="../../../assets/img/icon-star.png" alt="">
+          <img src="../../../assets/image/icon-star.png" alt="">
         </div>
       </div>
       <p class="title-middle">
@@ -98,7 +98,7 @@
     methods: {
       request() {
         let url
-        console.log(this.$route.params.type === '2')
+        // console.log(this.$route.params.type === '2')
         if (this.type === '1') { // 商品列表
           url = 'app/index.php?i=1&c=entry&eid=85&act=goods'
         } else {
@@ -133,7 +133,7 @@
         })
       },
       onFocus() {
-        console.log(123)
+        // console.log(123)
       }
     }
 

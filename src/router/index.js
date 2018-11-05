@@ -99,7 +99,7 @@ export default new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
     },
     {//热门商品--预约支付
-      path: '/appointPay/:orderid',//orderid 预约订单
+      path: '/appointPay/:orderid/:type',//orderid 预约订单  type 无 预约支付确认  1 查看订单
       name: 'appointPay',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/pay'], resolve)
@@ -127,6 +127,12 @@ export default new Router({
       name: 'member',
       meta: {showFooter: true, keepAlive: false},
       component: resolve => require(['../pages/member'], resolve)
+    },
+    {//会员中心--我的预约
+      path: '/member/mySubscribe',
+      name: 'mySubscribe',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/member/page/subscribe'], resolve)
     },
     {//会员中心--会员卡
       path: '/member/memberCard',

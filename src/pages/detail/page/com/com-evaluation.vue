@@ -20,8 +20,8 @@
     props:['good_rate','discuss','discussType'],
     watch:{
       discussType:function (val) {
-        console.log(val)
-        console.log(val ===1)
+        // console.log(val)
+        // console.log(val ===1)
       }
     },
     components: {

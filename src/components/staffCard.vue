@@ -1,17 +1,18 @@
 <template>
   <div class="staffCard">
-    <img src="" alt="">
+    <img :src="Data.avatar" alt="">
     <dl>
-      <dt>科美师：王娟</dt>
-      <dd>环球中心店6号科美师</dd>
-      <p>每天告诉你自己一次，你真的很不错</p>
+      <dt>科美师：{{Data.name}}</dt>
+      <dd>{{Data.address}}店{{Data.displayorder}}号科美师</dd>
+      <p>{{Data.signature}}</p>
     </dl>
   </div>
 </template>
 
 <script>
     export default {
-        name: "staffCard"
+        name: "staffCard",
+      props:['Data']
     }
 </script>
 
@@ -26,7 +27,6 @@
     display: flex;
     justify-content: space-between;
     >img{
-      border: 1px solid red;
       width: 115px;
       height: 115px;
 

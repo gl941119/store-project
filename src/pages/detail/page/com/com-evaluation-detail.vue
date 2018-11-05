@@ -2,17 +2,17 @@
   <div class="evaluation-detail">
     <div class="fill"></div>
     <div class="title">
-      <span class="title-name">{{nick}}</span>
+      <span class="title-name">{{discuss.nick}}</span>
       <img :src="discuss.level_img" alt="" class="title-grade">
       <div class="title-giveMark">
-        <img src="../../../../assets/image/evaluation.png" alt="" v-for="item in score">
+        <img src="../../../../assets/image/evaluation.png" alt="" v-for="item in discuss.score">
       </div>
-      <span class="title-time">{{createtime}}</span>
+      <span class="title-time">{{discuss.createtime}}</span>
     </div>
     <div class="content">
-      <p class="content-title">{{content}}</p>
+      <p class="content-title">{{discuss.content}}</p>
       <p class="content-img">
-        <img :src="item" alt="" v-for="item in imgs">
+        <img :src="item" alt="" v-for="item in discuss.imgs" v-if="discuss.imgs">
       </p>
     </div>
   </div>
@@ -32,7 +32,7 @@
     },
     watch: {
       discuss: function (val) {
-        console.log(val);
+        // console.log(val);
         this.nick = val.nick;
         this.score = parseInt(val.score) / 2;
         this.imgs = val.imgs;
@@ -103,6 +103,7 @@
         font-size: 10px;
         color: rgba(58, 58, 58, 1);
         line-height: 14px;
+       word-wrap: break-word;
       }
       &-img {
         width: 100%;

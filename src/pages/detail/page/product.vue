@@ -13,7 +13,7 @@
         <span class="title-top-name">{{Data.title}}</span>
         <div class="title-top-right">
           <span>{{Data.collection}}人收藏</span>
-          <img src="../../../assets/img/icon-star.png" alt="">
+          <img src="../../../assets/image/icon-star.png" alt="">
         </div>
       </div>
       <p class="title-middle">
@@ -162,7 +162,7 @@
         })
       },
       onFocus() {
-        console.log(123)
+        // console.log(123)
       }
     }
 

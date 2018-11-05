@@ -37,7 +37,8 @@
           address:undefined
         },
         date:undefined, //预约时间
-        beauty:undefined
+        beauty:undefined,
+
       }
     },
     mounted() {
@@ -49,8 +50,12 @@
       },
 
       request() {
+        let url = 'app/index.php?i=1&c=entry&eid=86&act=payorder'
+        if(this.$route.params.type === '1'){
+          url = 'app/index.php?i=1&c=entry&eid=86&act=orderinfo'
+        }
         this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
+          url: url,
           type: 'POST',
           data: {
             orderid:this.$route.params.orderid

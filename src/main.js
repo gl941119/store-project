@@ -14,8 +14,6 @@ import './assets/css/reset.css';
 import './utils/vant'
 
 
-
-
 Vue.config.productionTip = false
 //全局组件
 import MyFooter from './components/footer'
@@ -44,10 +42,13 @@ Vue.component('search', Search);
 Vue.component('price-list', PriceList);
 
 
-
 import request from './utils/request'
 
 Vue.prototype.$request = request
+
+window.addEventListener('click', function () {
+  console.log(123123)
+})
 
 // import axios from 'axios';
 //
@@ -83,7 +84,6 @@ router.beforeEach((to, from, next) => {
 });
 
 
-
 //插件
 import 'lib-flexible/flexible'
 /* eslint-disable no-new */
@@ -91,6 +91,6 @@ new Vue({
   el: '#app',
   store,
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

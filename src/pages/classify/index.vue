@@ -5,11 +5,14 @@
     <div class="nav">
       <ul class="nav-left">
         <li @click="handleChangeComponent('recommend')"
-        >推荐</li>
+        >推荐
+        </li>
         <li @click="handleChangeComponent('club-card')"
-        >会员卡</li>
+        >会员卡
+        </li>
         <li v-for="item,index in category" :key="item.id"
-            >{{item.name}}</li>
+        >{{item.name}}
+        </li>
       </ul>
       <keep-alive>
         <component v-bind:is="isCurrentTabComponent" class="nav-right"></component>
@@ -22,33 +25,32 @@
   import Recommend from './com/recommend'//推荐
   export default {
     name: "classfiy",
-    components:{
-      ClubCard,Recommend
+    components: {
+      ClubCard, Recommend
     },
-    data(){
-      return{
-        isCurrentTabComponent:'recommend',
-        value:undefined,
-        category:null,
-        hover:-2
+    data() {
+      return {
+        isCurrentTabComponent: 'recommend',
+        value: undefined,
+        category: null,
+        hover: -2
       }
     },
-    methods:{
-      handleChangeComponent(name){
+    methods: {
+      handleChangeComponent(name) {
         this.isCurrentTabComponent = name
       }
     },
-    mounted(){
+    mounted() {
       this.$request({
-        url:'app/index.php?i=1&c=entry&eid=85&act=category',
-        type:'get',
-        data:{
-        },
-      }).then((res)=>{
+        url: 'app/index.php?i=1&c=entry&eid=85&act=category',
+        type: 'get',
+        data: {},
+      }).then((res) => {
         // goods: array 商品推荐精华列表，返回数组形式
         // services: array 服务推荐列表，数组
         // category: array 分类列表，数组
-      this.category = res.data.category
+        this.category = res.data.category
 
 
       })
@@ -59,7 +61,7 @@
 
 <style lang="scss" scoped>
   .search {
-    margin:5px auto;
+    margin: 5px auto;
     width: 345px;
     height: 30px;
     background: rgba(244, 244, 244, 1);
@@ -69,7 +71,7 @@
   .nav {
     height: 514px;
     background: white;
-    border-top:1px solid #F4F4F4 ;
+    border-top: 1px solid #F4F4F4;
     &-left {
       width: 80px;
       height: 514px;
@@ -87,7 +89,7 @@
         color: #71B3FF;
       }
     }
-    &-right{
+    &-right {
       width: 280px;
       float: left;
     }
