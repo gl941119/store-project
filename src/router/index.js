@@ -255,10 +255,34 @@ export default new Router({
       component:  resolve => require(['../pages/bindAccount'], resolve)
     },
     {//美师主页
-      path: '/subscribe/page/appoint/DetailsBeautyDivision',
+      path: '/subscribe/page/appoint/DetailsBeautyDivision/:id/:sid',
       name: 'DetailsBeautyDivision',
       meta: {keepAlive: false}, // 不需要被缓存
       component:  resolve => require(['../pages/subscribe/page/appoint/DetailsBeautyDivision'], resolve)
+    },
+    {//美丽代言说明
+      path: '/beautyFund/beautifulEndorsement',
+      name: 'beautifulEndorsement',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/beautifulEndorsement'], resolve)
+    },
+    {//银行卡列表
+      path: '/beautyFund/choiceBanks',
+      name: 'choiceBanks',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/member/page/beautyFund/choiceBanks'], resolve)
+    },
+    {//员工个人资料
+      path: '/staff/employeeInformation',
+      name: 'employeeInformation',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/staff/employeeInformation'], resolve)
+    },
+    {//员工个人编辑
+      path: '/staff/editEmployeeInformation/:type',
+      name: 'editEmployeeInformation',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component:  resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
     }
 
 

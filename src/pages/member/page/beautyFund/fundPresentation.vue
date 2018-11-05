@@ -2,7 +2,7 @@
   <div class="beautyBody">
     <navbar :name="'美丽基金'"></navbar>
     <div class="exchangeBox">
-      <div class="exchangeTop">
+      <div class="exchangeTop" @click="choiceBanks()">
         <div class="exchangeBody">
           <div class="exchangeTxt">
             <div class="exchangeImgBox"><img src="../../../../assets/image/yh_icon.gif" /></div>
@@ -84,7 +84,12 @@
           }
 
 
+        },
+        choiceBanks(){
+            this.$router.push({name:'choiceBanks'});
         }
+
+
       }
 
 

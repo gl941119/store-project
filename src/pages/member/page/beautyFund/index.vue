@@ -28,7 +28,7 @@
     <div class="beautyList beautyListMargin">
       <div class="beautyListPading">
         <van-cell-group>
-          <van-cell title="我的美丽代言码" is-link />
+          <van-cell title="我的美丽代言码" is-link :to="{ path:'/beautyFund/beautifulEndorsement'}"/>
           <van-cell title="我的上级美丽代言" is-link :to="{ path:'/beautyFund/superiorEndorsement'}"/>
           <van-cell title="我的一级美丽代言" is-link :to="{ path:'/beautyFund/oneEndorsement'}"/>
           <van-cell title="我的二级美丽代言" is-link :to="{ path:'/beautyFund/twoEndorsement'}"/>

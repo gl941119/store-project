@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="title" @click="DetailsBeautyDivision(Data)">
+    <div class="title" @click="DetailsBeautyDivision(Data.id,Data.sid)">
       <img :src="Data.thumb" alt="" class="title-img">
       <div class="title-content">
         <div class="title-content-name">
@@ -48,8 +48,8 @@
       goSelectTime(id,sid){//id  美师id  sid 服务id
         this.$router.push({name:'selectTime',params:{id:id,sid:sid}})
       },
-      DetailsBeautyDivision(data){
-        this.$router.push({name:'DetailsBeautyDivision',params:{data:data}})
+      DetailsBeautyDivision(id,sid){
+        this.$router.push({name:'DetailsBeautyDivision',params:{id:id,sid:sid}})
       }
     }
   }

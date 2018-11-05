@@ -4,7 +4,7 @@
     <div class="outer">
       <div class="inner">
         <div class="upload">
-          <input name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update" class="upload-input"/>
+          <input name="file" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf,image/png,image/gif,image/jpeg" @change="update" class="upload-input"/>
           <div class="upload-img">
             <img src="../../../assets/image/staff1.png" alt="">
           </div>
@@ -45,9 +45,8 @@
           headers: {'Content-Type': 'multipart/form-data'}
         };
         axios.defaults.withCredentials = true;
-
-        let uk = this.$store.state.uk || Cache.getSession('uk');
-
+        // let uk = this.$store.state.uk || Cache.getSession('uk');
+        let uk = this.$store.state.uk || sessionStorage.getItem('uk');
         axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
           .then(res => {
             console.log(res)
