@@ -6,7 +6,7 @@
           <p>王小茜<span>五星科美师</span></p>
           <!--<span class="out-content-title">五星科美师</span>-->
         </div>
-        <p class="out-footer">每天告诉自己一次，你真的不错！<img src="../../../assets/image/staff.png" alt=""> </p>
+        <p class="out-footer">每天告诉自己一次，你真的不错！<img src="../../../assets/image/staff.png" @click="employeeInformation()" alt=""> </p>
       </div>
       <img src="../../../assets/image/花2.png" alt="" class="inner">
     </div>
@@ -14,7 +14,12 @@
 
 <script>
     export default {
-        name: "com-info"
+        name: "com-info",
+      methods:{
+        employeeInformation(){
+          this.$router.push({name:'employeeInformation'});
+        }
+      }
     }
 </script>
 
@@ -27,7 +32,7 @@
     position: relative;
     .out{
       position: absolute;
-      z-index: -1;
+      z-index: 1;
       float: left;
       width:375px;
       height:200px;
