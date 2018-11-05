@@ -1,6 +1,7 @@
 <template>
   <div class="jiFenPaiHang" ref="myBoxSrc" @scroll.passive="onScroll($event)">
-    <navbar ref="navs" :name="'积分排行榜'"></navbar>
+    <div><navbar ref="navs" :name="'积分排行榜'"></navbar></div>
+
     <div ref="myDiv">
       <div class="oneDyList" >
         <div class="oneDyListImg"><img :src="imgSrc"></div>
@@ -25,7 +26,6 @@
           <p class="oneDyTxtJe">¥{{ item.allamount }}</p>
         </div>
       </div>
-<div class="morePage">加载更多</div>
 
     </div>
 
@@ -44,15 +44,16 @@
         arr:[],
         myScroll:null,
         myBox:null,
-        pages:null,
-        sizePage:0
+        listLen:null,
+        currListLen:0,
+        status:false,
+        pages:0,
       }
     },
     mounted(){
       this.meRequest();
       this.myScroll=this.$refs.myDiv;
       this.myBox=this.$refs.myBoxSrc;
-
     },
     methods:{
       meRequest(){
@@ -68,18 +69,18 @@
             this.money=user.allamount;
             this.num=user.num;
             this.arr=list;
+            this.listLen=list.length;
             this.pages=res.data.page.p;
-            // this.sizePage=res.data.page.size;
           }
         });
       },
       onScroll(e){
-
         var listHeight=e.target.scrollTop+this.myBox.offsetHeight;
         var listScrollTop=this.myScroll.offsetHeight;
         var c=listScrollTop-listHeight;
-        console.log(c)
-        if(this.sizePage==0&&c < 100){
+        console.log(this.currListLen!=this.listLen,this.currListLen,this.listLen,this.status)
+        if(!this.status&&this.currListLen!=this.listLen&&c < 100){
+          this.status=true;
           this.$request({
             url:'app/index.php?i=1&c=entry&eid=88&act=scorelist',
             type:"post",
@@ -88,7 +89,11 @@
             }
           }).then((res) => {
             if(res.status){
-
+              var list=res.data.list;
+              this.listLen=list.length;
+              this.currListLen=list.length;
+              this.arr=list;
+              this.status=false;
             }
           });
         }

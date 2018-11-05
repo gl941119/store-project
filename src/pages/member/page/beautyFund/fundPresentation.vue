@@ -7,8 +7,8 @@
           <div class="exchangeTxt">
             <div class="exchangeImgBox"><img src="../../../../assets/image/yh_icon.gif" /></div>
             <div class="fundPresentationPadding">
-              <div class="fundPresentationYhTitle fundPresentationPadding10">中国工商银行</div>
-              <div class="fundPresentationYhWh">尾号1234储蓄卡</div>
+              <div class="fundPresentationYhTitle fundPresentationPadding10">{{ cardName }}</div>
+              <div class="fundPresentationYhWh">尾号{{ cardNUmber }}储蓄卡</div>
             </div>
           </div>
 
@@ -41,7 +41,9 @@
           return{
             money:'',
             maxMoney:'',
-            minMoney:''
+            minMoney:'',
+            cardName:'',
+            cardNUmber:'',
           }
       },
       mounted(){
@@ -56,7 +58,8 @@
               var data=res.data;
               this.maxMoney=data.end_amount;//最大金额
               this.minMoney=data.start_amount;//最小金额
-              console.log(res)
+              this.cardName=data.card_name;//银行名称
+              this.cardNUmber=data.end_no;//尾号
             })
           },
         fundPresentationMoney(){
