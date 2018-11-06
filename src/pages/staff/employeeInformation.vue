@@ -9,7 +9,10 @@
             <!--<div class="eInformationTxt1">ID：1276682168</div>-->
           </div>
           <div class="eInformationHImg">
-            <div class="eInformationHImgB"><img :src="avatar"></div>
+            <div class="eInformationHImgB">
+              <img :src="avatar" class="uploadImg">
+              <input type="file" name="file" accept="image/png,image/gif,image/jpeg" @change="update" class="uploadInput">
+            </div>
             <div class="exchangeIcon"></div>
           </div>
         </div>
@@ -79,6 +82,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
     export default {
         name: "employeeInformation",
       data(){
@@ -112,7 +116,7 @@
           }).then((res)=>{
             if(res.status){
               var data=res.data.user;
-              this.nick=data.nick;
+              this.nick=data.name;
               this.signature=data.signature;
               this.avatar=data.avatar;
             }
@@ -131,6 +135,31 @@
               this.status=true;
             }
           });
+        },
+        update(e) {   // 上传照片
+          var self = this;
+          let file = e.target.files[0];
+          let param = new FormData();  // 创建form对象
+          param.append('file', file, file.name);  // 通过append向form对象添加数据
+          // param.append('chunk', '0') // 添加form表单中其他数据
+          // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+          let config = {
+            headers: {'Content-Type': 'multipart/form-data'}
+          };
+          axios.defaults.withCredentials = true;
+          // let uk = this.$store.state.uk || Cache.getSession('uk');
+          let uk = this.$store.state.uk || sessionStorage.getItem('uk');
+
+          axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
+            .then(res => {
+              // console.log(res,res.data.data.avatar)
+              if (res.data.code === 100) {
+                this.avatar=res.data.data.avatar;
+                this.$toast('上传成功')
+                // this.$emit('Refresh')
+              }
+
+            })
         }
 
 
@@ -176,11 +205,13 @@
   }
 .eInformationHImgB{
   margin-right: 10px;
+  position: relative;
 }
   .eInformationHImgB,.eInformationHImgB img{
     width: 60px;
     height: 60px;
     border-radius: 50%;
+    overflow: hidden;
   }
 .exchangeIcon{
   width: 6px;
@@ -223,5 +254,18 @@
   }
   .eInformationOutPadding{
     padding: 50px 0 20px 0;
+  }
+  .uploadInput{
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    top:0px;
+    left:0px;
+  }
+  .uploadImg{
+    position: relative;
+    z-index: 1;
   }
 </style>

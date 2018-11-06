@@ -9,11 +9,8 @@
             <img src="../../../assets/image/staff1.png" alt="">
           </div>
         </div>
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
-        <img src="../../../assets/image/staff1.png" alt="" class="inner-photo">
+        <img :src="item" alt="" class="inner-photo" v-for="item in album.listImg">
+
       </div>
     </div>
   </div>
@@ -24,6 +21,7 @@
 
   export default {
     name: "com-album",
+    props:['album'],
     data() {
       return {
         val: {
@@ -33,7 +31,11 @@
         }
       }
     },
+    mounted(){
+
+    },
     methods: {
+
       update(e) {   // 上传照片
         var self = this;
         let file = e.target.files[0];
@@ -47,12 +49,11 @@
         axios.defaults.withCredentials = true;
         // let uk = this.$store.state.uk || Cache.getSession('uk');
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
+        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=' + uk, param, config)
           .then(res => {
-            console.log(res)
             if (res.data.code === 100) {
-              this.$toast('上传成功')
-              // this.$emit('Refresh')
+              this.$toast('上传成功');
+              this.$emit('init');
             }
 
           })

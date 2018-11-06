@@ -46,9 +46,7 @@ import request from './utils/request'
 
 Vue.prototype.$request = request
 
-window.addEventListener('click', function () {
-  console.log(123123)
-})
+
 
 // import axios from 'axios';
 //

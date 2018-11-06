@@ -74,7 +74,7 @@
         fundCodeClick(){
 
           this.$request({
-            url:'app/index.php?i=1&c=entry&eid=88&act=sendcode',
+            url:'app/index.php?i=1&c=entry&eid=87&act=sendcode',
             type:'post',
             data:{
               mobile:this.phone
@@ -100,7 +100,7 @@
         bindAccountSubmit(){
           if(testPhone.test(this.phone)&&testName.test(this.names)){
             this.$request({
-              url:'app/index.php?i=1&c=entry&eid=88&act=binduser',
+              url:'app/index.php?i=1&c=entry&eid=87&act=binduser',
               type:'post',
               data:{
                 mobile:this.phone,

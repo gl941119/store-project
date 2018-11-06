@@ -1,16 +1,29 @@
 <template>
   <div class="wrap">
     <cell :Data="list"  class="cell"></cell>
-    <div class="header">
-      <span>3D美白嫩肤</span>
-      <van-button type="default" class="header-Btn">开始</van-button>
+    <div class="infoMs">
+      <div>
+        <div class="header">
+          <span>{{ mySub.sName }}</span>
+        </div>
+        <p class="indent">订单号{{ mySub.orderId }}</p>
+        <p class="indent">预计{{ mySub.time }}到店</p>
+      </div>
+      <div>
+        <div>
+          <van-button type="default" class="header-Btn headerBtn" v-if="status" @click="startBtn">开始</van-button>
+          <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
+        </div>
+        <div>
+          <van-button type="default" class="header-Btn" v-if="status" @click="quXiaoBtn">取消</van-button>
+        </div>
+      </div>
     </div>
-    <p class="indent">订单号145721682783723872389</p>
-    <p class="indent">预计2018-09-27 18:24到店</p>
+
     <div class="fill"></div>
     <div class="connection">
-      <span>客户：王女士</span>
-      <span>联系电话：15362221234</span>
+      <span>客户：{{ mySub.xm }}</span>
+      <span>联系电话：{{ mySub.phone }}</span>
     </div>
 
   </div>
@@ -19,13 +32,63 @@
 <script>
   export default {
     name: "com-MySubscribe",
+    props:['mySub'],
     data(){
       return{
+        status:true,
         list:{
           name:'我的预约',
           message:'查看更多',
           url:undefined
         }
+      }
+    },
+    methods:{
+      startBtn(){
+        this.status=false;
+
+        //订单开始
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=86&act=servicestart',
+          type:'post',
+          data:{
+            orderid:this.mySub.orderId
+          }
+        }).then((res) => {
+
+        });
+      },
+      endBtn(){
+        this.status=true;
+        //订单结束
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=86&act=finish',
+          type:'post',
+          data:{
+            orderid:this.mySub.orderId
+          }
+        }).then((res) => {
+          if(res.status){
+            this.$emit('init')
+          }
+
+        });
+      },
+      quXiaoBtn(){
+        //取消订单
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
+          type:'post',
+          data:{
+            orderid:this.mySub.orderId
+          }
+        }).then((res) => {
+          if(res.status){
+
+            this.$emit('init')
+          }
+
+        });
       }
     }
   }
@@ -89,8 +152,14 @@
       color:rgba(51,51,51,1);
     }
   }
-
-
+.infoMs{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.headerBtn{
+  margin-bottom: 10px;
+}
 
 </style>
 
