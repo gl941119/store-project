@@ -26,11 +26,11 @@
         <span class="icon-c"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>购物车</p>
       </router-link>
-      <router-link tag="li" :to="{ name: 'member'}"
+      <router-link tag="li" to=""
                    v-bind:class="{li_hover:hover===4}"
-                   v-on:click.native="hover = 4">
+                   v-on:click.native="infoUrl">
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-        <p>会员中心</p>
+        <p>{{ txt }}</p>
       </router-link>
     </ul>
 
@@ -38,11 +38,13 @@
 </template>
 
 <script>
+  var isMember=window.sessionStorage.getItem('is_member');
   export default {
     name: "MyFooter",
     data() {
       return {
-        hover: 1
+        hover: 1,
+        txt:isMember===0?'会员中心':'个人中心',
       }
     },
     computed: {
@@ -54,8 +56,18 @@
 
     },
     methods: {
-      onclick() {
-        console.log(123)
+      infoUrl() {
+        this.hover = 4;
+
+     if(isMember===0){//会员中心
+       this.$router.push({name:'member'});
+       this.txt='会员中心';
+     }else{//个人中心
+       this.$router.push({name:'staff'});
+       this.txt='个人中心';
+     }
+
+
       }
     }
   }

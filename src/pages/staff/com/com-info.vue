@@ -1,21 +1,33 @@
 <template>
     <div class="wrap">
       <div class="out">
-        <img src="../../../assets/image/头像.png" alt="" class="out-header">
+        <img :src="conInfo.imgSr" alt="" class="out-header">
         <div class="out-content">
-          <p>王小茜<span>五星科美师</span></p>
+          <p>{{ conInfo.name }}<span>{{ conInfo.task }}</span></p>
           <!--<span class="out-content-title">五星科美师</span>-->
         </div>
-        <p class="out-footer">每天告诉自己一次，你真的不错！<img src="../../../assets/image/staff.png" @click="employeeInformation()" alt=""> </p>
+        <p class="out-footer">{{ conInfo.gx }}<img src="../../../assets/image/staff.png" @click="employeeInformation()" alt=""> </p>
       </div>
-      <img src="../../../assets/image/花2.png" alt="" class="inner">
+      <img :src="conInfo.bg" alt="" class="inner">
     </div>
 </template>
 
 <script>
     export default {
         name: "com-info",
+      props:['conInfo'],
+
+
+      data(){
+          return{
+
+          }
+      },
+      mounted(){
+
+      },
       methods:{
+
         employeeInformation(){
           this.$router.push({name:'employeeInformation'});
         }

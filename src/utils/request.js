@@ -80,6 +80,10 @@ function requestHandle(params) {
         if(res.data.code === 100){
           Toast.clear();
         }
+        if(res.data.code === 105){
+          Toast.clear();
+          this.$router.push({name:'bindAccount'});
+        }
         resolve(res.data);
 
         // const { data, success, message } = res.data;

@@ -4,7 +4,7 @@
   <div class="editYgInfos">
     <textarea class="editYgInfosArea" v-if="status" v-model="text"></textarea>
     <div class="editYgInfosTab" v-else>
-      <div :class="arrY[index]!=undefined&&item.id===arrY[index].id?'editYgInfosItemSelect':'editYgInfosItem'" v-for="(item,index) in arr" @click="editYgInfosItem($event,index)" ref="spanDiv" :data-id="item.id">{{ item.name }}</div>
+      <div :class="item.ids===0?'editYgInfosItemSelect':'editYgInfosItem'" v-for="(item,index) in arr" @click="editYgInfosItem($event,index)" ref="spanDiv" :data-id="item.id" :data-name="item.name">{{ item.name }}</div>
     </div>
     <div class="eInformationOutPadding">
       <div class="eInformationOut" @click="editSever()">保存</div>
@@ -24,7 +24,9 @@
           signature:'',
           status:null,
           arr:[],
-          arrY:[]
+          arrY:[],
+          jsonArr:[],
+          curArr:[],
         }
       },
       mounted(){
@@ -38,9 +40,9 @@
           }else if(t==='js'){ //自我介绍
             this.memberinfo({type:1,intro:this.text},'savemember');
           }else if(t==='xm'){ //擅长项目
-            this.memberinfo({type:2,goodproject:this.text},'savemember');
+            this.memberinfo({type:2,goodproject:this.arrJ()},'savemember');
           }else if(t==='yq'){ //擅长仪器
-            this.memberinfo({type:3,goodsinstrument:this.text},'savemember');
+            this.memberinfo({type:3,goodsinstrument:this.arrJ()},'savemember');
           }
         },
         memberinfo(par,str){
@@ -94,8 +96,16 @@
                 this.arr=data.project;
                 this.arrY=data.goodproject;
               }else if(t==='yq'){ //擅长仪器
-                this.arr=data.goodsinstrument;
+                this.arr=data.instrument;
+                this.arrY=data.goodsinstrument;
               }
+             this.arr.map((v,k) => {
+                this.arrY.map((y) => {
+                  if(v.id===y.id){
+                    this.arr[k].ids=0;
+                  }
+                });
+              });
 
             }
           });
@@ -107,6 +117,17 @@
             this.$refs.spanDiv[index].className='editYgInfosItemSelect';
           }
 
+        },
+        arrJ(){
+          var div=this.$refs.spanDiv;
+          var spanDiv=div.length;
+          var jsonAr=[];
+          for(let i=0;i<spanDiv;i++){
+            if(div[i].className === 'editYgInfosItemSelect'){
+              jsonAr.push({id:div[i].getAttribute('data-id'),name:div[i].getAttribute('data-name')});
+            }
+          }
+          return JSON.stringify(jsonAr);
         }
 
       }
