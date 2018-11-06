@@ -32,7 +32,7 @@
         <div class="title-bottom">
           <span class="price">￥{{Data.marketprice}}</span>
           <span class="notPrice">￥{{Data.productprice}}</span>
-          <span class="buy">{{Data.sales}}人已经购买</span>
+          <span class="title-bottom-buy">{{Data.sales}}人已经购买</span>
         </div>
       </div>
       <!--已购-->
@@ -69,10 +69,18 @@
       <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
       <!--选择规格-->
       <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
-        <com-buy-specification :goods_spec="goods_spec" :goods="Data" :num="num"></com-buy-specification>
+        <com-buy-specification :goods_spec="goods_spec" :goods="Data" :num="num"
+                               :status="status"></com-buy-specification>
       </van-actionsheet>
       <!--购买栏-->
-      <com-buy :optionid='optionid' :id="id"></com-buy>
+      <van-goods-action class="buy">
+        <van-goods-action-mini-btn :icon="icon" :class="{is_collect:is_collect}" @click="onClickCollect"/>
+        <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
+        <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"
+        />
+        <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"
+        />
+      </van-goods-action>
     </div>
 
 
@@ -80,22 +88,25 @@
 </template>
 
 <script>
-  import Product from './page/product'
+
   import ComEvaluation from './page/com/com-evaluation'
   import ComBuySpecification from './page/com/com-buySpecification'
-  import ComBuy from './page/com/com-buy'
+
 
   export default {
     name: "detail",
     components: {
-      Product, ComEvaluation, ComBuySpecification, ComBuy,
+      ComEvaluation, ComBuySpecification
     },
     data() {
       return {
         num: undefined,
         show: true,
+        is_collect: false,//是否收藏
+        status: '1',//购买状态 0 购物车  1 立即购买
         id: this.$route.params.id,
         type: this.$route.params.type,
+        icon: 'like-o',
         title: this.$route.params.type == '1' ? '商品详情' : '服务详情',
         optionid: undefined,
         Data: {
@@ -146,6 +157,40 @@
       }
     },
     methods: {
+      onClickCollect() {//加入收藏
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
+          type: 'get',
+          data: {
+            type: this.type,
+            id: this.id
+          }
+        }).then(res=>{
+          if(res.code === 100){
+            this.is_collect = !this.is_collect
+          }
+
+        })
+
+
+      },
+      goButCart() {//跳转购物车
+        this.$router.push({name: 'buyCart'})
+      },
+      addBuyCart() {//加入购物车
+        this.status = '0'
+        this.$store.commit('setShowBuySpecification', true)
+
+
+      },
+      onceBuy() {//立即购买
+        this.status = '1'
+        this.$store.commit('setShowBuySpecification', true)
+
+      },
+      onClickMiniBtn() {
+
+      },
       onClick(index, title) {//锚点
         switch (index) {
           case 0:
@@ -179,12 +224,14 @@
           if (res.code === 100) {
             if (this.type == '2') {//服务
               this.Data = res.data.service
+              this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
             } else if (this.type == '1') {//商品
               this.Data = res.data.goods
               this.goods_spec = res.data.goods_spec //容量
               this.Alreadybought = `${res.data.goods.title},1瓶` //已购
               this.address = res.data.address
               this.num = res.data.num //规格数量
+              this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
             }
             // console.log(res.data.disucss.)
             if (res.data.discuss.length === 0) {
@@ -297,7 +344,7 @@
           flex: 1;
           text-decoration: line-through;
         }
-        .buy {
+        &-buy {
           font-size: 12px;
           font-weight: 400;
           color: rgba(153, 153, 153, 1);
@@ -414,4 +461,23 @@
       }
     }
   }
+
+  .buy {
+    height: 49px !important;
+    .addBuy {
+      background-color: white;
+      font-size: 18px;
+      color: rgba(113, 179, 255, 1);
+    }
+    .buyNow {
+      background-color: #71B3FF;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  .is_collect {
+    color: red;
+  }
+
 </style>

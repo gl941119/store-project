@@ -37,6 +37,9 @@
       <van-cell title="积分券减免" class="cell">
         <span class="cell-right">-&nbsp;￥&nbsp;{{score_nex}}</span>
       </van-cell>
+      <van-cell title="美丽基金减免" class="cell">
+        <span class="cell-right">-&nbsp;￥&nbsp;{{user_share_amount}}</span>
+      </van-cell>
       <van-cell title="运费" class="cell">
         <span class="cell-right">+&nbsp;￥&nbsp;{{freight}}</span>
       </van-cell>
@@ -47,10 +50,11 @@
     </div>
 
     <van-button class="submitBtn" type="default" v-if="allmoney == '0'"
-                style="background-color: #71B3FF;color: #FFFFFF;">提交订单</van-button>
+                style="background-color: #71B3FF;color: #FFFFFF;" v-on:click="submit">提交订单
+    </van-button>
     <div v-else>
-    <van-button class="submitBtn" type="primary" >支付</van-button>
-    <van-button class="submitBtn" type="danger">取消</van-button>
+      <van-button class="submitBtn" type="primary">支付</van-button>
+      <van-button class="submitBtn" type="danger">取消</van-button>
     </div>
   </div>
 </template>
@@ -78,18 +82,19 @@
           realname: undefined,
         },
         goodslist: [],
-        share_amount:undefined,//基金
+        share_amount: undefined,//基金
         ishave: undefined,
         freight: undefined,
         leave: undefined,//买家留言
         money: undefined,//美丽余额
         allprice: undefined,//商品金额
-        score_nex:undefined,//积分券减免
-        allmoney:undefined,//总金额
+        score_nex: undefined,//积分券减免
+        allmoney: undefined,//总金额
+        user_share_amount:undefined,//美丽基金减免
       }
     },
     mounted() {
-      console.log()
+
 
       // if (window.sessionStorage.getItem('address')) {
       //   this.address = JSON.parse(window.sessionStorage.getItem('address'))
@@ -104,6 +109,24 @@
 
     },
     methods: {
+      submit(){//提交订单
+
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=85&act=payorder',
+          type:'post',
+          data:{
+            ordersn: window.sessionStorage.getItem('ordersn')
+          }
+        }).then(res=>{
+          if(res.code === 100){
+            this.$toast.success('提交成功')
+            setTimeout(function () {
+              this.$router.push({name:'idnex'})
+            },500)
+          }
+        })
+
+      },
       goAddress() {//去收货地址
         this.$router.push({name: 'address', params: {type: '0'}})
       },
@@ -135,6 +158,7 @@
           this.allprice = res.data.allrecord.allprice  //商品金额
           this.score_nex = res.data.allrecord.score_nex  //积分券减免
           this.allmoney = res.data.allrecord.money  //总金额
+          this.user_share_amount = res.data.allrecord.share_amount
 
         })
 

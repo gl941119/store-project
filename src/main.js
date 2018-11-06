@@ -46,19 +46,7 @@ import request from './utils/request'
 
 Vue.prototype.$request = request
 
-window.addEventListener('click', function () {
-  console.log(123123)
-})
 
-// import axios from 'axios';
-//
-// axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=saveinfo', {
-//   nick:'聪慧的帅哥'
-// }, {
-//   headers: {
-//     'Content-Type': 'application/x-www-form-urlencoded'
-//   },
-// });
 
 
 //导航守卫
