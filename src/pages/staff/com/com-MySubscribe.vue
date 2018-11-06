@@ -84,7 +84,6 @@
           }
         }).then((res) => {
           if(res.status){
-
             this.$emit('init')
           }
 

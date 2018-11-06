@@ -4,7 +4,7 @@
       <!--员工信息-->
       <com-info :conInfo="infoTxt" @init="init"></com-info>
       <!--我的预约-->
-      <com-mysubscribe v-if="status" :mySub="infoTxt" c style="margin-top: -39px"></com-mysubscribe>
+      <com-mysubscribe v-if="status" :mySub="infoTxt" @init="init" style="margin-top: -39px"></com-mysubscribe>
       <!--相册-->
       <com-album @init="init" :album="infoTxt"></com-album>
     </div>

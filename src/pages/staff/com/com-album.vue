@@ -52,11 +52,26 @@
         axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=' + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
+              var s=res.data.data.imgs;
               this.$toast('上传成功');
-              this.$emit('init');
+              this.saver(s);
             }
 
           })
+      },
+      saver(scr){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=savestyle',
+          type:'post',
+          data:{
+            ipath:scr,
+            type:'image'
+          }
+        }).then((res)=>{
+          if(res.status){
+            this.$emit('init');
+          }
+        });
       }
     }
   }
