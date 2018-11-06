@@ -2,7 +2,7 @@
   <ul class="list">
     <li  class="list-li">
 
-      <button v-on:click.native="onclick">1231231232</button>
+      <!--<button v-on:click="onclick">1231231232</button>-->
       <cell :Data="item" v-for="item,index in listData" :key="index" class="cell"></cell>
 
 
@@ -47,9 +47,19 @@
       clickHandle(url) {
         console.log(123)
       },
-      onclick(){
+      onclick(e){
+
+        // var _hmt = _hmt || [];
+        // (function() {
+        //   var hm = document.createElement("script");
+        //   hm.src = "https://hm.baidu.com/hm.js?52e7beb522789eee138201052df7acab";
+        //   // var s = document.getElementsByTagName("script")[0];
+        //   var  a =   e.target
+        //   s.parentNode.insertBefore(hm, s);
+        // })();
 
 
+        console.log(123)
       }
     }
   }

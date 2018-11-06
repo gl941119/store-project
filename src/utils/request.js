@@ -11,6 +11,25 @@ axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.url.loc
 axios.defaults.withCredentials = true;
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
+
+
+
+
+ url = url.replace('eid=84','eid=84')
+ url = url.replace('eid=85','eid=85')
+ url = url.replace('eid=86','eid=86')
+ url = url.replace('eid=87','eid=87')
+ url = url.replace('eid=88','eid=88')
+ url = url.replace('eid=89','eid=89')
+
+
+
+
+
+
+
+
+
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');
   data['uk'] = uk

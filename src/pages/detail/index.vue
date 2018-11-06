@@ -50,7 +50,7 @@
         <div class="address-cell-title">送至运费</div>
         <div class="address-cell-content">
           <p>{{address}}</p>
-          <p>免运费</p>
+          <p> 免运费</p>
         </div>
         <div class="address-cell-right">
           <div></div>
@@ -165,8 +165,8 @@
             type: this.type,
             id: this.id
           }
-        }).then(res=>{
-          if(res.code === 100){
+        }).then(res => {
+          if (res.code === 100) {
             this.is_collect = !this.is_collect
           }
 
@@ -299,7 +299,6 @@
           line-height: 25px;
         }
         &-right {
-
           width: 79px;
           overflow: hidden;
           > img {

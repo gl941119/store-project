@@ -46,6 +46,14 @@ import request from './utils/request'
 
 Vue.prototype.$request = request
 
+Vue.prototype.$idnex = '84';
+Vue.prototype.$goods = '85';
+Vue.prototype.$server = '86';
+Vue.prototype.$comm = '87';
+Vue.prototype.$ucenter = '88';
+Vue.prototype.$card = '89';
+
+
 
 
 

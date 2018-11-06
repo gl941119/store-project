@@ -64,12 +64,12 @@
         },
         type: 'get'
       }).then((res) => {
-        this.data = res.data
-        this.goods_essence = res.data.goods_hot
-        this.expre_cards = res.data.expre_cards
-        this.member_cards = res.data.member_cards
-        this.advOne = res.data.adv[0].bimg
-        this.advTwo = res.data.adv[1].bimg
+        this.data = res.data;
+        this.goods_essence = res.data.goods_hot;
+        this.expre_cards = res.data.expre_cards;
+        this.member_cards = res.data.member_cards;
+        this.advOne = res.data.adv[0].bimg;
+        this.advTwo = res.data.adv[1].bimg;
         this.advThree = res.data.adv[2].bimg
       })
     }

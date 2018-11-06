@@ -45,7 +45,7 @@ this.init();
       methods:{
         init(){
           this.$request({
-            url:'app/index.php?i=1&c=entry&eid=88&act=member',
+            url:'app/index.php?i=1&c=entry&&act=member',
             type:'get'
           }).then((res) => {
             if(res.status){

@@ -6,7 +6,7 @@
     <!--我的订单-->
     <com-my-indent></com-my-indent>
     <!--列表-->
-    <com-list  class="com-list"></com-list>
+    <com-list class="com-list"></com-list>
   </div>
 </template>
 
@@ -47,7 +47,7 @@
           url: 'app/index.php?i=1&c=entry&eid=88&act=ucenter',
           type: 'get',
         }).then((res) => {
-var data=res.data.user;
+          var data = res.data.user;
           // this.$set(this.menberData,res.data.user)
           this.menberData = data;
 
