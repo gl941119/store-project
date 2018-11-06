@@ -44,7 +44,7 @@
     data() {
       return {
         hover: 1,
-        txt:isMember===0?'会员中心':'个人中心',
+        txt:isMember == 1?'会员中心':'个人中心',
       }
     },
     computed: {
@@ -59,7 +59,7 @@
       infoUrl() {
         this.hover = 4;
 
-     if(isMember===0){//会员中心
+     if(isMember == 1){//会员中心
        this.$router.push({name:'member'});
        this.txt='会员中心';
      }else{//个人中心

@@ -124,8 +124,8 @@
 
 <style lang="scss" scoped>
 .bindAccount{
-  padding: 10px 0;
-}
+   padding: 10px 0;
+ }
   .bindAccountBox{
     $width:345px;
     width: $width;

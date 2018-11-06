@@ -154,7 +154,7 @@
             .then(res => {
               // console.log(res,res.data.data.avatar)
               if (res.data.code === 100) {
-                this.avatar=res.data.data.avatar;
+                this.avatar=res.data.data.imgs;
                 this.$toast('上传成功')
                 // this.$emit('Refresh')
               }
