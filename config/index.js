@@ -8,6 +8,7 @@ module.exports = {
   dev: {
 
     // Paths
+    NODE_ENV:'development',
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {},

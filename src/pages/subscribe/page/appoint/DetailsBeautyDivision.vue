@@ -59,7 +59,7 @@
           <div class="DetailsBeautyDivisionContTitleIcon"></div>
           <div class="DetailsBeautyDivisionContTitleTxt">美丽印象</div>
         </div>
-        <div class="DetailsBeautyDivisionCoiv>x">
+        <div class="DetailsBeautyDivisionCoiv DetailsBeautyDivisionContYx">
           <div class="DetailsBeautyDivisionContYxItem" v-for="item in mevals">{{ item.name }} {{ item.up }}</div>
         </div>
 

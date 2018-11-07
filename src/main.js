@@ -44,8 +44,9 @@ Vue.component('price-list', PriceList);
 
 import request from './utils/request'
 
-Vue.prototype.$request = request
-
+Vue.prototype.$request = request;
+Vue.prototype.$upUrl = 'http://dev-cd.vasterroad.com/';
+Vue.prototype.$eid = 163;
 
 
 

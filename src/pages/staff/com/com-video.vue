@@ -25,7 +25,7 @@
     data() {
       return {
         val: {
-          name: '我的相册',
+          name: '我的视频',
           message: '查看全部',
           url: undefined
         }
@@ -47,14 +47,16 @@
           headers: {
             'Content-Type': 'multipart/form-data',
             'Access-Control-Allow-Origin':'*',
-            'Access-Control-Allow-Headers':'content-type'
+            'Access-Control-Allow-Headers':'content-type',
+            'Access-Control-Request-Method':'GET,POST'
           }
         };
+
         axios.defaults.withCredentials = true;
         // let uk = this.$store.state.uk || Cache.getSession('uk');
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act=fileupload&uk=';
-        axios.post(url + uk, param, config)
+        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=';
+        axios.post(url+ uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
               var s=res.data.data.imgs;
