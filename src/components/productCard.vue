@@ -1,5 +1,5 @@
 <template>
-  <div class="card"  v-on:click="goDetail(Data.id)">
+  <div class="card"  v-on:click="goDetail(Data.id,Data.type)">
     <img :src="Data.thumb" alt="" class="card-left">
     <div class="card-right">
       <span class="card-right-select" v-if="select">已选</span>
@@ -25,8 +25,8 @@
     mounted(){
     },
     methods:{
-      goDetail(id){
-        this.$router.push({name:'detail',params:{id:id,type:1}})
+      goDetail(id,type){
+        this.$router.push({name:'detail',params:{id:id,type:type}})
       }
     }
   }
@@ -68,7 +68,7 @@
         font-weight: 400;
       }
       &-content {
-        height: 19px;
+        height: 14px;
         width: 200px;
         margin-top: 6px;
         font-size: 10px;
@@ -89,7 +89,7 @@
       }
       &-comment{
         height: 14px;
-        margin-top: 4px;
+        margin-top: 8px;
         font-size:10px;
         color:rgba(153,153,153,1);
 

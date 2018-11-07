@@ -38,6 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  overflow: hidden;
 
   .icon{
     font-size: 15px;

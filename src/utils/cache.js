@@ -26,7 +26,7 @@ export default {
   },
   getLocal(name) {
     if (!name) return;
-    return window.localStorage.getItem(name);
+    return JSON.parse(window.localStorage.getItem(name));
   },
   setLocal(name, content) {
     if (!name) return;
