@@ -16,7 +16,7 @@
       </router-link>
       <router-link tag="li" :to="{ path: 'subscribe/1'}"
                    v-bind:class="{}"
-                   v-on:click.native="hover = 2">
+                   >
         <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>预约</p>
       </router-link>
@@ -57,7 +57,7 @@
     },
     methods: {
       infoUrl() {
-        this.hover = 4;
+
 
      if(isMember == 1){//会员中心
        this.$router.push({name:'member'});

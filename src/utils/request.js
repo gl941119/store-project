@@ -12,27 +12,27 @@ axios.defaults.withCredentials = true;
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
 
-  // url = url.replace('eid=84','eid=164')
-  // url = url.replace('eid=85','eid=85')
-  // url = url.replace('eid=86','eid=86')
-  // url = url.replace('eid=87','eid=87')
-  // url = url.replace('eid=88','eid=88')
-  // url = url.replace('eid=89','eid=89')
-  //
+  url = url.replace('eid=84','eid=153');
+  url = url.replace('eid=85','eid=154');
+  url = url.replace('eid=86','eid=155');
+  url = url.replace('eid=87','eid=156');
+  url = url.replace('eid=88','eid=157');
+  url = url.replace('eid=89','eid=158');
 
 
 
 
-  url = url.replace('eid=84', 'eid=160')
-  url = url.replace('eid=85', 'eid=161')
-  url = url.replace('eid=86', 'eid=162')
-  url = url.replace('eid=87', 'eid=163')
-  url = url.replace('eid=88', 'eid=164')
-  url = url.replace('eid=89', 'eid=165')
+
+  // url = url.replace('eid=84', 'eid=160')
+  // url = url.replace('eid=85', 'eid=161')
+  // url = url.replace('eid=86', 'eid=162')
+  // url = url.replace('eid=87', 'eid=163')
+  // url = url.replace('eid=88', 'eid=164')
+  // url = url.replace('eid=89', 'eid=165')
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');
-  data['uk'] = uk
+  data['uk'] = uk;
   if (type === 'GET') {
     return axios.get(url, {
       params: data,
@@ -79,16 +79,16 @@ function requestHandle(params) {
     ajaxRequest(url, data, type, flag).then(
       res => {
         if (res.data.uk) {
-          store.commit('setUk', res.data.uk)
+          store.commit('setUk', res.data.uk);
           Cache.setSession('uk', res.data.uk)
         }
         if (res.data.user.is_member) {
-          store.commit('setIs_member', res.data.user.is_member)
+          store.commit('setIs_member', res.data.user.is_member);
           Cache.setSession('is_member', res.data.user.is_member)
         }
 
         if (res.data.user.store) {
-          store.commit('setStore', res.data.user.store)
+          store.commit('setStore', res.data.user.store);
           Cache.setSession('store', res.data.user.store)
         }
 
@@ -129,7 +129,7 @@ function requestHandle(params) {
       },
       rej => {
 
-        Toast.fail('网络错误!')
+        Toast.fail('网络错误!');
 
         reject(rej);
       }

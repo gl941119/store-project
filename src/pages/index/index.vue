@@ -2,7 +2,7 @@
   <div class="index">
     <navbar :name="'S+艾司商城'"></navbar>
     <div class="search">
-      <search :value.sync="value" class="search-left"></search>
+      <search :value.sync="value" class="search-left" v-on:click.native="goSearch"></search>
       <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
       <img src="../../assets/image/扫一扫.png" alt="" class="search-right">
     </div>
@@ -12,7 +12,7 @@
       </van-swipe>
     </div>
     <!--分类列表-->
-    <com-list :data="data.cate" ></com-list>
+    <com-list :data="data.cate"></com-list>
     <!--热销商品-->
     <com-model :data="goods_essence"></com-model>
     <img :src="advOne" alt="" class="img">
@@ -20,8 +20,8 @@
     <com-model :data="expre_cards" :type="false"></com-model>
     <!--会员专区-->
     <com-model :data="member_cards" :type="false"></com-model>
-    <img :src="advTwo"  alt="" class="img">
-    <img :src="advThree"  alt="" class="img">
+    <img :src="advTwo" alt="" class="img">
+    <img :src="advThree" alt="" class="img">
   </div>
 </template>
 
@@ -33,35 +33,35 @@
   export default {
     name: "index",
     components: {
-      ComModel,ComList
+      ComModel, ComList
     },
-    watch:{
-      value:function (val) {
+    watch: {
+      value: function (val) {
 
       }
     },
-    mounted(){
+    mounted() {
       console.log(this.$ref.img)
     },
 
     data() {
       return {
         data: {},
-        goods_essence:{},
-        expre_cards:{},
-        member_cards:{},
-        adv:[],
+        goods_essence: {},
+        expre_cards: {},
+        member_cards: {},
+        adv: [],
         value: undefined,
-        advOne:undefined,
-        advTwo:undefined,
-        advThree:undefined
+        advOne: undefined,
+        advTwo: undefined,
+        advThree: undefined
       }
     },
     mounted() {
+      console.log(123)
       this.$request({
         url: 'app/index.php?i=1&c=entry&eid=84',
-        data: {
-        },
+        data: {},
         type: 'get'
       }).then((res) => {
         this.data = res.data;
@@ -72,6 +72,11 @@
         this.advTwo = res.data.adv[1].bimg;
         this.advThree = res.data.adv[2].bimg
       })
+    },
+    methods:{
+      goSearch(){
+        this.$router.push({name:'search'})
+      }
     }
   }
 </script>
@@ -82,6 +87,7 @@
     padding-bottom: 50px;
 
   }
+
   .search {
     padding: 5px 15px;
     overflow: hidden;
@@ -91,8 +97,8 @@
     justify-content: space-between;
     &-left {
       float: left;
-      width: 308px ;
-      height: 29px ;
+      width: 308px;
+      height: 29px;
 
     }
     &-right {
@@ -101,8 +107,10 @@
       height: 23px;
     }
   }
+
   .banner {
     overflow: hidden;
+    height: 223px;
     img {
       width: 375px;
       height: 223px;
