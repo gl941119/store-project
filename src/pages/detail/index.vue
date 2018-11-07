@@ -47,9 +47,9 @@
       </div>
       <!--运送至-->
       <div class="address-cell" v-if="type== '1'">
-        <div class="address-cell-title">送至运费</div>
+        <div class="address-cell-title">运费</div>
         <div class="address-cell-content">
-          <p>{{address}}</p>
+          <!--<p>{{address}}</p>-->
           <p> 免运费</p>
         </div>
         <div class="address-cell-right">
@@ -385,7 +385,7 @@
     margin-top: 10px !important;
     width: 100%;
     padding: 12px 15px;
-    height: 64px;
+    height: 45px;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -395,6 +395,7 @@
       height: 100%;
       font-size: 12px;
       color: rgba(153, 153, 153, 1);
+      line-height: 22px;
     }
     &-content {
       flex: 1;
@@ -406,14 +407,14 @@
       line-height: 20px;
       P:first-child {
         width: 100%;
-        height: 50%;
+        height: 100%;
         overflow: hidden;
         white-space: normal;
         text-overflow: ellipsis;
       }
       p:last-child {
         width: 100%;
-        height: 50%;
+        height: 100%;
       }
     }
     &-right {

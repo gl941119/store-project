@@ -12,23 +12,23 @@ axios.defaults.withCredentials = true;
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
 
-
-
-
- url = url.replace('eid=84','eid=84')
- url = url.replace('eid=85','eid=85')
- url = url.replace('eid=86','eid=86')
- url = url.replace('eid=87','eid=87')
- url = url.replace('eid=88','eid=88')
- url = url.replace('eid=89','eid=89')
-
-
+  // url = url.replace('eid=84','eid=164')
+  // url = url.replace('eid=85','eid=85')
+  // url = url.replace('eid=86','eid=86')
+  // url = url.replace('eid=87','eid=87')
+  // url = url.replace('eid=88','eid=88')
+  // url = url.replace('eid=89','eid=89')
+  //
 
 
 
 
-
-
+  url = url.replace('eid=84', 'eid=160')
+  url = url.replace('eid=85', 'eid=161')
+  url = url.replace('eid=86', 'eid=162')
+  url = url.replace('eid=87', 'eid=163')
+  url = url.replace('eid=88', 'eid=164')
+  url = url.replace('eid=89', 'eid=165')
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');
@@ -70,7 +70,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
  */
 function requestHandle(params) {
   Toast.loading({
-    duration:0,
+    duration: 0,
     mask: true,
     message: '加载中...'
   });
@@ -82,13 +82,13 @@ function requestHandle(params) {
           store.commit('setUk', res.data.uk)
           Cache.setSession('uk', res.data.uk)
         }
-        if(res.data.user.is_member){
+        if (res.data.user.is_member) {
           store.commit('setIs_member', res.data.user.is_member)
           Cache.setSession('is_member', res.data.user.is_member)
         }
 
-        if(res.data.user.store){
-          store.commit('setStore',res.data.user.store)
+        if (res.data.user.store) {
+          store.commit('setStore', res.data.user.store)
           Cache.setSession('store', res.data.user.store)
         }
 
@@ -96,12 +96,12 @@ function requestHandle(params) {
         if (res.data.code === 108) {
           Toast.fail(res.data.message);
         }
-        if(res.data.code === 100){
+        if (res.data.code === 100) {
           Toast.clear();
         }
-        if(res.data.code === 105){
+        if (res.data.code === 105) {
           Toast.clear();
-          this.$router.push({name:'bindAccount'});
+          this.$router.push({name: 'bindAccount'});
         }
         resolve(res.data);
 
