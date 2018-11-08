@@ -82,10 +82,15 @@ function requestHandle(params) {
           store.commit('setUk', res.data.uk);
           Cache.setSession('uk', res.data.uk)
         }
-        if (res.data.user.is_member) {
-          store.commit('setIs_member', res.data.user.is_member);
-          Cache.setSession('is_member', res.data.user.is_member)
+        try {//分辨美师
+          if (res.data.user.is_member) {
+            store.commit('setIs_member', res.data.user.is_member);
+            Cache.setSession('is_member', res.data.user.is_member)
+          }
+        }catch (e) {
+          console.log('无法分辨美师')
         }
+
 
         if (res.data.user.store) {
           store.commit('setStore', res.data.user.store);

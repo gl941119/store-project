@@ -18,8 +18,6 @@ export default new Vuex.Store({
     Is_member:undefined,//是否会员 string
     Store:undefined,//是否美师 number
     AppraiseImg:[],
-    BuySpecs:[],//商品购买规格
-    BuyNumber: undefined ,//商品规格选择数量
     ClassifyId:undefined,//分类栏分类id
   },
   mutations: {
@@ -56,12 +54,8 @@ export default new Vuex.Store({
     setAppraiseImg(state,val){
       state.AppraiseImg = val
     },
-    setBuySpecs(state,val){
-      state.BuySpecs = val
-    },
-    setBuyNumber(state,val){
-      state.BuyNumber = val
-    },
+
+
     setClassifyId(state,val){
       state.ClassifyId = val
     }

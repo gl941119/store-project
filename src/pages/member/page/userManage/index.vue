@@ -16,7 +16,7 @@
         <cell :Data="birthdayData" class="cell"></cell>
 
       </router-link>
-      <router-link tag="li" :to="{ path: '/member/userManage/address'}" class="list-li">
+      <router-link tag="li" :to="{ path: '/member/userManage/address/2'}" class="list-li">
         <cell :Data="addressData" class="cell"></cell>
 
       </router-link>
@@ -82,14 +82,14 @@
           url: 'app/index.php?i=1&c=entry&eid=88&act=ucenter',
           type: 'get'
         }).then((res) => {
-          this.Data = res.data.user  //用户数据
-          this.avatar = this.Data.avatar //头像
+          this.Data = res.data.user;  //用户数据
+          this.avatar = this.Data.avatar; //头像
           this.nameData.message = this.Data.nick; //名称
           this.sexData.message = this.Data.sex === "female" ? '女' : '男'; //性别
-          let time = this.utils.secondFormart(this.Data.birthday)
+          let time = this.utils.secondFormart(this.Data.birthday);
           this.birthdayData.message = this.utils.dateFormart(time); //出生日期
           this.birthdayDate = time.getTime(); //出生日期
-          this.addressData.message = this.Data.address //收货地址
+          this.addressData.message = this.Data.address; //收货地址
           this.signatureData.message = this.Data.signature //名称
         })
       }
@@ -108,9 +108,11 @@
     width: 304px;
     height: 40px;
   }
-.cell{
-  height: 45px;
-}
+
+  .cell {
+    height: 45px;
+  }
+
   .list {
     background: rgba(255, 255, 255, 1);
     &-li {

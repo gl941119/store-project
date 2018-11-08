@@ -44,14 +44,13 @@
 
       },
       cheng(val) {  //修改订单数量
-
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=updateorder',
           type: 'post',
           data: {
             ordersn:window.sessionStorage.getItem('ordersn'),
             id: this.goodsid,
-            optionid:48,
+            optionid:this.item.optionid,
             num:val,
           }
       })

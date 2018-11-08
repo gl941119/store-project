@@ -16,23 +16,23 @@
       </div>
       <div class="fill"></div>
       <textarea class="area" maxlength="200" placeholder="宝贝的效果如何呢？发表一下自己的感受吧"
-        v-model="item.content"></textarea>
+                v-model="item.content"></textarea>
       <div class="upload">
         <video class="upload-img" :src="val" controls v-for="val,num in item.videos" :key="num"></video>
         <img class="upload-img" :src="val" alt="" v-for="val,num in item.imgs" :key="num">
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
-          <input  name="file" type="file" accept="image/png,image/gif,image/jpeg"
-                  @change="uploadImg" class="upload-img-input"
-                  v-on:click="clickUpload(index)" />
+          <input name="file" type="file" accept="image/png,image/gif,image/jpeg"
+                 @change="uploadImg" class="upload-img-input"
+                 v-on:click="clickUpload(index)"/>
         </div>
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise1.png" alt="">
           <p>添加视频</p>
-          <input  name="file" type="file" accept="video/mp4，video/avi"
-                  @change="uploadVideo" class="upload-img-input"
-                  v-on:click="clickUpload(index)"
+          <input name="file" type="file" accept="video/mp4，video/avi"
+                 @change="uploadVideo" class="upload-img-input"
+                 v-on:click="clickUpload(index)"
           />
         </div>
 
@@ -50,19 +50,20 @@
 <script>
   import cache from '../../../../../../utils/cache'
   import axios from 'axios'
+
   export default {
     name: "index",
     data() {
       return {
         value: 3,
         checked: true,
-        arr:this.$route.params.data||JSON.parse(cache.getSession('appraise')),
-        area:undefined,
-        img:undefined,
-        index:undefined,//点击暂存
-    }
+        arr: this.$route.params.data || JSON.parse(cache.getSession('appraise')),
+        area: undefined,
+        img: undefined,
+        index: undefined,//点击暂存
+      }
     },
-    mounted(){
+    mounted() {
       console.log(this.arr)
 
 
@@ -83,9 +84,9 @@
 
     },
     methods: {
-      clickUpload(index){
+      clickUpload(index) {
 
-        this.index= index
+        this.index = index
       },
       uploadImg(e) {   // 上传照片
         var self = this;
@@ -110,7 +111,7 @@
 
           })
       },
-      uploadVideo(e){
+      uploadVideo(e) {
         var self = this;
         let file = e.target.files[0];
         let param = new FormData();  // 创建form对象
@@ -118,8 +119,9 @@
         // param.append('type', 'video') // 添加form表单中其他数据
         // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
         let config = {
-          headers: {'Content-Type': 'multipart/form-data',
-                  }
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
         };
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || cache.getSession('uk');
@@ -150,37 +152,31 @@
 
       },
       confirmHandle() { //确认上传
-
         let arr = this.arr
-        arr.forEach(item=>{
-          item.tip =  item.tip === true? '1':'0'
-          item.score =  item.score*2
+        arr.forEach(item => {
+          item.tip = item.tip === true ? '1' : '0'
+          item.score = item.score * 2
         })
-
         let result = [{
-          orderid:this.$route.params.id,
-          goods:arr,
+          orderid: this.$route.params.id,
+          goods: arr,
         }]
-
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=87&act=goodsdiscuss',
-          type:'post',
-          data:{
+          url: 'app/index.php?i=1&c=entry&eid=87&act=goodsdiscuss',
+          type: 'post',
+          data: {
             discuss: JSON.stringify(result)
           }
-        }).then((res)=>{
-
-          if(res.code===100){
+        }).then((res) => {
+          if (res.code === 100) {
             this.$toast.success('评论成功')
             let thia = this
-            setTimeout(()=>{
-              thia.$router.push({name:'index'})
-            },500)
+            setTimeout(() => {
+              thia.$router.push({name: 'index'})
+            }, 500)
 
           }
         })
-
-
       }
     }
   }
@@ -265,7 +261,7 @@
         color: rgba(193, 192, 205, 1);
         line-height: 19px;
       }
-      &-input{
+      &-input {
         width: 80px;
         height: 80px;
         position: absolute;

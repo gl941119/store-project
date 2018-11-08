@@ -88,7 +88,7 @@
         allprice: undefined,//商品金额
         score_nex: undefined,//积分券减免
         allmoney: undefined,//总金额
-        user_share_amount:undefined,//美丽基金减免
+        user_share_amount: undefined,//美丽基金减免
       }
     },
     mounted() {
@@ -102,41 +102,16 @@
       // }
 
       //确认订单
-      this.goodslist = JSON.parse(cache.getSession('buyCart'))
+      // this.goodslist = JSON.parse(cache.getSession('buyCart'))
       this.request()
 
     },
     methods: {
-      submit(){//提交订单
-
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=85&act=payorder',
-          type:'post',
-          data:{
-            ordersn: window.sessionStorage.getItem('ordersn')
-          }
-        }).then(res=>{
-          if(res.code === 100){
-            this.$toast.success('提交成功')
-            setTimeout(function () {
-              this.$router.push({name:'idnex'})
-            },500)
-          }
-        })
-
-      },
-      goAddress() {//去收货地址
-        this.$router.push({name: 'address', params: {type: '0'}})
-      },
       request() {//通过订单号查询
         let addressid = undefined
-
         try {
           addressid = JSON.parse(window.sessionStorage.getItem('address')).id
-
-        } catch (e) {
-
-        }
+        } catch (e) {}
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
@@ -146,6 +121,7 @@
             addressid: addressid
           }
         }).then((res) => {
+          this.goodslist = res.data.goodslist
           this.address = res.data.user
           this.score_nex = res.data.user.score_nex      //美丽
           this.share_amount = res.data.user.share_amount   //基金
@@ -157,11 +133,31 @@
           this.score_nex = res.data.allrecord.score_nex  //积分券减免
           this.allmoney = res.data.allrecord.money  //总金额
           this.user_share_amount = res.data.allrecord.share_amount
-
+        })
+      },
+      submit() {//提交订单
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=85&act=payorder',
+          type: 'post',
+          data: {
+            ordersn: window.sessionStorage.getItem('ordersn')
+          }
+        }).then(res => {
+          if (res.code === 100) {
+            this.$toast.success('提交成功')
+            let thia = this
+            setTimeout(function () {
+              thia.$router.push({name: 'index'})
+            }, 500)
+          }
         })
 
 
-      }
+      },
+      goAddress() {//去收货地址
+        this.$router.push({name: 'address', params: {type: '0'}})
+      },
+
     }
   }
 </script>

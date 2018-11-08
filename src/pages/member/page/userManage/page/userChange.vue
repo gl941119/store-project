@@ -157,6 +157,10 @@
     width: 375px;
     height: 44px;
     background: rgba(255, 255, 255, 1);
+    font-size:15px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(102,102,102,1);
   }
 
   .signature {

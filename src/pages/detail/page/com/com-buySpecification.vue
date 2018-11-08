@@ -53,7 +53,7 @@
         @change="change"
       />
     </div>
-    <van-button type="default" class="submit" v-on:click="submit">确认</van-button>
+    <van-button type="default" class="submit" v-on:click="confirmHandle">确认</van-button>
   </div>
 
 </template>
@@ -61,7 +61,7 @@
 <script>
   export default {
     name: "com-buySpecification",
-    props: ['goods_spec', 'goods', 'num', 'status'],
+    props: ['goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs'],
     data() {
       return {
         id: this.$route.params.id,//商品id
@@ -81,136 +81,77 @@
         fiveData: [],
         fiveSel: undefined,
         sixData: undefined,
-        specs: [],//规格
+        // specs: [],//规格
 
       }
     },
     mounted() {
     },
     methods: {
-      change(val) {//数量查询
-        console.log(val)
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=85&act=optionstock',
-          type: 'get',
-          data: {
-            goodsid: this.id,
-            specs: this.specs.join("_"),
-          }
-        }).then(res => {
-          if (res.code === 100) {
-            this.numMax = res.data.stock
-          }
-        })
-
-      },
-      submit() {
-
-
+      confirmHandle() {
         if (this.specs.length !== this.num) {
           this.$toast.fail('请选择规格')
           return
+        } else {
+          this.$store.commit('setShowBuySpecification', false)//关闭购买栏
         }
-        this.$store.commit('setBuySpecs', this.specs.join('_'))
-        this.$store.commit('setBuyNumber', this.value)
-
-
-        if (this.status === '1') {//立即购买
-          this.$request({
-            url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
-            type: 'post',
-            data: {
-              goods: JSON.stringify([{
-                id: this.id,
-                optionid: this.specs.join('_'),
-                num: this.value
-              }])}
-          }).then(res=>{
-            if(res.code === 100){
-              window.sessionStorage.setItem('ordersn',res.data.ordersn)
-              this.$router.push({name:'indentConfirme'})
-            }
-          })
-        } else if (this.status === '0') {//加入购物车
-
-
-          this.$request({
-            url:'app/index.php?i=1&c=entry&eid=85&act=mycart&id=1',
-            type:'post',
-            data:{
-              op:'add',
-              id:this.id,
-              total:this.value,
-              specs:this.specs.join('_')
-            }
-          }).then(res=>{
-            if(res.code ===100){
-              this.$toast.success('添加成功')
-              this.$store.commit('setShowBuySpecification', false)//关闭购买栏
-            }
-          })
-
-
-        }
-
-        // this.$request({
-        //   url:'app/index.php?i=1&c=entry&eid=85&act=mycart&id=1&op=add',
-        //   type:'POST',
-        //   data:{
-        //     id:this.id,
-        //     total: this.value,
-        //     specs:this.specs,
-        //   }
-        // })
-
-
       },
       onclick(son, tier) {//son 传向下一层数据  tier  层数
         if (!son.stock) return;  //无库存阻止
+        let alreadybought = this.alreadybought;
         switch (tier) {
           case 2:
+            alreadybought.splice(0, 1, son.title)
             this.oneSel = son.id
             this.twoData = son.son
             break;
           case 3:
+            alreadybought.splice(1, 1, son.title)
             this.twoSel = son.id
             this.threeData = son.son
             break;
           case 4:
+            alreadybought.splice(2, 1, son.title)
             this.threeSel = son.id
             this.fourData = son.son
             break;
           case 5:
+            alreadybought.splice(3, 1, son.title)
             this.fourSel = son.id
             this.fiveData = son.son
             break;
           case 6:
+            alreadybought.splice(4, 1, son.title)
             this.fiveSel = son.id
             this.sixData = son.son
             break;
         }
 
-
-        let arr = [this.oneSel, this.twoSel, this.threeSel, this.fourSel, this.fiveSel].filter(item => {
+        let specs = [this.oneSel, this.twoSel, this.threeSel, this.fourSel, this.fiveSel].filter(item => {
           return item
         })
-        this.specs = arr
-        if (this.specs.length == this.num) {
+        if (specs.length == this.num) {//选择完成传值
+          this.$emit('update:specs', specs)//商品id
+          this.$emit('update:alreadybought', alreadybought)//商品名称
           this.disabled = false;
         }
-
+      },
+      change(val) {//数量查询
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=85&act=optionstock',
+          type: 'get',
+          data: {
+            goodsid: this.id,
+            specs: this.specs.join('_'),
+          }
+        }).then(res => {
+          if (res.code === 100) {
+            this.numMax = res.data.stock
+            this.$emit('update:buyNum', val)
+          }
+        })
 
       },
-      clickHandle(e) {
-
-
-        //
-        //
-        // console.log(e.target.parentNode.parentNode)
-        // e.target.parentNode.parentNode.insertBefore(span)
-
-
-      }
     }
   }
 </script>

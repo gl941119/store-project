@@ -84,8 +84,9 @@ import cache from '../../utils/cache'
         this.confirmIndent(goodslist)
       },
       confirmIndent(goodslist){//生成订单
-        goodslist.forEach((item)=>{
+        goodslist.forEach((item)=>{//数据整理
           item['num']=item['total']
+          item['id'] = item['goodsid']
         })
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',

@@ -3,7 +3,7 @@ const url = {
 
   localTestUrl: 'http://192.168.3.23:80',
   // localTestUrl: 'http://dev-cd.vasterroad.com',
-  productUrl: 'http://dev-cd.vasterroad.com' ,
+  productUrl: 'http://dev-cd.vasterroad.com:80' ,
   // productUrl: protocol === 'http:' ? 'http://api.afdchain.com/' : 'https://api.afdchain.com/',
 };
 

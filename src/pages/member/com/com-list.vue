@@ -1,11 +1,8 @@
 <template>
   <ul class="list">
-    <li  class="list-li">
-
+    <li class="list-li">
       <!--<button v-on:click="onclick">1231231232</button>-->
       <cell :Data="item" v-for="item,index in listData" :key="index" class="cell"></cell>
-
-
     </li>
   </ul>
 </template>
@@ -13,7 +10,6 @@
 <script>
   export default {
     name: "com-list",
-
     data() {
       return {
         listData: [{
@@ -26,7 +22,7 @@
           message: undefined
         }, {
           name: '美的交流',
-          url: null,
+          url: 'interflow',
           message: undefined
         }, {
           name: '邀请好友',
@@ -34,7 +30,7 @@
           message: undefined
         }, {
           name: '我的评价',
-          url: null,
+          url: '/member/myEvaluate',
           message: undefined
         }, {
           name: '地址管理',
@@ -47,7 +43,7 @@
       clickHandle(url) {
         console.log(123)
       },
-      onclick(e){
+      onclick(e) {
 
         // var _hmt = _hmt || [];
         // (function() {
@@ -66,9 +62,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .cell{
+  .cell {
     height: 43px;
   }
+
   .list {
     background: rgba(255, 255, 255, 1);
     &-li {
@@ -80,7 +77,6 @@
       }
     }
   }
-
 
 
 </style>
