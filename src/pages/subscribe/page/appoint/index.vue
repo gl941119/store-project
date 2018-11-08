@@ -46,7 +46,7 @@
           url: 'app/index.php?i=1&c=entry&eid=86&act=appointone&sid=2',
           type: 'GET',
           data: {
-            sid: this.$route.params.id
+            sid: this.$route.params.sid
           }
         }).then((res) => {
           this.store = res.data.store

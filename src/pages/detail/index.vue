@@ -37,8 +37,8 @@
       </div>
       <!--已购-->
       <div class="myCell" v-on:click="SpecificationHandle" v-if="type== '1'">
-        <div class="myCell-title">{{'已选'}}</div>
-        <div class="myCell-content">{{Alreadybought}}</div>
+        <div class="myCell-title">已选</div>
+        <div class="myCell-content">{{alreadybought.join('-')||'请选择规格'}}</div>
         <div class="myCell-right">
           <div></div>
           <div></div>
@@ -50,7 +50,7 @@
         <div class="address-cell-title">运费</div>
         <div class="address-cell-content">
           <!--<p>{{address}}</p>-->
-          <p> 免运费</p>
+          <p>{{freight}}</p>
         </div>
         <div class="address-cell-right">
           <div></div>
@@ -69,17 +69,26 @@
       <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
       <!--选择规格-->
       <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
-        <com-buy-specification :goods_spec="goods_spec" :goods="Data" :num="num"
-                               :status="status"></com-buy-specification>
+        <com-buy-specification :goods_spec="goods_spec" :goods="Data"
+                               :num='num'
+                               v-bind:buyNum.sync="buyNum"
+                               v-bind:alreadybought.sync="alreadybought"
+                               v-bind:specs.sync="specs"></com-buy-specification>
       </van-actionsheet>
-      <!--购买栏-->
-      <van-goods-action class="buy">
+      <!--商品购买栏-->
+      <van-goods-action class="buy" v-if="type== '1'">
         <van-goods-action-mini-btn :icon="icon" :class="{is_collect:is_collect}" @click="onClickCollect"/>
         <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
         <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"
+
         />
         <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"
         />
+      </van-goods-action>
+      <!--服务购买栏-->
+      <van-goods-action class="buy" v-else>
+        <van-goods-action-mini-btn :icon="icon" :class="{is_collect:is_collect}" @click="onClickCollect"/>
+        <van-goods-action-big-btn text="立即预约" @click="goAppoint" primary class="buyNow"/>
       </van-goods-action>
     </div>
 
@@ -100,14 +109,17 @@
     },
     data() {
       return {
-        num: undefined,
+        title: this.$route.params.type == '1' ? '商品详情' : '服务详情',
+        type: this.$route.params.type, // 1 商品 2服务
+        id: this.$route.params.id,
         show: true,
         is_collect: false,//是否收藏
-        status: '1',//购买状态 0 购物车  1 立即购买
-        id: this.$route.params.id,
-        type: this.$route.params.type,
+        specs: [],//购买规格id
+        buyNum: 1,//购买数量
+        alreadybought: [],//购买商品名称
+        num: undefined,//规格层数
+        freight: '免运费',
         icon: 'like-o',
-        title: this.$route.params.type == '1' ? '商品详情' : '服务详情',
         optionid: undefined,
         Data: {
           "id": undefined,
@@ -135,7 +147,6 @@
           score: undefined
         },
         discussType: 0,
-        Alreadybought: undefined,//已购
         address: undefined,//收货地址
         goodsData: null,
         SpecificationData: null,
@@ -143,11 +154,15 @@
       }
     },
     mounted() {
-      // console.log(this.$refs['evaluation'])
       this.request()
     },
+    watch: {
+      specs: function (val) {
+        this.countFreight()//计算运费
+      }
+    },
     computed: {
-      ShowSpecification: {//商品规格
+      ShowSpecification: {//show商品规格栏
         set: function (val) {
           this.$store.commit('setShowBuySpecification', false)
         },
@@ -169,23 +184,56 @@
           if (res.code === 100) {
             this.is_collect = !this.is_collect
           }
-
         })
-
-
       },
       goButCart() {//跳转购物车
         this.$router.push({name: 'buyCart'})
       },
       addBuyCart() {//加入购物车
-        this.status = '0'
-        this.$store.commit('setShowBuySpecification', true)
-
-
+        if (this.specs.length === this.num) {//是否选择规格
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=85&act=mycart&id=1',
+            type: 'post',
+            data: {
+              op: 'add',
+              id: this.id,
+              total: this.buyNum,
+              specs: this.specs.join('_')
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('添加成功')
+              this.$store.commit('setShowBuySpecification', false)//关闭购买栏
+            }
+          })
+        } else {
+          this.$store.commit('setShowBuySpecification', true)
+        }
       },
       onceBuy() {//立即购买
-        this.status = '1'
-        this.$store.commit('setShowBuySpecification', true)
+        if (this.specs.length === this.num) {//是否选择规格
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
+            type: 'post',
+            data: {
+              goods: JSON.stringify([{
+                id: this.id,
+                optionid: this.specs.join('_'),
+                num: this.buyNum
+              }])
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              window.sessionStorage.setItem('ordersn', res.data.ordersn)
+              this.$router.push({name: 'indentConfirme'})
+            }
+          })
+        } else {
+          this.$store.commit('setShowBuySpecification', true)
+        }
+      },
+      goAppoint(){//立即预约
+        this.$router.push({name:'appoint',params:{sid:this.id}})
 
       },
       onClickMiniBtn() {
@@ -228,7 +276,7 @@
             } else if (this.type == '1') {//商品
               this.Data = res.data.goods
               this.goods_spec = res.data.goods_spec //容量
-              this.Alreadybought = `${res.data.goods.title},1瓶` //已购
+              // this.alreadybought.length === 0 ? '请选择规格 := `${res.data.goods.title},1瓶` //已购
               this.address = res.data.address
               this.num = res.data.num //规格数量
               this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
@@ -239,10 +287,28 @@
             } else {
               this.discussType = 1
               this.discuss = res.data.discuss[0] //评论
-
             }
           }
         })
+      },
+      countFreight() {
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=85&act=freight',
+          type: 'post',
+          data: {
+            id:this.id,
+            specs: this.specs.join('_')
+          }
+        }).then(res => {
+          if (res.code === 100) {
+            if(res.data.freight.ishave){
+              this.freight = '￥'+res.data.freight.freight+'元'
+            }else{
+              this.freight = res.data.freight.freight
+            }
+          }
+        })
+
       },
       onFocus() {
         // console.log(123)

@@ -1,7 +1,6 @@
 <template>
   <div style="padding-bottom: 50px">
     <navbar :name="'会员中心'"></navbar>
-    <div ref="jiao">123213</div>
     <!--会员详情-->
     <com-member-card class="card" :Data="menberData"></com-member-card>
     <!--我的订单-->

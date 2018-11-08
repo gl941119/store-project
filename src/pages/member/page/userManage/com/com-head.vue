@@ -73,9 +73,6 @@
       overflow: hidden;
       position: relative;
 
-      /*display: flex;*/
-      /*align-items: center;*/
-      /*justify-content: flex-end;*/
       &-img{
         position: absolute;
         right: 23px;
@@ -83,6 +80,7 @@
         margin-top: -30px;
         width: 60px;
         height: 60px;
+        border-radius: 250px;
       }
       &-upload {
         position: absolute;

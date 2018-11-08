@@ -10,49 +10,48 @@
 </template>
 
 <script>
-    export default {
-        name: "staffCard",
-      props:['Data']
-    }
+  export default {
+    name: "staffCard",
+    props: ['Data']
+  }
 </script>
 
 <style lang="scss" scoped>
-  .staffCard{
-    margin: 0 auto;
-    width:345px;
-    height:115px;
-    background:rgba(255,255,255,1);
-    box-shadow:0px 1px 11px 0px rgba(211,211,211,0.5);
-    border-radius:4px;
+  .staffCard {
+    margin: 10px auto 0;
+    width: 345px;
+    height: 115px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 1px 11px 0px rgba(211, 211, 211, 0.5);
+    border-radius: 4px;
     display: flex;
     justify-content: space-between;
-    >img{
+    > img {
       width: 115px;
       height: 115px;
-
     }
-    >dl{
+    > dl {
       flex: 1;
       padding: 9px 0 0 15px;
-      >dt{
-        font-size:16px;
-        font-family:PingFangSC-Regular;
-        color:rgba(51,51,51,1);
+      > dt {
+        font-size: 16px;
+        font-family: PingFangSC-Regular;
+        color: rgba(51, 51, 51, 1);
       }
-      >dd{
+      > dd {
         margin-top: 10px;
-        font-size:12px;
-        font-family:PingFangSC-Regular;
-        color:rgba(51,51,51,1);
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        color: rgba(51, 51, 51, 1);
       }
-      >p{
+      > p {
         max-height: 47px;
         overflow: hidden;
         margin-top: 10px;
-        font-size:12px;
-        font-family:PingFangSC-Regular;
-        color:rgba(153,153,153,1);
-        line-height:17px;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        color: rgba(153, 153, 153, 1);
+        line-height: 17px;
 
       }
     }

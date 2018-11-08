@@ -168,6 +168,11 @@ export default new Router({
       meta: {keepAlive: true},
       component: resolve => require(['../pages/member/page/invite'], resolve)
     },
+    {//会员中心--我的评价
+      path:'/member/myEvaluate',
+      name:'myEvaluate',
+      component:resolve => require(['../pages/member/page/myEvaluate'],resolve)
+    },
     {//会员中心--用户管理
       path: '/member/userManage',
       name: 'userManage',
