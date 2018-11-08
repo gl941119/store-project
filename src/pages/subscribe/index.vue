@@ -15,7 +15,7 @@
           v-for="item in serverData"
           :key="item.id"
           :Data="item"
-          ></server-card>
+        ></server-card>
       </div>
       <div v-if="type === '2'">
         <select-bar @emitSort="setSort"></select-bar>
@@ -46,9 +46,9 @@
 
       }
     },
-    computed:{
-      name:function (){
-        return this.type === '1' ? '热门服务': '热门精华'
+    computed: {
+      name: function () {
+        return this.type === '1' ? '热门服务' : '热门精华'
       }
     },
     mounted() {
@@ -57,7 +57,7 @@
     },
     methods: {
 
-      handle(){
+      handle() {
         if (this.type === '1') {//服务
           this.reqServer()
         } else if (this.type === '2') {//商品
@@ -69,17 +69,17 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=list',
           data: {
             sort: this.sort,
-            search:this.value
+            search: this.value
           },
           type: 'get'
         }).then((res) => {
           if (res.code === 100) {
-              this.productData = res.data.goodslist
-              if(res.data.goodslist){
-                this.showSearch = 1
-              }else{
-                this.showSearch = 2
-              }
+            this.productData = res.data.goodslist
+            if (res.data.goodslist) {
+              this.showSearch = 1
+            } else {
+              this.showSearch = 2
+            }
           }
         })
       },
@@ -88,15 +88,15 @@
           url: 'app/index.php?i=1&c=entry&eid=86&act=list',
           data: {
             sort: this.sort,
-            search:this.value
+            search: this.value
           },
           type: 'get'
         }).then((res) => {
           if (res.code === 100) {
-              this.serverData = res.data.servicelist
-            if(res.data.servicelist){
+            this.serverData = res.data.servicelist
+            if (res.data.servicelist) {
               this.showSearch = 1
-            }else{
+            } else {
               this.showSearch = 2
             }
           }
@@ -104,8 +104,8 @@
       },
       setSort(val) {
         console.log(val)
-      this.sort = val;
-      this.handle()
+        this.sort = val;
+        this.handle()
       },
 
       onSearch() {
@@ -113,7 +113,7 @@
       emitSort(val) {
 
       },
-      atOnceBuy(id){
+      atOnceBuy(id) {
         console.log(id)
 
       }
@@ -134,31 +134,31 @@
     background: rgba(255, 255, 255, 1);
     display: flex;
     justify-content: space-between;
-    &-input{
+    &-input {
       width: 283px;
       height: 30px;
-      background:rgba(244,244,244,1);
-      border-radius:4px;
+      background: rgba(244, 244, 244, 1);
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
 
-      .icon{
+      .icon {
         font-size: 15px;
         margin-left: 10px;
       }
-      .input{
+      .input {
         margin-left: 8px;
         height: 100%;
         flex: 1;
-        background:rgba(244,244,244,1);
-        font-size:12px;
-        font-family:PingFangSC-Regular;
-        color:rgba(153,153,153,1);
-        line-height:17px;
+        background: rgba(244, 244, 244, 1);
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        color: rgba(153, 153, 153, 1);
+        line-height: 17px;
 
       }
-      .close{
+      .close {
 
         font-size: 12px;
         margin-right: 7px;
@@ -178,6 +178,7 @@
       border: 1px solid #ffffff;
     }
   }
+
   .notresult {
     width: 100%;
     height: 300px;
@@ -186,22 +187,20 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    >img{
+    > img {
       width: 124px;
       height: 124px;
     }
-    >p{
-      width:150px;
-      height:21px;
-      font-size:15px;
-      font-family:PingFangSC-Regular;
-      color:rgba(167,167,167,1);
-      line-height:21px;
+    > p {
+      width: 150px;
+      height: 21px;
+      font-size: 15px;
+      font-family: PingFangSC-Regular;
+      color: rgba(167, 167, 167, 1);
+      line-height: 21px;
     }
 
   }
-
-
 
 
 </style>

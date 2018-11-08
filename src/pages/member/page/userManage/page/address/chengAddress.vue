@@ -4,12 +4,12 @@
     <ul class="list">
       <li class="list-cell">
         <div class="list-cell-title">收货人</div>
-        <input type="text" v-model="realname" class="list-cell-content">
+        <input type="text" v-model="realname" class="list-cell-content" placeholder="姓名">
       </li>
       <div class="fill"></div>
       <li class="list-cell">
         <div class="list-cell-title">联系人</div>
-        <input type="text" v-model="mobile" class="list-cell-content">
+        <input type="text" v-model="mobile" class="list-cell-content"  placeholder="手机号码">
       </li>
       <div class="fill"></div>
       <li class="list-cell" v-on:click="show = true">
@@ -20,8 +20,8 @@
       <div class="fill"></div>
       <li class="list-cell">
         <div class="list-cell-title">详细地址</div>
-        <input type="text" v-model="address" class="list-cell-content">
-        <van-icon name="close" class="list-cell-icon" v-on:click="address = undefined"/>
+        <input type="text" v-model="address" class="list-cell-content"  placeholder="详细地址需填写楼层或房间号">
+        <van-icon name="close" class="list-cell-icon" v-on:click="address = undefined" />
       </li>
       <div class="fill"></div>
       <li class="list-cell default">
@@ -221,7 +221,7 @@
       &-content {
         float: left;
         margin-left: 10px;
-        width: 220px;
+        width: 255px;
         height: 21px;
         font-size: 15px;
         color: rgba(51, 51, 51, 1);

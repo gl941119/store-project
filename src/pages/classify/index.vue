@@ -1,21 +1,25 @@
 <template>
   <div>
     <navbar :name="'S+艾司商城'"></navbar>
-    <search :value="value" class="search"></search>
+    <search :value="value" class="search" v-on:click.native="goSearch"></search>
     <div class="nav">
       <ul class="nav-left">
-        <li @click="handleChangeComponent('recommend')"
+        <li v-on:click="handleChangeComponent('recommend')"
+            :class="{li_hover:hover === '-1'}"
         >推荐
         </li>
-        <li @click="handleChangeComponent('club-card')"
+        <li v-on:click="handleChangeComponent('clubCard')"
+            :class="{li_hover:hover === '0'}"
         >会员卡
         </li>
         <li v-for="item,index in category" :key="item.id"
+            v-on:click="handleChangeComponent('series',item.id)"
+            :class="{li_hover:hover === item.id}"
         >{{item.name}}
         </li>
       </ul>
       <keep-alive>
-        <component v-bind:is="isCurrentTabComponent" class="nav-right"></component>
+      <router-view class="nav-right"/>
       </keep-alive>
     </div>
   </div>
@@ -23,22 +27,40 @@
 <script>
   import ClubCard from './com/clubCard'//会员卡
   import Recommend from './com/recommend'//推荐
+  import Series from './com/series'
+
   export default {
     name: "classfiy",
     components: {
-      ClubCard, Recommend
+      ClubCard, Recommend, Series
     },
     data() {
       return {
         isCurrentTabComponent: 'recommend',
         value: undefined,
         category: null,
-        hover: -2
+        hover: '-1'
       }
     },
     methods: {
-      handleChangeComponent(name) {
-        this.isCurrentTabComponent = name
+      goSearch() {
+        this.$router.push({name: 'search'})
+      },
+      handleChangeComponent(name, id) {
+        switch (name) {
+          case 'recommend':
+            this.hover = '-1';
+            break;
+          case 'clubCard':
+            this.hover = '0';
+            break;
+          case 'series':
+            this.hover = id;
+            this.$store.commit('setClassifyId', id)
+            break;
+        }
+        // this.isCurrentTabComponent = name
+        this.$router.push({name:name})
       }
     },
     mounted() {
@@ -51,8 +73,6 @@
         // services: array 服务推荐列表，数组
         // category: array 分类列表，数组
         this.category = res.data.category
-
-
       })
     }
 
@@ -83,10 +103,12 @@
         text-align: center;
         font-size: 15px;
         color: rgba(60, 60, 60, 1);
-        line-height: 60px;
+        line-height: 45px;
       }
-      li:hover {
+      .li_hover {
         color: #71B3FF;
+        background: url("../../assets/image/icon-fenge.png") no-repeat left center;
+        background-size: 3px 25px;
       }
     }
     &-right {

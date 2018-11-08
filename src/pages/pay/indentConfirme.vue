@@ -28,8 +28,6 @@
       </div>
       <div class="fill"></div>
     </div>
-
-
     <div class="aggregate">
       <van-cell title="商品金额" class="cell">
         <span class="cell-right">￥&nbsp;{{allprice}}</span>
