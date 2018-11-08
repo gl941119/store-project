@@ -7,7 +7,7 @@
       <img src="../../assets/image/扫一扫.png" alt="" class="search-right">
     </div>
     <div class="banner">
-      <van-swipe :autoplay="3000" :height="223" :width="375">
+      <van-swipe :autoplay="3000">
         <van-swipe-item v-for="item in data.slide" :key="item.name"><img :src="item.bimg" alt=""></van-swipe-item>
       </van-swipe>
     </div>
