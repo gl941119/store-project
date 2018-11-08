@@ -1,23 +1,23 @@
 <template>
   <div class="wrap">
     <div class="cell">
-      <span class="cell-name">我的相册</span>
+      <span class="cell-name">我的视频</span>
     </div>
     <div class="outer">
       <div class="inner">
         <div class="upload">
-          <input name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update" class="upload-input"/>
+          <input name="file" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="update" class="upload-input"/>
           <div class="upload-img">
             <img src="../../../assets/image/staff1.png" alt="">
           </div>
         </div>
         <div class="innerPhoto">
-          <div  v-for="(item,index) in album.listImg"  ref="imgBoxs" class="innerPhotoItem"  >
-            <img :src="item" alt="" class="innerPhotoImg" :data-k="index" @click="clickMax(album.listImg,index)" @touchstart="innerPhotoItemEv($event,index)" @touchend="innerPhotoItemEnd($event,index)">
+          <div  v-for="(item,index) in video.listVideo"  ref="imgBoxs" class="innerPhotoItem"  >
+            <!--<canvas class="movie" ref="canvasImg"></canvas>-->
+            <video class="movie" preload="metadata" @canplay="videoSource($event,index)" controls  ref="videoSource" ><source :src="item.video" type="video/mp4" /></video>
             <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  @click="innerPhotoItemClose(index)"/>
           </div>
         </div>
-
 
       </div>
     </div>
@@ -28,15 +28,14 @@
 
 <script>
   import axios from 'axios'
-  import { Icon ,Toast,ImagePreview  } from 'vant';
-  var c=0;
+  import { Icon ,Toast } from 'vant';
   export default {
-    name: "com-album",
-    props:['album'],
+    name: "com-video",
+    props:['video'],
     data() {
       return {
         val: {
-          name: '我的相册',
+          name: '我的视频',
           message: '查看全部',
           url: undefined
         },
@@ -44,35 +43,35 @@
         longTapTimeout:null,
         longTapDelay:750,
         statusA:null,
-        cont:0,
+        cont:0
       }
     },
     mounted(){
 
+      this.videoSource(0);
     },
     methods: {
-      clickMax(list,index){
-        ImagePreview({
-          images: list,
-          startPosition: index,
-          onClose() {
-            // do something
-          }
-        });
+
+      videoSource(index){
+        let videos = this.$refs.videoSource;
+        // videos.forEach((video) => {
+        //   let canvas = this.$refs.canvasImg[index];
+        //   let src = canvas.toDataURL('image/png');
+        //   this.$refs.videoSource.setAttribute('poster',src);
+        //   canvas.getContext('2d').drawImage(video, 0, 0);
+        // });
       },
       innerPhotoItemEv(e,index){
-        this.longTapTimeout = setInterval(()=>{
-          this.cont=c++;
-          // this.longTapTimeout = null;
-          // this.status=true;
-          // this.statusA= parseInt(e.target.getAttribute('data-k'));
+        this.longTapTimeout = setTimeout(()=>{
+          this.cont++;
         }, 100);
       },
       innerPhotoItemEnd(e,index){
-        clearInterval(this.longTapTimeout);
         this.longTapTimeout = null;
+        this.status=true;
+        this.statusA= parseInt(e.target.getAttribute('data-k'));
         if (this.status){
-          // clearTimeout(this.longTapTimeout);
+          clearTimeout(this.longTapTimeout);
         }else{
           this.longTapTimeout = null;
           this.status=false;
@@ -84,7 +83,7 @@
           url:'app/index.php?i=1&c=entry&eid=88&act=delstyle',
           type:'post',
           data:{
-            type:'image',
+            type:'video',
             ids:index.toString()
           }
         }).then((res)=>{
@@ -113,11 +112,11 @@
         axios.defaults.withCredentials = true;
         // let uk = this.$store.state.uk || Cache.getSession('uk');
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act=fileupload&uk=';
+        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act=fileuploadvideo&uk=';
         axios.post(url + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
-              var s=res.data.data.imgs;
+              var s=res.data.data.videos;
               this.$toast('上传成功');
               this.saver(s);
             }
@@ -129,8 +128,9 @@
           url:'app/index.php?i=1&c=entry&eid=88&act=savestyle',
           type:'post',
           data:{
-            ipath:scr,
-            type:'image'
+            ipath:'',
+            vpath:scr,
+            type:'video'
           }
         }).then((res)=>{
           if(res.status){
@@ -147,6 +147,7 @@
     margin: 15px auto 0;
     padding: 0 15px;
     width: 345px;
+    height: 163px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 1px 8px 0px rgba(200, 200, 200, 0.5);
     border-radius: 4px;
@@ -157,7 +158,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     .inner {
-
+      /*height: 75px;*/
       .upload{
         margin-right: 15px;
         float: left;
@@ -196,9 +197,10 @@
   }
   .innerPhotoItem{
     margin-right: 15px;
-    width: 75px;
-    height: 75px;
+    width: 73px;
+    height: 73px;
     position: relative;
+    border: 1px solid rgba(200, 200, 200, 0.5);
   }
   .innerPhotoImg{
     width: 75px;
@@ -212,6 +214,10 @@
     color: #fff;
     font-size: 20px;
     border-radius: 50%;
+  }
+  .movie{
+    width: 75px;
+    height: 75px;
   }
 
   .cell {

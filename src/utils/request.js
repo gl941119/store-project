@@ -101,7 +101,7 @@ function requestHandle(params) {
         if (res.data.code === 108) {
           Toast.fail(res.data.message);
         }
-        if (res.data.code === 100) {
+        if (res.data.code === 100 || res.data.code === 107 || res.data.code === 103) {
           Toast.clear();
         }
         if (res.data.code === 105) {

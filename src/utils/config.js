@@ -1,6 +1,6 @@
 const protocol = window.location.protocol;
 const url = {
-
+  // localTestUrl: 'http://dev-cd.vasterroad.com',
   localTestUrl: 'http://192.168.3.23:80',
   // localTestUrl: 'http://dev-cd.vasterroad.com',
   productUrl: 'http://dev-cd.vasterroad.com:80' ,

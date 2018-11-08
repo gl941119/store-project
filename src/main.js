@@ -44,8 +44,9 @@ Vue.component('price-list', PriceList);
 
 import request from './utils/request'
 
-Vue.prototype.$request = request
-
+Vue.prototype.$request = request;
+Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
+Vue.prototype.$eid = 156;
 
 
 

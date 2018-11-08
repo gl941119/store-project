@@ -7,6 +7,8 @@
       <com-mysubscribe v-if="status" :mySub="infoTxt" @init="init" style="margin-top: -39px"></com-mysubscribe>
       <!--相册-->
       <com-album @init="init" :album="infoTxt"></com-album>
+      <!--视频-->
+      <com-video @init="init" :video="infoTxt"></com-video>
     </div>
 </template>
 
@@ -14,6 +16,7 @@
   import ComInfo from './com/com-info'
   import ComMysubscribe from './com/com-MySubscribe'
   import ComAlbum from './com/com-album'
+  import ComVideo from './com/com-video'
     export default {
         name: "staff",
       data(){
@@ -37,7 +40,7 @@
       },
 
       components:{
-        ComInfo,ComMysubscribe,ComAlbum
+        ComInfo,ComMysubscribe,ComAlbum,ComVideo
       },
       mounted(){
 this.init();

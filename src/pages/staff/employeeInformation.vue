@@ -149,8 +149,8 @@
           axios.defaults.withCredentials = true;
           // let uk = this.$store.state.uk || Cache.getSession('uk');
           let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-
-          axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
+          var url=this.$upUrl+'app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=';
+          axios.post(url + uk, param, config)
             .then(res => {
               // console.log(res,res.data.data.avatar)
               if (res.data.code === 100) {
