@@ -8,7 +8,7 @@
       <!--相册-->
       <com-album @init="init" :album="infoTxt"></com-album>
       <!--视频-->
-      <com-video @init="init" :album="infoTxt"></com-video>
+      <com-video @init="init" :video="infoTxt"></com-video>
     </div>
 </template>
 

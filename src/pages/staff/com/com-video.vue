@@ -1,65 +1,122 @@
 <template>
   <div class="wrap">
-    <cell :Data="val" class="h53"></cell>
+    <div class="cell">
+      <span class="cell-name">我的视频</span>
+    </div>
     <div class="outer">
       <div class="inner">
         <div class="upload">
-          <input name="file" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf,image/png,image/gif,image/jpeg" @change="update" class="upload-input"/>
+          <input name="file" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="update" class="upload-input"/>
           <div class="upload-img">
             <img src="../../../assets/image/staff1.png" alt="">
           </div>
         </div>
-        <img :src="item" alt="" class="inner-photo" v-for="item in album.listImg">
+        <div class="innerPhoto">
+          <div  v-for="(item,index) in video.listVideo"  ref="imgBoxs" class="innerPhotoItem"  >
+            <!--<canvas class="movie" ref="canvasImg"></canvas>-->
+            <video class="movie" preload="metadata" @canplay="videoSource($event,index)" controls  ref="videoSource" ><source :src="item.video" type="video/mp4" /></video>
+            <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  @click="innerPhotoItemClose(index)"/>
+          </div>
+        </div>
 
       </div>
     </div>
+
+
   </div>
 </template>
 
 <script>
   import axios from 'axios'
-
+  import { Icon ,Toast } from 'vant';
   export default {
-    name: "com-album",
-    props:['album'],
+    name: "com-video",
+    props:['video'],
     data() {
       return {
         val: {
           name: '我的视频',
           message: '查看全部',
           url: undefined
-        }
+        },
+        status:false,
+        longTapTimeout:null,
+        longTapDelay:750,
+        statusA:null,
+        cont:0
       }
     },
     mounted(){
 
+      this.videoSource(0);
     },
     methods: {
 
+      videoSource(index){
+        let videos = this.$refs.videoSource;
+        // videos.forEach((video) => {
+        //   let canvas = this.$refs.canvasImg[index];
+        //   let src = canvas.toDataURL('image/png');
+        //   this.$refs.videoSource.setAttribute('poster',src);
+        //   canvas.getContext('2d').drawImage(video, 0, 0);
+        // });
+      },
+      innerPhotoItemEv(e,index){
+        this.longTapTimeout = setTimeout(()=>{
+          this.cont++;
+        }, 100);
+      },
+      innerPhotoItemEnd(e,index){
+        this.longTapTimeout = null;
+        this.status=true;
+        this.statusA= parseInt(e.target.getAttribute('data-k'));
+        if (this.status){
+          clearTimeout(this.longTapTimeout);
+        }else{
+          this.longTapTimeout = null;
+          this.status=false;
+        }
+      },
+      innerPhotoItemClose(index){
+
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=delstyle',
+          type:'post',
+          data:{
+            type:'video',
+            ids:index.toString()
+          }
+        }).then((res)=>{
+          if(res.code==100){
+            Toast.success('删除成功！');
+            this.$emit('init');
+          }else{
+            Toast.fail('删除失败！');
+          }
+        });
+      },
       update(e) {   // 上传照片
         var self = this;
         let file = e.target.files[0];
         let param = new FormData();  // 创建form对象
+
         param.append('file', file, file.name);  // 通过append向form对象添加数据
+        // param.append('type', 'image');
         // param.append('chunk', '0') // 添加form表单中其他数据
         // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
         let config = {
           headers: {
-            'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Origin':'*',
-            'Access-Control-Allow-Headers':'content-type',
-            'Access-Control-Request-Method':'GET,POST'
+            'Content-Type': 'multipart/form-data'
           }
         };
-
         axios.defaults.withCredentials = true;
         // let uk = this.$store.state.uk || Cache.getSession('uk');
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=';
-        axios.post(url+ uk, param, config)
+        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act=fileuploadvideo&uk=';
+        axios.post(url + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
-              var s=res.data.data.imgs;
+              var s=res.data.data.videos;
               this.$toast('上传成功');
               this.saver(s);
             }
@@ -71,8 +128,9 @@
           url:'app/index.php?i=1&c=entry&eid=88&act=savestyle',
           type:'post',
           data:{
-            ipath:scr,
-            type:'image'
+            ipath:'',
+            vpath:scr,
+            type:'video'
           }
         }).then((res)=>{
           if(res.status){
@@ -95,16 +153,12 @@
     border-radius: 4px;
   }
   .outer {
-    margin-top: 14px;
+    padding: 24px 0;
     width: 100%;
-    height: 75px;
     overflow-x: scroll;
     overflow-y: hidden;
     .inner {
-
-      width: 1000px;/*动态设定*/
-      height: 75px;
-      overflow: hidden;
+      /*height: 75px;*/
       .upload{
         margin-right: 15px;
         float: left;
@@ -134,6 +188,67 @@
         width: 75px;
         height: 75px;
       }
+    }
+  }
+  .innerPhoto{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .innerPhotoItem{
+    margin-right: 15px;
+    width: 73px;
+    height: 73px;
+    position: relative;
+    border: 1px solid rgba(200, 200, 200, 0.5);
+  }
+  .innerPhotoImg{
+    width: 75px;
+    height: 75px;
+  }
+  .innerPhotoItemClose{
+    position: absolute;
+    top:-17px;
+    right:-17px;
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
+  }
+  .movie{
+    width: 75px;
+    height: 75px;
+  }
+
+  .cell {
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    &-name {
+      flex: 1;
+      color: rgba(51, 51, 51, 1);
+      font-size: 15px;
+      font-family: PingFangSC-Regular;
+    }
+    &-content {
+      margin-right: 10px;
+      font-family: PingFangSC-Regular;
+      font-size: 12px;
+      font-family: PingFangSC-Regular;
+      color: rgba(102, 102, 102, 1);
+    }
+    &-icon {
+      font-size: 10px;
+      right: 0;
+    }
+    .fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(216, 216, 216, 1);
     }
   }
 </style>
