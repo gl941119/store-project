@@ -4,7 +4,6 @@
       <router-view class="view"  v-if="$route.meta.keepAlive"/>
     </keep-alive>
     <router-view class="view"  v-if="!$route.meta.keepAlive"/>
-
     <my-footer></my-footer>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  
+
   <ul class="selectBar">
     <li @click="clickHandle('1')" v-bind:class="{li_hover: hover=== '1' }">综合</li>
     <li @click="clickHandle('2')" v-bind:class="{li_hover: hover=== '2' }">销量</li>

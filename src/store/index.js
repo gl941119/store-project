@@ -20,8 +20,7 @@ export default new Vuex.Store({
     AppraiseImg:[],
     BuySpecs:[],//商品购买规格
     BuyNumber: undefined ,//商品规格选择数量
-
-
+    ClassifyId:undefined,//分类栏分类id
   },
   mutations: {
     setShowFooter(state, val) {
@@ -63,6 +62,9 @@ export default new Vuex.Store({
     setBuyNumber(state,val){
       state.BuyNumber = val
     },
+    setClassifyId(state,val){
+      state.ClassifyId = val
+    }
 
 
 

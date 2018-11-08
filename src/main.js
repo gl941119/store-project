@@ -23,7 +23,7 @@ import ServerCard from './components/serverCard'
 import StaffCard from './components/staffCard'//員工簡介卡片
 import MyCell from './components/myCell'
 import Cell from './components/cell'
-import SearchBar from './components/searchBar'
+
 import SelectBar from './components/selectBar'
 import Search from './components/search'
 import PriceList from './components/priceList' //金额列表
@@ -36,7 +36,7 @@ Vue.component('server-card', ServerCard);
 Vue.component('staff-card', StaffCard);
 Vue.component('my-cell', MyCell);
 Vue.component('cell', Cell);
-Vue.component('search-bar', SearchBar);
+
 Vue.component('select-bar', SelectBar);
 Vue.component('search', Search);
 Vue.component('price-list', PriceList);

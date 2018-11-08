@@ -16,7 +16,7 @@
       </router-link>
       <router-link tag="li" :to="{ path: 'subscribe/1'}"
                    v-bind:class="{}"
-                   >
+      >
         <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>预约</p>
       </router-link>
@@ -27,7 +27,7 @@
         <p>购物车</p>
       </router-link>
       <router-link tag="li" to=""
-                   v-bind:class="{}"
+                   v-bind:class="{li_hover:hover===4}"
                    v-on:click.native="infoUrl">
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>{{ txt }}</p>
@@ -38,13 +38,13 @@
 </template>
 
 <script>
-  var isMember=window.sessionStorage.getItem('is_member');
+
   export default {
     name: "MyFooter",
     data() {
       return {
-        hover: 1,
-        txt:isMember == 1?'会员中心':'个人中心',
+        hover: 0,
+        txt: window.sessionStorage.getItem('is_member') === '0' ? '会员中心' : '个人中心',
       }
     },
     computed: {
@@ -57,17 +57,12 @@
     },
     methods: {
       infoUrl() {
-
-
-     if(isMember == 1){//会员中心
-       this.$router.push({name:'member'});
-       this.txt='会员中心';
-     }else{//个人中心
-       this.$router.push({name:'staff'});
-       this.txt='个人中心';
-     }
-
-
+        this.hover = 4
+        if (window.sessionStorage.getItem('is_member') === '0') {//用户
+          this.$router.push({name: 'member'});
+        } else {//美师
+          this.$router.push({name: 'staff'});
+        }
       }
     }
   }

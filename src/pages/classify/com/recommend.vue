@@ -15,7 +15,7 @@
     <div class="product">
       <div class="product-title">
         <span class="product-title-name">推荐精华</span>
-        <span class="product-title-more"  v-on:click="routerPush('/subscribe/2')">查看更多</span>
+        <span class="product-title-more" v-on:click="routerPush('/subscribe/2')">查看更多</span>
         <van-icon name="arrow" class="product-title-icon"></van-icon>
       </div>
       <ul>
@@ -37,8 +37,8 @@
       return {
         goods: null,
         services: null,
-        adv:{
-          bimg:undefined,
+        adv: {
+          bimg: undefined,
           link: undefined,
           name: undefined
         }
@@ -48,8 +48,8 @@
       this.request()
     },
     methods: {
-      routerPush(url){
-        this.$router.push({path:url})
+      routerPush(url) {
+        this.$router.push({path: url})
       },
 
       request() {
@@ -58,6 +58,7 @@
           type: 'get',
 
         }).then((res) => {
+          console.log(res)
           this.services = res.data.services
           this.goods = res.data.goods
           this.adv = res.data.adv
@@ -88,15 +89,15 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      &-name{
+      &-name {
         flex: 1;
       }
-      &-more{
-        font-size:13px;
-        font-family:PingFangSC-Regular;
-        color:rgba(153,153,153,1);
+      &-more {
+        font-size: 13px;
+        font-family: PingFangSC-Regular;
+        color: rgba(153, 153, 153, 1);
       }
-      &-icon{
+      &-icon {
         margin-top: 1px;
         font-size: 9px;
       }
@@ -126,15 +127,15 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      &-name{
+      &-name {
         flex: 1;
       }
-      &-more{
-        font-size:13px;
-        font-family:PingFangSC-Regular;
-        color:rgba(153,153,153,1);
+      &-more {
+        font-size: 13px;
+        font-family: PingFangSC-Regular;
+        color: rgba(153, 153, 153, 1);
       }
-      &-icon{
+      &-icon {
         margin-top: 1px;
         font-size: 9px;
       }
