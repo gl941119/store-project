@@ -3,7 +3,7 @@
     <div class="cell-left">头像</div>
     <div class="cell-right">
       <img :src="avatar" alt="" class="cell-right-img">
-      <input  name="file" type="file" accept="image/*,image/png,image/gif,image/jpeg" @change="update" class="cell-right-upload"/>
+      <input  name="file" type="file" accept="image/png,image/gif,image/jpeg,image/*"  @change="update" class="cell-right-upload"/>
       <van-icon name="arrow" class="cell-right-icon"/>
     </div>
   </div>
@@ -24,6 +24,7 @@
     },
     methods: {
       update(e) {   // 上传照片
+
         var self = this;
         let file = e.target.files[0];
         let param = new FormData();  // 创建form对象
@@ -36,18 +37,17 @@
         axios.defaults.withCredentials = true;
 
         let uk = this.$store.state.uk || Cache.getSession('uk');
-
-        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
+        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eids+'&act=fileupload&uk=';
+        axios.post(url + uk, param, config)
           .then(res => {
-            console.log(res)
             if (res.data.code === 100) {
-              this.$toast('上传成功')
+              this.$toast('上传成功');
               this.$emit('Refresh')
             }
-
-          })
+          }).catch((res)=>{
+            // alert(res+'catch')
+        })
       }
-
     }
   }
 </script>

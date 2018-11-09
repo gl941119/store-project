@@ -44,6 +44,7 @@ import request from './utils/request'
 if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
   Vue.prototype.$eid = 156; //图片视频上传
+  Vue.prototype.$eids = 157; //会员头像上传
   Vue.prototype.$eidpay = 158; //支付
 } else {
   Vue.prototype.$upUrl = 'http://dev-cd.vasterroad.com:80/';

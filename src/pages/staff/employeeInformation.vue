@@ -11,7 +11,7 @@
           <div class="eInformationHImg">
             <div class="eInformationHImgB">
               <img :src="avatar" class="uploadImg">
-              <input type="file" name="file" accept="image/png,image/gif,image/jpeg" @change="update" class="uploadInput">
+              <input type="file" name="file" accept="image/png,image/gif,image/jpeg,image/*" @change="update" class="uploadInput">
             </div>
             <div class="exchangeIcon"></div>
           </div>
@@ -149,14 +149,14 @@
           axios.defaults.withCredentials = true;
           // let uk = this.$store.state.uk || Cache.getSession('uk');
           let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-          var url=this.$upUrl+'app/index.php?i=1&c=entry&eid=87&act=fileupload&uk=';
+          var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eids+'&act=fileupload&uk=';
           axios.post(url + uk, param, config)
             .then(res => {
               // console.log(res,res.data.data.avatar)
               if (res.data.code === 100) {
-                this.avatar=res.data.data.imgs;
+                // this.avatar=res.data.data.imgs;
                 this.$toast('上传成功')
-                // this.$emit('Refresh')
+                this.init();
               }
 
             })
