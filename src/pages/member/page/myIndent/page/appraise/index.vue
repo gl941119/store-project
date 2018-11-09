@@ -23,14 +23,14 @@
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
-          <input name="file" type="file" accept="image/png,image/gif,image/jpeg"
+          <input name="file" type="file" accept="image/png,image/gif,image/jpeg,image/*"
                  @change="uploadImg" class="upload-img-input"
                  v-on:click="clickUpload(index)"/>
         </div>
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise1.png" alt="">
           <p>添加视频</p>
-          <input name="file" type="file" accept="video/mp4，video/avi"
+          <input name="file" type="file" accept="video/mp4，video/avi,video/*"
                  @change="uploadVideo" class="upload-img-input"
                  v-on:click="clickUpload(index)"
           />
