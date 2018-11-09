@@ -139,8 +139,8 @@
                 this.signature=member.signature;
                 this.goodproject=JSON.parse(member.goodproject);
                 this.goodsinstrument=JSON.parse(member.goodsinstrument);
-                this.style=member.style.image;
-                this.styleV=member.style.video;
+                this.style=member.style!=undefined?member.style.image:[];
+                this.styleV=member.style!=undefined?member.style.video:[];
                 this.mevals=data.mevals;
                 this.up=member.up;
                 this.task=member.task;
@@ -242,6 +242,10 @@
     height: 50px;
     overflow: hidden;
     border-radius:50%;
+  }
+  .DetailsBeautyDivisionHImg img{
+    width: 50px;
+    height: 50px;
   }
   .DetailsBeautyDivisionCont{
     padding: 10px 0;
