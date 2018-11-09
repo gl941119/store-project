@@ -48,6 +48,7 @@
         margin: 21px auto 0;
         width:65px;
         height:65px;
+        border-radius: 50%;
       }
       &-content{
         margin-top: 9px;
@@ -102,5 +103,7 @@ display: inline-block;
     height: 15px;
     color: #e9584f;
     background: url("../../../assets/image/address.png") no-repeat;
+    background-size: 15px 15px;
+    border-radius: 50%;
   }
 </style>
