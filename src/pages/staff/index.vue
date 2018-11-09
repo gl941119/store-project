@@ -34,6 +34,7 @@
               xm:'',
               listImg:[],
               listVideo:[],
+              startTime:'',
             },
             status:null
           }
@@ -66,6 +67,7 @@ this.init();
                   time:d.plan_date,
                   sName:d.service_name,
                   phone:d.mobile,
+                  startTime:d.starttime,
                   xm:d.name,
                   listImg:data.style.image,
                   listVideo:data.style.video

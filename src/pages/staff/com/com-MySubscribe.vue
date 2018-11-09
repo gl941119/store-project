@@ -43,6 +43,9 @@
         }
       }
     },
+    mounted(){
+      this.status=this.mySub.startTime==null?true:false;
+    },
     methods:{
       startBtn(){
         this.status=false;

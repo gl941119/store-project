@@ -184,7 +184,7 @@
     justify-content: space-between;
     align-items: center;
     &-left {
-      width: 30px;
+
       height: 21px;
       font-size: 15px;
 
@@ -193,7 +193,7 @@
       line-height: 21px;
     }
     &-right {
-      width: 30px;
+
       height: 21px;
       font-size: 15px;
 

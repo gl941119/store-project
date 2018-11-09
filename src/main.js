@@ -44,11 +44,11 @@ Vue.component('price-list', PriceList);
 
 import request from './utils/request'
 
-if (process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV==='development'){
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
   Vue.prototype.$eid = 156; //图片视频上传
   Vue.prototype.$eidpay = 158; //支付
-} else {
+}else{
   Vue.prototype.$upUrl = 'http://dev-cd.vasterroad.com:80/';
   Vue.prototype.$eid = 163; //图片视频上传
   Vue.prototype.$eidpay = 165; //支付
@@ -56,19 +56,9 @@ if (process.env.NODE_ENV === 'development') {
 
 Vue.prototype.$request = request;
 
-// Vue.prototype.$setInterval = setInterval(function () {//长轮询
-//   Vue.prototype.$request({
-//     url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
-//     type: 'post',
-//     isToast: false
-//   }).then(res => {
-//     if (res.data.is_discuss== '0'){
-//      this.$router.push({name:""})
-//     }
-//   });
-// }, 2000)
 
-// window.clearInterval(this.$setInterval);
+
+
 
 
 
@@ -97,7 +87,6 @@ router.beforeEach((to, from, next) => {
 
 //插件
 import 'lib-flexible/flexible'
-import Cache from "./utils/cache";
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
