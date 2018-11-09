@@ -58,7 +58,7 @@
     methods: {
       infoUrl() {
         this.hover = 4
-        if (window.sessionStorage.getItem('is_member') === '0') {//用户
+        if (window.sessionStorage.getItem('store') === '0') {//用户
           this.$router.push({name: 'member'});
         } else {//美师
           this.$router.push({name: 'staff'});

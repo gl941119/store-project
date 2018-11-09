@@ -7,7 +7,6 @@
     <com-my-indent></com-my-indent>
     <!--列表-->
     <com-list class="com-list"></com-list>
-
   </div>
 </template>
 

@@ -12,14 +12,14 @@ axios.defaults.withCredentials = true;
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
 
-  if(process.env.NODE_ENV === 'development'){
-    url = url.replace('eid=84','eid=153');
-    url = url.replace('eid=85','eid=154');
-    url = url.replace('eid=86','eid=155');
-    url = url.replace('eid=87','eid=156');
-    url = url.replace('eid=88','eid=157');
-    url = url.replace('eid=89','eid=158');
-  }else{
+  if (process.env.NODE_ENV === 'development') {
+    url = url.replace('eid=84', 'eid=153');
+    url = url.replace('eid=85', 'eid=154');
+    url = url.replace('eid=86', 'eid=155');
+    url = url.replace('eid=87', 'eid=156');
+    url = url.replace('eid=88', 'eid=157');
+    url = url.replace('eid=89', 'eid=158');
+  } else {
     url = url.replace('eid=84', 'eid=160');
     url = url.replace('eid=85', 'eid=161');
     url = url.replace('eid=86', 'eid=162');
@@ -81,16 +81,18 @@ function requestHandle(params) {
           store.commit('setUk', res.data.uk);
           Cache.setSession('uk', res.data.uk)
         }
-        try {//分辨美师
-          if (res.data.user.is_member) {
-            store.commit('setIs_member', res.data.user.is_member);
-            Cache.setSession('is_member', res.data.user.is_member)
-          }
-        }catch (e) {
-          console.log('无法分辨美师')
+        try {//分辨会员
+          store.commit('setIs_member', res.data.user.is_member);
+          Cache.setSession('is_member', res.data.user.is_member)
+        } catch (e) {
+          alert('无法分辨会员')
         }
-
-
+        try {//分辨美师  >0 美师
+          store.commit('setStore', res.data.user.store);
+          Cache.setSession('store', res.data.user.store)
+        } catch (e) {
+          alert('无法分辨美师')
+        }
         if (res.data.user.store) {
           store.commit('setStore', res.data.user.store);
           Cache.setSession('store', res.data.user.store)
@@ -132,10 +134,7 @@ function requestHandle(params) {
         // }
       },
       rej => {
-
-
         Toast.fail('网络错误!');
-
         reject(rej);
       }
     );

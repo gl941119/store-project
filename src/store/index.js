@@ -16,7 +16,7 @@ export default new Vuex.Store({
     SelectHour:undefined,
     SelectTime:undefined,
     Is_member:undefined,//是否会员 string
-    Store:undefined,//是否美师 number
+    Store:undefined,//是否美师 string
     AppraiseImg:[],
     ClassifyId:undefined,//分类栏分类id
   },

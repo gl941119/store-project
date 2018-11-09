@@ -44,22 +44,17 @@ Vue.component('price-list', PriceList);
 
 import request from './utils/request'
 
-if(process.env.NODE_ENV==='development'){
+if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
   Vue.prototype.$eid = 156; //图片视频上传
   Vue.prototype.$eidpay = 158; //支付
-}else{
+} else {
   Vue.prototype.$upUrl = 'http://dev-cd.vasterroad.com:80/';
   Vue.prototype.$eid = 163; //图片视频上传
   Vue.prototype.$eidpay = 165; //支付
 }
 
 Vue.prototype.$request = request;
-
-
-
-
-
 
 
 //导航守卫

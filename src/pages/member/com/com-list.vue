@@ -1,7 +1,6 @@
 <template>
   <ul class="list">
     <li class="list-li">
-      <!--<button v-on:click="onclick">1231231232</button>-->
       <cell :Data="item" v-for="item,index in listData" :key="index" class="cell"></cell>
     </li>
   </ul>
