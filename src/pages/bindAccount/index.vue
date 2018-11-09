@@ -76,16 +76,10 @@
 
         },
         saoMiao(){
-          alert('saoMiao')
           axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
             .then((res)=>{
-              var ss=res+'接口请求成功';
-              alert(ss)
             if(res.data.status){
-              console.log(res.data.data.config)
               var d=res.data.data.config;
-              var ss=res+'接口请求成功并获取到数据';
-              alert(ss)
               wx.config({
                 debug: true, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -100,9 +94,8 @@
                   needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
                   scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                   success: function (res) {
-                    var s=res+'scanQRCode';
-                    alert(s)
-                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    this.yqCode=res.resultStr;
+                    var result = res.resultStr+'扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
                   }
                 });
                 wx.error(function(res){
