@@ -5,7 +5,7 @@
     <div class="cell-left">头像</div>
     <div class="cell-right">
       <img :src="avatar" alt="" class="cell-right-img">
-      <!--<input  name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="chooseImage" class="cell-right-upload"/>-->
+      <input  name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update" class="cell-right-upload"/>
       <van-icon name="arrow" class="cell-right-icon"/>
     </div>
   </div>
@@ -26,20 +26,23 @@
     },
     methods: {
       chooseImage() {
-
+        alert(123457)
         axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
           .then((res) => {
+            alert(res)
             if (res.data.status) {
               var d = res.data.data.config;
               wx.config({
-                debug: true, // 开启调试模式,
+                debug: false, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
                 timestamp: d.timestamp, // 必填，生成签名的时间戳
                 nonceStr: d.nonceStr, // 必填，生成签名的随机串
                 signature: d.signature,// 必填，签名，见附录1
                 jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
+              alert('config')
               wx.ready(function () {
+                alert('ready')
                 wx.chooseImage({
                   count: 1, // 默认9
                   sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有

@@ -68,7 +68,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
  */
 function requestHandle(params) {
   Toast.loading({
-    duration: 0,
+    duration: 6000,
     mask: true,
     message: '加载中...'
   });
@@ -85,13 +85,13 @@ function requestHandle(params) {
           store.commit('setIs_member', res.data.user.is_member);
           Cache.setSession('is_member', res.data.user.is_member)
         } catch (e) {
-          alert('无法分辨会员')
+          // alert('无法分辨会员')
         }
         try {//分辨美师  >0 美师
           store.commit('setStore', res.data.user.store);
           Cache.setSession('store', res.data.user.store)
         } catch (e) {
-          alert('无法分辨美师')
+          // alert('无法分辨美师')
         }
         if (res.data.user.store) {
           store.commit('setStore', res.data.user.store);
