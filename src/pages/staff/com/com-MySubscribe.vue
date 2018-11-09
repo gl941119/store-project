@@ -58,7 +58,9 @@
             orderid:this.mySub.orderId
           }
         }).then((res) => {
-          this.$emit('init')
+          if(res.status){
+            this.$emit('init')
+          }
         });
       },
       endBtn(){
