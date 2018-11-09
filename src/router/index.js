@@ -109,7 +109,7 @@ export default new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
     },
     {//热门商品--预约确认
-      path: '/appoint/:sid/:id/:time',//sid 服务id id 美师id  time选择的时间
+      path: '/appoint/:orderid',//订单号
       name: 'confirm',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)

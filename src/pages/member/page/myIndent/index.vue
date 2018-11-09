@@ -59,7 +59,7 @@
       }
     },
     mounted() {
-      this.request()
+      this.tabChange()
     },
 
     methods: {

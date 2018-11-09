@@ -21,14 +21,13 @@
     </div>
     <div class="bottom">
       <van-icon name="pending-evaluate" class="bottom-icon"/>
-      <span>联系卖家</span>
+      <span v-on:click="goBaidu">联系卖家</span>
       <!--取消-->
 
       <!--待付款-->
-
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'||item.type==='2'||item.type==='3'" v-on:click="goAppointPay(item.orderid)">查看详情</van-button>
+      <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goAppointPay(item.orderid)">查看详情</van-button>
       <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'">付款</van-button>
+      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'" v-on:click="pay(item.orderid)">付款</van-button>
 
     </div>
   </div>
@@ -58,10 +57,15 @@
     data() {
       return {
         is_member: window.sessionStorage.getItem('is_member'), //0 非会员  1 会员
-
       }
     },
     methods:{
+      pay(orderid){
+        this.$router.push({name:'confirm',params:{orderid:orderid}})
+      },
+      goBaidu(){
+        this.$baidu()
+      },
       goAppointPay(orderid){
         this.$router.push({name:'appointPay',params:{orderid:orderid,type:'1'}})
       },

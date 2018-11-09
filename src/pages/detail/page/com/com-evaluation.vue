@@ -66,10 +66,12 @@
       &-all{
         margin-right: 5px;
         color: #666666;
+        font-size: 11px;
       }
       &-icon {
         text-align: right;
         color: #666666;
+        font-size: 10px;
       }
     }
   }

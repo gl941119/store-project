@@ -147,6 +147,7 @@
         }).then(res => {
           if (res.code === 100) {
             this.numMax = res.data.stock
+
             this.$emit('update:buyNum', val)
           }
         })

@@ -57,6 +57,7 @@
           }
         }).then(res=>{
           this.discusslist = res.data.discusslist
+          console.log( this.discusslist)
         })
 
       },

@@ -49,7 +49,7 @@
         },
         tel:undefined,
         nike:undefined,
-        orderid:undefined,//订单号
+        orderid:this.$route.params.orderid,//订单号
       }
     },
     mounted() {
@@ -102,7 +102,6 @@
             if(res.code === 100){
               this.$router.push({name:'appointPay',params:{orderid:this.orderid}})
             }
-
           })
 
 
@@ -120,7 +119,6 @@
       memerCancelHandle(){//会员取消按钮
         this.$dialog.confirm({
           title: '是否取消预约',
-          message: ''
         }).then(() => {
           this.$router.go(-1)
         }).catch(() => {
@@ -130,18 +128,16 @@
       },
       request() {
         this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=86&act=confirmorder',
+          url: 'app/index.php?i=1&c=entry&eid=86&act=orderinfo',
           type: 'POST',
           data: {
-            id: this.id,
-            sid: this.sid,
-            date: this.time,
+            orderid:this.$route.params.orderid
           }
         }).then((res)=>{
           this.store = res.data.store
           this.service = res.data.service
           this.user = res.data.user
-          this.orderid = res.data.orderid
+
         })
       }
     }

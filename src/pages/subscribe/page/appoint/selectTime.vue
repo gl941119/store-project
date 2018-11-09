@@ -41,7 +41,7 @@
     methods: {
       submit() {//提交
         let Day = this.$store.state.SelectDay,
-            Hour = this.$store.state.SelectHour;
+          Hour = this.$store.state.SelectHour;
 
         if (!Day) {
           this.$toast.fail('请选择日期')
@@ -56,27 +56,35 @@
         const DayArray = Day.split('.')
         DayArray.unshift(new Date().getFullYear().toString())
         const time = [DayArray.join('-'), Hour + ':00'].join(' ')
-        this.$store.commit('setSelectTime',time)
+        this.$store.commit('setSelectTime', time)
 
         this.verify(time)
       },
-      verify(time){//验证时间选择是否正确
+      verify(time) {//验证时间选择是否正确
 
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=86&act=verifytime',
-          type:'post',
-          data:{
-              id:this.$route.params.id,
-              sid:this.$route.params.sid,
-              date:time,
+          url: 'app/index.php?i=1&c=entry&eid=86&act=verifytime',
+          type: 'post',
+          data: {
+            id: this.$route.params.id,
+            sid: this.$route.params.sid,
+            date: time,
           }
-        }).then((res)=>{
-          if(res.code === 100){
-            this.$router.push({name:'confirm',params:{
-              id:this.$route.params.id,
-              sid:this.$route.params.sid,
-              time:time,
-              }})
+        }).then((res) => {
+          if (res.code === 100) {
+            this.$request({//生成订单
+              url: 'app/index.php?i=1&c=entry&eid=86&act=confirmorder',
+              type: 'POST',
+              data: {
+                id: this.$route.params.id,
+                sid: this.$route.params.sid,
+                date: time,
+              }
+            }).then((res) => {
+              if (res.code === 100) {
+                this.$router.push({name: 'confirm', params: {orderid: res.data.orderid}})
+              }
+            })
           }
         })
       },

@@ -1,9 +1,8 @@
 <template>
   <div class="evaluation-detail">
-
     <div class="title">
       <span class="title-name">{{discuss.nick}}</span>
-      <img :src="discuss.level_img" alt="" class="title-grade">
+      <img :src="discuss.level_img" v-if="!!discuss.level_img" alt="" class="title-grade">
       <div class="title-giveMark">
         <img src="../../../../assets/image/evaluation.png" alt="" v-for="item in discuss.score">
       </div>

@@ -71,7 +71,7 @@ Vue.prototype.$setInterval = setInterval(function () {//长轮询
       router.push({name: "serverEvaluate", params: {orderid: res.data.orderid}})
     }
   });
-}, 2000)
+}, 10000)
 
 
 //导航守卫

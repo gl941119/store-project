@@ -52,7 +52,7 @@
     </van-button>
     <div v-else>
       <van-button class="submitBtn" type="primary" v-on:click="payHandle">支付</van-button>
-      <van-button class="submitBtn" type="danger">取消</van-button>
+      <van-button class="submitBtn" type="danger" v-on:click="cancleHandle">取消</van-button>
     </div>
   </div>
 </template>
@@ -107,6 +107,31 @@
 
     },
     methods: {
+      cancleHandle(){
+        this.$dialog.confirm({
+          title: '是否取消订单',
+        }).then(() => {
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
+            type:'post',
+            data:{
+              ordersn:window.sessionStorage.getItem('ordersn'),
+              status:-1
+            }
+          }).then(res=>{
+            if(res.code===100){
+              this.$toast.success('取消成功')
+              let thia = this
+              setTimeout(function () {
+                thia.$router.push({name:'index'})
+              },1000)
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
+
+      },
       request() {//通过订单号查询
         let addressid = undefined
         try {
@@ -118,7 +143,7 @@
           type: 'post',
           data: {
             ordersn: window.sessionStorage.getItem('ordersn'),
-            address: window.sessionStorage.getItem('address'),
+            // address: window.sessionStorage.getItem('address'),
             addressid: addressid
           }
         }).then((res) => {

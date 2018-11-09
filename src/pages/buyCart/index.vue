@@ -4,9 +4,9 @@
     <!--<product-card v-for="item,index in 4" class="product-card" :key="index"></product-card>-->
 
     <!--购物车卡片-->
-    <div class="card" v-for="item in goodslist" :key="item.id" v-on:click="saveId(item.goodsid,item.optionid,item.id)">
+    <div class="card" v-for="item in goodslist" :key="item.id" >
       <van-checkbox v-model="item.checked" class="checkbox" v-on:click.native="refreshPrice"></van-checkbox>
-      <div class="content">
+      <div class="content" v-on:click="goDetail(item.goodsid)">
         <img :src="item.thumb" alt="">
         <div class="content-right">
           <div class="content-right-top">
@@ -25,6 +25,7 @@
               :max="item.stock"
               :step="1"
               @change="cheng"
+              v-on:click.native="saveId(item.goodsid,item.optionid,item.id)"
               class="stepper"
             />
           </div>
@@ -46,7 +47,8 @@
 
 <script>
   // import ProductCard from './com/productCard'
-import cache from '../../utils/cache'
+  import cache from '../../utils/cache'
+
   export default {
     name: "index",
     components: {
@@ -61,43 +63,46 @@ import cache from '../../utils/cache'
         optionid: undefined,
         id: undefined,
         price: 0,
-        loading:false
+        loading: false
       }
     },
     mounted() {
       this.request()
     },
     methods: {
-      onSubmit(){//提交订单
-        let goodslist = this.goodslist.filter(item=>{
+      goDetail(goodsid) {
+        this.$router.push({name: 'detail', params: {type: '1', id: goodsid}})
+      },
+      onSubmit() {//提交订单
+        let goodslist = this.goodslist.filter(item => {
           return item.checked === true
         })
         // 判定勾选
-        if(goodslist.length===0){
+        if (goodslist.length === 0) {
           this.$toast.fail('请勾选商品')
           return;
         }
         //购物车订单存本地
-        cache.setSession('buyCart',goodslist)
+        cache.setSession('buyCart', goodslist)
 
         //生成订单
         this.confirmIndent(goodslist)
       },
-      confirmIndent(goodslist){//生成订单
-        goodslist.forEach((item)=>{//数据整理
-          item['num']=item['total']
+      confirmIndent(goodslist) {//生成订单
+        goodslist.forEach((item) => {//数据整理
+          item['num'] = item['total']
           item['id'] = item['goodsid']
         })
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
-          type:'post',
-          data:{
-            goods:JSON.stringify(goodslist)
+          url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
+          type: 'post',
+          data: {
+            goods: JSON.stringify(goodslist)
           }
-        }).then((res)=>{
-          if(res.code === 100){
-            window.sessionStorage.setItem('ordersn',res.data.ordersn)//保存订单号
-            this.$router.push({name:'indentConfirme',params:{ordersn:res.data.ordersn}})
+        }).then((res) => {
+          if (res.code === 100) {
+            window.sessionStorage.setItem('ordersn', res.data.ordersn)//保存订单号
+            this.$router.push({name: 'indentConfirme', params: {ordersn: res.data.ordersn}})
           }
 
         })
@@ -112,6 +117,7 @@ import cache from '../../utils/cache'
         this.refreshPrice()
       },
       saveId(goodsid, optionid, id) {
+        console.log(goodsid, optionid, id)
         this.goodsid = goodsid
         this.optionid = optionid
         this.id = id
@@ -142,23 +148,28 @@ import cache from '../../utils/cache'
         this.price = price * 100
       },
       removeProduct(id) {//删除商品
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=85&act=mycart',
-          type: 'post',
-          data: {
-            op: 'remove',
-            id: id
-          }
-        }).then((res) => {
-          if (res.code === 100) {
-            let goodslist = this.goodslist.filter(item => {
-              return item.id != id
-            })
-            this.goodslist = goodslist
-            this.$toast.success('删除成功')
-          }
-        })
-
+        this.$dialog.confirm({
+          title: '是否删除商品？',
+        }).then(() => {
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=85&act=mycart',
+            type: 'post',
+            data: {
+              op: 'remove',
+              id: id
+            }
+          }).then((res) => {
+            if (res.code === 100) {
+              let goodslist = this.goodslist.filter(item => {
+                return item.id != id
+              })
+              this.goodslist = goodslist
+              this.$toast.success('删除成功')
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
       },
       request() {
         this.$request({

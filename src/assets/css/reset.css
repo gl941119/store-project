@@ -220,12 +220,12 @@ a:focus {
 }
 
 .van-stepper__input{
-  width: 21px !important;
-  height: 21px !important;
-}
-.van-stepper__minus,.van-stepper__plus{
   width: 25px !important;
   height: 25px !important;
+}
+.van-stepper__minus,.van-stepper__plus{
+  width: 28px !important;
+  height: 28px !important;
 }
 .van-button--danger{
   /*background:rgba(113,179,255,1) !important;*/

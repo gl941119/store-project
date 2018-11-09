@@ -9,11 +9,11 @@
     <!--商品-->
     <div class="detali-product product">
       <!--banner-->
-
       <van-swipe :autoplay="300000000000000000" class="swipe">
         <van-swipe-item class="wrap">
-          <img src="../../assets/image/play.png" class="wrap-play" :class="{is_display:is_display}" v-on:click="videoPlay"></img>
-          <img :src="Data.videothumb" :class="{is_display:is_display}" alt="" class="wrap-img">
+          <img src="../../assets/image/play.png" class="wrap-play" :class="{is_display:show_play}"
+               v-on:click="videoPlay"></img>
+          <img :src="Data.videothumb" :class="{is_display:show_img}" alt="" class="wrap-img">
           <video :src="Data.video"
                  class="wrap-video"
                  x5-video-player-type="h5"
@@ -21,6 +21,7 @@
                  webkit-playsinline="true"
                  preload="auto"
                  ref="media"
+                 v-on:click="videoStop"
           />
         </van-swipe-item>
         <van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">
@@ -78,8 +79,9 @@
       <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
       <!--选择规格-->
       <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
-        <com-buy-specification :goods_spec="goods_spec" :goods="Data"
+        <com-buy-specification :goods_spec="goods_spec"
                                :num='num'
+                               v-bind:goods="Data"
                                v-bind:buyNum.sync="buyNum"
                                v-bind:alreadybought.sync="alreadybought"
                                v-bind:specs.sync="specs"></com-buy-specification>
@@ -156,8 +158,8 @@
         address: undefined,//收货地址
         goodsData: null,
         SpecificationData: null,
-        is_display:false,//是否隐藏
-
+        show_play: false,//是否隐藏播放按钮
+        show_img: false,//是否隐藏第一帧图像
       }
     },
     mounted() {
@@ -170,9 +172,10 @@
 
       media.addEventListener('play', function () {
         console.log('播放')
-        media.addEventListener('pause', function () {
-          console.log('停止')
-        });
+
+      });
+      media.addEventListener('pause', function () {
+        console.log('停止')
       });
 
 
@@ -193,10 +196,7 @@
       }
     },
     methods: {
-      videoPlay(){
-        this.$refs['media'].play()
-        this.is_display = true
-      },
+
       onClickCollect() {//加入收藏
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
@@ -229,6 +229,8 @@
             if (res.code === 100) {
               this.$toast.success('添加成功')
               this.$store.commit('setShowBuySpecification', false)//关闭购买栏
+            }else{
+              this.$toast.fail('添加失败')
             }
           })
         } else {
@@ -334,13 +336,24 @@
             } else {
               this.freight = res.data.freight.freight
             }
+            this.Data.marketprice = res.data.marketprice
+            this.Data.productprice = res.data.productprice
           }
         })
 
       },
       onFocus() {
         // console.log(123)
-      }
+      },
+      videoStop() {
+        this.$refs['media'].pause()
+        this.show_play = false
+      },
+      videoPlay() {
+        this.$refs['media'].play()
+        this.show_play = true
+        this.show_img = true
+      },
     }
   }
 </script>
@@ -387,7 +400,7 @@
       width: 375px;
       height: 343px;
     }
-    .is_display{
+    .is_display {
       display: none;
     }
 
