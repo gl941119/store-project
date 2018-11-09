@@ -328,7 +328,5 @@ export default new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/index/serverEvaluate'], resolve)
     }
-
-
   ]
 })
