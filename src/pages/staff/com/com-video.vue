@@ -5,16 +5,16 @@
     </div>
     <div class="outer">
       <div class="inner">
-        <div class="upload">
-          <input name="file" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="update" class="upload-input"/>
+        <div class="upload" @click="upPop()">
           <div class="upload-img">
             <img src="../../../assets/image/staff1.png" alt="">
           </div>
         </div>
         <div class="innerPhoto">
           <div  v-for="(item,index) in video.listVideo"  ref="imgBoxs" class="innerPhotoItem"  >
+            <img :src="item.image" class="movie">
+            <div class="movieBtn" @click="movieBtn(item.video)"><span></span></div>
             <!--<canvas class="movie" ref="canvasImg"></canvas>-->
-            <video class="movie" preload="metadata" @canplay="videoSource($event,index)" controls  ref="videoSource" ><source :src="item.video" type="video/mp4" /></video>
             <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  @click="innerPhotoItemClose(index)"/>
           </div>
         </div>
@@ -22,13 +22,26 @@
       </div>
     </div>
 
-
+    <van-popup class="showBox" v-model="show">
+      <div class="upVedio">
+        <div class="upVedioTxt">视频封面</div><input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/png,image/gif,image/jpeg" @change="upData('fileupload',$event)"/>
+      </div>
+      <div class="upVedio">
+        <div class="upVedioTxt">上传视频</div><input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="upData('fileuploadvideo',$event)" />
+      </div>
+      <div class="bindAccountSubmitBox">
+        <div class="bindAccountSubmit" @click="bindAccountSubmit()">提交</div>
+      </div>
+    </van-popup>
+    <van-popup class="showBox" v-model="videoShow">
+      <video id="myvideo" class="myvideo" preload="metadata" @canplay="videoSource($event)" controls  ref="videoVideo" ><source  :src="sourcSrc" type="video/mp4" /></video>
+    </van-popup>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
-  import { Icon ,Toast } from 'vant';
+  import { Icon ,Toast,Popup  } from 'vant';
   export default {
     name: "com-video",
     props:['video'],
@@ -43,7 +56,14 @@
         longTapTimeout:null,
         longTapDelay:750,
         statusA:null,
-        cont:0
+        cont:0,
+        show:false,
+        vedioSrc:null,
+        imgSrc:null,
+        formF:null,
+        videoShow:false,
+        sourcSrc:'',
+        isPlay:false
       }
     },
     mounted(){
@@ -51,9 +71,57 @@
       this.videoSource(0);
     },
     methods: {
+      upData(str,e){
+        let sefl=this;
+        let file=e.target.files[0];
+        let param = new FormData();  // 创建form对象
+        param.append('file', file, file.name);
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
+        axios.defaults.withCredentials = true;
+        let uk = this.$store.state.uk || sessionStorage.getItem('uk');
+        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
+        axios.post(url + uk, param, config)
+          .then(res => {
+            if (res.data.code === 100) {
+              var s=res.data.data;
+              if(s.imgs!=undefined){
+                sefl.imgSrc=s.imgs;
+                e.target.value='';
+              }else{
+                sefl.vedioSrc=s.videos;
+                e.target.value='';
+              }
 
-      videoSource(index){
-        let videos = this.$refs.videoSource;
+
+            }
+
+          })
+      },
+      bindAccountSubmit(){
+        if(this.vedioSrc&&this.imgSrc){
+          this.$toast('上传成功');
+          this.saver(this.imgSrc,this.vedioSrc)
+        }else{
+          this.$toast('封面and视频地址不能为空！');
+        }
+
+  },
+      movieBtn(src){
+        this.videoShow=true;
+        this.sourcSrc=src;
+      },
+      upPop(){
+        this.show=true;
+      },
+      videoSource(e){
+        // let dom = document.getElementById('myvideo');
+        // this.isPlay = !this.isPlay;
+        // dom.play();
+        // let videos = this.$refs.videoSource;
         // videos.forEach((video) => {
         //   let canvas = this.$refs.canvasImg[index];
         //   let src = canvas.toDataURL('image/png');
@@ -95,46 +163,20 @@
           }
         });
       },
-      update(e) {   // 上传照片
-        var self = this;
-        let file = e.target.files[0];
-        let param = new FormData();  // 创建form对象
-
-        param.append('file', file, file.name);  // 通过append向form对象添加数据
-        // param.append('type', 'image');
-        // param.append('chunk', '0') // 添加form表单中其他数据
-        // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        };
-        axios.defaults.withCredentials = true;
-        // let uk = this.$store.state.uk || Cache.getSession('uk');
-        let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act=fileuploadvideo&uk=';
-        axios.post(url + uk, param, config)
-          .then(res => {
-            if (res.data.code === 100) {
-              var s=res.data.data.videos;
-              this.$toast('上传成功');
-              this.saver(s);
-            }
-
-          })
-      },
-      saver(scr){
+      saver(im,vd){
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=88&act=savestyle',
           type:'post',
           data:{
-            ipath:'',
-            vpath:scr,
+            ipath:im,
+            vpath:vd,
             type:'video'
           }
         }).then((res)=>{
           if(res.status){
             this.$emit('init');
+            this.show=false;
+            this.formF.value='';
           }
         });
       }
@@ -143,6 +185,35 @@
 </script>
 
 <style lang="scss" scoped>
+  .upVedio{
+    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .myvideo{
+    width: 354px;
+    margin: 0 auto;
+  }
+  .bindAccountSubmit{
+    font-size:16px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    width:296px;
+    height:43px;
+    background:rgba(113,179,255,1);
+    border-radius:4px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 43px;
+  }
+  .showBox{
+    padding: 5px;
+  }
+  .bindAccountSubmitBox{
+    padding: 30px 0;
+  }
   .wrap {
     margin: 15px auto 0;
     padding: 0 15px;
@@ -250,5 +321,38 @@
       height: 1px;
       background: rgba(216, 216, 216, 1);
     }
+  }
+  .upVedioTxt{
+    font-size:15px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    padding-right: 10px;
+  }
+  .upVedioIn{
+    width: 100px;
+    font-size: 20px;
+  }
+  .movieBtn{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    z-index: 10;
+    border-radius: 50%;
+    text-align: center;
+  }
+  .movieBtn span{
+    display: block;
+    width:0;
+    height:0;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+    border-left:10px solid #000;
   }
 </style>

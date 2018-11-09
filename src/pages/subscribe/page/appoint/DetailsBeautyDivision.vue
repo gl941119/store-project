@@ -49,9 +49,12 @@
           <div class="DetailsBeautyDivisionContTitleTxt">个人风采</div>
         </div>
         <div class="DetailsBeautyDivisionContVoid">
-          <div class="DetailsBeautyDivisionContVoidItem"  v-for="item in style">
-            <img :src="item" class="DetailsBeautyDivisionContVoidItemImg">
-            <span v-if="item === ''?false:true" class="DetailsBeautyDivisionContVoidItemBtn" @click="voidShow()"></span>
+          <div class="DetailsBeautyDivisionContVoidItem"  v-for="(item,index) in style">
+            <img :src="item" class="DetailsBeautyDivisionContVoidItemImg" @click="imgEvent(style,index)">
+          </div>
+          <div class="DetailsBeautyDivisionContVoidItem"  v-for="(items,indexs) in styleV">
+            <img :src="items.image" class="DetailsBeautyDivisionContVoidItemImg">
+            <div class="movieBtn" @click="movieBtn(items.video)"><span></span></div>
           </div>
         </div>
 
@@ -69,8 +72,8 @@
     </div>
   </div>
   <van-popup v-model="show">
-    <video class="video" controls autoplay>
-      <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+    <video class="video" controls>
+      <source :src="vedioSrc" type="video/mp4">
       您的浏览器不支持Video标签。
     </video>
   </van-popup>
@@ -79,7 +82,7 @@
 
 <script>
 
-  import { Popup } from 'vant';
+  import { Popup ,ImagePreview} from 'vant';
     export default {
         name: "DetailsBeautyDivision",
       data(){
@@ -91,19 +94,34 @@
             signature:'',//个性签名
             goodproject:[],//擅长项目
             goodsinstrument:[],//擅长仪器
-            style:[],//个人风采
+            style:[],//个人风采 图片
+            styleV:[],//个人风采 视频
             mevals:[],//美丽印象
             up:0,//数量
             task:'',//几星美师
             name:'',
             intro:'',//个人介绍
             show:false,
+            vedioSrc:''
           }
       },
       mounted(){
         this.init();
       },
       methods:{
+        movieBtn(src){
+          this.vedioSrc=src;
+          this.show=true;
+        },
+        imgEvent(list,index){
+          ImagePreview({
+            images: list,
+            startPosition: index,
+            onClose() {
+              // do something
+            }
+          });
+        },
           init(){
             this.$request({
               url:'app/index.php?i=1&c=entry&eid=86&act=memberpage',
@@ -121,7 +139,8 @@
                 this.signature=member.signature;
                 this.goodproject=JSON.parse(member.goodproject);
                 this.goodsinstrument=JSON.parse(member.goodsinstrument);
-                this.style=JSON.parse(member.style);
+                this.style=member.style.image;
+                this.styleV=member.style.video;
                 this.mevals=data.mevals;
                 this.up=member.up;
                 this.task=member.task;
@@ -280,7 +299,13 @@
     width: 95px;
     height: 95px;
     margin: 0 6px 10px 6px;
+    overflow: hidden;
   }
+.DetailsBeautyDivisionContVoidItem img{
+
+  width: 95px;
+  height: 95px;
+}
   .DetailsBeautyDivisionContVoidItemImg{
     position: relative;
     z-index: 1;
@@ -298,6 +323,31 @@
     margin: 0 5px 10px 5px;
   }
   .video{
-    width: 100%;
+    width: 354px;
+    margin: 0 auto;
   }
+
+.movieBtn{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  z-index: 10;
+  border-radius: 50%;
+  text-align: center;
+}
+.movieBtn span{
+  display: block;
+  width:0;
+  height:0;
+  border-top:8px solid transparent;
+  border-bottom:8px solid transparent;
+  border-left:10px solid #000;
+}
 </style>

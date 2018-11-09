@@ -27,6 +27,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
     url = url.replace('eid=88', 'eid=164');
     url = url.replace('eid=89', 'eid=165')
   }
+  // url=url+"&openid=abc123";
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');

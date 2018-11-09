@@ -173,8 +173,8 @@
   .bindAccountBox{
     $width:345px;
     width: $width;
-    margin: 0 auto;
-    padding-top: 10px;
+    margin: 0px auto 15px auto;
+    padding: 10px 0;
     background:rgba(255,255,255,1);
     box-shadow:0px 2px 13px 0px rgba(207,207,207,0.5);
     border-radius:4px;
