@@ -74,9 +74,9 @@
       </div>
     </div>
 
-    <div class="eInformationOutPadding">
-      <div class="eInformationOut" @click="editOut()">退出账户</div>
-    </div>
+    <!--<div class="eInformationOutPadding">-->
+      <!--<div class="eInformationOut" @click="editOut()">退出账户</div>-->
+    <!--</div>-->
 
   </div>
 </template>

@@ -166,7 +166,8 @@
   .editYgInfosTab{
     display: flex;
     align-items: center;
-    flex-warp:warp;
+    -webkit-flex-wrap:wrap;
+    flex-wrap:wrap;
   }
   .editYgInfosItem{
     margin: 0 5px 10px 5px;

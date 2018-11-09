@@ -27,7 +27,7 @@
         <div class="upVedioTxt">视频封面</div>
         <div class="upVedioTBox">
           选择文件
-          <input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/*,image/png,image/gif,image/jpeg" capture="camera"   @change="upData('fileupload',$event)"/>
+          <input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/*,image/png,image/gif,image/jpeg"    @change="upData('fileupload',$event)"/>
         </div>
         <div class="gouzi" v-if="imgGou">√</div>
       </div>
@@ -35,7 +35,7 @@
         <div class="upVedioTxt">上传视频</div>
         <div class="upVedioTBox">
           选择文件
-          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/*,video/avi,video/mp4,video/flv,video/3gp,video/swf"  capture="camera"   @change="upData('fileuploadvideo',$event)" />
+          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/*,video/avi,video/mp4,video/flv,video/3gp,video/swf"     @change="upData('fileuploadvideo',$event)" />
         </div>
         <div class="gouzi" v-if="vdGou">√</div>
 
