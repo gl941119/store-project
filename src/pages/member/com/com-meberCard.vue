@@ -1,7 +1,7 @@
 <template>
   <div class="Card">
     <div class="card-top">
-      <img src="../../../assets/image/头像.png" alt="" class="headPhoto">
+      <img :src="Data.avatar" alt="" class="headPhoto">
       <div class="card-top-title">
         <div class="card-top-title-top">
           <span class="name">{{Data.nick}}</span>
@@ -62,7 +62,7 @@
         height: 50px;
       }
       &-title {
-        margin: 8px 0 0 16px;
+        margin: 4px 0 0 16px;
         width: 100%;
         &-top {
           width: 100%;

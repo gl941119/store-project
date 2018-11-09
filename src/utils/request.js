@@ -74,8 +74,6 @@ function requestHandle(params) {
 
   const {url, data, type, isToast} = params;
 
-
-
   return new Promise((resolve, reject) => {
     ajaxRequest(url, data, type, isToast).then(
       res => {

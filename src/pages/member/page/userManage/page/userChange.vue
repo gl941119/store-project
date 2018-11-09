@@ -115,10 +115,11 @@
 
       },
       setSex() {
+        console.log(this.sex)
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=saveinfo',
           data: {
-            sex: this.sex,
+            sex: this.sex== '女'? 'female':'male',
           },
           type: 'post',
         }).then((res) => {

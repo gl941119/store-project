@@ -1,7 +1,5 @@
 <template>
   <div class="cell">
-
-    <button v-on:click="chooseImage">12345</button>
     <div class="cell-left">头像</div>
     <div class="cell-right">
       <img :src="avatar" alt="" class="cell-right-img">
@@ -14,7 +12,7 @@
 <script>
   import axios from 'axios';
   import Cache from '../../../../../utils/cache'
-  import  wx from 'weixin-js-sdk'
+  import wx from 'weixin-js-sdk'
   export default {
     name: "cell",
     props: ['avatar'],
@@ -25,48 +23,6 @@
 
     },
     methods: {
-      chooseImage() {
-        alert(123457)
-        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
-          .then((res) => {
-            alert(res)
-            console.log(res.data)
-            if (res.data.status) {
-              var d = res.data.data.config;
-              wx.config({
-                debug: true, // 开启调试模式,
-                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
-                timestamp: d.timestamp, // 必填，生成签名的时间戳
-                nonceStr: d.nonceStr, // 必填，生成签名的随机串
-                signature: d.signature,// 必填，签名，见附录1
-                jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-              });
-              alert('config')
-              wx.ready(function () {
-                alert('ready')
-                wx.chooseImage({
-                  count: 1, // 默认9
-                  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                  success: function (res) {
-                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                   alert(localIds)
-                  }
-                });
-                wx.error(function(res){
-                  var s=res+'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
-                  alert(s)
-                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-                });
-              });
-            }
-          }).catch((res) => {
-          var ss = res + 'catch请求失败';
-
-        });
-
-
-      },
       update(e) {   // 上传照片
         var self = this;
         let file = e.target.files[0];

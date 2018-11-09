@@ -52,9 +52,13 @@ if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$upUrl = 'http://dev-cd.vasterroad.com:80/';
   Vue.prototype.$eid = 163; //图片视频上传
   Vue.prototype.$eidpay = 165; //支付
+  Vue.prototype.$eid162 = 162; //支付
+
 }
 
 Vue.prototype.$request = request;
+
+
 
 // Vue.prototype.$setInterval = setInterval(function () {//长轮询
 //   Vue.prototype.$request({

@@ -82,7 +82,7 @@
       },
       request() {
         this.$request({
-          url: 'http://local.bzwx.com/app/index.php?i=1&c=entry&eid=86&act=appointtwo',
+          url: 'app/index.php?i=1&c=entry&eid=86&act=appointtwo',
           type: 'post',
           data: {
             id: this.id,
