@@ -137,8 +137,8 @@
                 this.avatar=member.avatar;
                 this.name=member.name;
                 this.signature=member.signature;
-                this.goodproject=JSON.parse(member.goodproject);
-                this.goodsinstrument=JSON.parse(member.goodsinstrument);
+                this.goodproject=member.goodproject!=undefined?JSON.parse(member.goodproject):'';
+                this.goodsinstrument=member.goodsinstrument!=undefined?JSON.parse(member.goodsinstrument):'';
                 this.style=member.style!=undefined?member.style.image:[];
                 this.styleV=member.style!=undefined?member.style.video:[];
                 this.mevals=data.mevals;
