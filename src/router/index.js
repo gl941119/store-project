@@ -36,9 +36,7 @@ import Pay from '../pages/pay'
 Vue.use(Router)
 
 
-
-
-  let router = new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -155,11 +153,12 @@ Vue.use(Router)
       name: 'staff',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff'], resolve)
-
-
-
-
-
+    },
+    {//员工端--我的預約
+      path: '/mySubscribe',
+      name: 'mySubscribe',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/staff/mySubscribe'], resolve)
     },
     {//会员中心
       path: '/member',
@@ -168,8 +167,8 @@ Vue.use(Router)
       component: resolve => require(['../pages/member'], resolve)
     },
     {//会员中心--我的预约
-      path: '/member/subscribe',
-      name: 'subscribe',
+      path: '/member/mySubscribe',
+      name: 'memberSubscribe',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/subscribe'], resolve)
     },
@@ -333,12 +332,7 @@ Vue.use(Router)
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/index/serverEvaluate'], resolve)
     },
-    {//美师中心--我的预约
-      path: '/staff/mySubscribe',
-      name: 'mySubscribe',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/staff/mySubscribe'], resolve)
-    }
+
   ]
 })
 

@@ -27,7 +27,7 @@
       <!--待付款-->
       <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goAppointPay(item.orderid)">查看详情</van-button>
       <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'" v-on:click="pay(item.orderid)">付款</van-button>
+      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&item.is_use=='1'" v-on:click="pay(item.orderid)">付款</van-button>
 
     </div>
   </div>
@@ -42,7 +42,6 @@
         switch (this.item.type) {
           case '0':
             return '已取消'
-
           case '1':
             return '待付款'
 
@@ -61,7 +60,27 @@
     },
     methods:{
       pay(orderid){
-        this.$router.push({name:'confirm',params:{orderid:orderid}})
+
+        if(window.sessionStorage.getItem('is_member')== '1'){
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=86&act=paymoney',
+            type: 'post',
+            data: {
+              orderid:this.item.orderid,
+            }
+          }).then((res) => {
+            if(res.code===100){
+              this.$toast.success('支付成功')
+              this.$emit('refresh')
+            }
+
+          })
+
+
+        }else{
+          this.$router.push({name:'confirm',params:{orderid:orderid}})
+        }
+
       },
       goBaidu(){
         this.$baidu()

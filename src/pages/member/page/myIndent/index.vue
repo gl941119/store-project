@@ -77,28 +77,27 @@
         })
       },
       tabChange(index) {
-        this.active = index
-        console.log(index)
+        this.active = index;
         switch (index) {
           case 0:
-            this.ltype = 1
-            this.status = 0
+            this.ltype = 1;
+            this.status = 0;
             break;
           case 1:
-            this.ltype = 2
-            this.status = 0
+            this.ltype = 2;
+            this.status = 0;
             break;
           case 2:
-            this.ltype = 3
-            this.status = 1
+            this.ltype = 3;
+            this.status = 1;
             break;
           case 3:
-            this.ltype = 4
-            this.status = 2
+            this.ltype = 4;
+            this.status = 2;
             break;
           case 4:
-            this.ltype = 5
-            this.status = 3
+            this.ltype = 5;
+            this.status = 3;
             break;
         }
         this.request()

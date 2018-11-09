@@ -3,9 +3,9 @@
     <router-link :to="{name:'myIndent',params:{type:0}}">
       <cell :Data="nameData" class="cell"></cell>
     </router-link>
-    <div class="fill"></div>
+
     <ul>
-      <router-link tag="li" :to="{name:'mySubscribe'}">
+      <router-link tag="li" :to="{name:'memberSubscribe'}">
         <img src="../../../assets/image/预约.png" alt="">
         <p>预约</p>
       </router-link>

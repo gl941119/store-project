@@ -237,7 +237,8 @@
       color: rgba(51, 51, 51, 1);
     }
     &-bottom {
-      overflow: hidden;
+      height: 30px;
+  overflow: hidden;
       &-icon {
         float: left;
         font-size: 16px;
@@ -252,6 +253,7 @@
         line-height: 27px;
       }
       .cancelBtn {
+        margin-top: 1px;
         float: right;
         margin-right: 8px;
         width: 79px;
@@ -265,6 +267,7 @@
 
       }
       .confirmBtn {
+        margin-top: 1px;
         float: right;
         width: 79px;
         height: 27px;

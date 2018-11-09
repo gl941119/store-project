@@ -39,7 +39,7 @@
         list:{
           name:'我的预约',
           message:'查看更多',
-          url:'/staff/mySubscribe'
+          url:'/mySubscribe'
         }
       }
     },

@@ -29,7 +29,35 @@
         </div>
 
       </van-tab>
-      <van-tab title="服务"></van-tab>
+      <van-tab title="服务">
+
+        <!--卡片-->
+        <div class="main" v-for="item,num in discusslist" :key="num">
+          <div class="main-top">
+            <img :src="item.avatar" alt="">
+            <span class="main-top-name">{{item.name}}</span>
+          </div>
+          <div class="main-middle">
+            <p class="main-middle-title">{{item.goodslist[0].title}}：{{item.goodslist[0].total}}</p>
+            <p class="main-middle-text">{{item.content}}</p>
+            <div class="main-middle-img">
+              <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
+            </div>
+          </div>
+          <div class="main-bottom" v-if="!!item.goodslist.length">
+            <img :src="item.goodslist[0].thumb" alt="">
+            <dl>
+              <dt>{{item.goodslist[0].title}}</dt>
+              <dd>
+                <span class="price">¥{{item.goodslist[0].price}}</span>
+                <span class="type">{{Math.ceil(parseInt(item.score)/2)}}星好评</span>
+              </dd>
+            </dl>
+          </div>
+        </div>
+
+
+      </van-tab>
     </van-tabs>
 
   </div>

@@ -50,7 +50,7 @@
       },
       request() {
         this.$request({//訂單信息
-          url: 'app/index.php?i=1&c=entry&eid=86&act=orderinfo',
+          url: 'app/index.php?i=1&c=entry&eid=86&act=doorderinfo',
           type: 'POST',
           data: {
             orderid: this.$route.params.orderid
