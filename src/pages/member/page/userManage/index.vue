@@ -45,23 +45,23 @@
         avatar: undefined,
         nameData: {
           name: '昵称',
-          message: undefined
+          message: ' '
         },
         sexData: {
           name: '性别',
-          message: undefined
+          message: ' '
         },
         birthdayData: {
           name: '出生日期',
-          message: undefined
+          message: ' '
         },
         addressData: {
           name: '收货地址',
-          message: undefined
+          message: ' '
         },
         signatureData: {
           name: '个性签名',
-          message: undefined
+          message: ' '
         }
       }
     },
@@ -80,12 +80,25 @@
           this.Data = res.data.user;  //用户数据
           this.avatar = this.Data.avatar; //头像
           this.nameData.message = this.Data.nick; //名称
-          this.sexData.message = this.Data.sex === "female" ? '女' : '男'; //性别
-          let time = this.utils.secondFormart(this.Data.birthday);
-          this.birthdayData.message = this.utils.dateFormart(time); //出生日期
-          this.birthdayDate = time.getTime(); //出生日期
-          this.addressData.message = this.Data.address; //收货地址
-          this.signatureData.message = this.Data.signature //名称
+          if(this.Data.sex){
+            this.sexData.message = this.Data.sex === "female" ? '女' : '男'; //性别
+          }
+
+          if(this.Data.birthday){
+            let time = this.utils.secondFormart(this.Data.birthday);
+            this.birthdayData.message = this.utils.dateFormart(time); //出生日期
+            this.birthdayDate = time.getTime(); //出生日期
+          }
+
+
+          if(this.Data.address){
+            this.addressData.message = this.Data.address; //收货地址
+          }
+          if(this.Data.signature){
+            this.signatureData.message = this.Data.signature //个性
+          }
+
+
         })
       }
     }

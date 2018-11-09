@@ -18,9 +18,11 @@
     </div>
     <div class="card-bottom">
       <van-icon name="pending-evaluate" class="card-bottom-icon"/>
-      <span class="card-bottom-connection">联系卖家</span>
+      <span class="card-bottom-connection" v-on:click="gobaidu">联系卖家</span>
       <van-button round plain type="default" class="confirmBtn"
-                  v-if="good.status== '0'">
+                  v-if="good.status== '0'"
+                  v-on:click="goindentConfirme(good.goods[0].ordersn)"
+      >
         付款
       </van-button>
       <van-button round plain type="default" class="confirmBtn"
@@ -82,6 +84,13 @@
       }
     },
     methods: {
+      goindentConfirme(ordersn){
+        window.sessionStorage.setItem('ordersn',ordersn)
+        this.$router.push({name:'indentConfirme'})
+      },
+      gobaidu(){
+        this.$baidu()
+      },
       confirmHandle(id) {//确认收货
         this.$dialog.confirm({
           title: '是否确认收货',
@@ -111,14 +120,14 @@
           }
         }).then((res) => {
           if (res.code === 100) {
-            if (status === -1) {
+            if (staus === -1) {
               this.$toast.success('取消成功')
               let thia = this
               setTimeout(function () {
                 thia.$emit('refresh')
               }, 1000)
             }
-            if (status === 2) {
+            if (staus === 3) {
               this.$toast.success('收货成功')
               let thia = this
               setTimeout(function () {
@@ -159,7 +168,7 @@
 
 <style lang="scss" scoped>
   .card {
-    margin: 0 auto;
+    margin: 10px auto 0;
     padding: 10px 10px;
     width: 345px;
     /*height: 163px;*/

@@ -155,11 +155,6 @@ Vue.use(Router)
       name: 'staff',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff'], resolve)
-
-
-
-
-
     },
     {//会员中心
       path: '/member',

@@ -16,7 +16,7 @@
         @change="pickerChange"
         v-if="type === '2'"
       />
-      <textarea class="signature" v-if="type === '4'" v-model="message"/> <!--个性签名-->
+      <textarea class="signature" v-if="type == '4'" v-model="message"/> <!--个性签名-->
     </div>
   </div>
 </template>

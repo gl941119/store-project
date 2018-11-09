@@ -16,7 +16,7 @@
     <div class="fill"></div>
     <div class="card-bottom">
       <div class="card-bottom-left">
-        <router-link :to="{path:'member/beautyIntegral'}">
+        <router-link to="">
           <p class="card-bottom-left-name">美丽积分</p>
           <p class="card-bottom-left-price">{{Data.score}}</p>
         </router-link>

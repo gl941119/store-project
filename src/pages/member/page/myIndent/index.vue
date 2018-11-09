@@ -6,35 +6,35 @@
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="request"
+                  @refresh="tabChange"
         ></com-card>
       </van-tab>
       <van-tab title="待付款">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="request"
+                  @refresh="tabChange"
         ></com-card>
       </van-tab>
       <van-tab title="待发货">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="request"
+                  @refresh="tabChange"
         ></com-card>
       </van-tab>
       <van-tab title="待收货">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="request"
+                  @refresh="tabChange"
         ></com-card>
       </van-tab>
       <van-tab title="待评价">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="request"
+                  @refresh="tabChange"
         ></com-card>
       </van-tab>
     </van-tabs>

@@ -12,8 +12,8 @@
           >
         </div>
         <div class="list-card-bottom">
-          <div class="list-card-bottom-default" v-if="item.isdefault==='1'">默认</div>
-          <span class="list-card-bottom-address">{{item.address}}</span>
+
+          <div class="list-card-bottom-address"><div class="default" v-if="item.isdefault==='1'">默认</div>{{item.address}}</div>
         </div>
         <div class="fill"></div>
       </li>
@@ -82,17 +82,15 @@
         overflow: hidden;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         &-realname {
-
           font-size: 15px;
           font-weight: 500;
           color: rgba(51, 51, 51, 1);
           font-family:PingFangSC-Medium;
-
-
         }
         &-mobile {
-         flex: 1;
+          flex: 1;
           margin-left: 15px;
           font-size: 15px;
           font-weight: 500;
@@ -112,23 +110,25 @@
         line-height: 5px;
         display: block;
         text-overflow: ellipsis;
-        &-default {
-          display: inline-block;
-          margin-right: 5px;
-          margin-top: 3px;
+        .default {
+          float: left;
           text-align: center;
           width: 30px;
           height: 15px;
-          line-height: 13px;
           border-radius: 2px;
           border: 1px solid rgba(231, 59, 61, 1);
           font-size: 10px;
           color: rgba(233, 88, 79, 1);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        margin-top: 2px;
         }
         &-address {
+
           font-size: 14px;
           color: rgba(102, 102, 102, 1);
-          line-height: 20px;
+          line-height: 18px;
         }
       }
 

@@ -6,7 +6,7 @@
     <!--购物车卡片-->
     <div class="card" v-for="item in goodslist" :key="item.id" >
       <van-checkbox v-model="item.checked" class="checkbox" v-on:click.native="refreshPrice"></van-checkbox>
-      <div class="content" v-on:click="goDetail(item.goodsid)">
+      <div class="content" v-on:click.stop="goDetail(item.goodsid)">
         <img :src="item.thumb" alt="">
         <div class="content-right">
           <div class="content-right-top">
@@ -25,7 +25,7 @@
               :max="item.stock"
               :step="1"
               @change="cheng"
-              v-on:click.native="saveId(item.goodsid,item.optionid,item.id)"
+              v-on:click.native.stop="saveId(item.goodsid,item.optionid,item.id)"
               class="stepper"
             />
           </div>
