@@ -76,12 +76,13 @@
 
         },
         saoMiao(){
+          let thia = this;
           axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
             .then((res)=>{
             if(res.data.status){
               var d=res.data.data.config;
               wx.config({
-                debug: true, // 开启调试模式,
+                debug: false, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
                 timestamp: d.timestamp, // 必填，生成签名的时间戳
                 nonceStr: d.nonceStr, // 必填，生成签名的随机串
@@ -89,12 +90,11 @@
                 jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
               wx.ready(function () {
-
                 wx.scanQRCode({
                   needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
                   scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                   success: function (res) {
-                    this.yqCode=res.resultStr;
+                    thia.yqCode=res.resultStr;
                     var result = res.resultStr+'扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
                   }
                 });
@@ -232,6 +232,7 @@ background-size: $width $height;
   font-size:10px;
 font-family:PingFangSC-Regular;
 font-weight:400;
+    text-align: center;
 color:rgba(170,170,170,1);
     padding: 10px 0;
 }
