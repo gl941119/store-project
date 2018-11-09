@@ -21,7 +21,7 @@
       </router-link>
     </ul>
     <div style="text-align: center;margin-top: 29px">
-      <van-button type="danger" id="userManage-outBtn">退出账户</van-button>
+      <!--<van-button type="danger" id="userManage-outBtn">退出账户</van-button>-->
     </div>
   </div>
 </template>

@@ -1,15 +1,15 @@
 <template>
-    <div class="staff">
-      <navbar :name="'美师端'"></navbar>
-      <!--员工信息-->
-      <com-info :conInfo="infoTxt" @init="init"></com-info>
-      <!--我的预约-->
-      <com-mysubscribe v-if="status" :mySub="infoTxt" @init="init" style="margin-top: -39px"></com-mysubscribe>
-      <!--相册-->
-      <com-album @init="init" :album="infoTxt"></com-album>
-      <!--视频-->
-      <com-video @init="init" :video="infoTxt"></com-video>
-    </div>
+  <div class="staff">
+    <navbar :name="'美师端'"></navbar>
+    <!--员工信息-->
+    <com-info :conInfo="infoTxt" @init="init"></com-info>
+    <!--我的预约-->
+    <com-mysubscribe :status="status" :mySub="infoTxt" @init="init" style="margin-top: -39px"></com-mysubscribe>
+    <!--相册-->
+    <com-album @init="init" :album="infoTxt"></com-album>
+    <!--视频-->
+    <com-video @init="init" :video="infoTxt"></com-video>
+  </div>
 </template>
 
 <script>

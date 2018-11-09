@@ -181,9 +181,9 @@ export default new Router({
       component: resolve => require(['../pages/member/page/invite'], resolve)
     },
     {//会员中心--我的评价
-      path:'/member/myEvaluate',
-      name:'myEvaluate',
-      component:resolve => require(['../pages/member/page/myEvaluate'],resolve)
+      path: '/member/myEvaluate',
+      name: 'myEvaluate',
+      component: resolve => require(['../pages/member/page/myEvaluate'], resolve)
     },
     {//会员中心--用户管理
       path: '/member/userManage',
@@ -316,6 +316,11 @@ export default new Router({
       name: 'editEmployeeInformation',
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
+    }, {//服务评价
+      path: '/serverEvaluate',
+      name: "serverEvaluate",
+      meta: {keepAlive: false}, // 不需要被缓存
+      component: resolve => require(['../pages/index/serverEvaluate'], resolve)
     }
 
 

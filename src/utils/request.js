@@ -74,8 +74,6 @@ function requestHandle(params) {
 
   const {url, data, type, isToast} = params;
 
-
-
   return new Promise((resolve, reject) => {
     ajaxRequest(url, data, type, isToast).then(
       res => {
@@ -92,9 +90,13 @@ function requestHandle(params) {
         try {//分辨美师  >0 美师
           store.commit('setStore', res.data.user.store);
           Cache.setSession('store', res.data.user.store)
+          if(res.data.user.store != '0'){//是美师 结束长轮询
+            window.clearInterval(Vue.prototype.$setInterval);
+          }
         } catch (e) {
           // alert('无法分辨美师')
         }
+        // console.log(res.data)
         if (res.data.code === 108) {
           Toast.clear();
           Toast.fail(res.data.message);
@@ -104,7 +106,7 @@ function requestHandle(params) {
           Toast.clear();
           this.$router.push({name: 'bindAccount'});
         } else {
-          alert(res.data.message)
+          // alert(res.data.message)
           Toast.clear();
         }
         resolve(res.data);

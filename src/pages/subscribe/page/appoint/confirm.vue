@@ -57,7 +57,7 @@
     },
     methods: {
       payHandle(){//非会员线上支付
-        window.location.href=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+this.orderid
+        window.location.href=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid162+'&act=payorder&orderid='+this.orderid
       },
       cancelHandle(){//非会员取消
         this.$dialog.confirm({

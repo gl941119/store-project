@@ -16,18 +16,13 @@
     export default {
         name: "com-info",
       props:['conInfo'],
-
-
       data(){
           return{
 
           }
       },
-      mounted(){
-
-      },
+      mounted(){},
       methods:{
-
         employeeInformation(){
           this.$router.push({name:'employeeInformation'});
         }
