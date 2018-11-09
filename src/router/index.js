@@ -109,14 +109,14 @@ export default new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
     },
     {//热门商品--预约确认
-      path: '/appoint/:orderid',//订单号
+      path: '/appoint/:sid/:id/:time',//sid 服务id id 美师id  time选择的时间
       name: 'confirm',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
     },
 
     {//热门商品--预约完成
-      path: '/appointPay/:orderid',//orderid 预约订单
+
       name: 'appointPay',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/pay'], resolve)
@@ -150,6 +150,11 @@ export default new Router({
       name: 'staff',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff'], resolve)
+
+
+
+
+      
     },
     {//会员中心
       path: '/member',

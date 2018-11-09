@@ -99,7 +99,7 @@ router.beforeEach((to, from, next) => {
 
 //插件
 import 'lib-flexible/flexible'
-import Cache from "./utils/cache";
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
