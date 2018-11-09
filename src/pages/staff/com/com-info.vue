@@ -39,7 +39,7 @@
     position: relative;
     .out{
       position: absolute;
-      z-index: 1;
+      z-index: 10;
       float: left;
       width:375px;
       height:200px;

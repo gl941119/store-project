@@ -103,7 +103,8 @@
     padding: 0 15px;
     margin: 0 auto;
     width: 345px;
-
+position: relative;
+    z-index: 20;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 1px 8px 0px rgba(200, 200, 200, 0.5);
     border-radius: 4px;

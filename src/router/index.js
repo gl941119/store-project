@@ -163,10 +163,10 @@ Vue.use(Router)
       component: resolve => require(['../pages/member'], resolve)
     },
     {//会员中心--我的预约
-      path: '/member/mySubscribe',
+      path: '/staff/mySubscribe',
       name: 'mySubscribe',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/member/page/subscribe'], resolve)
+      component: resolve => require(['../pages/staff/mySubscribe'], resolve)
     },
     {//会员中心--会员卡
       path: '/member/memberCard',
