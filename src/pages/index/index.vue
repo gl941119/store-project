@@ -5,7 +5,7 @@
     <div class="search">
       <search :value.sync="value" class="search-left" v-on:click.native="goSearch"></search>
       <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
-      <img src="../../assets/image/扫一扫.png" alt="" class="search-right">
+      <img src="../../assets/image/scan.png" alt="" class="search-right" @click="scanBtn()">
     </div>
     <div class="banner">
       <van-swipe :autoplay="3000">
@@ -46,7 +46,8 @@
         value: undefined,
         advOne: undefined,
         advTwo: undefined,
-        advThree: undefined
+        advThree: undefined,
+        value:''
       }
     },
     mounted() {
@@ -54,7 +55,43 @@
 
     },
     methods: {
+      scanBtn(){
+        let thia = this;
+        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan')
+          .then((res)=>{
+            if(res.data.status){
+              var d=res.data.data.config;
+              wx.config({
+                debug: false, // 开启调试模式,
+                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+                timestamp: d.timestamp, // 必填，生成签名的时间戳
+                nonceStr: d.nonceStr, // 必填，生成签名的随机串
+                signature: d.signature,// 必填，签名，见附录1
+                jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              });
+              wx.ready(function () {
+                wx.scanQRCode({
+                  needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                  scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                  success: function (res) {
+                    thia.value=res.resultStr;
+                    var result = res.resultStr+'扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
+                  }
+                });
+                wx.error(function(res){
+                  var s=res+'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
+                  alert(s)
+                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 
+                });
+
+              });
+            }
+          }).catch((res)=>{
+          var ss=res+'catch请求失败';
+          alert(ss)
+        });
+      },
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=84',

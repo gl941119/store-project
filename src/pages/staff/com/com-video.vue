@@ -27,7 +27,7 @@
         <div class="upVedioTxt">视频封面</div>
         <div class="upVedioTBox">
           选择文件
-          <input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/png,image/gif,image/jpeg" @change="upData('fileupload',$event)"/>
+          <input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/*,image/png,image/gif,image/jpeg" capture="camera"   @change="upData('fileupload',$event)"/>
         </div>
         <div class="gouzi" v-if="imgGou">√</div>
       </div>
@@ -35,7 +35,7 @@
         <div class="upVedioTxt">上传视频</div>
         <div class="upVedioTBox">
           选择文件
-          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="upData('fileuploadvideo',$event)" />
+          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/*,video/avi,video/mp4,video/flv,video/3gp,video/swf"  capture="camera"   @change="upData('fileuploadvideo',$event)" />
         </div>
         <div class="gouzi" v-if="vdGou">√</div>
 
@@ -89,11 +89,10 @@
           this.imgGou=false;
       },
       upData(str,e){
-        alert(1)
+
         let sefl=this;
         let file=e.target.files[0];
         let param = new FormData();  // 创建form对象
-        alert(file.name)
         param.append('file', file, file.name);
         let config = {
           headers: {
@@ -105,7 +104,6 @@
         var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
         axios.post(url + uk, param, config)
           .then(res => {
-            alert(res.data.message)
             if (res.data.code === 100) {
               var s=res.data.data;
               if(s.imgs!=undefined){
@@ -314,7 +312,7 @@
   }
 
   .cell {
-
+    padding-top: 10px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -366,7 +364,7 @@
   .upVedioIn{
     width: 100px;
     font-size: 20px;
-    /*opacity: 0;*/
+    opacity: 0;
     position: absolute;
     top:0px;
     left: 0px;

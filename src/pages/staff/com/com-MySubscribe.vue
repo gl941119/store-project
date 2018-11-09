@@ -11,11 +11,11 @@
       </div>
       <div>
         <div>
-          <van-button type="default" class="header-Btn headerBtn" v-if="status" @click="startBtn">开始</van-button>
+          <van-button type="default" class="header-Btn headerBtn" v-if="statusBtn" @click="startBtn">开始</van-button>
           <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
         </div>
         <div>
-          <van-button type="default" class="header-Btn" v-if="status" @click="quXiaoBtn">取消</van-button>
+          <van-button type="default" class="header-Btn" v-if="statusBtn" @click="quXiaoBtn">取消</van-button>
         </div>
       </div>
     </div>
@@ -35,13 +35,16 @@
     props:['mySub','status'],
     data(){
       return{
-        status:true,
+        statusBtn:true,
         list:{
           name:'我的预约',
           message:'查看更多',
           url:'/staff/mySubscribe'
         }
       }
+    },
+    mounted(){
+      this.statusBtn=this.mySub.startTime==null?true:false;
     },
     methods:{
       startBtn(){
@@ -105,6 +108,7 @@
   }
   .cell{
     height: 53px
+
   }
   .header{
     margin-top: 11px;
@@ -142,7 +146,7 @@
     background:rgba(216,216,216,1);
   }
   .connection{
-    margin-top: 13px;
+    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     >span{
