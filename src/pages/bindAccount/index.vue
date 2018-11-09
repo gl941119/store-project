@@ -68,32 +68,45 @@
         }
       },
       mounted() {
-
+        this.initScao();
       },
       methods:{
+        initScao(){
+
+        },
         saoMiao(){
-          var id='wxc5e6eb142a2b5535';
-          var c='76345375b322f9dac25480f798f91dc1';
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=164&act=weixinscan',
+            type:'post'
+          }).then((res)=>{
+            if(res.status){
+              var d=res.data.config;
+              wx.config({
+                debug: true, // 开启调试模式,
+                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+                timestamp: d.timestamp, // 必填，生成签名的时间戳
+                nonceStr: d.nonceStr, // 必填，生成签名的随机串
+                signature: d.signature,// 必填，签名，见附录1
+                jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              });
+              wx.ready(()=>{
+                wx.scanQRCode({
+                  needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                  scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                  success: function (res) {
+                    alert(res)
+                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                  }
+                });
+                wx.error(function(res){
+                  alert(res)
+                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                });
 
-          wx.config({
-            debug: true, // 开启调试模式,
-            appId: 'wxc5e6eb142a2b5535', // 必填，企业号的唯一标识，此处填写企业号corpid
-            timestamp: parseInt(new Date().getTime() / 1000), // 必填，生成签名的时间戳
-            nonceStr: Math.random().toString(36).substr(2,16), // 必填，生成签名的随机串
-            signature: '76345375b322f9dac25480f798f91dc1',// 必填，签名，见附录1
-            jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              });
+            }
           });
 
-          wx.ready(()=>{
-            wx.scanQRCode({
-              needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-              scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-              success: function (res) {
-                alert(res)
-                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-              }
-            });
-          });
 
 
         },
