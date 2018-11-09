@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <cell :Data="list"  class="cell"></cell>
-    <div class="infoMs">
+    <div class="infoMs" v-if="status">
       <div>
         <div class="header">
           <span>{{ mySub.sName }}</span>
@@ -20,8 +20,8 @@
       </div>
     </div>
 
-    <div class="fill"></div>
-    <div class="connection">
+
+    <div class="connection" v-if="status">
       <span>客户：{{ mySub.xm }}</span>
       <span>联系电话：{{ mySub.phone }}</span>
     </div>
@@ -32,14 +32,14 @@
 <script>
   export default {
     name: "com-MySubscribe",
-    props:['mySub'],
+    props:['mySub','status'],
     data(){
       return{
         status:true,
         list:{
           name:'我的预约',
           message:'查看更多',
-          url:undefined
+          url:'/staff/mySubscribe'
         }
       }
     },
@@ -98,7 +98,7 @@
     padding: 0 15px;
     margin: 0 auto;
     width: 345px;
-    height: 196px;
+
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 1px 8px 0px rgba(200, 200, 200, 0.5);
     border-radius: 4px;

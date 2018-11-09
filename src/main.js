@@ -23,7 +23,6 @@ import ServerCard from './components/serverCard'
 import StaffCard from './components/staffCard'//員工簡介卡片
 import MyCell from './components/myCell'
 import Cell from './components/cell'
-
 import SelectBar from './components/selectBar'
 import Search from './components/search'
 import PriceList from './components/priceList' //金额列表
@@ -32,11 +31,9 @@ Vue.component('my-footer', MyFooter);
 Vue.component('navbar', Navbar);
 Vue.component('product-card', ProductCard);
 Vue.component('server-card', ServerCard);
-
 Vue.component('staff-card', StaffCard);
 Vue.component('my-cell', MyCell);
 Vue.component('cell', Cell);
-
 Vue.component('select-bar', SelectBar);
 Vue.component('search', Search);
 Vue.component('price-list', PriceList);
@@ -59,21 +56,18 @@ if (process.env.NODE_ENV === 'development') {
 Vue.prototype.$request = request;
 
 
-
-// Vue.prototype.$setInterval = setInterval(function () {//长轮询
-//   Vue.prototype.$request({
-//     url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
-//     type: 'post',
-//     isToast: false
-//   }).then(res => {
-//     if (res.data.is_discuss== '0'){
-//      this.$router.push({name:""})
-//     }
-//   });
-// }, 2000)
-
-// window.clearInterval(this.$setInterval);
-
+Vue.prototype.$setInterval = setInterval(function () {//长轮询
+  Vue.prototype.$request({
+    url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
+    type: 'post',
+    isToast: false
+  }).then(res => {
+    if (res.data.is_discuss == '0') {
+      window.clearInterval(Vue.prototype.$setInterval);
+      router.push({name: "serverEvaluate", params: {orderid: res.data.orderid}})
+    }
+  });
+}, 2000)
 
 
 //导航守卫

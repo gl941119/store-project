@@ -150,6 +150,12 @@ export default new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff'], resolve)
     },
+    {//员工端 -- 我的预约
+      path: '/staff/mySubscribe',
+      name: 'staffMySubscribe',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/staff/mySubscribe'], resolve)
+    },
     {//会员中心
       path: '/member',
       name: 'member',
@@ -293,6 +299,7 @@ export default new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/subscribe/page/appoint/DetailsBeautyDivision'], resolve)
     },
+
     {//美丽代言说明
       path: '/beautyFund/beautifulEndorsement',
       name: 'beautifulEndorsement',
@@ -317,12 +324,10 @@ export default new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
     }, {//服务评价
-      path: '/serverEvaluate',
+      path: '/serverEvaluate/:orderid',//订单号
       name: "serverEvaluate",
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/index/serverEvaluate'], resolve)
     }
-
-
   ]
 })
