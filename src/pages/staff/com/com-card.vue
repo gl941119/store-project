@@ -1,272 +1,248 @@
 <template>
-  <div class="card">
-    <span class="card-status">{{status}}</span>
-    <div class="card-top"
-         v-for="item in good.goods"
-         :key="item.goodsid"
-         v-on:click="goDetail(item.goodsid)"
-    >
-      <img :src="item.thumb" alt="" class="card-top-img">
-      <div class="card-top-content">
-        <span class="card-top-content-title">{{item.title}}</span>
-        <p class="card-top-content-ml">{{item.optionname}}</p>
-        <p class="my-price price">¥{{item.price}}</p>
-      </div>
+  <div class="wrap">
+    <div class="main">
+      <img :src="item.simg" alt="" class="main-img">
+      <dl>
+        <dt>
+          <span>{{item.service_name}}</span>
+          <span>{{type}}</span>
+        </dt>
+        <dd>
+          <span>{{item.displayorder}}号美师</span>
+          <span>预计{{item.plan_date}}到店</span>
+        </dd>
+        <p>¥{{item.price}}</p>
+      </dl>
     </div>
-    <div class="card-middle">
-      共一件商品 合计：{{good.orderprice}}元
+    <div class="address">
+      <img src="../../../assets/image/exhibition2.png" alt="">
+      <span>{{item.address}}店</span>
+      <p>共一件商品 合计：{{item.price}}元</p>
     </div>
-    <div class="card-bottom">
-      <van-icon name="pending-evaluate" class="card-bottom-icon"/>
-      <span class="card-bottom-connection">联系卖家</span>
-      <van-button round plain type="default" class="confirmBtn"
-                  v-if="good.status== '0'">
-        付款
-      </van-button>
-      <van-button round plain type="default" class="confirmBtn"
-                  v-if="good.status== '2'||good.status== '1'"
-                  v-on:click="confirmHandle(good.goods[0].ordersn)">
-        确认收货
-      </van-button>
+    <div class="bottom">
 
-      <van-button round plain type="default" class="cancelBtn"
-                  v-if="good.status== '0'||good.status== '1'"
-                  v-on:click="cancelHandle(good.goods[0].ordersn)">
-        取消订单
+      <span>服务星级：</span>
+      <van-rate v-model="score"
+                disabled
+                disabled-color="#ffd21e"
+                class="icon"/>
+      <!--取消-->
+
+      <!--待付款-->
+
+      <van-button type="default" class="bottom-Btn"
+                  v-on:click="goAppointPay(item.orderid)">查看详情
       </van-button>
 
 
-      <van-button round plain type="default" class="cancelBtn" v-if="good.status== '2'">
-        查看物流
-      </van-button>
-
-      <van-button round plain type="default" class="confirmBtn"
-                  v-if="good.status== '3'"
-                  v-on:click="goAppraise(good.goods[0].ordersn)"
-      >
-        评价
-      </van-button>
     </div>
-
   </div>
 </template>
 
 <script>
-  import cache from '../../../utils/cache'
-
   export default {
-    name: "ssscom-card",
-    props: ['good'],
-    data() {
-      return {}
-    },
+    name: "com-serverCard",
+    props: ['item'],
     computed: {
-      status: function () {
-
-        switch (this.good.status) {
+      type: function () {
+        switch (this.item.type) {
           case '0':
-            return '待付款';
-            break
+            return '已取消'
+
           case '1':
-            return '待发货';
-            break
+            return '待付款'
+
           case '2':
-            return '已发货';
+            return '已预约'
+
           case '3':
-            return '待评价';
-          case '4':
-            return '交易完成';
-          default:
-            return undefined
+            return '已完成'
         }
+      },
+      score:function () {
+        return Math.ceil(parseInt(this.item.score)/2)
+      }
+    },
+    data() {
+      return {
+        is_member: window.sessionStorage.getItem('is_member'), //0 非会员  1 会员
+        value:3,
+
       }
     },
     methods: {
-      confirmHandle(id) {//确认收货
-        this.$dialog.confirm({
-          title: '是否确认收货',
-        }).then(() => {
-          this.reqChange(id, 3)
-        }).catch(() => {
-          // on cancel
-        });
-
+      goBaidu(){
+        this.$baidu()
       },
-      cancelHandle(id) {//取消订单
+      goAppointPay(orderid) {
+        this.$router.push({name: 'appointPay', params: {orderid: orderid}})
+      },
+      cancleIndent(orderid) {//取消订单
         this.$dialog.confirm({
           title: '是否取消订单',
+          message: ''
         }).then(() => {
-          this.reqChange(id, -1)
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
+            type: 'post',
+            data: {
+              orderid: orderid,
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('取消成功')
+              this.$emit('refresh')
+            }
+
+          })
         }).catch(() => {
           // on cancel
         });
       },
-      reqChange(id, staus) {//修改订单状态
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
-          type: 'get',
-          data: {
-            ordersn: id,
-            status: staus
-          }
-        }).then((res) => {
-          if (res.code === 100) {
-            if (status === -1) {
-              this.$toast.success('取消成功')
-              let thia = this
-              setTimeout(function () {
-                thia.$emit('refresh')
-              }, 1000)
-            }
-            if (status === 2) {
-              this.$toast.success('收货成功')
-              let thia = this
-              setTimeout(function () {
-                thia.$emit('refresh')
-              }, 1000)
-            }
-
-
-          }
-        })
-
-      },
-      goDetail(id) {//跳转
-        this.$router.push({name: 'detail', params: {id: id, type: '1'}})
-      },
-      goAppraise(id) {//跳转评价
-        let arr = []
-
-
-        this.good.goods.forEach((item) => {
-          let obj = {
-            thumb: item.thumb,
-            goodsid: item.goodsid,
-            "content": undefined,
-            "score": 4,
-            "tip": undefined,//匿名
-            videos:[],
-            imgs:[]
-          }
-          arr.push(obj)
-        })
-        cache.setSession('appraise', arr)
-        this.$router.push({name: 'appraise', params: {id: id, data: arr}})//id 订单号id
+      goAppointPay() {
+        this.$router.push({name: 'appointPay', params: {orderid: this.item.orderid}})
       }
     }
+
   }
 </script>
 
 <style lang="scss" scoped>
-  .card {
-    margin: 0 auto;
+  .wrap {
+    margin: 18px auto 0;
     padding: 10px 10px;
     width: 345px;
-    /*height: 163px;*/
+    height: 163px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 1px 11px 0px rgba(211, 211, 211, 0.5);
     border-radius: 4px;
-    position: relative;
-    &-status {
-      position: absolute;
-      right: 10px;
-      top: 15px;
-      font-size: 12px;
-      color: rgba(233, 58, 61, 1);
-    }
-    &-top {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 7px;
-      &-img {
-        width: 75px;
-        height: 75px;
+  }
 
-      }
-      &-content {
-        width: 236px;
+  .main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    &-img {
+      width: 75px;
+      height: 75px;
+
+    }
+    dl {
+      margin-left: 15px;
+      flex: 1;
+      height: 75px;
+      > dt {
+        height: 23px;
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
-        &-title {
-          width: 180px;
+        align-items: center;
+        span:first-child {
           height: 23px;
           font-size: 16px;
+          font-family: PingFangSC-Regular;
           color: rgba(51, 51, 51, 1);
           line-height: 23px;
-          font-family: PingFangSC-Regular;
-          display: block;
-          white-space: normal;
-          text-overflow: ellipsis;
         }
-        &-ml {
-          /*margin-top: 7px;*/
+        span:last-child {
+          width: 36px;
+          height: 17px;
           font-size: 12px;
+          font-family: PingFangSC-Regular;
+          color: rgba(233, 58, 61, 1);
+          line-height: 17px;
+        }
+      }
+      > dd {
+        margin-top: 7px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+
+          height: 17px;
+          font-size: 12px;
+          font-family: PingFangSC-Regular;
+
           color: rgba(153, 153, 153, 1);
           line-height: 17px;
-          width: 100%;
-          display: block;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
         }
-        .price {
-          font-size: 16px;
-          font-weight: 500;
-          color: rgba(233, 58, 61, 1);
-          line-height: 23px;
-        }
-
       }
-    }
-    &-middle {
-      height: 42px;
-      line-height: 42px;
-      text-align: right;
-      font-size: 14px;
-      color: rgba(51, 51, 51, 1);
-    }
-    &-bottom {
-      overflow: hidden;
-      &-icon {
-        float: left;
+      > p {
+        margin-top: 7px;
+        height: 23px;
         font-size: 16px;
-        line-height: 27px;
-        color: #979797;
-      }
-      &-connection {
-        float: left;
-        margin-left: 8px;
-        font-size: 14px;
-        color: rgba(151, 151, 151, 1);
-        line-height: 27px;
-      }
-      .cancelBtn {
-        float: right;
-        margin-right: 8px;
-        width: 79px;
-        height: 27px;
-        line-height: 25px !important;
-        background: rgba(255, 255, 255, 1);
-        border-radius: 13px;
-        border: 1px solid;
-        font-size: 14px;
-        color: rgba(151, 151, 151, 1);
-
-      }
-      .confirmBtn {
-        float: right;
-        width: 79px;
-        height: 27px;
-        line-height: 25px;
-        border-radius: 13px;
-        border: 1px solid;
-        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
         color: rgba(233, 58, 61, 1);
-
+        line-height: 23px;
       }
     }
-
   }
+
+  .address {
+    width: 100%;
+    height: 20px;
+    margin-top: 9px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    > img {
+      width: 12px;
+      height: 15px;
+
+    }
+    > span {
+      flex: 1;
+      margin-left: 4px;
+      height: 17px;
+      font-size: 12px;
+      font-family: PingFangSC-Regular;
+
+      color: rgba(51, 51, 51, 1);
+      line-height: 17px;
+    }
+    > p {
+
+      height: 20px;
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+
+      color: rgba(51, 51, 51, 1);
+      line-height: 20px;
+    }
+  }
+
+  .bottom {
+    height: 27px;
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  .icon{
+flex: 1;
+  }
+    >span {
+
+      width:65px;
+      height:19px;
+      font-size:13px;
+      font-family:PingFangSC-Regular;
+      font-weight:400;
+      color:rgba(51,51,51,1);
+      line-height:19px;
+    }
+    &-Btn {
+      margin-left: 4px;
+      width: 70px;
+      height: 27px;
+      border-radius: 13px;
+      border: 1px solid;
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+      color: rgba(233, 58, 61, 1);
+      line-height: 20px;
+    }
+  }
+
+
 </style>

@@ -19,8 +19,8 @@
     methods: {
       goUrl() {
         if (this.Data.url === 'interflow') {
-          console.log(123456)
-          window.open('http://p.qiao.baidu.com/cps/chat?siteId=12754459&userId=26723163')
+
+          this.$baidu()
         } else {
           this.$router.push({path: this.Data.url, query: {}})
         }
