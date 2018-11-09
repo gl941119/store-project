@@ -11,11 +11,11 @@
       </div>
       <div>
         <div>
-          <van-button type="default" class="header-Btn headerBtn" v-if="statusBtn" @click="startBtn">开始</van-button>
+          <van-button type="default" class="header-Btn headerBtn" v-if="statusBtn && mySub.startTime == null?true:false" @click="startBtn">开始</van-button>
           <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
         </div>
         <div>
-          <van-button type="default" class="header-Btn" v-if="statusBtn" @click="quXiaoBtn">取消</van-button>
+          <van-button type="default" class="header-Btn" v-if="statusBtn && mySub.startTime == null?true:false" @click="quXiaoBtn">取消</van-button>
         </div>
       </div>
     </div>
@@ -44,11 +44,11 @@
       }
     },
     mounted(){
-      this.statusBtn=this.mySub.startTime==null?true:false;
+
     },
     methods:{
       startBtn(){
-        this.status=false;
+        this.statusBtn=false;
 
         //订单开始
         this.$request({
@@ -58,7 +58,7 @@
             orderid:this.mySub.orderId
           }
         }).then((res) => {
-
+          this.$emit('init')
         });
       },
       endBtn(){
