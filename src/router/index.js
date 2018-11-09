@@ -36,7 +36,9 @@ import Pay from '../pages/pay'
 Vue.use(Router)
 
 
-export default new Router({
+
+
+  let router = new Router({
   routes: [
     {
       path: '/',
@@ -47,11 +49,13 @@ export default new Router({
     {//官网展示
       path: '/exhibition',
       name: 'exhibition',
+
       component: resolve => require(['../pages/exhibition'], resolve)
     },
     {//首页
       path: '/index',
       name: 'index',
+
       meta: {showFooter: true, keepAlive: true},
       component: resolve => require(['..//pages/index'], resolve)
 
@@ -59,6 +63,7 @@ export default new Router({
     {//首页--分类页
       path: '/index/list/:id',
       name: 'list',
+
       meta: {keepAlive: false},
       component: resolve => require(['../pages/index/page/list'], resolve),
     },
@@ -109,7 +114,7 @@ export default new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
     },
     {//热门商品--预约确认
-      path: '/appoint/:orderid',//订单号
+      path: '/appoint/:sid/:id/:time',//sid 服务id id 美师id  time选择的时间
       name: 'confirm',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
@@ -150,6 +155,11 @@ export default new Router({
       name: 'staff',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff'], resolve)
+
+
+
+
+
     },
     {//会员中心
       path: '/member',
@@ -325,3 +335,32 @@ export default new Router({
     }
   ]
 })
+
+
+// function setTitle(title) {
+//   document.title = title
+//   var mobile = navigator.userAgent.toLowerCase();
+//   if (/iphone|ipad|ipod/.test(mobile)) {
+//     var iframe = document.createElement('iframe');
+//     iframe.style.display = 'none'
+//     var iframeCallback = function () {
+//       setTimeout(function () {
+//         iframe.removeEventListener('load', iframeCallback);
+//         document.body.removeChild(iframe);
+//       }, 0);
+//     }
+//     iframe.addEventListener('load', iframeCallback);
+//     document.body.appendChild(iframe);
+//   }
+// }
+//
+// router.afterEach((transition) => {
+//   let name = transition.name;
+//   let item = router.options.routes.filter((ele) => { return ele.name === name; });
+//   setTitle(name);
+// });
+
+export default router
+
+
+
