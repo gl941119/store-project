@@ -115,7 +115,7 @@ export default new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
     },
     {//热门商品--预约支付
-      path: '/appointPay/:orderid/:type',//orderid 预约订单  type 无 预约支付确认  1 查看订单
+      path: '/appointPay/:orderid',//orderid 预约订单
       name: 'appointPay',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/pay'], resolve)
@@ -181,9 +181,9 @@ export default new Router({
       component: resolve => require(['../pages/member/page/invite'], resolve)
     },
     {//会员中心--我的评价
-      path:'/member/myEvaluate',
-      name:'myEvaluate',
-      component:resolve => require(['../pages/member/page/myEvaluate'],resolve)
+      path: '/member/myEvaluate',
+      name: 'myEvaluate',
+      component: resolve => require(['../pages/member/page/myEvaluate'], resolve)
     },
     {//会员中心--用户管理
       path: '/member/userManage',
@@ -316,6 +316,11 @@ export default new Router({
       name: 'editEmployeeInformation',
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
+    }, {//服务评价
+      path: '/serverEvaluate',
+      name: "serverEvaluate",
+      meta: {keepAlive: false}, // 不需要被缓存
+      component: resolve => require(['../pages/index/serverEvaluate'], resolve)
     }
 
 

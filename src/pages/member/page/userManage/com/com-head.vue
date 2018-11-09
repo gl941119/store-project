@@ -14,7 +14,7 @@
 <script>
   import axios from 'axios';
   import Cache from '../../../../../utils/cache'
-
+  import  wx from 'weixin-js-sdk'
   export default {
     name: "cell",
     props: ['avatar'],
@@ -30,10 +30,11 @@
         axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
           .then((res) => {
             alert(res)
+            console.log(res.data)
             if (res.data.status) {
               var d = res.data.data.config;
               wx.config({
-                debug: false, // 开启调试模式,
+                debug: true, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
                 timestamp: d.timestamp, // 必填，生成签名的时间戳
                 nonceStr: d.nonceStr, // 必填，生成签名的随机串

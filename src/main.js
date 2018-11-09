@@ -56,6 +56,21 @@ if (process.env.NODE_ENV === 'development') {
 
 Vue.prototype.$request = request;
 
+// Vue.prototype.$setInterval = setInterval(function () {//长轮询
+//   Vue.prototype.$request({
+//     url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
+//     type: 'post',
+//     isToast: false
+//   }).then(res => {
+//     if (res.data.is_discuss== '0'){
+//      this.$router.push({name:""})
+//     }
+//   });
+// }, 2000)
+
+// window.clearInterval(this.$setInterval);
+
+
 
 //导航守卫
 router.beforeEach((to, from, next) => {
@@ -82,6 +97,7 @@ router.beforeEach((to, from, next) => {
 
 //插件
 import 'lib-flexible/flexible'
+import Cache from "./utils/cache";
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

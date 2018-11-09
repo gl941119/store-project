@@ -1,6 +1,7 @@
 <template>
   <div class="index">
     <navbar :name="'S+艾司商城'"></navbar>
+
     <div class="search">
       <search :value.sync="value" class="search-left" v-on:click.native="goSearch"></search>
       <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
@@ -50,9 +51,10 @@
     },
     mounted() {
       this.request()
-      alert(window.location.href)
+
     },
     methods: {
+
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=84',
