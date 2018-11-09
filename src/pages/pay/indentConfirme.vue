@@ -5,7 +5,6 @@
     <com-address :address="address" v-on:click.native="goAddress"></com-address>
     <div class="main">
       <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"></com-prodectcard>
-
       <div class="fill"></div>
       <van-cell title="美丽积分券:" is-link class="cell">
         <span class="cell-default">{{score_nex=='0'? '不可用':'可用'}}</span>
@@ -52,7 +51,7 @@
                 style="background-color: #71B3FF;color: #FFFFFF;" v-on:click="submit">提交订单
     </van-button>
     <div v-else>
-      <van-button class="submitBtn" type="primary">支付</van-button>
+      <van-button class="submitBtn" type="primary" v-on:click="payHandle">支付</van-button>
       <van-button class="submitBtn" type="danger">取消</van-button>
     </div>
   </div>
@@ -159,7 +158,10 @@
       goAddress() {//去收货地址
         this.$router.push({name: 'address', params: {type: '0'}})
       },
+      payHandle(){
+        window.location.href = this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid161+'&act=payorder&ordersn='+window.sessionStorage.getItem('ordersn')
 
+      }
     }
   }
 </script>

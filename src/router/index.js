@@ -114,7 +114,7 @@ export default new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
     },
-    {//热门商品--预约支付
+    {//热门商品--预约完成
       path: '/appointPay/:orderid',//orderid 预约订单
       name: 'appointPay',
       meta: {keepAlive: false},

@@ -50,8 +50,12 @@ if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$eid = 163; //图片视频上传
   Vue.prototype.$eidpay = 165; //支付
   Vue.prototype.$eid162 = 162; //支付
-
+  Vue.prototype.$eid161 = 161; //支付
 }
+Vue.prototype.$baidu = function(){
+  return window.open('http://p.qiao.baidu.com/cps/chat?siteId=12754459&userId=26723163')
+}
+
 
 Vue.prototype.$request = request;
 
