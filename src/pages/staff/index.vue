@@ -34,7 +34,7 @@
               xm:'',
               listImg:[],
               listVideo:[],
-              startTime:'',
+              startTime:null,
             },
             status:null
           }

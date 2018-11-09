@@ -50,9 +50,10 @@
             sid: this.$route.params.sid
           }
         }).then((res) => {
-          this.store = res.data.store
-          this.service = res.data.service
-          this.member = res.data.member
+          let da= res.data;
+          this.store = da.store!=undefined?da.store:[];
+          this.service = da.service!=undefined?da.service:[];
+          this.member = da.member!=undefined?da.member:[];
         })
       }
     }

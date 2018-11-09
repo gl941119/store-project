@@ -31,7 +31,7 @@
   import ComList from './com/com-list'
   import wx from 'weixin-js-sdk'
   import axios from 'axios'
-
+  import qs from 'qs';
   export default {
     name: "index",
     components: {
@@ -48,22 +48,25 @@
         advOne: undefined,
         advTwo: undefined,
         advThree: undefined,
-        value:''
       }
     },
     mounted() {
       this.request()
-
     },
     methods: {
       scanBtn(){
         let thia = this;
-        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan')
+        let re=window.location.href;
+        let config = {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        };
+        let r='http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url='+re;
+        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan',r,config)
           .then((res)=>{
             if(res.data.status){
               var d=res.data.data.config;
               wx.config({
-                debug: true, // 开启调试模式,
+                debug: false, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
                 timestamp: d.timestamp, // 必填，生成签名的时间戳
                 nonceStr: d.nonceStr, // 必填，生成签名的随机串
