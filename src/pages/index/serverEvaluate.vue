@@ -23,9 +23,9 @@
       </div>
 
       <div class="serverEvaluateWbg serverEvaluateWbg1">
-        <div class="serverEvaluateW serverEvaluateWw">
+        <div class="serverEvaluateW serverEvaluateWw"  v-for="(item,index) in list">
           <div class="serverEvaluateWL">
-            <div class="serverEvaluateT">态度</div>
+            <div class="serverEvaluateT">{{ item.name }}</div>
             <div>
               <van-rate
                 v-model="taiDuTxt"
@@ -61,10 +61,25 @@
             value:0,
             count:0,
             taiDuTxt:0,
-            taiDuCount:0
+            taiDuCount:0,
+            list:[]
           }
       },
+      mounted(){
+this.initO();
+      },
+
       methods:{
+        initO(){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=162&act=serviceevaluate',
+            type:'post',
+          }).then((res)=>{
+            if(res.status){
+              this.list=res.data.evals;
+            }
+          });
+        },
         zh(){
           this.count=this.value*2;
         },

@@ -22,12 +22,23 @@
       </div>
     </div>
 
-    <van-popup class="showBox" v-model="show">
+    <van-popup class="showBox" @click-overlay="vanPopup()" v-model="show">
       <div class="upVedio">
-        <div class="upVedioTxt">视频封面</div><input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/png,image/gif,image/jpeg" @change="upData('fileupload',$event)"/>
+        <div class="upVedioTxt">视频封面</div>
+        <div class="upVedioTBox">
+          选择文件
+          <input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/png,image/gif,image/jpeg" @change="upData('fileupload',$event)"/>
+        </div>
+        <div class="gouzi" v-if="imgGou">√</div>
       </div>
       <div class="upVedio">
-        <div class="upVedioTxt">上传视频</div><input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="upData('fileuploadvideo',$event)" />
+        <div class="upVedioTxt">上传视频</div>
+        <div class="upVedioTBox">
+          选择文件
+          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/avi,video/mp4,video/flv,video/3gp,video/swf" @change="upData('fileuploadvideo',$event)" />
+        </div>
+        <div class="gouzi" v-if="vdGou">√</div>
+
       </div>
       <div class="bindAccountSubmitBox">
         <div class="bindAccountSubmit" @click="bindAccountSubmit()">提交</div>
@@ -63,7 +74,9 @@
         formF:null,
         videoShow:false,
         sourcSrc:'',
-        isPlay:false
+        isPlay:false,
+        vdGou:false,
+        imgGou:false,
       }
     },
     mounted(){
@@ -71,10 +84,16 @@
       this.videoSource(0);
     },
     methods: {
+      vanPopup(){
+        this.vdGou=false;
+          this.imgGou=false;
+      },
       upData(str,e){
+        alert(1)
         let sefl=this;
         let file=e.target.files[0];
         let param = new FormData();  // 创建form对象
+        alert(file.name)
         param.append('file', file, file.name);
         let config = {
           headers: {
@@ -86,14 +105,17 @@
         var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
         axios.post(url + uk, param, config)
           .then(res => {
+            alert(res.data.message)
             if (res.data.code === 100) {
               var s=res.data.data;
               if(s.imgs!=undefined){
                 sefl.imgSrc=s.imgs;
                 e.target.value='';
+                this.imgGou=true;
               }else{
                 sefl.vedioSrc=s.videos;
                 e.target.value='';
+                this.vdGou=true;
               }
 
 
@@ -328,9 +350,27 @@
     font-weight:400;
     padding-right: 10px;
   }
+  .upVedioTBox{
+    width: 100px;
+    overflow: hidden;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    line-height: 20px;
+    position: relative;
+    text-align: center;
+  }
   .upVedioIn{
     width: 100px;
     font-size: 20px;
+    /*opacity: 0;*/
+    position: absolute;
+    top:0px;
+    left: 0px;
+
   }
   .movieBtn{
     position: absolute;
@@ -354,5 +394,11 @@
     border-top:8px solid transparent;
     border-bottom:8px solid transparent;
     border-left:10px solid #000;
+  }
+  .gouzi{
+    color: red;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 400;
   }
 </style>
