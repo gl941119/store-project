@@ -6,7 +6,7 @@
           <p>{{ conInfo.name }}<span>{{ conInfo.task }}</span></p>
           <!--<span class="out-content-title">五星科美师</span>-->
         </div>
-        <p class="out-footer">{{ conInfo.gx }}<img src="../../../assets/image/staff.png" @click="employeeInformation()" alt=""> </p>
+        <p class="out-footer">{{ conInfo.gx }}<span @click="employeeInformation()"></span> </p>
       </div>
       <img :src="conInfo.bg" alt="" class="inner">
     </div>
@@ -95,5 +95,12 @@
       filter:blur(2px)
 
     }
+  }
+  .out-footer span{
+display: inline-block;
+    width: 15px;
+    height: 15px;
+    color: #e9584f;
+    background: url("../../../assets/image/address.png") no-repeat;
   }
 </style>

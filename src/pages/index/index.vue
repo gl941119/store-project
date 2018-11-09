@@ -53,12 +53,13 @@
     },
     mounted() {
       this.request()
-
     },
     methods: {
       scanBtn(){
         let thia = this;
-        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan')
+        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan',{
+          url:window.location.href
+        })
           .then((res)=>{
             if(res.data.status){
               var d=res.data.data.config;
