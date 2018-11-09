@@ -155,6 +155,11 @@ Vue.use(Router)
       name: 'staff',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff'], resolve)
+
+
+
+
+
     },
     {//会员中心
       path: '/member',
@@ -163,10 +168,10 @@ Vue.use(Router)
       component: resolve => require(['../pages/member'], resolve)
     },
     {//会员中心--我的预约
-      path: '/staff/mySubscribe',
-      name: 'mySubscribe',
+      path: '/member/subscribe',
+      name: 'subscribe',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/staff/mySubscribe'], resolve)
+      component: resolve => require(['../pages/member/page/subscribe'], resolve)
     },
     {//会员中心--会员卡
       path: '/member/memberCard',
@@ -327,6 +332,12 @@ Vue.use(Router)
       name: "serverEvaluate",
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/index/serverEvaluate'], resolve)
+    },
+    {//美师中心--我的预约
+      path: '/staff/mySubscribe',
+      name: 'mySubscribe',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/staff/mySubscribe'], resolve)
     }
   ]
 })
