@@ -53,6 +53,7 @@
 
 <script>
   import wx from 'weixin-js-sdk'
+  import axios from 'axios'
   var testPhone= /^1[34578]\d{9}$/;
   var testName= /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
     export default {
@@ -75,12 +76,16 @@
 
         },
         saoMiao(){
-          this.$request({
-            url:'app/index.php?i=1&c=entry&eid=164&act=weixinscan',
-            type:'post'
-          }).then((res)=>{
-            if(res.status){
-              var d=res.data.config;
+          alert('saoMiao')
+          axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
+            .then((res)=>{
+              var ss=res+'接口请求成功';
+              alert(ss)
+            if(res.data.status){
+              console.log(res.data.data.config)
+              var d=res.data.data.config;
+              var ss=res+'接口请求成功并获取到数据';
+              alert(ss)
               wx.config({
                 debug: true, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -89,7 +94,8 @@
                 signature: d.signature,// 必填，签名，见附录1
                 jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
-              wx.ready(()=>{
+              wx.ready(function () {
+
                 wx.scanQRCode({
                   needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
                   scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
@@ -101,10 +107,14 @@
                 wx.error(function(res){
                   alert(res)
                   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+
                 });
 
               });
             }
+          }).catch((res)=>{
+            var ss=res+'catch请求失败';
+            alert(ss)
           });
 
 
