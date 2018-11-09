@@ -43,7 +43,6 @@
         productData: null,
         reqData: null,
         value: undefined,
-
       }
     },
     computed: {

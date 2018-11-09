@@ -12,23 +12,21 @@ axios.defaults.withCredentials = true;
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
 
-  url = url.replace('eid=84','eid=153');
-  url = url.replace('eid=85','eid=154');
-  url = url.replace('eid=86','eid=155');
-  url = url.replace('eid=87','eid=156');
-  url = url.replace('eid=88','eid=157');
-  url = url.replace('eid=89','eid=158');
-
-
-
-
-
-  // url = url.replace('eid=84', 'eid=160')
-  // url = url.replace('eid=85', 'eid=161')
-  // url = url.replace('eid=86', 'eid=162')
-  // url = url.replace('eid=87', 'eid=163')
-  // url = url.replace('eid=88', 'eid=164')
-  // url = url.replace('eid=89', 'eid=165')
+  if(process.env.NODE_ENV === 'development'){
+    url = url.replace('eid=84','eid=153');
+    url = url.replace('eid=85','eid=154');
+    url = url.replace('eid=86','eid=155');
+    url = url.replace('eid=87','eid=156');
+    url = url.replace('eid=88','eid=157');
+    url = url.replace('eid=89','eid=158');
+  }else{
+    url = url.replace('eid=84', 'eid=160');
+    url = url.replace('eid=85', 'eid=161');
+    url = url.replace('eid=86', 'eid=162');
+    url = url.replace('eid=87', 'eid=163');
+    url = url.replace('eid=88', 'eid=164');
+    url = url.replace('eid=89', 'eid=165')
+  }
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');

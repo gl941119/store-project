@@ -46,7 +46,12 @@ import request from './utils/request'
 
 Vue.prototype.$request = request;
 Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
-Vue.prototype.$eid = 156;
+// Vue.prototype.$upUrl = 'http://dev-cd.vasterroad.com:80/';
+Vue.prototype.$eid = 156; //图片视频上传
+// Vue.prototype.$eid = 163; //图片视频上传
+Vue.prototype.$eidpay = 158; //支付
+// Vue.prototype.$eidpay = 165; //支付
+
 
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="card"  v-on:click="goDetail(Data.id,Data.type)">
+  <div class="card"  v-on:click="goDetail(Data.id)">
     <img :src="Data.thumb" alt="" class="card-left">
     <div class="card-right">
       <span class="card-right-select" v-if="select">已选</span>
@@ -25,8 +25,9 @@
     mounted(){
     },
     methods:{
-      goDetail(id,type){
-        this.$router.push({name:'detail',params:{id:id,type:type}})
+      goDetail(id){
+
+        this.$router.push({name:'detail',params:{id:id,type:'1'}})
       }
     }
   }

@@ -7,12 +7,11 @@
       <van-icon name="arrow" class="model-top-icon" v-if="type"/>
     </div>
     <ul class="model-buttom">
-      <li class="model-buttom-li" v-for="item in data.data" :key="item.id" v-on:click="goDetail(item.id)">
+      <li class="model-buttom-li" v-for="item in data.data" :key="item.id" v-on:click="goclubCardDetail(item.id)">
         <img :src="item.thumb" alt="">
         <p>{{item.name}}</p>
       </li>
     </ul>
-
   </div>
 </template>
 
@@ -34,8 +33,13 @@
       doThat() {
         this.$router.push({path: '/subscribe/2'})
       },
-      goDetail(id){
-this.$router.push({name:'detail',params:{type:'1',id:id}})
+      goclubCardDetail(id) {
+        if(this.data.name === '热销精品'){
+          this.$router.push({name:'detail',params:{type:'1',id:id}})
+        }else{
+          this.$router.push({name: 'clubCardDetail',params:{id:id}})
+        }
+
       }
     }
   }

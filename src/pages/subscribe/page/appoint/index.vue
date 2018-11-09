@@ -11,7 +11,8 @@
     </div>
     <div class="fill"></div>
     <div class="product">
-      <product-card :Data="service" :select="true" class="product-card"></product-card>
+      <!--<product-card :Data="service" :select="true" class="product-card"></product-card>-->
+      <server-card :Data="service" :btn="false" ></server-card>
     </div>
 
     <div class="cosmetologist">

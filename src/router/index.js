@@ -94,7 +94,7 @@ export default new Router({
       path: '/subscribe/:type',//1 服务 2 商品
       name: 'subscribe',
       meta: {keepAlive: false},
-      component: resolve => require(['@/pages/subscribe'], resolve)
+      component: resolve => require(['../pages/subscribe'], resolve)
     },
     {//热门商品--预约美师
       path: '/appoint/:sid',//sid 服务id
@@ -125,6 +125,18 @@ export default new Router({
       name: 'detail',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/detail'], resolve)
+    },
+    {//会员卡详情页
+      path: '/clubCardDetail/:id',// 会员卡id
+      name: 'clubCardDetail',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/detail/clubCard'], resolve)
+    },
+    {//详情页--商品评论
+      path: '/evaluate/:type/:id',// type 1 商品  2服务
+      name: 'evaluate',
+      meta: {keepAlive: true},
+      component: resolve => require(['../pages/detail/page/evaluate'], resolve)
     },
     {//购物车
       path: '/buyCart',

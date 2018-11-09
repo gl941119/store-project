@@ -13,10 +13,10 @@
         <div class="content-right-bottom">
           <span class="my-price">¥{{item.marketprice}}</span>
           <van-stepper
-            v-model="item.total"
+            v-model="item.num"
             integer
             :min="1"
-            :max="item.stock"
+            :max="item.total"
             :step="1"
             @change="cheng"
             v-on:click.native="saveGoodsid(item.goodsid,item)"
@@ -32,28 +32,39 @@
   export default {
     name: "productCard",
     props: ['item'],
-    data(){
-      return{
+    data() {
+      return {
         goodsid: undefined
       }
     },
     methods: {
-      saveGoodsid(id,item){//暂存商品id
-        console.log(id,item)
-        this.goodsid= id
+      saveGoodsid(id, item) {//暂存商品id
+        console.log(id, item)
+        this.goodsid = id
 
       },
       cheng(val) {  //修改订单数量
+
+        let goods  = [{
+          id: this.item.id,
+          optionid: this.item.optionid,
+          num: val
+        }]
+
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=updateorder',
           type: 'post',
           data: {
-            ordersn:window.sessionStorage.getItem('ordersn'),
-            id: this.goodsid,
-            optionid:this.item.optionid,
-            num:val,
+            ordersn: window.sessionStorage.getItem('ordersn'),
+            goods:JSON.stringify(goods)
           }
-      })
+        }).then(res => {
+          if (res.code === 100) {
+            this.$emit('refrech')
+          }
+
+        })
+
 
       }
     }

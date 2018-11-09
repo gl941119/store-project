@@ -50,7 +50,7 @@
     methods:{
       request(){
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=157&act=discusslist',
+          url:'app/index.php?i=1&c=entry&eid=88&act=discusslist',
           type:'post',
           data:{
             type:this.active+1

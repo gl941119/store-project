@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="wrap-li" v-for="item in cards" :key="item.id">
+    <div class="wrap-li" v-for="item in cards" :key="item.id" v-on:click="goclubCardDetail(item.id)">
       <img :src="item.imgurl" alt="">
       <p>{{item.name}}</p>
     </div>
@@ -29,7 +29,11 @@
         }).then((res) => {
           this.cards = res.data.cards
         })
+      },
+      goclubCardDetail(id){
+        this.$router.push({name:'clubCardDetail',params:{id:id}})
       }
+
     }
   }
 </script>

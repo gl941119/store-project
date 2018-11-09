@@ -1,6 +1,6 @@
 <template>
   <div class="evaluation-detail">
-    <div class="fill"></div>
+
     <div class="title">
       <span class="title-name">{{discuss.nick}}</span>
       <img :src="discuss.level_img" alt="" class="title-grade">
@@ -15,7 +15,9 @@
         <img :src="item" alt="" v-for="item in discuss.imgs" v-if="discuss.imgs">
       </p>
     </div>
+    <div class="fill"></div>
   </div>
+
 </template>
 <script>
   export default {
@@ -47,15 +49,21 @@
 </script>
 
 <style lang="scss" scoped>
+  .fill {
+    width: 344px;
+    height: 1px;
+    background: rgba(216, 216, 216, 1);
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
+  }
   .evaluation-detail {
     min-height: 161px;
     width: 100%;
-    .fill {
-      width: 344px;
-      height: 1px;
-      background: rgba(216, 216, 216, 1);
-      margin: 0 auto;
-    }
+    position: relative;
+
     .title {
       height: 35px;
       padding: 7px 15px 14px;
@@ -107,11 +115,15 @@
       }
       &-img {
         width: 100%;
-        overflow: hidden;
-        margin-top: 20px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-content: flex-start;
+
         > img {
           margin-right: 10px;
-          float: left;
+          margin-top: 3px;
           width: 71px;
           height: 70px;
         }

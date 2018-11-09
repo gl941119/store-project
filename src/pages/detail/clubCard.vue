@@ -1,86 +1,44 @@
 <template>
   <div class="detail" ref="out">
-    <navbar :name="title"></navbar>
-    <van-tabs @click="onClick" swipeable class="tabs">
-      <van-tab title="商品"></van-tab>
-      <van-tab title="详情"></van-tab>
-      <van-tab title="评价"></van-tab>
-    </van-tabs>
+    <navbar :name="'会员卡'"></navbar>
+    <!--<van-tabs @click="onClick" swipeable class="tabs">-->
+      <!--<van-tab title="商品"></van-tab>-->
+      <!--<van-tab title="详情"></van-tab>-->
+    <!--</van-tabs>-->
     <!--商品-->
     <div class="detali-product product">
       <!--banner-->
-      <van-swipe :autoplay="300000000000000000" class="swipe">
-        <van-swipe-item v-if="Data.video">
-          <video :src="Data.video" autoplay controls class="swipe-video"/>
-        </van-swipe-item>
-        <van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">
-          <img :src="item" alt="" class="swipe-img">
-        </van-swipe-item>
-      </van-swipe>
+      <!--<van-swipe :autoplay="300000000000000000" class="swipe">-->
+        <!--<van-swipe-item v-if="Data.video">-->
+          <!--<video :src="Data.video" autoplay controls class="swipe-video"/>-->
+        <!--</van-swipe-item>-->
+        <!--<van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">-->
+          <!--<img :src="item" alt="" class="swipe-img">-->
+        <!--</van-swipe-item>-->
+      <!--</van-swipe>-->
+      <img :src="Data.imgurl" alt="" class="swipe">
       <!--详情-->
       <div class="title">
         <div class="title-top">
-          <span class="title-top-name">{{Data.title}}</span>
-          <div class="title-top-right">
-            <span>{{Data.collection}}人收藏</span>
-            <img src="../../assets/image/icon-star.png" alt="">
-          </div>
+          <span class="title-top-name">{{Data.name}}</span>
         </div>
         <p class="title-middle">
-          {{Data.description}}
+          {{Data.descript}}
         </p>
         <div class="title-bottom">
-          <span class="price">￥{{Data.marketprice}}</span>
-          <span class="notPrice">￥{{Data.productprice}}</span>
-          <span class="title-bottom-buy">{{Data.sales}}人已经购买</span>
+          <span class="price">￥{{Data.price}}</span>
+
         </div>
       </div>
-      <!--已购-->
-      <div class="myCell" v-on:click="SpecificationHandle" v-if="type== '1'">
-        <div class="myCell-title">{{'已选'}}</div>
-        <div class="myCell-content">{{Alreadybought}}</div>
-        <div class="myCell-right">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <!--运送至-->
-      <div class="address-cell" v-if="type== '1'">
-        <div class="address-cell-title">运费</div>
-        <div class="address-cell-content">
-          <!--<p>{{address}}</p>-->
-          <p> 免运费</p>
-        </div>
-        <div class="address-cell-right">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <!--产品详情-->
-      <div class="presentation" ref="presentation">
-        <p class="presentation-title">产品详情</p>
-        <!--<div class="presentation-fill"></div>-->
-        <div class="presentation-content" v-html="Data.content"></div>
-      </div>
-      <!--评价-->
-      <div ref="evaluation"></div>
-      <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
-      <!--选择规格-->
-      <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
-        <com-buy-specification :goods_spec="goods_spec" :goods="Data" :num="num"
-                               :status="status"></com-buy-specification>
-      </van-actionsheet>
-      <!--购买栏-->
-      <van-goods-action class="buy">
-        <van-goods-action-mini-btn :icon="icon" :class="{is_collect:is_collect}" @click="onClickCollect"/>
-        <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
-        <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"
-        />
-        <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"
-        />
-      </van-goods-action>
+
+      <!--&lt;!&ndash;产品详情&ndash;&gt;-->
+      <!--<div class="presentation" ref="presentation">-->
+        <!--<p class="presentation-title">产品详情</p>-->
+        <!--&lt;!&ndash;<div class="presentation-fill"></div>&ndash;&gt;-->
+        <!--<div class="presentation-content" v-html="Data.content"></div>-->
+      <!--</div>-->
+      <button class="buy" v-on:click="goAppoint">立即购买</button>
+
     </div>
 
 
@@ -89,169 +47,70 @@
 
 <script>
 
-  import ComEvaluation from './page/com/com-evaluation'
-  import ComBuySpecification from './page/com/com-buySpecification'
 
 
   export default {
     name: "detail",
     components: {
-      ComEvaluation, ComBuySpecification
+
     },
     data() {
       return {
-        num: undefined,
-        show: true,
-        is_collect: false,//是否收藏
-        status: '1',//购买状态 0 购物车  1 立即购买
         id: this.$route.params.id,
-        type: this.$route.params.type,
-        icon: 'like-o',
-        title: this.$route.params.type == '1' ? '商品详情' : '服务详情',
-        optionid: undefined,
-        Data: {
-          "id": undefined,
-          "title": undefined,
-          "thumb": undefined,
-          "description": undefined,
-          "content": undefined,
-          "marketprice": undefined,
-          "productprice": undefined,
-          'sales': undefined,
-          "thumb_url": null,
-          "total": "400",
-          "collection": "0",
-          "hasoption": "1",
-          "good_rate": null,
-        },
-        goods_spec: null,
-        discuss: {//评论
-          card_id: undefined,
-          content: undefined,
-          createtime: undefined,
-          imgs: null,
-          level_img: undefined,
-          nick: undefined,
-          score: undefined
-        },
-        discussType: 0,
-        Alreadybought: undefined,//已购
-        address: undefined,//收货地址
-        goodsData: null,
-        SpecificationData: null,
-
+        Data:{},
       }
     },
     mounted() {
-      // console.log(this.$refs['evaluation'])
       this.request()
     },
-    computed: {
-      ShowSpecification: {//商品规格
-        set: function (val) {
-          this.$store.commit('setShowBuySpecification', false)
-        },
-        get: function () {
-          return this.$store.state.ShowBuySpecification
-        }
-      }
-    },
     methods: {
-      onClickCollect() {//加入收藏
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
-          type: 'get',
-          data: {
-            type: this.type,
-            id: this.id
-          }
-        }).then(res => {
-          if (res.code === 100) {
-            this.is_collect = !this.is_collect
-          }
-
-        })
-
-
-      },
-      goButCart() {//跳转购物车
-        this.$router.push({name: 'buyCart'})
-      },
-      addBuyCart() {//加入购物车
-        this.status = '0'
-        this.$store.commit('setShowBuySpecification', true)
-
-
-      },
-      onceBuy() {//立即购买
-        this.status = '1'
-        this.$store.commit('setShowBuySpecification', true)
-
-      },
-      onClickMiniBtn() {
-
-      },
-      onClick(index, title) {//锚点
-        switch (index) {
-          case 0:
-            this.$refs['out'].scrollTop = 0
-            break;
-          case 1:
-            this.$refs['out'].scrollTop = this.$refs['presentation'].offsetTop
-            break;
-          case 2:
-            this.$refs['out'].scrollTop = this.$refs['evaluation'].offsetTop
-            break;
-        }
-      },
-      SpecificationHandle() {
-        this.$store.commit('setShowBuySpecification', true)
-      },
-      request() {
-        let url
-        if (this.type == '1') { // 商品列表
-          url = 'app/index.php?i=1&c=entry&eid=85&act=goods'
-        } else {
-          url = 'app/index.php?i=1&c=entry&eid=86&act=service'
-        }
-        this.$request({
-          url: url,
-          type: 'get',
-          data: {
-            id: this.$route.params.id
-          }
-        }).then((res) => {
-          if (res.code === 100) {
-            if (this.type == '2') {//服务
-              this.Data = res.data.service
-              this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
-            } else if (this.type == '1') {//商品
-              this.Data = res.data.goods
-              this.goods_spec = res.data.goods_spec //容量
-              this.Alreadybought = `${res.data.goods.title},1瓶` //已购
-              this.address = res.data.address
-              this.num = res.data.num //规格数量
-              this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
+        request(){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=89&act=cardinfo',
+            type:'post',
+            data:{
+              id:this.$route.params.id
             }
-            // console.log(res.data.disucss.)
-            if (res.data.discuss.length === 0) {
-              this.discussType = 0
-            } else {
-              this.discussType = 1
-              this.discuss = res.data.discuss[0] //评论
-
+          }).then(res=>{
+           this.Data  =res.data
+          })
+        },
+      goAppoint(){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=89&act=buycard',
+            type:'post',
+            data:{
+              id:this.$route.params.id
             }
-          }
-        })
-      },
-      onFocus() {
-        // console.log(123)
+          }).then(res=>{
+           if(res.code === 100){
+             // window.open(this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+res.data.orderid)
+             window.location.href=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+res.data.orderid
+             // window.location.href='www.baidu.com'
+             // console.log(this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+res.data.orderid)
+           }
+          })
+
+
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  .buy{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width:125px;
+    height:49px;
+    background:rgba(113,179,255,1);
+    box-shadow:0px 4px 7px 0px rgba(204,226,249,1);
+    font-size:18px;
+    font-family:PingFangSC-Regular;
+    color:rgba(255,255,255,1);
+    line-height:25px;
+  }
   .detail {
     padding-bottom: 50px;
     position: relative;
@@ -266,13 +125,14 @@
   }
 
   .product {
-    margin-top: 44px;
+
   }
 
   .detali-product {
     height: 100%;
     background-color: #F4F4F4;
     .swipe {
+      width: 100%;
       height: 343px;
       overflow: hidden;
       &-img {

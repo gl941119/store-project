@@ -4,7 +4,8 @@
     <!--收货地址-->
     <com-address :address="address" v-on:click.native="goAddress"></com-address>
     <div class="main">
-      <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" style=""></com-prodectcard>
+      <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"></com-prodectcard>
+
       <div class="fill"></div>
       <van-cell title="美丽积分券:" is-link class="cell">
         <span class="cell-default">{{score_nex=='0'? '不可用':'可用'}}</span>
@@ -111,7 +112,8 @@
         let addressid = undefined
         try {
           addressid = JSON.parse(window.sessionStorage.getItem('address')).id
-        } catch (e) {}
+        } catch (e) {
+        }
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',

@@ -14,7 +14,7 @@
         <span class="icon-w"><span class="path1"></span><span class="path2"></span></span>
         <p>分类</p>
       </router-link>
-      <router-link tag="li" :to="{ path: 'subscribe/1'}"
+      <router-link tag="li" :to="{ name: 'subscribe',params:{type:'1'}}"
                    v-bind:class="{}"
       >
         <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>

@@ -61,7 +61,6 @@
       <!--产品详情-->
       <div class="presentation" ref="presentation">
         <p class="presentation-title">产品详情</p>
-        <!--<div class="presentation-fill"></div>-->
         <div class="presentation-content" v-html="Data.content"></div>
       </div>
       <!--评价-->
@@ -79,11 +78,8 @@
       <van-goods-action class="buy" v-if="type== '1'">
         <van-goods-action-mini-btn :icon="icon" :class="{is_collect:is_collect}" @click="onClickCollect"/>
         <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
-        <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"
-
-        />
-        <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"
-        />
+        <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"/>
+        <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"/>
       </van-goods-action>
       <!--服务购买栏-->
       <van-goods-action class="buy" v-else>
@@ -352,7 +348,7 @@
       }
     }
     .title {
-      /*height: 157px;*/
+
       padding: 15px 15px 9px;
       background-color: white;
       &-top {
@@ -420,7 +416,7 @@
       }
     }
     .presentation {
-      padding: 15px 15px 0;
+        padding: 15px 15px 0;
       background-color: white;
       margin-top: 10px;
       &-title {
@@ -439,9 +435,11 @@
         min-height: 165px;
         font-size: 10px;
         color: rgba(153, 153, 153, 1);
-
         > p {
           line-height: 30px;
+        }
+        >>> img{
+          width: 100%;
         }
       }
     }

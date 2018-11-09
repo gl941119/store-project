@@ -39,6 +39,7 @@
 
 <style lang="scss" scoped>
   .card {
+    overflow: hidden;
     position: relative;
     margin: 10px auto 0;
     width: 345px;
@@ -47,13 +48,14 @@
     box-shadow:0px 1px 11px 0px rgba(211,211,211,0.5);
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     &-left {
       width: 115px;
       height: 115px;
     }
     &-right {
-      width: 230px;
+      flex: 1;
+      width: 130px;
       margin-left: 15px;
       &-name {
         margin-top: 9px;
@@ -63,10 +65,17 @@
         font-weight: 400;
       }
       &-content {
+
         margin-top: 6px;
         font-size: 10px;
         color: rgba(153, 153, 153, 1);
         line-height: 14px;
+        width: 100%;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
       }
       &-price {
         margin-top: 16px;
