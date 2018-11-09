@@ -57,8 +57,7 @@
     },
     methods: {
       payHandle(){//非会员线上支付
-
-
+        window.location.href=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+this.orderid
       },
       cancelHandle(){//非会员取消
         this.$dialog.confirm({
@@ -82,11 +81,6 @@
             }
 
           })
-
-
-
-
-
         }).catch(() => {
           // on cancel
         });
@@ -97,9 +91,28 @@
           title: '是否预约',
           message: ''
         }).then(() => {
-          this.$router.push({name:'appointPay',params:{orderid:this.orderid}})
+
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
+            type: 'POST',
+            data: {
+              orderid:this.orderid
+            }
+          }).then((res)=>{
+            if(res.code === 100){
+              this.$router.push({name:'appointPay',params:{orderid:this.orderid}})
+            }
+
+          })
+
+
+
+
+
+
         }).catch(() => {
           // on cancel
+
         });
 
 

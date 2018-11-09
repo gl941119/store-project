@@ -10,7 +10,7 @@ module.exports = {
     // Paths
     NODE_ENV:'development',
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
     proxyTable: {},
 
     // Various Dev Server settings

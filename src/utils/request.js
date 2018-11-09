@@ -10,7 +10,16 @@ axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.url.loc
 
 axios.defaults.withCredentials = true;
 
-async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
+async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
+
+  if (isToast === true) {
+    Toast.loading({
+      duration: 6000,
+      mask: true,
+      message: '加载中...'
+    });
+  }
+
 
   if (process.env.NODE_ENV === 'development') {
     url = url.replace('eid=84', 'eid=153');
@@ -37,13 +46,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
       headers: {},
     });
   } else if (type === 'POST') {
-    if (isJson) {
-      return axios.post(url, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    }
+
     return axios.post(url, qs.stringify(data), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -67,16 +70,14 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isJson = false) {
  * @param params.flag -> json require, default false
  */
 function requestHandle(params) {
-  Toast.loading({
-    duration: 6000,
-    mask: true,
-    message: '加载中...'
-  });
-  const {url, data, type, flag} = params;
-  return new Promise((resolve, reject) => {
-    ajaxRequest(url, data, type, flag).then(
-      res => {
 
+  const {url, data, type, isToast} = params;
+
+
+
+  return new Promise((resolve, reject) => {
+    ajaxRequest(url, data, type, isToast).then(
+      res => {
         if (res.data.uk) {
           store.commit('setUk', res.data.uk);
           Cache.setSession('uk', res.data.uk)
@@ -93,45 +94,19 @@ function requestHandle(params) {
         } catch (e) {
           // alert('无法分辨美师')
         }
-        if (res.data.user.store) {
-          store.commit('setStore', res.data.user.store);
-          Cache.setSession('store', res.data.user.store)
-        }
-
-
         if (res.data.code === 108) {
-          Toast.fail(res.data.message);
-        }
-        if (res.data.code === 100 || res.data.code === 107 || res.data.code === 103) {
           Toast.clear();
-        }
-        if (res.data.code === 105) {
+          Toast.fail(res.data.message);
+        } else if (res.data.code === 100) {
+          Toast.clear();
+        } else if (res.data.code === 105) {
           Toast.clear();
           this.$router.push({name: 'bindAccount'});
+        } else {
+          alert(res.data.message)
+          Toast.clear();
         }
         resolve(res.data);
-
-        // const { data, success, message } = res.data;
-        // console.log('requestHandle-[%s]->', url, res.data);
-        // if (success === 1) {
-        //   resolve(res.data);
-        // } else {
-        //   if (data && data.islogin) {
-        //     store.commit('setUserId', undefined);
-        //     store.commit('setUserName', undefined);
-        //     store.commit('setUserNickName', undefined);
-        //     store.commit('setToken', undefined);
-        //     Cache.removeSession('bier_username');
-        //     Cache.removeSession('bier_token');
-        //     Cache.removeSession('bier_userid');
-        //     Cache.getSession('bier_usernickname') && Cache.removeSession('bier_usernickname');
-        //     // location.href = "/userManage";
-        //   }
-        //   reject(res.data);
-        //   if (message !== '1004') {
-        //     Toast(utils.judgeLanguage(utils.getCurrLanguage(store), message));
-        //   }
-        // }
       },
       rej => {
         Toast.fail('网络错误!');

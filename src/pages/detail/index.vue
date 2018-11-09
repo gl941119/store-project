@@ -9,9 +9,19 @@
     <!--商品-->
     <div class="detali-product product">
       <!--banner-->
+
       <van-swipe :autoplay="300000000000000000" class="swipe">
-        <van-swipe-item v-if="Data.video">
-          <video :src="Data.video" autoplay controls class="swipe-video"/>
+        <van-swipe-item class="wrap">
+          <img src="../../assets/image/play.png" class="wrap-play" :class="{is_display:is_display}" v-on:click="videoPlay"></img>
+          <img :src="Data.videothumb" :class="{is_display:is_display}" alt="" class="wrap-img">
+          <video :src="Data.video"
+                 class="wrap-video"
+                 x5-video-player-type="h5"
+                 playsinline="true"
+                 webkit-playsinline="true"
+                 preload="auto"
+                 ref="media"
+          />
         </van-swipe-item>
         <van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">
           <img :src="item" alt="" class="swipe-img">
@@ -146,11 +156,26 @@
         address: undefined,//收货地址
         goodsData: null,
         SpecificationData: null,
+        is_display:false,//是否隐藏
 
       }
     },
     mounted() {
       this.request()
+
+
+      console.log(this.$refs['media'])
+      let media = this.$refs['media']
+
+
+      media.addEventListener('play', function () {
+        console.log('播放')
+        media.addEventListener('pause', function () {
+          console.log('停止')
+        });
+      });
+
+
     },
     watch: {
       specs: function (val) {
@@ -168,6 +193,10 @@
       }
     },
     methods: {
+      videoPlay(){
+        this.$refs['media'].play()
+        this.is_display = true
+      },
       onClickCollect() {//加入收藏
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
@@ -228,8 +257,8 @@
           this.$store.commit('setShowBuySpecification', true)
         }
       },
-      goAppoint(){//立即预约
-        this.$router.push({name:'appoint',params:{sid:this.id}})
+      goAppoint() {//立即预约
+        this.$router.push({name: 'appoint', params: {sid: this.id}})
 
       },
       onClickMiniBtn() {
@@ -266,6 +295,7 @@
           }
         }).then((res) => {
           if (res.code === 100) {
+
             if (this.type == '2') {//服务
               this.Data = res.data.service
               this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
@@ -284,6 +314,8 @@
               this.discussType = 1
               this.discuss = res.data.discuss[0] //评论
             }
+
+
           }
         })
       },
@@ -292,14 +324,14 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=freight',
           type: 'post',
           data: {
-            id:this.id,
+            id: this.id,
             specs: this.specs.join('_')
           }
         }).then(res => {
           if (res.code === 100) {
-            if(res.data.freight.ishave){
-              this.freight = '￥'+res.data.freight.freight+'元'
-            }else{
+            if (res.data.freight.ishave) {
+              this.freight = '￥' + res.data.freight.freight + '元'
+            } else {
               this.freight = res.data.freight.freight
             }
           }
@@ -331,6 +363,36 @@
     margin-top: 44px;
   }
 
+  .wrap {
+    position: relative;
+    &-play {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      z-index: 99;
+    }
+    &-img {
+      position: absolute;
+      height: 343px;
+      width: 375px;
+    }
+    &-video {
+      position: absolute;
+      z-index: -1;
+      object-fit: fill;
+      width: 375px;
+      height: 343px;
+    }
+    .is_display{
+      display: none;
+    }
+
+  }
+
   .detali-product {
     height: 100%;
     background-color: #F4F4F4;
@@ -342,9 +404,7 @@
         width: 375px;
       }
       &-video {
-        object-fit: fill;
-        width: 375px;
-        height: 343px;
+
       }
     }
     .title {
@@ -416,7 +476,7 @@
       }
     }
     .presentation {
-        padding: 15px 15px 0;
+      padding: 15px 15px 0;
       background-color: white;
       margin-top: 10px;
       &-title {
@@ -438,7 +498,7 @@
         > p {
           line-height: 30px;
         }
-        >>> img{
+        > > > img {
           width: 100%;
         }
       }
