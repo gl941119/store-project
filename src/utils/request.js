@@ -76,6 +76,7 @@ function requestHandle(params) {
   return new Promise((resolve, reject) => {
     ajaxRequest(url, data, type, flag).then(
       res => {
+
         if (res.data.uk) {
           store.commit('setUk', res.data.uk);
           Cache.setSession('uk', res.data.uk)
@@ -131,6 +132,7 @@ function requestHandle(params) {
         // }
       },
       rej => {
+
 
         Toast.fail('网络错误!');
 

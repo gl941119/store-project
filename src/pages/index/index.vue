@@ -35,15 +35,6 @@
     components: {
       ComModel, ComList
     },
-    watch: {
-      value: function (val) {
-
-      }
-    },
-    mounted() {
-      console.log(this.$ref.img)
-    },
-
     data() {
       return {
         data: {},
@@ -58,24 +49,27 @@
       }
     },
     mounted() {
-      console.log(123)
-      this.$request({
-        url: 'app/index.php?i=1&c=entry&eid=84',
-        data: {},
-        type: 'get'
-      }).then((res) => {
-        this.data = res.data;
-        this.goods_essence = res.data.goods_hot;
-        this.expre_cards = res.data.expre_cards;
-        this.member_cards = res.data.member_cards;
-        this.advOne = res.data.adv[0].bimg;
-        this.advTwo = res.data.adv[1].bimg;
-        this.advThree = res.data.adv[2].bimg
-      })
+      this.request()
+      alert(window.location.href)
     },
-    methods:{
-      goSearch(){
-        this.$router.push({name:'search'})
+    methods: {
+      request() {
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=84',
+          data: {},
+          type: 'get'
+        }).then((res) => {
+          this.data = res.data;
+          this.goods_essence = res.data.goods_hot;
+          this.expre_cards = res.data.expre_cards;
+          this.member_cards = res.data.member_cards;
+          this.advOne = res.data.adv[0].bimg;
+          this.advTwo = res.data.adv[1].bimg;
+          this.advThree = res.data.adv[2].bimg
+        })
+      },
+      goSearch() {
+        this.$router.push({name: 'search'})
       }
     }
   }
