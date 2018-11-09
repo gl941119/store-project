@@ -77,7 +77,7 @@
         },
         saoMiao(){
           let thia = this;
-          axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=164&act=weixinscan')
+          axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan')
             .then((res)=>{
             if(res.data.status){
               var d=res.data.data.config;
