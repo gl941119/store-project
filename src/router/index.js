@@ -51,9 +51,8 @@ let router = new Router({
       component: resolve => require(['../pages/exhibition'], resolve)
     },
     {//首页
-      path: '/index',
+      path: '/index/:config',
       name: 'index',
-
       meta: {showFooter: true, keepAlive: true},
       component: resolve => require(['..//pages/index'], resolve)
 
@@ -61,7 +60,6 @@ let router = new Router({
     {//首页--分类页
       path: '/index/list/:id',
       name: 'list',
-
       meta: {keepAlive: false},
       component: resolve => require(['../pages/index/page/list'], resolve),
     },
@@ -337,28 +335,28 @@ let router = new Router({
 })
 
 
-// function setTitle(title) {
-//   document.title = title
-//   var mobile = navigator.userAgent.toLowerCase();
-//   if (/iphone|ipad|ipod/.test(mobile)) {
-//     var iframe = document.createElement('iframe');
-//     iframe.style.display = 'none'
-//     var iframeCallback = function () {
-//       setTimeout(function () {
-//         iframe.removeEventListener('load', iframeCallback);
-//         document.body.removeChild(iframe);
-//       }, 0);
-//     }
-//     iframe.addEventListener('load', iframeCallback);
-//     document.body.appendChild(iframe);
-//   }
-// }
-//
-// router.afterEach((transition) => {
-//   let name = transition.name;
-//   let item = router.options.routes.filter((ele) => { return ele.name === name; });
-//   setTitle(name);
-// });
+function setTitle(title) {
+  document.title = title
+  var mobile = navigator.userAgent.toLowerCase();
+  if (/iphone|ipad|ipod/.test(mobile)) {
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none'
+    var iframeCallback = function () {
+      setTimeout(function () {
+        iframe.removeEventListener('load', iframeCallback);
+        document.body.removeChild(iframe);
+      }, 0);
+    }
+    iframe.addEventListener('load', iframeCallback);
+    document.body.appendChild(iframe);
+  }
+}
+
+router.afterEach((transition) => {
+  let name = transition.name;
+  let item = router.options.routes.filter((ele) => { return ele.name === name; });
+  setTitle(name);
+});
 
 export default router
 

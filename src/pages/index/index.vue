@@ -31,7 +31,9 @@
   import ComList from './com/com-list'
   import wx from 'weixin-js-sdk'
   import axios from 'axios'
+
   import qs from 'qs';
+
   export default {
     name: "index",
     components: {
@@ -50,21 +52,25 @@
         advThree: undefined,
       }
     },
+    created() {
+
+    },
     mounted() {
+
       this.request()
     },
     methods: {
-      scanBtn(){
+      scanBtn() {
         let thia = this;
-        let re=window.location.href;
+        let re = window.location.href;
         let config = {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
-        let r='http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url='+re;
-        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan',r,config)
-          .then((res)=>{
-            if(res.data.status){
-              var d=res.data.data.config;
+        let r = 'http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url=' + re;
+        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan', r, config)
+          .then((res) => {
+            if (res.data.status) {
+              var d = res.data.data.config;
               wx.config({
                 debug: false, // 开启调试模式,
                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -76,14 +82,14 @@
               wx.ready(function () {
                 wx.scanQRCode({
                   needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-                  scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                  scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                   success: function (res) {
-                    thia.value=res.resultStr;
-                    var result = res.resultStr+'扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
+                    thia.value = res.resultStr;
+                    var result = res.resultStr + '扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
                   }
                 });
-                wx.error(function(res){
-                  var s=res+'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
+                wx.error(function (res) {
+                  var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
                   alert(res)
                   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 
@@ -91,12 +97,13 @@
 
               });
             }
-          }).catch((res)=>{
-          var ss=res+'catch请求失败';
+          }).catch((res) => {
+          var ss = res + 'catch请求失败';
           alert(ss)
         });
       },
       request() {
+        console.log(13)
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=84',
           data: {},

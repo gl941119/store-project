@@ -184,7 +184,7 @@
         this.$router.push({name: 'address', params: {type: '0'}})
       },
       payHandle(){
-        window.location.href = this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eid161+'&act=payorder&ordersn='+window.sessionStorage.getItem('ordersn')
+        window.location.href = this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid161+'&act=payorder&ordersn='+window.sessionStorage.getItem('ordersn')
       }
     }
   }

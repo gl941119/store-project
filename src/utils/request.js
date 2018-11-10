@@ -4,9 +4,33 @@ import qs from 'qs';
 import store from '../store';
 import Cache from './cache';
 import {Toast} from 'vant';
-import config from './config';
+// import config from './config';
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.url.localTestUrl : config.url.productUrl;
+
+
+// 解密
+let Base64 = {
+  encode(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+      function toSolidBytes(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
+  },
+  decode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  }
+};
+let config = window.location.hash.split('/').slice(-1)[0];
+config = JSON.parse(Base64.decode(config))
+
+console.log(config['domain'],config)
+axios.defaults.baseURL = config['domain']
 
 axios.defaults.withCredentials = true;
 
@@ -20,6 +44,13 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     });
   }
 
+  let config
+  try {
+    config =  JSON.parse(window.sessionStorage.getItem('config'))
+  }catch (e) {
+    alert('无法获得config')
+  }
+
 
   if (process.env.NODE_ENV === 'development') {
     url = url.replace('eid=84', 'eid=153');
@@ -29,13 +60,20 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=88', 'eid=157');
     url = url.replace('eid=89', 'eid=158');
   } else {
-    url = url.replace('eid=84', 'eid=160');
-    url = url.replace('eid=85', 'eid=161');
-    url = url.replace('eid=86', 'eid=162');
-    url = url.replace('eid=87', 'eid=163');
-    url = url.replace('eid=88', 'eid=164');
-    url = url.replace('eid=89', 'eid=165')
+    let key = Object.keys(config.binds)
+    url = url.replace('i=1','i='+config.uid)
+    url = url.replace('eid='+key[0], 'eid='+config.binds[key[0]]);
+    url = url.replace('eid='+key[1], 'eid='+config.binds[key[1]]);
+    url = url.replace('eid='+key[2], 'eid='+config.binds[key[2]]);
+    url = url.replace('eid='+key[3], 'eid='+config.binds[key[3]]);
+    url = url.replace('eid='+key[4], 'eid='+config.binds[key[4]]);
+    url = url.replace('eid='+key[5], 'eid='+config.binds[key[5]])
   }
+
+
+
+
+
 
 // var url=url+'&openid=abc123';
   type = type.toUpperCase();

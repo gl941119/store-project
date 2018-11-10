@@ -84,7 +84,7 @@
             }
           }).then(res=>{
            if(res.code === 100){//支付
-             window.location.href=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+res.data.orderid
+             window.location.href=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+res.data.orderid
            }
           })
 

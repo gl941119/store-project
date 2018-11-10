@@ -37,7 +37,7 @@
         axios.defaults.withCredentials = true;
 
         let uk = this.$store.state.uk || Cache.getSession('uk');
-        var url=this.$upUrl+'app/index.php?i=1&c=entry&eid='+this.$eids+'&act=fileupload&uk=';
+        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eids+'&act=fileupload&uk=';
         axios.post(url + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
