@@ -368,14 +368,12 @@
   .tabs {
     position: fixed;
     z-index: 100;
-    top: 44px;
+
     width: 100%;
     height: 50px;
   }
 
-  .product {
-    margin-top: 44px;
-  }
+
 
   .wrap {
     position: relative;

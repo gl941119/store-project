@@ -146,6 +146,7 @@ let router = new Router({
     {//会员卡详情页
       path: '/clubCardDetail/:id',// 会员卡id
       name: 'clubCardDetail',
+      title:'会员卡详情',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/detail/clubCard'], resolve)
     },

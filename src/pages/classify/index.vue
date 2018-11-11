@@ -1,7 +1,9 @@
 <template>
   <div>
+    <div class="search_wrap">
+      <search :value="value" class="search" v-on:click.native="goSearch"></search>
+    </div>
 
-    <search :value="value" class="search" v-on:click.native="goSearch"></search>
     <div class="nav">
       <ul class="nav-left">
         <li v-on:click="handleChangeComponent('recommend')"
@@ -80,13 +82,18 @@
 </script>
 
 <style lang="scss" scoped>
-  .search {
-    margin: 5px auto;
-    width: 345px;
-    height: 30px;
-    background: rgba(244, 244, 244, 1);
-    border-radius: 4px;
+  .search_wrap{
+    width: 100%;
+    background-color: white;
+    .search {
+      margin: 5px auto;
+      width: 345px;
+      height: 30px;
+      background: rgba(244, 244, 244, 1);
+      border-radius: 4px;
+    }
   }
+
 
   .nav {
     height: 514px;

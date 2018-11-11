@@ -61,12 +61,15 @@
   .evaluation-detail {
     min-height: 161px;
     width: 100%;
-    position: relative;
+
 
     .title {
       height: 35px;
       padding: 7px 15px 14px;
       vertical-align: middle;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       &-name {
 
         font-size: 12px;
@@ -75,13 +78,14 @@
       }
       &-grade {
 
-        margin-top: 3px;
+
         margin-left: 5px;
         width: 11px;
         height: 11px;
         vertical-align: middle;
       }
       &-giveMark {
+        flex: 1;
         vertical-align: middle;
         margin-top: 4px;
         margin-left: 12px;
@@ -90,7 +94,6 @@
           width: 12px;
           height: 12px;
           margin-left: 7px;
-
         }
       }
       &-time {

@@ -61,22 +61,33 @@
     methods:{
       pay(orderid){
 
-        if(window.sessionStorage.getItem('is_member')== '1'){
-          this.$request({
-            url: 'app/index.php?i=1&c=entry&eid=86&act=paymoney',
-            type: 'post',
-            data: {
-              orderid:this.item.orderid,
-            }
-          }).then((res) => {
-            if(res.code===100){
-              this.$toast.success('支付成功')
-              this.$emit('refresh')
-            }
-          })
-        }else{
-          this.$router.push({name:'confirm',params:{orderid:orderid}})
-        }
+        this.$dialog.confirm({
+          title: '是否支付?',
+
+        }).then(() => {
+          if(window.sessionStorage.getItem('is_member')== '1'){
+            this.$request({
+              url: 'app/index.php?i=1&c=entry&eid=86&act=paymoney',
+              type: 'post',
+              data: {
+                orderid:this.item.orderid,
+              }
+            }).then((res) => {
+              if(res.code===100){
+                this.$toast.success('支付成功')
+                this.$emit('refresh')
+              }else{
+                this.$toast.fail('支付失败');
+              }
+            })
+          }else{
+            this.$router.push({name:'confirm',params:{orderid:orderid}})
+          }
+        }).catch(() => {
+          // on cancel
+        });
+
+
 
       },
       goBaidu(){
