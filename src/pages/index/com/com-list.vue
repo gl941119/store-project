@@ -4,9 +4,7 @@
         :key="item.id"
         @click="handleClick(item.id)"
         class="list-li">
-      <div class="list-li-circle">
-        <img :src="item.thumb" alt="">
-      </div>
+      <img :src="item.thumb" alt="" class="list-li-img">
       <p class="list-li-name">{{item.name}}</p>
     </li>
   </ul>
@@ -38,26 +36,14 @@
       height: 90px;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      &-circle {
+      &-img {
         width: 45px;
         height: 45px;
-        background: rgba(247, 247, 247, 1);
-        border-radius: 250px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        > img {
-          min-width: 19px;
-          max-width: 40px;
-          min-height: 25px;
-          max-height: 50px;
-          height: 45px;
-          line-height: 83px;
-        }
       }
       &-name {
+        margin-top: 6px;
         font-size: 12px;
         color: rgba(102, 102, 102, 1);
         line-height: 17px;

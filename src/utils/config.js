@@ -1,7 +1,5 @@
 const protocol = window.location.protocol;
 
-
-alert(window.sessionStorage.getItem('config'))
 const url = {
   // localTestUrl: 'http://dev-cd.vasterroad.com',
   localTestUrl: 'http://192.168.3.23:80',

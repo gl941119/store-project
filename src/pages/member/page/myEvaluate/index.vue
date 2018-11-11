@@ -1,10 +1,11 @@
 <template>
   <div class="wrap">
-    <navbar :name="'我的评价'"></navbar>
+
     <van-tabs v-model="active" @click="onclick">
       <van-tab title="商品">
+        <div class="fill"></div>
         <!--卡片-->
-        <div class="main" v-for="item,num in discusslist" :key="num">
+        <div class="main" v-for="item,num in discusslist" :key="num" v-if="!!item.goodslist.length">
           <div class="main-top">
             <img :src="item.avatar" alt="">
             <span class="main-top-name">{{item.name}}</span>
@@ -16,7 +17,7 @@
               <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
             </div>
           </div>
-          <div class="main-bottom" v-if="!!item.goodslist.length">
+          <div class="main-bottom"  v-on:click="goDetail(1,goodsid)">
             <img :src="item.goodslist[0].thumb" alt="">
             <dl>
               <dt>{{item.goodslist[0].title}}</dt>
@@ -27,12 +28,11 @@
             </dl>
           </div>
         </div>
-
       </van-tab>
       <van-tab title="服务">
-
+        <div class="fill"></div>
         <!--卡片-->
-        <div class="main" v-for="item,num in discusslist" :key="num">
+        <div class="main" v-for="item,num in discusslist" :key="num" v-if="!!item.goodslist.length">
           <div class="main-top">
             <img :src="item.avatar" alt="">
             <span class="main-top-name">{{item.name}}</span>
@@ -44,7 +44,7 @@
               <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
             </div>
           </div>
-          <div class="main-bottom" v-if="!!item.goodslist.length">
+          <div class="main-bottom"  v-on:click="goDetail(2,item.goodslist[0].goodsid)">
             <img :src="item.goodslist[0].thumb" alt="">
             <dl>
               <dt>{{item.goodslist[0].title}}</dt>
@@ -76,6 +76,10 @@
       this.request()
     },
     methods:{
+      goDetail(type,id){
+        console.log(type,id)
+        this.$router.push({name:'detail',params:{type:type,id:id}})
+      },
       request(){
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=88&act=discusslist',
@@ -99,10 +103,20 @@
 </script>
 
 <style lang="scss" scoped>
+  .wrap{
+    height: 100%;
+    background-color: #F4F4F4;
+  }
+  .fill{
+    width: 100%;
+    height: 1px;
+    background-color: #D8D8D8;
+  }
   .main {
     width: 100%;
     padding: 15px 15px;
-    background-color: white;
+background-color: white;
+    margin-bottom: 10px;
     &-top {
       height: 29px;
       display: flex;
@@ -114,6 +128,7 @@
         border-radius: 250px;
       }
       > span {
+        margin-left: 5px;
         font-size: 15px;
         font-family: PingFangSC-Regular;
         color: rgba(5, 5, 5, 1);

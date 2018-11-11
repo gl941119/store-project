@@ -130,13 +130,29 @@
         let specs = [this.oneSel, this.twoSel, this.threeSel, this.fourSel, this.fiveSel].filter(item => {
           return item
         })
+
         if (specs.length == this.num) {//选择完成传值
+
+          if(specs.length===1){//后台格式需要
+            specs[0] = specs[0]+"_"
+          }
+
           this.$emit('update:specs', specs)//商品id
           this.$emit('update:alreadybought', alreadybought)//商品名称
           this.disabled = false;
         }
       },
       change(val) {//数量查询
+
+        if(this.specs.length===1){//后台格式需要
+          if(!this.specs.indexOf("_")){
+            this.specs[0] = this.specs[0]+"_"
+          }
+
+
+        }
+        console.log(this.specs)
+
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=optionstock',
           type: 'get',

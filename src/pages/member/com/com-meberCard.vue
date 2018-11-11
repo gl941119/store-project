@@ -11,7 +11,6 @@
         </div>
         <p class="character">{{Data.signature}}</p>
       </div>
-
     </div>
     <div class="fill"></div>
     <div class="card-bottom">
@@ -35,8 +34,14 @@
 <script>
   export default {
     name: "com-meberCard",
-    props:['Data'],
+    props:{
+      Data:{
+        type:Object,
+      }
+    },
+    mounted(){
 
+    },
     methods:{
       goUserManage(){
         this.$router.push({name:'userManage'})
@@ -60,6 +65,7 @@
       .headPhoto {
         width: 50px;
         height: 50px;
+        border-radius: 250px;
       }
       &-title {
         margin: 4px 0 0 16px;

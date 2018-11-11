@@ -1,6 +1,6 @@
 <template>
   <div class="appoint">
-    <navbar :name="'预约美师'"></navbar>
+
     <div class="address">
       <img :src="store.thumb" alt="" class="address-img">
       <dl>

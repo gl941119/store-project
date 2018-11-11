@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="'预约记录'"></navbar>
+
     <com-card :item="item"  v-for="item,index in appoint" :key="index"></com-card>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: #F4F4F4;height: 100%">
-    <navbar :name="navbarName"></navbar>
+
     <div class="cell">
       <a class="cell-left" v-on:click="cancelHandle">取消</a>
       <a class="cell-right" v-on:click="confirmHandle">保存</a>
@@ -52,7 +52,7 @@
     },
     mounted() {
       this.currentDate = new Date(parseInt(this.message))
-
+      document.title= this.navbarName
     },
     methods: {
       pickerChange(picker) {

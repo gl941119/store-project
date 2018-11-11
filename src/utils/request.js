@@ -8,30 +8,9 @@ import {Toast} from 'vant';
 
 
 
-// 解密
-let Base64 = {
-  encode(str) {
-    // first we use encodeURIComponent to get percent-encoded UTF-8,
-    // then we convert the percent encodings into raw bytes which
-    // can be fed into btoa.
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-      function toSolidBytes(match, p1) {
-        return String.fromCharCode('0x' + p1);
-      }));
-  },
-  decode(str) {
-    // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function (c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-  }
-};
-let config = window.location.hash.split('/').slice(-1)[0];
-config = JSON.parse(Base64.decode(config))
 
-console.log(config['domain'],config)
-axios.defaults.baseURL = config['domain']
 
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://192.168.3.23:80' : Cache.getConfig().domain
 axios.defaults.withCredentials = true;
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
@@ -44,14 +23,6 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     });
   }
 
-  let config
-  try {
-    config =  JSON.parse(window.sessionStorage.getItem('config'))
-  }catch (e) {
-    alert('无法获得config')
-  }
-
-
   if (process.env.NODE_ENV === 'development') {
     url = url.replace('eid=84', 'eid=153');
     url = url.replace('eid=85', 'eid=154');
@@ -60,19 +31,16 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=88', 'eid=157');
     url = url.replace('eid=89', 'eid=158');
   } else {
-    let key = Object.keys(config.binds)
-    url = url.replace('i=1','i='+config.uid)
-    url = url.replace('eid='+key[0], 'eid='+config.binds[key[0]]);
-    url = url.replace('eid='+key[1], 'eid='+config.binds[key[1]]);
-    url = url.replace('eid='+key[2], 'eid='+config.binds[key[2]]);
-    url = url.replace('eid='+key[3], 'eid='+config.binds[key[3]]);
-    url = url.replace('eid='+key[4], 'eid='+config.binds[key[4]]);
-    url = url.replace('eid='+key[5], 'eid='+config.binds[key[5]])
+    let config =  Cache.getConfig()
+    let key = Object.keys(config.binds);
+    url = url.replace('i=1', 'i=' + config.uid);
+    url = url.replace('eid=' + key[0], 'eid=' + config.binds[key[0]]);
+    url = url.replace('eid=' + key[1], 'eid=' + config.binds[key[1]]);
+    url = url.replace('eid=' + key[2], 'eid=' + config.binds[key[2]]);
+    url = url.replace('eid=' + key[3], 'eid=' + config.binds[key[3]]);
+    url = url.replace('eid=' + key[4], 'eid=' + config.binds[key[4]]);
+    url = url.replace('eid=' + key[5], 'eid=' + config.binds[key[5]])
   }
-
-
-
-
 
 
 // var url=url+'&openid=abc123';
@@ -85,7 +53,6 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
       headers: {},
     });
   } else if (type === 'POST') {
-
     return axios.post(url, qs.stringify(data), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -128,7 +95,7 @@ function requestHandle(params) {
         try {//分辨美师  >0 美师
           store.commit('setStore', res.data.user.store);
           Cache.setSession('store', res.data.user.store)
-          if(res.data.user.store != '0'){//是美师 结束长轮询
+          if (res.data.user.store != '0') {//是美师 结束长轮询
             window.clearInterval(Vue.prototype.$setInterval);
           }
         } catch (e) {
@@ -142,7 +109,6 @@ function requestHandle(params) {
           Toast.clear();
         } else if (res.data.code === 105) {
           Toast.clear();
-          this.$router.push({name: 'bindAccount'});
         } else {
           // alert(res.data.message)
           Toast.clear();

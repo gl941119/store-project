@@ -1,6 +1,6 @@
 <template>
 <div class="DetailsBeautyDivisionBox">
-  <navbar :name="'美师主页'"></navbar>
+
   <div class="DetailsBeautyDivisionH">
     <img :src="bannerImg" class="DetailsBeautyDivisionImg">
   </div>

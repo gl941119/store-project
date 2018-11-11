@@ -1,6 +1,5 @@
 <template>
   <div class="beautyBody">
-    <navbar :name="'选择银行'"></navbar>
 
     <!--<div class="exchangeTop" @click="returnChoiceBanks()">-->
       <!--<div class="exchangeBody">-->

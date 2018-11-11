@@ -1,6 +1,6 @@
 <template>
   <div class="fundOk">
-    <navbar :name="'美丽基金'"></navbar>
+
     <div class="fundOkPadding">
       <div class="fundOkH">
         <div>

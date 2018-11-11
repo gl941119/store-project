@@ -73,10 +73,7 @@
               this.$toast.success('支付成功')
               this.$emit('refresh')
             }
-
           })
-
-
         }else{
           this.$router.push({name:'confirm',params:{orderid:orderid}})
         }

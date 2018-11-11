@@ -1,6 +1,6 @@
 <template>
   <div class="detail" ref="out">
-    <navbar :name="title"></navbar>
+
     <van-tabs @click="onClick" swipeable class="tabs">
       <van-tab title="商品"></van-tab>
       <van-tab title="详情"></van-tab>
@@ -165,7 +165,7 @@
     mounted() {
       this.request()
 
-
+      document.title=this.title
       console.log(this.$refs['media'])
       let media = this.$refs['media']
 
@@ -239,6 +239,7 @@
       },
       onceBuy() {//立即购买
         if (this.specs.length === this.num) {//是否选择规格
+
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
             type: 'post',

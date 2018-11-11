@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <navbar :name="'发表评论'"></navbar>
+
     <div class="cell">
       <a class="cell-left" v-on:click="cancelHandle">取消</a>
       <a class="cell-right" v-on:click="confirmHandle">发布</a>
@@ -18,8 +18,8 @@
       <textarea class="area" maxlength="200" placeholder="宝贝的效果如何呢？发表一下自己的感受吧"
                 v-model="item.content"></textarea>
       <div class="upload">
-        <video class="upload-img" :src="val" controls v-for="val,num in item.videos" :key="num"></video>
-        <img class="upload-img" :src="val" alt="" v-for="val,num in item.imgs" :key="num">
+        <video class="upload-img" :src="val.avatar" controls v-for="val,num in item.videos" :key="num"></video>
+        <img class="upload-img" :src="val.avatar" alt="" v-for="val,num in item.imgs" :key="num">
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
@@ -65,23 +65,6 @@
     },
     mounted() {
       console.log(this.arr)
-
-
-      // this.arr.forEach((item)=>{
-      //   item = {
-      //     "goodsid": 1,
-      //     "content": "服务不错哟",
-      //     "score": 10,
-      //     "tip": 0,
-      //     "imgs": [
-      //       "images/1/2018/10/oa6II05NkKKewO6w6nxJB6n0wF5s0k.png",
-      //       "images/1/2018/10/D3rj93rDRTZaRp3Kdd85AR5kO55nyA.png",
-      //       "images/1/2018/10/EiB8ve8I1iSzAkV1EA5VB1KKBBScbI.png",
-      //       "images/1/2018/10/QE0Hsesth1sRDrtdt0rwn0sc27ttSe.png"
-      //     ]
-      //   }
-      // })
-
     },
     methods: {
       clickUpload(index) {
@@ -89,6 +72,7 @@
         this.index = index
       },
       uploadImg(e) {   // 上传照片
+        // alert('准备')
         var self = this;
         let file = e.target.files[0];
         let param = new FormData();  // 创建form对象
@@ -99,14 +83,18 @@
           headers: {'Content-Type': 'multipart/form-data'}
         };
         axios.defaults.withCredentials = true;
+        // alert(param)
         let uk = this.$store.state.uk || cache.getSession('uk');
-        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=88&act=fileupload&uk=' + uk, param, config)
+        // alert(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=')
+        axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=' + uk, param, config)
           .then(res => {
             console.log(res)
             if (res.data.code === 100) {
               this.$toast('上传成功')
-              console.log(res.data.data.imgs)
-              this.arr[this.index].imgs.push(res.data.data.imgs)
+              this.arr[this.index].imgs.push({
+                avatar: res.data.data.avatar,
+                imgs: res.data.data.imgs
+              })
             }
 
           })
@@ -125,12 +113,14 @@
         };
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || cache.getSession('uk');
-        axios.post('http://local.bzwx.com/app/index.php?i=1&c=entry&eid=87&act=fileuploadvideo&uk=' + uk, param, config)
+        axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileuploadvideo&uk=' + uk, param, config)
           .then(res => {
-            console.log(res)
-            alert(res.data)
+
             if (res.data.code === 100) {
-              this.arr[this.index].videos.push(res.data.data.videos)
+              this.arr[this.index].videos.push({
+                avatar: res.data.data.avatar,
+                videos: res.data.data.videos
+              })
               this.$toast('上传成功')
             }
 
@@ -161,22 +151,33 @@
           orderid: this.$route.params.id,
           goods: arr,
         }]
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=87&act=goodsdiscuss',
-          type: 'post',
-          data: {
-            discuss: JSON.stringify(result)
-          }
-        }).then((res) => {
-          if (res.code === 100) {
-            this.$toast.success('评论成功')
-            let thia = this
-            setTimeout(() => {
-              thia.$router.push({name: 'index'})
-            }, 500)
 
-          }
-        })
+
+        this.$dialog.confirm({
+          title: '是否发布评论',
+
+        }).then(() => {
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=87&act=goodsdiscuss',
+            type: 'post',
+            data: {
+              discuss: JSON.stringify(result)
+            }
+          }).then((res) => {
+            if (res.code === 100) {
+              this.$toast.success('评论成功')
+              let thia = this
+              setTimeout(() => {
+                thia.$router.push({name: 'index'})
+              }, 500)
+
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
+
+
       }
     }
   }

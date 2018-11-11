@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index'
-
+import Cache from './utils/cache';
 // iconfont
 import './assets/fonts/style.css'
 
@@ -16,48 +16,27 @@ import './utils/vant'
 
 
 
-// 解密
-let Base64 = {
-  encode(str) {
-    // first we use encodeURIComponent to get percent-encoded UTF-8,
-    // then we convert the percent encodings into raw bytes which
-    // can be fed into btoa.
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-      function toSolidBytes(match, p1) {
-        return String.fromCharCode('0x' + p1);
-      }));
-  },
-  decode(str) {
-    // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function (c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-  }
-};
-let config = window.location.hash.split('/').slice(-1)[0];
-config = JSON.parse(Base64.decode(config))
-console.log(config,'config')
-
-//赋值
 
 if (process.env.NODE_ENV === 'development') {
-  Vue.prototype.$i = 'i='+config.uid;
+  Vue.prototype.$i = 'i=1';
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
-  Vue.prototype.$eid = 156; //图片视频上传
-  Vue.prototype.$eids = 157; //会员头像上传
+  Vue.prototype.$eid = 156; //图片视频上传  87
+  Vue.prototype.$eids = 157; //会员头像上传 88
   Vue.prototype.$eidpay = 158; //支付
+
 } else {
-  this.$i = 'i='+config.uid;
-  this.$upUrl = config.domain+'/';
-  this.$eid = config.binds['87']; //图片视频上传
-  this.$eidpay = config.binds['89']; //支付
-  this.$eid162 = config.binds['86']; //支付
-  this.$eid161 = config.binds['85']; //支付
+  let config =  Cache.getConfig()
+  Vue.prototype.$i = 'i='+config.uid;
+  Vue.prototype.$upUrl = config.domain+'/';
+  Vue.prototype.$eid = config.binds['87']; //图片视频上传
+  Vue.prototype.$eidpay = config.binds['89']; //支付
+  Vue.prototype.$eid162 = config.binds['86']; //支付
+  Vue.prototype.$eid161 = config.binds['85']; //支付
+  Vue.prototype.$eids = config.binds['88']; //支付
 }
 
 
 
-window.sessionStorage.setItem('config', JSON.stringify(config))
 
 
 
@@ -90,20 +69,7 @@ Vue.component('search', Search);
 Vue.component('price-list', PriceList);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Vue.prototype.$baidu = function () {
+Vue.prototype.$baidu = function () {//联系卖家
   return window.open('http://p.qiao.baidu.com/cps/chat?siteId=12754459&userId=26723163')
 }
 
@@ -154,6 +120,7 @@ router.beforeEach((to, from, next) => {
 
 //插件
 import 'lib-flexible/flexible'
+
 
 /* eslint-disable no-new */
 new Vue({

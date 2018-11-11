@@ -1,7 +1,7 @@
 <template>
   <div class="index">
-    <navbar :name="'S+艾司商城'"></navbar>
 
+    <!--搜索栏-->
     <div class="search">
       <search :value.sync="value" class="search-left" v-on:click.native="goSearch"></search>
       <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
@@ -9,20 +9,20 @@
     </div>
     <div class="banner">
       <van-swipe :autoplay="3000">
-        <van-swipe-item v-for="item in data.slide" :key="item.name"><img :src="item.bimg" alt=""></van-swipe-item>
+        <van-swipe-item v-for="item in data.slide" :key="item.name" ><img :src="item.bimg" alt="" v-on:click="goLink(item.link)" ></van-swipe-item>
       </van-swipe>
     </div>
     <!--分类列表-->
     <com-list :data="data.cate"></com-list>
     <!--热销商品-->
     <com-model :data="goods_essence"></com-model>
-    <img :src="advOne" alt="" class="img">
+    <img :src="advOne.bimg" alt="" v-on:click="goLink(advOne.link)" class="img" >
     <!--热门体验卡-->
     <com-model :data="expre_cards" :type="false"></com-model>
     <!--会员专区-->
     <com-model :data="member_cards" :type="false"></com-model>
-    <img :src="advTwo" alt="" class="img">
-    <img :src="advThree" alt="" class="img">
+    <img :src="advTwo.bimg" alt="" v-on:click="goLink(advTwo.link)" class="img">
+    <img :src="advThree.bimg" alt="" v-on:click="goLink(advThree.link)" class="img">
   </div>
 </template>
 
@@ -47,9 +47,18 @@
         member_cards: {},
         adv: [],
         value: undefined,
-        advOne: undefined,
-        advTwo: undefined,
-        advThree: undefined,
+        advOne: {
+          bimg:undefined,
+          link:undefined
+        },
+        advTwo: {
+          bimg:undefined,
+          link:undefined
+        },
+        advThree: {
+          bimg:undefined,
+          link:undefined
+        },
       }
     },
     created() {
@@ -60,6 +69,9 @@
       this.request()
     },
     methods: {
+      goLink(link){//banner跳转
+        window.location.href = link
+      },
       scanBtn() {
         let thia = this;
         let re = window.location.href;
@@ -103,19 +115,21 @@
         });
       },
       request() {
-        console.log(13)
+
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=84',
-          data: {},
+          data: {
+            act:'index'
+          },
           type: 'get'
         }).then((res) => {
           this.data = res.data;
           this.goods_essence = res.data.goods_hot;
           this.expre_cards = res.data.expre_cards;
           this.member_cards = res.data.member_cards;
-          this.advOne = res.data.adv[0].bimg;
-          this.advTwo = res.data.adv[1].bimg;
-          this.advThree = res.data.adv[2].bimg
+          this.advOne = res.data.adv[0];
+          this.advTwo = res.data.adv[1];
+          this.advThree = res.data.adv[2]
         })
       },
       goSearch() {

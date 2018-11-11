@@ -1,6 +1,6 @@
 <template>
   <div class="userManage">
-    <navbar :name="'美丽积分'"></navbar>
+
 
   </div>
 </template>

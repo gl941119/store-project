@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <navbar :name="'全部评论'"></navbar>
+    <p v-if="discuss.length==0" class="notEvaluation">暂无评论</p>
     <com-evaluation-detail :discuss="item" v-for="item,index in discuss" :key="index"></com-evaluation-detail>
   </div>
 </template>
@@ -43,6 +43,13 @@
 </script>
 
 <style lang="scss" scoped>
-
+.notEvaluation{
+  padding: 30px 0;
+  text-align: center;
+  font-size:20px;
+  font-weight:400;
+  color:rgba(58,58,58,1);
+  line-height:14px;
+}
 
 </style>

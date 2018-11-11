@@ -1,40 +1,40 @@
 <template>
   <div>
-    <navbar :name="'我的订单'"></navbar>
+
     <van-tabs v-model="active" @change="tabChange" sticky>
       <van-tab title="全部">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="tabChange"
+                  @refresh="request"
         ></com-card>
       </van-tab>
       <van-tab title="待付款">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="tabChange"
+                  @refresh="request"
         ></com-card>
       </van-tab>
       <van-tab title="待发货">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="tabChange"
+                  @refresh="request"
         ></com-card>
       </van-tab>
       <van-tab title="待收货">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="tabChange"
+                  @refresh="request"
         ></com-card>
       </van-tab>
       <van-tab title="待评价">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
-                  @refresh="tabChange"
+                  @refresh="request"
         ></com-card>
       </van-tab>
     </van-tabs>
@@ -51,7 +51,7 @@
     },
     data() {
       return {
-        active: this.$route.params.type,
+        active: undefined,
         index: 0,
         ltype: 1,
         status: 0,
@@ -60,10 +60,10 @@
     },
     mounted() {
       this.tabChange()
+      this.active =this.$route.params.type
     },
 
     methods: {
-
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=myorderlist',
@@ -77,7 +77,6 @@
         })
       },
       tabChange(index) {
-        this.active = index;
         switch (index) {
           case 0:
             this.ltype = 1;

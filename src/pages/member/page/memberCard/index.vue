@@ -1,6 +1,6 @@
 <template>
     <div>
-      <navbar :name="'会员卡'"></navbar>
+
       <div class="tiyan">
         <div class="title">{{expData.name}}</div>
         <ul class="tiyan-left">

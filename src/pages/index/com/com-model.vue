@@ -3,7 +3,7 @@
     <div class="model-top">
       <div class="model-top-fill"></div>
       <span class="model-top-title">{{data.name}}</span>
-      <div class="model-top-more" v-on:click.self="doThat" v-if="type">查看更多</div>
+      <span class="model-top-more" v-on:click.self="doThat" v-if="type">查看更多</span>
       <van-icon name="arrow" class="model-top-icon" v-if="type"/>
     </div>
     <ul class="model-buttom">
@@ -71,15 +71,17 @@
         color: rgba(51, 51, 51, 1);
       }
       &-more {
+        height: 19px;
+        line-height: 19px;
         margin-right: 7px;
         color: rgba(153, 153, 153, 1);
-        line-height: 19px;
         font-size: 13px;
         font-family: PingFangSC-Regular;
       }
       &-icon {
-        margin-top: 2px;
-        height: 100%;
+        height: 19px;
+        line-height: 19px;
+
         font-size: 10px;
       }
     }

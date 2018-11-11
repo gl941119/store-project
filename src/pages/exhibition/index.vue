@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="'艾司官网'"></navbar>
+
     <img src="../../assets/image/image-1.png" alt="" class="banner">
     <div class="aboutUs">
       <p class="bg">ABOUT US</p>

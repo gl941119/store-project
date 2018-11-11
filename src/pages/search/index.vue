@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <navbar :name="'搜索栏'"></navbar>
+
     <div class="search">
       <div class="search-input">
         <van-icon name="search" class="icon"/>

@@ -1,6 +1,6 @@
 <template>
   <div class="userManage">
-    <navbar :name="'账号管理'"></navbar>
+
     <com-head :avatar='avatar' @Refresh="request"></com-head>
     <!--<com-list :listData="listData"></com-list>-->
     <ul class="list">

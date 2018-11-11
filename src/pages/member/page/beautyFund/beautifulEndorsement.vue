@@ -1,6 +1,6 @@
 <template>
   <div class="beautifulEndorsementBox">
-    <navbar :name="'美丽代言说明'"></navbar>
+
     <van-swipe @change="onChange">
       <van-swipe-item><img src="../../../../assets/image/image-bg.png" class="beautifulEndorsementImg"></van-swipe-item>
       <van-swipe-item><img src="../../../../assets/image/image-bg.png" class="beautifulEndorsementImg"></van-swipe-item>

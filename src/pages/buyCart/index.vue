@@ -1,6 +1,6 @@
 <template>
   <div class="buyCart">
-    <navbar :name="'购物车'"></navbar>
+
     <!--<product-card v-for="item,index in 4" class="product-card" :key="index"></product-card>-->
 
     <!--购物车卡片-->
@@ -11,7 +11,7 @@
         <div class="content-right">
           <div class="content-right-top">
             <span>{{item.title}}</span>
-            <img src="../../assets/image/删除.png" alt="" v-on:click="removeProduct(item.id)">
+            <img src="../../assets/image/删除.png" alt="" v-on:click.stop="removeProduct(item.id)">
           </div>
           <p class="content-right-middle">
             {{item.description}}

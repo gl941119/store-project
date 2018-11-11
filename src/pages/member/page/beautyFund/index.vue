@@ -1,6 +1,6 @@
 <template>
   <div class="beautyBody">
-    <navbar :name="'美丽基金'"></navbar>
+
     <div class="beautyBodyTop">
       <div class="beauty">
         <div class="beautyCart">

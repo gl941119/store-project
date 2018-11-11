@@ -1,6 +1,6 @@
 <template>
   <div class="chengeAddress">
-    <navbar :name="'收货地址'"></navbar>
+
     <ul class="list">
       <li class="list-cell">
         <div class="list-cell-title">收货人</div>

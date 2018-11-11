@@ -1,6 +1,6 @@
 <template>
   <div class="address">
-    <navbar :name="'收货地址'"></navbar>
+
     <ul class="list">
       <li v-for="item in listData" :key="item.id" class="list-card" v-on:click="goIndentConfirme(item)" >
         <div class="list-card-top">

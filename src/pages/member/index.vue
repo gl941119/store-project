@@ -1,8 +1,8 @@
 <template>
   <div style="padding-bottom: 50px">
-    <navbar :name="'会员中心'"></navbar>
+
     <!--会员详情-->
-    <com-member-card class="card" :Data="menberData"></com-member-card>
+    <com-member-card class="card" :Data="memberCard"></com-member-card>
     <!--我的订单-->
     <com-my-indent></com-my-indent>
     <!--列表-->
@@ -16,13 +16,13 @@
   import ComList from './com/com-list'
 
   export default {
-    name: "index",
+    name: "member",
     components: {
       ComMemberCard, ComMyIndent, ComList
     },
     data() {
       return {
-        menberData: {
+        memberCard: {
           address: undefined,
           avatar: undefined,
           birthday: undefined,
@@ -34,25 +34,11 @@
           share_amount: undefined,
           signature: undefined,
         },
-
       }
     },
     mounted() {
       this.request()
-
-      // let thia = this
-      // var _hmt = _hmt || [];
-      // (function () {
-      //   var hm = document.createElement("script");
-      //   hm.src = "https://hm.baidu.com/hm.js?52e7beb522789eee138201052df7acab";
-      //   var s = thia.$refs['jiao'];
-      //   console.log(thia.$refs['jiao'])
-      //   s.parentNode.insertBefore(hm, s);
-      // })();
-
-
     },
-
     methods: {
       request() {
         this.$request({
@@ -60,8 +46,7 @@
           type: 'get',
         }).then((res) => {
           let data = res.data.user;
-          this.menberData = data;
-
+          this.memberCard = data;
         })
       }
     }

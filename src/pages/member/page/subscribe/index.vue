@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="'我的预约'"></navbar>
+
     <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
 
   </div>

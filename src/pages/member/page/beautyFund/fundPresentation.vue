@@ -1,6 +1,6 @@
 <template>
   <div class="beautyBody">
-    <navbar :name="'美丽基金'"></navbar>
+
     <div class="exchangeBox">
       <div class="exchangeTop" @click="choiceBanks()">
         <div class="exchangeBody">

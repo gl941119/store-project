@@ -1,6 +1,6 @@
 <template>
   <div class="eInformation">
-    <navbar :name="'员工端个人资料'"></navbar>
+
     <div class="eInformationPadding">
       <div class="eInformationBg">
         <div class="eInformationFlex">

@@ -39,24 +39,30 @@ export default {
     if (!name) return;
     window.localStorage.removeItem(name);
   },
-  // getCookie(name) {
-  //     var strCookie = document.cookie;
-  //     var arrCookie = strCookie.split("; ");
-  //     let login_identify;
-  //     for (var i = 0; i < arrCookie.length; i++) {
-  //         var arr = arrCookie[i].split("=");
-  //         if (arr[0] == name) {
-  //             login_identify = arr[1];
-  //             break;
-  //         }
-  //     }
-  //     return login_identify;
-  // },
-  // removeCookie(name) {
-  //     var exp = new Date();
-  //     exp.setTime(exp.getTime() - 1);
-  //     var cval = this.getCookie(name);
-  //     if (cval != null)
-  //         document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-  // }
+  encode(str) {//Base64加密
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+      function toSolidBytes(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
+  },
+  decode(str) {//Base64解密
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return window.decodeURIComponent(window.atob(str).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  },
+  getConfig(){
+    let config
+    if (!window.sessionStorage.getItem('config')) {//url上获取config
+      config = window.location.hash.split('/').slice(-1)[0];
+      config = this.decode(config)//解码
+      window.sessionStorage.setItem('config',config)
+      config = JSON.parse(config)
+      return config
+    } else {//本地获取config
+      config = JSON.parse(window.sessionStorage.getItem('config'))
+      return config
+    }
+
+  }
 };

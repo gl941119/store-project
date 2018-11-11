@@ -1,6 +1,6 @@
 <template>
   <div class="beautyBody">
-    <navbar :name="'积分兑换'"></navbar>
+
     <div class="exchangeBox">
       <div class="exchangeTop">
         <div class="exchangeBody">

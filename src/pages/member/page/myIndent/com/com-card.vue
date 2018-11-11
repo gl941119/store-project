@@ -32,13 +32,15 @@
       </van-button>
 
       <van-button round plain type="default" class="cancelBtn"
-                  v-if="good.status== '0'||good.status== '1'"
+                  v-if="good.status== '0'"
                   v-on:click="cancelHandle(good.goods[0].ordersn)">
         取消订单
       </van-button>
 
 
-      <van-button round plain type="default" class="cancelBtn" v-if="good.status== '2'">
+      <van-button round plain type="default" class="cancelBtn" v-if="good.status== '2'"
+            v-on:click="logisticsHandle(good.goods[0].ordersn)"
+      >
         查看物流
       </van-button>
 
@@ -85,15 +87,26 @@
     },
     methods: {
       goindentConfirme(ordersn){
-        window.sessionStorage.setItem('ordersn',ordersn)
-        this.$router.push({name:'indentConfirme'})
+        this.$dialog.confirm({
+          title: '是否跳转付款页面？',
+        }).then(() => {
+          window.sessionStorage.setItem('ordersn',ordersn)
+          this.$router.push({name:'indentConfirme'})
+        }).catch(() => {
+          // on cancel
+        });
+      },
+      logisticsHandle(ordersn){//查看物流
+        console.log(ordersn)
+        this.$router.push({name:"logistics",params:{ordersn:ordersn}})
+
       },
       gobaidu(){
         this.$baidu()
       },
       confirmHandle(id) {//确认收货
         this.$dialog.confirm({
-          title: '是否确认收货',
+          title: '是否确认收货?',
         }).then(() => {
           this.reqChange(id, 3)
         }).catch(() => {
@@ -134,8 +147,6 @@
                 thia.$emit('refresh')
               }, 1000)
             }
-
-
           }
         })
 
@@ -145,8 +156,6 @@
       },
       goAppraise(id) {//跳转评价
         let arr = []
-
-
         this.good.goods.forEach((item) => {
           let obj = {
             thumb: item.thumb,

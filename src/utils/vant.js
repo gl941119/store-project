@@ -28,6 +28,7 @@ import {
   Actionsheet,//Actionsheet
   Dialog,//弹窗
   PullRefresh,//下拉
+  Step, Steps,//步骤条
 } from 'vant';
 Vue.use(Row).use(Col);
 Vue.use(Button);
@@ -52,3 +53,4 @@ Vue.use(Switch);
 Vue.use(Actionsheet);
 Vue.use(Dialog);
 Vue.use(PullRefresh);
+Vue.use(Step).use(Steps);

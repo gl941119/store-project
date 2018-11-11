@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="'S+艾司商城'"></navbar>
+
     <search :value="value" class="search" v-on:click.native="goSearch"></search>
     <div class="nav">
       <ul class="nav-left">

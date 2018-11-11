@@ -1,6 +1,6 @@
 <template>
   <div class="indentConfirme">
-    <navbar :name="'订单确认'"></navbar>
+
     <!--收货地址-->
     <com-address :address="address" v-on:click.native="goAddress"></com-address>
     <div class="main">

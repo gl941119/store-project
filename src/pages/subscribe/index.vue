@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <navbar :name="name"></navbar>
+
     <div class="search">
       <div class="search-input">
         <van-icon name="search" class="icon"/>
@@ -53,6 +53,7 @@
     mounted() {
       // console.log(this.$route.params.type)
       this.handle()
+      document.title = this.name
     },
     methods: {
 

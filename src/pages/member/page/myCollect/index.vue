@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <navbar :name="'我的收藏'"></navbar>
+
     <van-tabs v-model="active" @click="onClick">
       <van-tab title="商品">
         <product-card :Data="item" v-for="item in productList" :key="item.id"></product-card>

@@ -1,6 +1,6 @@
 <template>
   <div class="jiFenPaiHang" ref="myBoxSrc" @scroll.passive="onScroll($event)">
-    <div><navbar ref="navs" :name="'积分排行榜'"></navbar></div>
+    <div></div>
 
     <div ref="myDiv">
       <div class="oneDyList" >

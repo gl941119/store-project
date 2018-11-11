@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="'账号绑定'"></navbar>
+
     <div class="bindAccount">
       <div class="bindAccountBox accountFlex">
         <div class="bindAccountTopL">
@@ -9,7 +9,7 @@
         </div>
 
         <div class="bindAccountTopRBox">
-          <div class="bindAccountTopR" @click="saoMiao()">
+          <div class="bindAccountTopR" v-on:click="saoMiao">
             <div class="bindAccountTopRIg"></div>
             <div>扫一扫</div>
           </div>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="bindAccountSubmitBox">
-          <div class="bindAccountSubmit" @click="bindAccountSubmit()">注册绑定</div>
+          <van-button type="default" class="bindAccountSubmit" v-on:click="bindAccountSubmit">注册绑定</van-button>
         </div>
 
       </div>
@@ -142,7 +142,7 @@
 
         },
         bindAccountSubmit(){
-          if(testPhone.test(this.phone)&&testName.test(this.names)){
+
             this.$request({
               url:'app/index.php?i=1&c=entry&eid=87&act=binduser',
               type:'post',
@@ -156,7 +156,7 @@
                 this.$router.push({name:'member'});
               }
             });
-          }
+
         }
 
 
@@ -298,6 +298,8 @@ color:rgba(170,170,170,1);
   line-height: 29px;
 }
   .bindAccountSubmit{
+    display: block;
+    margin: 0 auto;
     font-size:16px;
     font-family:PingFangSC-Medium;
     font-weight:500;

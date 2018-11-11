@@ -1,6 +1,6 @@
 <template>
   <div class="invite">
-    <navbar :name="'邀请好友'"></navbar>
+
     <div class="content">
       <p class="content-title">您的邀请码</p>
       <p class="content-num">{{code}}</p>

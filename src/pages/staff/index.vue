@@ -1,6 +1,6 @@
 <template>
   <div class="staff">
-    <navbar :name="'美师端'"></navbar>
+
     <!--员工信息-->
     <com-info :conInfo="infoTxt" @init="init"></com-info>
     <!--我的预约-->

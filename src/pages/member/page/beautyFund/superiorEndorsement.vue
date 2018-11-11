@@ -1,6 +1,6 @@
 <template>
   <div class="beautyBody">
-    <navbar :name="'我的上级美丽代言'"></navbar>
+
     <div class="oneDy">
       <div class="oneDyTop">总计： {{ len }}人</div>
     </div>

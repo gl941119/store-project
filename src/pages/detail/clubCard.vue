@@ -1,6 +1,6 @@
 <template>
   <div class="detail" ref="out">
-    <navbar :name="'会员卡'"></navbar>
+
     <!--<van-tabs @click="onClick" swipeable class="tabs">-->
       <!--<van-tab title="商品"></van-tab>-->
       <!--<van-tab title="详情"></van-tab>-->

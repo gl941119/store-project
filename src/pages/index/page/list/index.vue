@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="catename"></navbar>
+
     <select-bar @emitSort="setSort"></select-bar>
     <product-card v-for="item in Data" :key="Data.id" :Data="item" ></product-card>
   </div>

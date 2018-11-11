@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="'我的评价'"></navbar>
+
     <div class="serverEvaluate">
       <div class="serverEvaluateWbg">
         <div class="serverEvaluateW">

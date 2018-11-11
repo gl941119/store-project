@@ -23,7 +23,6 @@
     /*color: #2c3e50;*/
     /*margin-top: 60px;*/
     /*margin-bottom: 49px;*/
-    padding-top: 44px;
     display: flex;
     flex-direction: column;
     width: 375px;

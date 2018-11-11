@@ -1,6 +1,6 @@
 <template>
 <div>
-  <navbar :name="'员工端个人资料'"></navbar>
+
   <div class="editYgInfos">
     <textarea class="editYgInfosArea" v-if="status" v-model="text"></textarea>
     <div class="editYgInfosTab" v-else>

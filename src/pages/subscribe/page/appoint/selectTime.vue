@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :name="name"></navbar>
+
     <cosmetologist-card :type="false" :Data="member" class="card"></cosmetologist-card>
     <!--选择天数-->
     <select-day :time='time'></select-day>
@@ -99,6 +99,7 @@
         }).then((res) => {
           this.member = res.data.member;
           this.name = `${res.data.member.displayorder}号美师`;
+          document.title = this.name
           let obj = res.data.ttime
           Object.keys(obj).forEach((item) => {
             obj[item].date = obj[item].date.split('-').slice(-2).join('.')
