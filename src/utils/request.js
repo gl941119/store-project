@@ -12,6 +12,34 @@ import {Toast} from 'vant';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://192.168.3.23:80' : Cache.getConfig().domain
 axios.defaults.withCredentials = true;
+export const wxRequest = params => {
+  let config = {
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  };
+  let r = 'http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url=' + params;
+  axios.post(r, null, config)
+    .then((res) => {
+      if (res.data.status) {
+        var d = res.data.data.config;
+        wx.config({
+          debug: false, // 开启调试模式,
+          appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+          timestamp: d.timestamp, // 必填，生成签名的时间戳
+          nonceStr: d.nonceStr, // 必填，生成签名的随机串
+          signature: d.signature,// 必填，签名，见附录1
+          jsApiList: ['scanQRCode','downloadImage','uploadImage','chooseImage','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+//scanQRCode 扫一扫','downloadImage 图片下载',
+// uploadImage 图片上传', 'chooseImage 拍照或从手机相册中选图接口',
+// onMenuShareTimeline “分享到朋友圈”按钮点击状态及自定义分享内容接口',
+// onMenuShareAppMessage 分享给朋友”按钮点击状态及自定义分享内容接口']
+
+      }
+    }).catch((res) => {
+    var ss = res + 'catch请求失败';
+    alert(ss)
+  });
+}
 
 async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
 
@@ -124,3 +152,5 @@ function requestHandle(params) {
 }
 
 export default requestHandle;
+
+

@@ -95,7 +95,7 @@
         this.index = index
       },
       uploadImg(e) {   // 上传照片
-        // alert('准备')
+        alert('准备')
         var self = this;
         let file = e.target.files[0];
         let param = new FormData();  // 创建form对象
