@@ -9,14 +9,16 @@
         </div>
       </div>
     </div>
-
-    <div class="exchangeWidth">
-      <div class="exchangeTitle">提现积分</div>
-      <div class="exchangeFlex">
-        <div class="exchangeInputImg"></div>
-        <div class="exchangeInputPadding"><input type="number" class="exchangeInput" v-model="score" /></div>
-      </div>
+<div class="exchangeWidthBg">
+  <div class="exchangeWidth">
+    <div class="exchangeTitle">提现积分</div>
+    <div class="exchangeFlex">
+      <div class="exchangeInputImg"></div>
+      <div class="exchangeInputPadding"><input type="number" class="exchangeInput" v-model="score" /></div>
     </div>
+  </div>
+</div>
+
 
     <div class="exchangeBtnPadding">
       <div class="exchangeBtn" @click="exchangeSub()">兑换</div>
@@ -76,6 +78,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .exchangeWidthBg{
+    background-color: #fff;
+  }
 .exchangeBox{
   background-color: rgba(244,244,244,1);
   $width: 345px !global;
@@ -115,6 +120,7 @@ width: $width;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-bottom: 2px;
 }
 .exchangeWidth{
   width:$width;

@@ -162,6 +162,7 @@ width: $width;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-bottom: 2px;
 }
 .exchangeWidth{
   width:$width;

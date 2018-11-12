@@ -67,6 +67,7 @@
 <style lang="scss" scoped>
   .banksInput{
     width: 200px;
+    border-radius: 0px;
     border-bottom: 1px solid rgba(216,216,216,1);
     margin-left: 10px;
     padding: 3px;
