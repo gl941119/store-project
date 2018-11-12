@@ -80,6 +80,7 @@
             var result = res.resultStr + '扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
           }
         })
+     
       },
       request() {
         this.$request({
