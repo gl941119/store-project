@@ -2,19 +2,19 @@
   <div class="detail" ref="out">
 
     <!--<van-tabs @click="onClick" swipeable class="tabs">-->
-      <!--<van-tab title="商品"></van-tab>-->
-      <!--<van-tab title="详情"></van-tab>-->
+    <!--<van-tab title="商品"></van-tab>-->
+    <!--<van-tab title="详情"></van-tab>-->
     <!--</van-tabs>-->
     <!--商品-->
     <div class="detali-product product">
       <!--banner-->
       <!--<van-swipe :autoplay="300000000000000000" class="swipe">-->
-        <!--<van-swipe-item v-if="Data.video">-->
-          <!--<video :src="Data.video" autoplay controls class="swipe-video"/>-->
-        <!--</van-swipe-item>-->
-        <!--<van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">-->
-          <!--<img :src="item" alt="" class="swipe-img">-->
-        <!--</van-swipe-item>-->
+      <!--<van-swipe-item v-if="Data.video">-->
+      <!--<video :src="Data.video" autoplay controls class="swipe-video"/>-->
+      <!--</van-swipe-item>-->
+      <!--<van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">-->
+      <!--<img :src="item" alt="" class="swipe-img">-->
+      <!--</van-swipe-item>-->
       <!--</van-swipe>-->
       <img :src="Data.imgurl" alt="" class="swipe">
       <!--详情-->
@@ -33,11 +33,12 @@
 
       <!--&lt;!&ndash;产品详情&ndash;&gt;-->
       <!--<div class="presentation" ref="presentation">-->
-        <!--<p class="presentation-title">产品详情</p>-->
-        <!--&lt;!&ndash;<div class="presentation-fill"></div>&ndash;&gt;-->
-        <!--<div class="presentation-content" v-html="Data.content"></div>-->
+      <!--<p class="presentation-title">产品详情</p>-->
+      <!--&lt;!&ndash;<div class="presentation-fill"></div>&ndash;&gt;-->
+      <!--<div class="presentation-content" v-html="Data.content"></div>-->
       <!--</div>-->
-      <button class="buy" v-on:click="goAppoint">立即购买</button>
+      <button class="buy" v-on:click="goAppoint">立即购买
+      </button>
 
     </div>
 
@@ -48,45 +49,55 @@
 <script>
 
 
-
   export default {
     name: "detail",
-    components: {
-
-    },
+    components: {},
     data() {
       return {
         id: this.$route.params.id,
-        Data:{},
+        Data: {},
       }
     },
     mounted() {
       this.request()
     },
     methods: {
-        request(){
+      request() {
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=89&act=cardinfo',
+          type: 'post',
+          data: {
+            id: this.$route.params.id
+          }
+        }).then(res => {
+          this.Data = res.data
+          document.title = res.data.name
+        })
+      },
+      goAppoint() {
+        if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定账号
+          this.$router.push({name: 'bindAccount'});
+          return
+        }
+
+
+        this.$dialog.confirm({
+          title: '是否购买？',
+        }).then(() => {
           this.$request({
-            url:'app/index.php?i=1&c=entry&eid=89&act=cardinfo',
-            type:'post',
-            data:{
-              id:this.$route.params.id
+            url: 'app/index.php?i=1&c=entry&eid=89&act=buycard',
+            type: 'post',
+            data: {
+              id: this.$route.params.id
             }
-          }).then(res=>{
-           this.Data  =res.data
-          })
-        },
-      goAppoint(){
-          this.$request({
-            url:'app/index.php?i=1&c=entry&eid=89&act=buycard',
-            type:'post',
-            data:{
-              id:this.$route.params.id
+          }).then(res => {
+            if (res.code === 100) {//支付
+              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay + '&act=payorder&orderid=' + res.data.orderid
             }
-          }).then(res=>{
-           if(res.code === 100){//支付
-             window.location.href=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eidpay+'&act=payorder&orderid='+res.data.orderid
-           }
           })
+        }).catch(() => {
+          // on cancel
+        });
 
 
       }
@@ -95,19 +106,20 @@
 </script>
 
 <style lang="scss" scoped>
-  .buy{
+  .buy {
     position: fixed;
     bottom: 0;
     right: 0;
-    width:125px;
-    height:49px;
-    background:rgba(113,179,255,1);
-    box-shadow:0px 4px 7px 0px rgba(204,226,249,1);
-    font-size:18px;
-    font-family:PingFangSC-Regular;
-    color:rgba(255,255,255,1);
-    line-height:25px;
+    width: 125px;
+    height: 49px;
+    background: rgba(113, 179, 255, 1);
+    box-shadow: 0px 4px 7px 0px rgba(204, 226, 249, 1);
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    color: rgba(255, 255, 255, 1);
+    line-height: 25px;
   }
+
   .detail {
     padding-bottom: 50px;
     position: relative;

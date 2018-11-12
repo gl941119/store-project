@@ -229,7 +229,6 @@ let router = new Router({
     {//会员中心--用户管理--修改
       path: '/member/userManage/userChange/:type/:message',
       name: 'userChange',
-      title:'修改收货地址',
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/member/page/userManage/page/userChange'], resolve)
     },
@@ -402,10 +401,10 @@ function setTitle(title) {
 
 router.afterEach((transition) => {
 
+  console.log(transition)
+  console.log(router.options)
   let name = transition.name;
-  console.log(name)
   let item = router.options.routes.filter((ele) => { return ele.name === name; });
-
   setTitle(item[0].title);
 });
 

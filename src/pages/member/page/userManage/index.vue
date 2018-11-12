@@ -4,19 +4,19 @@
     <com-head :avatar='avatar' @Refresh="request"></com-head>
     <!--<com-list :listData="listData"></com-list>-->
     <ul class="list">
-      <router-link tag="li" :to="{ path: '/member/userManage/userChange/0/'+nameData.message}" class="list-li">
+      <router-link tag="li" :to="{ name: 'userChange',params:{type:'0',message:nameData.message}}" class="list-li">
         <cell :Data="nameData" class="cell"></cell>
       </router-link>
-      <router-link tag="li" :to="{ path: '/member/userManage/userChange/1/'+sexData.message}" class="list-li">
+      <router-link tag="li" :to="{ name: 'userChange',params:{type:'1',message:sexData.message}}" class="list-li">
         <cell :Data="sexData" class="cell"></cell>
       </router-link>
-      <router-link tag="li" :to="{ path: '/member/userManage/userChange/2/'+birthdayDate}" class="list-li">
+      <router-link tag="li" :to="{ name: 'userChange',params:{type:'2',message:birthdayDate}}" class="list-li">
         <cell :Data="birthdayData" class="cell"></cell>
       </router-link>
       <router-link tag="li" :to="{ path: '/member/userManage/address/2'}" class="list-li">
         <cell :Data="addressData" class="cell"></cell>
       </router-link>
-      <router-link tag="li" :to="{ path: '/member/userManage/userChange/4/'+signatureData.message}" class="list-li">
+      <router-link tag="li" :to="{ name: 'userChange',params:{type:'4',message:signatureData.message}}" class="list-li">
         <cell :Data="signatureData" class="cell"></cell>
       </router-link>
     </ul>

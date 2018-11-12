@@ -28,7 +28,7 @@
     data() {
       return {
         type: this.$route.params.type,
-        message: this.$route.params.message&&'6',
+        message: this.$route.params.message,
         columns: ['男', '女'],
         sex: '男',
         currentDate: new Date(),
@@ -51,7 +51,7 @@
     },
     mounted() {
       this.currentDate = new Date(parseInt(this.message))
-
+    document.title = this.navbarName
     },
     methods: {
       pickerChange(picker) {

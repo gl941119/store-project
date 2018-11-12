@@ -125,6 +125,7 @@
             }
           }).then((res) =>{
             if(res.status){
+              this.$toast.success('已发送')
               this.fundCode=false;
               var num=59;
               var setVal= setInterval(()=>{
@@ -154,7 +155,10 @@
               }
             }).then((res) => {
               if(res.status){
-                this.$router.push({name:'member'});
+                // this.$router.push({name:'member'});
+                this.$toast.success('绑定成功')
+                window.sessionStorage.setItem('is_bind','1')
+                this.$router.go(-1)
               }
             });
 
