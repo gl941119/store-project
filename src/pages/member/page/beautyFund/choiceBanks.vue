@@ -18,7 +18,7 @@
         <div><input type="number" class="banksInput" v-model="card"/></div>
       </div>
       <div class=" bindAccountBoxMTop accountFlex">
-        <div class="fundPresentationYhTitle">开户名称：</div>
+        <div class="fundPresentationYhTitle">开户姓名：</div>
         <div><input type="text"  class="banksInput" v-model="cardN"/></div>
       </div>
 
