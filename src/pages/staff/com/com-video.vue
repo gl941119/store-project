@@ -102,6 +102,7 @@
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
         var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
+        alert(file.name)
         axios.post(url + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
@@ -115,11 +116,14 @@
                 e.target.value='';
                 this.vdGou=true;
               }
-
-
+            }else{
+              var ms=res.data.code+'---'+res.data.message;
+              alert(res.data.message)
             }
 
-          })
+          }).catch((res)=>{
+
+        })
       },
       bindAccountSubmit(){
         if(this.vedioSrc&&this.imgSrc){
