@@ -71,8 +71,8 @@
 
     </div>
   </div>
-  <van-popup v-model="show">
-    <video class="video" controls>
+  <van-popup v-model="show" :click-overlay="vanPopup()">
+    <video class="video" id="myVideo" controls ref="videoSourceRef">
       <source :src="vedioSrc" type="video/mp4">
       您的浏览器不支持Video标签。
     </video>
@@ -102,16 +102,38 @@
             name:'',
             intro:'',//个人介绍
             show:false,
-            vedioSrc:''
+            vedioSrc:'',
+            isPlay:false,
+            _dom:null,
+            playStatus:''
           }
       },
       mounted(){
         this.init();
       },
       methods:{
+        vanPopup(){
+          setTimeout(()=>{
+            let myVideo= document.getElementById('myVideo');
+            if(myVideo!=null){
+              if(!this.show){
+                myVideo.pause();
+              }
+
+            }
+
+          },500)
+        },
         movieBtn(src){
           this.vedioSrc=src;
           this.show=true;
+          setTimeout(()=>{
+            let myVideo= document.getElementById('myVideo');
+          myVideo.setAttribute('s','1');
+            myVideo.play();
+          },500)
+
+
         },
         imgEvent(list,index){
           ImagePreview({

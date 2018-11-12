@@ -18,7 +18,7 @@
       <textarea class="area" maxlength="200" placeholder="宝贝的效果如何呢？发表一下自己的感受吧"
                 v-model="item.content"></textarea>
       <div class="upload">
-        <video class="upload-img" :src="val.avatar" controls v-for="val,num in item.videos" :key="num"></video>
+        <video class="upload-img" :src="val.avatar" v-for="val,num in item.videos"  @click="videoClick($event,val.avatar)" :key="num"></video>
         <img class="upload-img" :src="val.avatar" alt="" v-for="val,num in item.imgs" :key="num">
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise.png" alt="">
@@ -43,6 +43,12 @@
       </div>
     </div>
 
+    <van-popup v-model="show" :click-overlay="vanPopup()">
+      <video class="video" id="myVideo" controls ref="videoSourceRef">
+        <source :src="vedioSrc" type="video/mp4">
+        您的浏览器不支持Video标签。
+      </video>
+    </van-popup>
 
   </div>
 </template>
@@ -61,12 +67,29 @@
         area: undefined,
         img: undefined,
         index: undefined,//点击暂存
+        show:false,
+        vedioSrc:''
       }
     },
     mounted() {
       console.log(this.arr)
     },
     methods: {
+      vanPopup(){
+        setTimeout(()=>{
+          let myVideo= document.getElementById('myVideo');
+          if(myVideo!=null){
+            if(!this.show){
+              myVideo.pause();
+            }
+          }
+
+        },500)
+      },
+      videoClick(e,src){
+        this.show=true;
+        this.vedioSrc=src;
+      },
       clickUpload(index) {
 
         this.index = index
@@ -209,7 +232,7 @@
     }
     > span {
       margin-left: 10px;
-      width: 60px;
+      /*width: 60px;*/
       height: 21px;
       font-size: 15px;
       font-family: PingFangSC-Regular;
@@ -302,7 +325,7 @@
     justify-content: space-between;
     align-items: center;
     &-left {
-      width: 30px;
+      /*width: 30px;*/
       height: 21px;
       font-size: 15px;
 
@@ -311,7 +334,7 @@
       line-height: 21px;
     }
     &-right {
-      width: 30px;
+      /*width: 30px;*/
       height: 21px;
       font-size: 15px;
       font-weight: 500;
