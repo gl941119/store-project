@@ -28,10 +28,10 @@
     <div class="beautyList beautyListMargin">
       <div class="beautyListPading">
         <van-cell-group>
-          <van-cell title="我的美丽代言码" is-link :to="{ path:'/beautyFund/beautifulEndorsement'}"/>
-          <van-cell title="我的上级美丽代言" is-link :to="{ path:'/beautyFund/superiorEndorsement'}"/>
-          <van-cell title="我的一级美丽代言" is-link :to="{ path:'/beautyFund/oneEndorsement'}"/>
-          <van-cell title="我的二级美丽代言" is-link :to="{ path:'/beautyFund/twoEndorsement'}"/>
+          <van-cell title="我的美丽代言码" is-link class="cellGroup" :to="{ path:'/beautyFund/beautifulEndorsement'}"/>
+          <van-cell title="我的上级美丽代言" is-link class="cellGroup" :to="{ path:'/beautyFund/superiorEndorsement'}"/>
+          <van-cell title="我的一级美丽代言" is-link class="cellGroup" :to="{ path:'/beautyFund/oneEndorsement'}"/>
+          <van-cell title="我的二级美丽代言" is-link class="cellGroup" :to="{ path:'/beautyFund/twoEndorsement'}"/>
         </van-cell-group>
       </div>
     </div>
@@ -39,8 +39,8 @@
     <div class="beautyList">
       <div class="beautyListPading">
         <van-cell-group>
-          <van-cell title="积分排行榜" is-link :to="{ path:'/beautyFund/IntegralRanking'}"/>
-          <van-cell title="美丽代言说明" is-link />
+          <van-cell title="积分排行榜" is-link class="cellGroup" :to="{ path:'/beautyFund/IntegralRanking'}"/>
+          <van-cell title="美丽代言说明" is-link class="cellGroup" />
         </van-cell-group>
       </div>
     </div>
@@ -81,8 +81,14 @@ url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
 
     }
 </script>
-
+<style>
+  .cellGroup > div{
+    display: flex;
+    align-items: center;
+  }
+</style>
 <style lang="scss" scoped>
+
   .beautyBody{
     background-color: #F4F4F4;
   }
