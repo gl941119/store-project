@@ -32,6 +32,7 @@
   import ComModel from './com/com-model'
   import ComList from './com/com-list'
   import axios from 'axios'
+  import wx from 'weixin-js-sdk'
 
 
   export default {
