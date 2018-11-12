@@ -7,7 +7,7 @@
       <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"></com-prodectcard>
       <div class="fill"></div>
       <van-cell title="美丽积分券:" is-link class="cell">
-        <span class="cell-default">{{score_nex=='0'? '不可用':'可用'}}</span>
+        <span>{{score_nex}}分</span>
       </van-cell>
       <div class="fill"></div>
       <van-cell title="美丽基金:" is-link class="cell">

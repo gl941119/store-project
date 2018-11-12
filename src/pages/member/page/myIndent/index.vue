@@ -78,7 +78,6 @@
         })
       },
       tabChange(index) {
-       
         switch (index) {
           case 0:
             this.ltype = 1;

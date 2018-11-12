@@ -69,7 +69,7 @@
         }
       }
       &-bottom {
-        margin-top: 4px;
+        margin-top: 14px;
         overflow: hidden;
         width: 250px;
         line-height: 5px;
