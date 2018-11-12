@@ -9,14 +9,16 @@
     </div>
     <div class="banner">
       <van-swipe :autoplay="3000">
-        <van-swipe-item v-for="item in data.slide" :key="item.name" ><img :src="item.bimg" alt="" v-on:click="goLink(item.link)" ></van-swipe-item>
+        <van-swipe-item v-for="item in data.slide" :key="item.name"><img :src="item.bimg" alt=""
+                                                                         v-on:click="goLink(item.link)">
+        </van-swipe-item>
       </van-swipe>
     </div>
     <!--分类列表-->
     <com-list :data="data.cate"></com-list>
     <!--热销商品-->
     <com-model :data="goods_essence"></com-model>
-    <img :src="advOne.bimg" alt="" v-on:click="goLink(advOne.link)" class="img" >
+    <img :src="advOne.bimg" alt="" v-on:click="goLink(advOne.link)" class="img">
     <!--热门体验卡-->
     <com-model :data="expre_cards" :type="false"></com-model>
     <!--会员专区-->
@@ -29,10 +31,8 @@
 <script>
   import ComModel from './com/com-model'
   import ComList from './com/com-list'
-  import wx from 'weixin-js-sdk'
   import axios from 'axios'
 
-  import qs from 'qs';
 
   export default {
     name: "index",
@@ -48,16 +48,16 @@
         adv: [],
         value: undefined,
         advOne: {
-          bimg:undefined,
-          link:undefined
+          bimg: undefined,
+          link: undefined
         },
         advTwo: {
-          bimg:undefined,
-          link:undefined
+          bimg: undefined,
+          link: undefined
         },
         advThree: {
-          bimg:undefined,
-          link:undefined
+          bimg: undefined,
+          link: undefined
         },
       }
     },
@@ -69,10 +69,11 @@
       this.request()
     },
     methods: {
-      goLink(link){//banner跳转
+      goLink(link) {//banner跳转
         window.location.href = link
       },
       scanBtn() {
+
         let thia = this;
         let re = window.location.href;
         let config = {
@@ -104,9 +105,7 @@
                   var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
                   alert(res)
                   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-
                 });
-
               });
             }
           }).catch((res) => {
@@ -118,7 +117,7 @@
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=84',
           data: {
-            act:'index'
+            act: 'index'
           },
           type: 'get'
         }).then((res) => {
@@ -129,7 +128,7 @@
           this.advOne = res.data.adv[0];
           this.advTwo = res.data.adv[1];
           this.advThree = res.data.adv[2]
-          window.sessionStorage.setItem('is_bind',res.data.is_bind)
+          window.sessionStorage.setItem('is_bind', res.data.is_bind)
         })
       },
       goSearch() {

@@ -51,14 +51,18 @@ export default {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
   },
-  getConfig(){
+  getConfig() {
     let config
     if (!window.sessionStorage.getItem('config')) {//url上获取config
-      config = window.location.hash.split('/').slice(-1)[0];
-      config = this.decode(config)//解码
-      window.sessionStorage.setItem('config',config)
-      config = JSON.parse(config)
-      return config
+      if (window.location.hash.split('?').length != 1) {//url上有config
+        let config = window.location.hash.split('?')[1]
+        console.log(config)
+        config = this.decode(config)//解码
+        window.sessionStorage.setItem('config', config)
+        config = JSON.parse(config)
+      } else {//url上没有config
+        alert('数据获取失败')
+      }
     } else {//本地获取config
       config = JSON.parse(window.sessionStorage.getItem('config'))
       return config
