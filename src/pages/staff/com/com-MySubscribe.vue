@@ -11,11 +11,11 @@
       </div>
       <div>
         <div>
-          <van-button type="default" class="header-Btn headerBtn" v-if="statusBtn && mySub.startTime == null?true:false" @click="startBtn">开始</van-button>
+          <van-button type="default" class="header-Btn headerBtn" v-if="mySub.startTime" @click="startBtn">开始</van-button>
           <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
         </div>
         <div>
-          <van-button type="default" class="header-Btn" v-if="statusBtn && mySub.startTime == null?true:false" @click="quXiaoBtn">取消</van-button>
+          <van-button type="default" class="header-Btn" v-if="mySub.startTime" @click="quXiaoBtn">取消</van-button>
         </div>
       </div>
     </div>

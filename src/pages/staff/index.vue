@@ -67,7 +67,7 @@ this.init();
                   time:d.plan_date,
                   sName:d.service_name,
                   phone:d.mobile,
-                  startTime:d.starttime,
+                  startTime:d.starttime == null?true:false,
                   xm:d.name,
                   listImg:data.style.image,
                   listVideo:data.style.video
