@@ -43,7 +43,18 @@
 </script>
 
 <style lang="scss" scoped>
+  .wrap{
+    width: 100%;
+    height: 100%;
+    background-color: #F4F4F4;
+    >p{
+      width: 100%;
+      height: 100%;
+    }
+  }
 .notEvaluation{
+  background-color: white !important;
+
   padding: 30px 0;
   text-align: center;
   font-size:20px;

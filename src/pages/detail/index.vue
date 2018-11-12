@@ -617,7 +617,7 @@
       background-color: white;
       font-size: 18px;
       color: rgba(113, 179, 255, 1);
-      border: 0 !important;
+      /*border: 0 !important;*/
     }
     .buyNow {
       background-color: #71B3FF;

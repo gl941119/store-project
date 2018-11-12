@@ -400,6 +400,9 @@ function setTitle(title) {
 }
 
 router.afterEach((transition) => {
+
+  console.log(transition)
+  console.log(router.options)
   let name = transition.name;
   let item = router.options.routes.filter((ele) => { return ele.name === name; });
   setTitle(item[0].title);

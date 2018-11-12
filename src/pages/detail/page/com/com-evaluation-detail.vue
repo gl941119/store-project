@@ -60,8 +60,8 @@
   .evaluation-detail {
     min-height: 161px;
     width: 100%;
-
-
+    background-color: white;
+    margin-bottom: 10px;
     .title {
       height: 35px;
       padding: 7px 15px 14px;
