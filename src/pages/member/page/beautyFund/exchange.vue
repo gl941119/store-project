@@ -52,9 +52,15 @@
                 score:this.score
               }
             }).then((res) => {
-              var data=res.data;
-              this.code=data.score;
-              this.score='';
+              if(res.status){
+                var data=res.data;
+                this.code=data.score;
+                this.score='';
+              }else{
+                this.code=0;
+                this.score='';
+              }
+
             })
           }else{
             Toast('积分格式不正确！整数且大于0！');
