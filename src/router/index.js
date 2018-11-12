@@ -122,7 +122,7 @@ let router = new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
     },
     {//热门商品--预约确认
-      path: '/appoint/:sid/:id/:time',//sid 服务id id 美师id  time选择的时间
+      path: '/appoint/:orderid',//sid 服务id id 美师id  time选择的时间
       name: 'confirm',
       title:'预约支付',
       meta: {keepAlive: false},
@@ -401,8 +401,11 @@ function setTitle(title) {
 }
 
 router.afterEach((transition) => {
+
   let name = transition.name;
+  console.log(name)
   let item = router.options.routes.filter((ele) => { return ele.name === name; });
+
   setTitle(item[0].title);
 });
 

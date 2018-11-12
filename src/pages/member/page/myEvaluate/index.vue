@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
 
-    <van-tabs v-model="active" @click="onclick">
+    <van-tabs v-model="active" @click="onclick" :swipeable="true" sticky>
       <van-tab title="商品">
         <div class="fill"></div>
         <!--卡片-->

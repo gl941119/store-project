@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="main">
+    <div class="main" v-on:click="goDetail(item.sid)">
       <img :src="item.simg" alt="" class="main-img">
       <dl>
         <dt>
@@ -74,6 +74,9 @@
       }
     },
     methods:{
+      goDetail(sid){
+        this.$router.push({name:'detail',params:{type:'2',id:sid}})
+      },
       pay(orderid){
 
         this.$dialog.confirm({

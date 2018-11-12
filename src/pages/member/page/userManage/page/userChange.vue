@@ -1,6 +1,5 @@
 <template>
   <div style="background-color: #F4F4F4;height: 100%">
-
     <div class="cell">
       <a class="cell-left" v-on:click="cancelHandle">取消</a>
       <a class="cell-right" v-on:click="confirmHandle">保存</a>
@@ -29,7 +28,7 @@
     data() {
       return {
         type: this.$route.params.type,
-        message: this.$route.params.message,
+        message: this.$route.params.message&&'6',
         columns: ['男', '女'],
         sex: '男',
         currentDate: new Date(),
@@ -52,7 +51,7 @@
     },
     mounted() {
       this.currentDate = new Date(parseInt(this.message))
-      document.title= this.navbarName
+
     },
     methods: {
       pickerChange(picker) {

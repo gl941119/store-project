@@ -45,23 +45,23 @@
         avatar: undefined,
         nameData: {
           name: '昵称',
-          message: ' '
+          message: undefined
         },
         sexData: {
           name: '性别',
-          message: ' '
+          message: undefined
         },
         birthdayData: {
           name: '出生日期',
-          message: ' '
+          message: undefined
         },
         addressData: {
           name: '收货地址',
-          message: ' '
+          message: undefined
         },
         signatureData: {
           name: '个性签名',
-          message: ' '
+          message: undefined
         }
       }
     },

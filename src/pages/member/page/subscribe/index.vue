@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
-
   </div>
 </template>
 

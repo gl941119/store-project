@@ -39,17 +39,23 @@
     align-items: center;
     position: relative;
     &-name {
-      flex: 1;
+      min-width: 70px;
       color: rgba(51, 51, 51, 1);
       font-size: 15px;
       font-family: PingFangSC-Regular;
     }
     &-content {
+      flex: 1;
+      text-align: right;
       margin-right: 10px;
       font-family: PingFangSC-Regular;
       font-size: 12px;
       font-family: PingFangSC-Regular;
       color: rgba(102, 102, 102, 1);
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &-icon {
       font-size: 10px;

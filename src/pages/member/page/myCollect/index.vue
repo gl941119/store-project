@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
 
-    <van-tabs v-model="active" @click="onClick">
+    <van-tabs v-model="active" @click="onClick" :swipeable="true" sticky>
       <van-tab title="商品">
         <product-card :Data="item" v-for="item in productList" :key="item.id"></product-card>
       </van-tab>

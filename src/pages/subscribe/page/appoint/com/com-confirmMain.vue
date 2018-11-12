@@ -31,8 +31,6 @@
     </ul>
 
 
-
-
   </div>
 </template>
 
@@ -40,23 +38,21 @@
   export default {
     name: "com-confirmMain",
     props: {
-      service:{
-        type:Object
+      service: {
+        type: Object
       },
-      type:{
-        default:'confirm'
+      type: {
+        default: 'confirm'
       },
-      date:{},
-      beauty:{}
+      date: {},
+      beauty: {}
     },
-    data(){
-      return{
-        Is_member:this.$store.state.Is_member
+    data() {
+      return {
+        Is_member: window.sessionStorage.getItem('is_member')
       }
     },
-    methods:{
-
-    }
+    methods: {}
   }
 </script>
 
@@ -88,8 +84,8 @@
         line-height: 23px;
       }
       > dd {
-
-        height: 17px;
+        height: 40px;
+        overflow: hidden;
         font-size: 12px;
         font-family: PingFangSC-Regular;
 
@@ -115,28 +111,29 @@
     background: rgba(216, 216, 216, 1);
     margin: 0 auto 0;
   }
-  .list{
+
+  .list {
     margin-top: 15px;
-    &-li{
+    &-li {
       height: 39px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      dt{
+      dt {
 
-        height:20px;
-        font-size:14px;
-        font-family:PingFangSC-Regular;
-        color:rgba(51,51,51,1);
+        height: 20px;
+        font-size: 14px;
+        font-family: PingFangSC-Regular;
+        color: rgba(51, 51, 51, 1);
 
       }
-      dd{
+      dd {
         margin-right: 10px;
-        height:17px;
-        font-size:12px;
-        font-family:PingFangSC-Regular;
+        height: 17px;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
 
-        color:rgba(153,153,153,1);
+        color: rgba(153, 153, 153, 1);
 
       }
     }
