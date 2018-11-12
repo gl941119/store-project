@@ -85,8 +85,9 @@
   .search_wrap{
     width: 100%;
     background-color: white;
+    padding: 5px 0;
     .search {
-      margin: 5px auto;
+      margin: 0px auto;
       width: 345px;
       height: 30px;
       background: rgba(244, 244, 244, 1);

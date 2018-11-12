@@ -60,7 +60,6 @@
       <div class="address-cell" v-if="type== '1'">
         <div class="address-cell-title">运费</div>
         <div class="address-cell-content">
-          <!--<p>{{address}}</p>-->
           <p>{{freight}}</p>
         </div>
         <div class="address-cell-right">
@@ -536,7 +535,6 @@
     &-content {
       flex: 1;
       margin-left: 10px;
-      /*width: 233px;*/
       height: 100%;
       font-size: 14px;
       color: rgba(51, 51, 51, 1);

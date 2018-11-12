@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <van-tabs v-model="active" @change="tabChange" sticky>
+    <van-tabs v-model="active" @change="tabChange" sticky :swipeable="true">
       <van-tab title="全部">
         <com-card v-for="item,key in goodslist"
                   :key="key"

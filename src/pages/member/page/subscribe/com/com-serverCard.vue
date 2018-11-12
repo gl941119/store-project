@@ -27,7 +27,7 @@
       <!--待付款-->
       <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goAppointPay(item.orderid)">查看详情</van-button>
       <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&item.is_use=='1'" v-on:click="pay(item.orderid)">付款</van-button>
+      <van-button type="default" class="bottom-Btn" v-if="showPayBtn" v-on:click="pay(item.orderid)">付款</van-button>
 
     </div>
   </div>
@@ -44,13 +44,28 @@
             return '已取消'
           case '1':
             return '待付款'
-
           case '2':
             return '已预约'
 
           case '3':
             return '已完成'
         }
+      },
+      showPayBtn:function () {
+        if(this.item.type==='1'){ //待付款状态下
+            if(window.sessionStorage.getItem('is_member')==='0'){//非会员
+              return true
+            }else{//会员
+              if(this.item.is_use==='1'){//付款
+                return  true
+              }else{//不付款
+                return   false
+              }
+
+            }
+        }
+
+
       }
     },
     data() {
@@ -63,7 +78,6 @@
 
         this.$dialog.confirm({
           title: '是否支付?',
-
         }).then(() => {
           if(window.sessionStorage.getItem('is_member')== '1'){
             this.$request({
@@ -74,10 +88,11 @@
               }
             }).then((res) => {
               if(res.code===100){
-                this.$toast.success('支付成功')
-                this.$emit('refresh')
-              }else{
-                this.$toast.fail('支付失败');
+                this.$toast.success('支付成功');
+                let thia = this
+                setTimeout(function () {
+                  thia.$emit('refresh')
+                },1000)
               }
             })
           }else{
@@ -99,7 +114,6 @@
       cancleIndent(orderid){//取消订单
         this.$dialog.confirm({
           title: '是否取消订单',
-          message: ''
         }).then(() => {
           this.$request({
             url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
