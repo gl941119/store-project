@@ -39,7 +39,7 @@
 
 
       <van-button round plain type="default" class="cancelBtn" v-if="good.status== '2'"
-            v-on:click="logisticsHandle(good.goods[0].ordersn)"
+                  v-on:click="logisticsHandle(good.goods[0].ordersn)"
       >
         查看物流
       </van-button>
@@ -86,22 +86,22 @@
       }
     },
     methods: {
-      goindentConfirme(ordersn){
+      goindentConfirme(ordersn) {
         this.$dialog.confirm({
           title: '是否跳转付款页面？',
         }).then(() => {
-          window.sessionStorage.setItem('ordersn',ordersn)
-          this.$router.push({name:'indentConfirme'})
+          window.sessionStorage.setItem('ordersn', ordersn)
+          this.$router.push({name: 'indentConfirme'})
         }).catch(() => {
           // on cancel
         });
       },
-      logisticsHandle(ordersn){//查看物流
+      logisticsHandle(ordersn) {//查看物流
         console.log(ordersn)
-        this.$router.push({name:"logistics",params:{ordersn:ordersn}})
+        this.$router.push({name: "logistics", params: {ordersn: ordersn}})
 
       },
-      gobaidu(){
+      gobaidu() {
         this.$baidu()
       },
       confirmHandle(id) {//确认收货
@@ -163,8 +163,8 @@
             "content": undefined,
             "score": 4,
             "tip": undefined,//匿名
-            videos:[],
-            imgs:[]
+            videos: [],
+            imgs: []
           }
           arr.push(obj)
         })
@@ -247,7 +247,7 @@
     }
     &-bottom {
       height: 30px;
-  overflow: hidden;
+      overflow: hidden;
       &-icon {
         float: left;
         font-size: 16px;
@@ -267,7 +267,7 @@
         margin-right: 8px;
         width: 79px;
         height: 27px;
-        line-height: 25px !important;
+        line-height: 27px !important;
         background: rgba(255, 255, 255, 1);
         border-radius: 13px;
         border: 1px solid;
@@ -280,7 +280,7 @@
         float: right;
         width: 79px;
         height: 27px;
-        line-height: 25px;
+        line-height: 27px;
         border-radius: 13px;
         border: 1px solid;
         font-size: 14px;
