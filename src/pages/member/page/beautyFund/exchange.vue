@@ -80,6 +80,7 @@
 <style lang="scss" scoped>
   .exchangeWidthBg{
     background-color: #fff;
+    padding-bottom: 10px;
   }
 .exchangeBox{
   background-color: rgba(244,244,244,1);
