@@ -372,7 +372,12 @@
     }
   }
 </script>
-
+<style>
+  .addBuy{
+    border:0px;
+    border-top:1px solid #eee;
+  }
+</style>
 <style lang="scss" scoped>
   .detail {
     padding-bottom: 50px;
