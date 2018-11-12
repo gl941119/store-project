@@ -43,7 +43,7 @@
       </van-cell>
       <div class="allPrice">
         <span class="allPrice-title">总金额：</span>
-        <span class="cell-right">+&nbsp;￥&nbsp;{{allmoney}}</span>
+        <span class="cell-right cellRight">+&nbsp;￥&nbsp;{{allmoney}}</span>
       </div>
     </div>
 
@@ -266,7 +266,7 @@
       font-size: 15px;
       color: rgba(51, 51, 51, 1);
       &-right {
-        width: 69px;
+        /*width: 69px;*/
         height: 21px;
         font-size: 15px;
         color: rgba(231, 59, 61, 1);
@@ -280,7 +280,7 @@
       justify-content: flex-end;
       &-title {
         margin-right: 24px;
-        width: 60px;
+        /*width: 60px;*/
         height: 21px;
         font-size: 15px;
         color: rgba(51, 51, 51, 1);
@@ -289,5 +289,7 @@
     }
   }
 
-
+.cellRight{
+  padding-right: 15px;
+}
 </style>

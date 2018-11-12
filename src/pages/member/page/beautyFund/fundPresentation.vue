@@ -16,14 +16,16 @@
         </div>
       </div>
     </div>
-
-    <div class="exchangeWidth">
-      <div class="exchangeTitle">提现金额</div>
-      <div class="exchangeFlex">
-        <div class="exchangeInputImg"></div>
-        <div class="exchangeInputPadding"><input type="number" class="exchangeInput" v-model="money" /></div>
+    <div class="exchangeWidthBg">
+      <div class="exchangeWidth">
+        <div class="exchangeTitle">提现金额</div>
+        <div class="exchangeFlex">
+          <div class="exchangeInputImg"></div>
+          <div class="exchangeInputPadding"><input type="number" class="exchangeInput" v-model="money" /></div>
+        </div>
       </div>
     </div>
+
 
     <div class="fundPresentationPop">可用提现余额20,000.00元</div>
 
@@ -97,6 +99,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .exchangeWidthBg{
+    background-color: #fff;
+    padding-bottom: 10px;
+  }
 .exchangeBox{
   background-color: rgba(244,244,244,1);
   $width: 345px !global;
@@ -162,6 +168,7 @@ width: $width;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-bottom: 2px;
 }
 .exchangeWidth{
   width:$width;

@@ -18,7 +18,7 @@
         <div><input type="number" class="banksInput" v-model="card"/></div>
       </div>
       <div class=" bindAccountBoxMTop accountFlex">
-        <div class="fundPresentationYhTitle">开户名称：</div>
+        <div class="fundPresentationYhTitle">开户姓名：</div>
         <div><input type="text"  class="banksInput" v-model="cardN"/></div>
       </div>
 
@@ -67,6 +67,7 @@
 <style lang="scss" scoped>
   .banksInput{
     width: 200px;
+    border-radius: 0px;
     border-bottom: 1px solid rgba(216,216,216,1);
     margin-left: 10px;
     padding: 3px;
