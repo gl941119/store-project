@@ -81,7 +81,7 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         let r = 'http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url=' + re;
-        axios.post('http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan', r, config)
+        axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
               var d = res.data.data.config;
@@ -104,7 +104,7 @@
                 });
                 wx.error(function (res) {
                   var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
-                  alert(res)
+                  alert(s)
                   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
                 });
               });
