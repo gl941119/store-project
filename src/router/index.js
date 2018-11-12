@@ -51,7 +51,7 @@ let router = new Router({
       component: resolve => require(['../pages/exhibition'], resolve)
     },
     {//首页
-      path: '/index/:config',
+      path: '/index',
       name: 'index',
       title:'S+艾司商城',
       meta: {showFooter: true, keepAlive: true},
@@ -400,9 +400,6 @@ function setTitle(title) {
 }
 
 router.afterEach((transition) => {
-
-  console.log(transition)
-  console.log(router.options)
   let name = transition.name;
   let item = router.options.routes.filter((ele) => { return ele.name === name; });
   setTitle(item[0].title);

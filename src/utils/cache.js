@@ -60,6 +60,7 @@ export default {
         config = this.decode(config)//解码
         window.sessionStorage.setItem('config', config)
         config = JSON.parse(config)
+        return config
       } else {//url上没有config
         alert('数据获取失败')
       }
