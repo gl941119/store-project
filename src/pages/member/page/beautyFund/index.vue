@@ -85,6 +85,12 @@ url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
   .cellGroup > div{
     display: flex;
     align-items: center;
+    line-height: normal;
+  }
+  .cellGroup  span{
+    display: flex;
+    align-items: center;
+    line-height: normal;
   }
 </style>
 <style lang="scss" scoped>
