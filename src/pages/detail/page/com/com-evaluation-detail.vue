@@ -14,7 +14,6 @@
         <img :src="item" alt="" v-for="item in discuss.imgs" v-if="discuss.imgs">
       </p>
     </div>
-    <div class="fill"></div>
   </div>
 
 </template>

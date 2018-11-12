@@ -3,7 +3,6 @@
     <router-link :to="{name:'myIndent',params:{type:0}}">
       <cell :Data="nameData" class="cell"></cell>
     </router-link>
-
     <ul>
       <router-link tag="li" :to="{name:'memberSubscribe'}">
         <img src="../../../assets/image/预约.png" alt="">
