@@ -73,7 +73,6 @@ Vue.prototype.$baidu = function () {//联系卖家
 import request from './utils/request'
 Vue.prototype.$request = request;
 
-
 Vue.prototype.$setInterval = setInterval(function () {//长轮询
   Vue.prototype.$request({
     url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
