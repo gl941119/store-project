@@ -1,6 +1,5 @@
 <template>
   <div style="padding-bottom: 50px">
-
     <!--会员详情-->
     <com-member-card class="card" :Data="memberCard"></com-member-card>
     <!--我的订单-->
