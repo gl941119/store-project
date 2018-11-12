@@ -164,7 +164,7 @@
     mounted() {
       this.request()
 
-      document.title=this.title
+      document.title = this.title
       console.log(this.$refs['media'])
       let media = this.$refs['media']
 
@@ -214,7 +214,7 @@
         this.$router.push({name: 'buyCart'})
       },
       addBuyCart() {//加入购物车
-        if(window.sessionStorage.getItem('is_bind') === '0'){//未绑定
+        if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定
           this.$router.push({name: 'bindAccount'});
           return
         }
@@ -232,7 +232,7 @@
             if (res.code === 100) {
               this.$toast.success('添加成功')
               this.$store.commit('setShowBuySpecification', false)//关闭购买栏
-            }else{
+            } else {
               this.$toast.fail('添加失败')
             }
           })
@@ -241,7 +241,7 @@
         }
       },
       onceBuy() {//立即购买
-        if (window.sessionStorage.getItem('is_bind') === '0'){//未绑定账号
+        if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定账号
           this.$router.push({name: 'bindAccount'});
           return
         }
@@ -269,7 +269,7 @@
         }
       },
       goAppoint() {//立即预约
-        if (window.sessionStorage.getItem('is_bind') === '0'){//未绑定账号
+        if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定账号
           this.$router.push({name: 'bindAccount'});
           return
         }
@@ -391,8 +391,6 @@
     width: 100%;
     height: 50px;
   }
-
-
 
   .wrap {
     position: relative;
@@ -622,7 +620,7 @@
       background-color: white;
       font-size: 18px;
       color: rgba(113, 179, 255, 1);
-      /*border: 0 !important;*/
+      border: 0 solid #eee !important;
     }
     .buyNow {
       background-color: #71B3FF;
