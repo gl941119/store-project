@@ -54,27 +54,16 @@
     },
     methods: {
       infoUrl() {
-
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=87',
-          data: {
-            act:'user_is_bind'
-          },
-          type: 'get',
-          isToast:false
-        }).then((res) => {
-          if(res.code === 100){
-             if (window.sessionStorage.getItem('store') === '0') {//用户
-               this.$router.push({name: 'member'});
-               this.hover = 4
-             } else {//美师
-               this.$router.push({name: 'staff'});
-             }
-          }else if(res.code===105){
-            this.$router.push({name: 'bindAccount'});
+        if (window.sessionStorage.getItem('is_bind') === '1') {//已绑定
+          if (window.sessionStorage.getItem('store') === '0') {//用户
+            this.$router.push({name: 'member'});
+            this.hover = 4
+          } else {//美师
+            this.$router.push({name: 'staff'});
           }
-        })
-
+        } else {//未绑定
+          this.$router.push({name: 'bindAccount'});
+        }
       }
     }
   }

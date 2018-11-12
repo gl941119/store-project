@@ -115,7 +115,6 @@
         });
       },
       request() {
-
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=84',
           data: {
@@ -130,6 +129,7 @@
           this.advOne = res.data.adv[0];
           this.advTwo = res.data.adv[1];
           this.advThree = res.data.adv[2]
+          window.sessionStorage.setItem('is_bind',res.data.is_bind)
         })
       },
       goSearch() {

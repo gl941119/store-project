@@ -214,6 +214,10 @@
         this.$router.push({name: 'buyCart'})
       },
       addBuyCart() {//加入购物车
+        if(window.sessionStorage.getItem('is_bind') === '0'){//未绑定
+          this.$router.push({name: 'bindAccount'});
+          return
+        }
         if (this.specs.length === this.num) {//是否选择规格
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=85&act=mycart&id=1',
@@ -232,13 +236,18 @@
               this.$toast.fail('添加失败')
             }
           })
-        } else {
+        } else {//未选择
           this.$store.commit('setShowBuySpecification', true)
         }
       },
       onceBuy() {//立即购买
-        if (this.specs.length === this.num) {//是否选择规格
+        if (window.sessionStorage.getItem('is_bind') === '0'){//未绑定账号
+          this.$router.push({name: 'bindAccount'});
+          return
+        }
 
+
+        if (this.specs.length === this.num) {//是否选择规格
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
             type: 'post',
@@ -260,6 +269,12 @@
         }
       },
       goAppoint() {//立即预约
+        if (window.sessionStorage.getItem('is_bind') === '0'){//未绑定账号
+          this.$router.push({name: 'bindAccount'});
+          return
+        }
+
+
         this.$router.push({name: 'appoint', params: {sid: this.id}})
 
       },
