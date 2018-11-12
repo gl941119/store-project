@@ -1,6 +1,5 @@
 <template>
     <div class="wrap">
-
       <van-steps direction="vertical" :active="0" active-color="#f44">
         <van-step v-for="item,index in info" :key="index">
           <h3>{{item.step}}</h3>

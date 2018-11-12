@@ -59,12 +59,13 @@
       }
     },
     mounted() {
-      this.tabChange()
+      // this.tabChange()
       this.active =this.$route.params.type
     },
 
     methods: {
       request() {
+
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=myorderlist',
           type: 'POST',
@@ -77,6 +78,7 @@
         })
       },
       tabChange(index) {
+       
         switch (index) {
           case 0:
             this.ltype = 1;
