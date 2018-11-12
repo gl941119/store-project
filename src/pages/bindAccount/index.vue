@@ -147,6 +147,7 @@
               url:'app/index.php?i=1&c=entry&eid=87&act=binduser',
               type:'post',
               data:{
+                icode:this.yqCode,
                 mobile:this.phone,
                 realname:this.names,
                 code:this.codes
