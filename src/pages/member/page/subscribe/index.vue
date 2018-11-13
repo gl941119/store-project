@@ -1,6 +1,22 @@
 <template>
   <div>
-    <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+    <van-tabs v-model="type" @change="change" sticky :swipeable="true">
+      <van-tab title="全部">
+        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+      </van-tab>
+      <van-tab title="待付款">
+        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+      </van-tab>
+      <van-tab title="已预约">
+        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+      </van-tab>
+      <van-tab title="已完成">
+        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+      </van-tab>
+    </van-tabs>
+
+
+
   </div>
 </template>
 
@@ -16,16 +32,25 @@
       return {
         appoint: [],
         is_member: window.sessionStorage.getItem('is_member'), //0 非会员  1 会员
+        type:0,// 1  全部   2 待付款   3  已预约     4  完成
       }
     },
     mounted() {
       this.request()
     },
     methods: {
+      change(index){
+
+        this.type = index
+        this.request()
+      },
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=appointlist',
-          type: 'get'
+          type: 'post',
+          data:{
+            type:this.type+1
+          }
         }).then(res => {
 
           if (res.code === 100) {
@@ -47,10 +72,9 @@
                 alert('无法判断会员')
               }
               item['type'] = type
-              // console.log(item.is_use === '0')
-              // console.log(this.is_member === '1')
+
+
             })
-            console.log(this.appoint)
           }
         })
       }

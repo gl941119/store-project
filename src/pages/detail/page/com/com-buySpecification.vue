@@ -61,7 +61,7 @@
 <script>
   export default {
     name: "com-buySpecification",
-    props: ['status','goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs'],
+    props: ['status','goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs','cart_num'],
     data() {
       return {
         id: this.$route.params.id,//商品id
@@ -107,6 +107,7 @@
               }
             }).then(res => {
               if (res.code === 100) {
+                this.$emit('update:cart_num', res.data.cart_num)
                 this.$toast.success('添加成功')
                 this.$store.commit('setShowBuySpecification', false)//关闭购买栏
               } else {

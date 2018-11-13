@@ -85,6 +85,7 @@
                                v-bind:alreadybought.sync="alreadybought"
                                v-bind:specs.sync="specs"
                                v-bind:status.sync="status"
+                               v-bind:cart_num.sync="cart_num"
         ></com-buy-specification>
       </van-actionsheet>
       <!--商品购买栏-->
@@ -93,13 +94,16 @@
         <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
         <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"/>
         <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"/>
-        <div class="icon"></div>
-        <div class="icon">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-
+        <img class="icon" src='../../assets/image/1.png' v-if="cart_num== '1'" alt="">
+        <img class="icon" src='../../assets/image/2.png' v-if="cart_num== '2'" alt="">
+        <img class="icon" src='../../assets/image/3.png' v-if="cart_num== '3'" alt="">
+        <img class="icon" src='../../assets/image/4.png' v-if="cart_num== '4'" alt="">
+        <img class="icon" src='../../assets/image/5.png' v-if="cart_num== '5'" alt="">
+        <img class="icon" src='../../assets/image/6.png' v-if="cart_num== '6'" alt="">
+        <img class="icon" src='../../assets/image/7.png' v-if="cart_num== '7'" alt="">
+        <img class="icon" src='../../assets/image/8.png' v-if="cart_num== '8'" alt="">
+        <img class="icon" src='../../assets/image/9.png' v-if="cart_num== '9'" alt="">
+        <img class="icon" src='../../assets/image/10.png' v-if="cart_num >= '10'" alt="">
       </van-goods-action>
       <!--服务购买栏-->
       <van-goods-action class="buy" v-else>
@@ -168,7 +172,8 @@
         SpecificationData: null,
         show_play: false,//是否隐藏播放按钮
         show_img: false,//是否隐藏第一帧图像
-        status:undefined,//购买栏 确定按钮状态 '1' 加入购物车  '2' 立即购买
+        status: undefined,//购买栏 确定按钮状态 '1' 加入购物车  '2' 立即购买
+        cart_num: undefined,//小图标
       }
     },
     mounted() {
@@ -177,7 +182,6 @@
       let media = this.$refs['media']
       media.addEventListener('play', function () {
         console.log('播放')
-
       });
       media.addEventListener('pause', function () {
         console.log('停止')
@@ -196,8 +200,9 @@
         get: function () {
           return this.$store.state.ShowBuySpecification
         }
-      }
+      },
     },
+
     methods: {
       onClickCollect() {//加入收藏
         if (this.is_collect) {
@@ -208,7 +213,7 @@
           }).catch(() => {
             // on cancel
           });
-        }else{
+        } else {
           this.cancleCollect()
         }
 
@@ -223,10 +228,10 @@
           }
         }).then(res => {
           if (res.code === 100) {
-            if(this.is_collect){//-1
-              this.Data.collection = parseInt(this.Data.collection)-1
-            }else{
-              this.Data.collection = parseInt(this.Data.collection)+1
+            if (this.is_collect) {//-1
+              this.Data.collection = parseInt(this.Data.collection) - 1
+            } else {
+              this.Data.collection = parseInt(this.Data.collection) + 1
               this.$toast.success('收藏成功')
             }
             this.is_collect = !this.is_collect
@@ -252,7 +257,10 @@
               specs: this.specs.join('_')
             }
           }).then(res => {
+
+
             if (res.code === 100) {
+              this.cart_num = res.data.cart_num
               this.$toast.success('添加成功')
               this.$store.commit('setShowBuySpecification', false)//关闭购买栏
             } else {
@@ -337,7 +345,6 @@
           }
         }).then((res) => {
           if (res.code === 100) {
-
             if (this.type == '2') {//服务
               this.Data = res.data.service
               this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
@@ -348,6 +355,7 @@
               this.address = res.data.address
               this.num = res.data.num //规格数量
               this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
+              this.cart_num = res.data.cart_num
             }
             // console.log(res.data.disucss.)
             if (res.data.discuss.length === 0) {
@@ -443,6 +451,7 @@
       display: none;
     }
   }
+
   .detali-product {
     height: 100%;
     background-color: #F4F4F4;
@@ -646,31 +655,12 @@
       font-size: 18px;
       color: rgba(255, 255, 255, 1);
     }
-    .icon{
-      width:18px;
-      height:18px;
-      background:rgba(255,255,255,1);
-      border-radius: 250px;
-      background:rgba(228,57,59,1);
-      border:3px solid white;
-      background-color: #E4393B;
-      left: 87px;
-      top: 7px;
+    .icon {
       position: absolute;
-
-
-      font-size: 10px;
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      >div{
-        border-radius: 250px;
-        width: 2px;
-        height: 2px;
-        background-color: white;
-      }
+      left: 88px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
     }
   }
 
