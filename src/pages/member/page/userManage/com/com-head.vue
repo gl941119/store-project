@@ -40,7 +40,8 @@
             }
           }).then((res)=>{
             if (res.code === 100) {
-              thisa.saver(res.data.imgs);
+              thisa.$toast('上传成功');
+              thisa.$emit('Refresh')
             }else{
               thisa.$toast(res.message);
             }

@@ -148,11 +148,11 @@
             if (res.data.code === 100) {
               var s=res.data.data;
               if(s.imgs!=undefined){
-                sefl.imgSrc=s.imgs;
+                self.imgSrc=s.imgs;
                 e.target.value='';
                 this.imgGou=true;
               }else{
-                sefl.vedioSrc=s.videos;
+                self.vedioSrc=s.videos;
                 e.target.value='';
                 this.vdGou=true;
               }
