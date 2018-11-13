@@ -36,7 +36,7 @@
         <div class="upVedioTxt">上传视频</div>
         <div class="upVedioTBox">
           选择文件
-          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/*,video/avi,video/mp4,video/flv,video/3gp,video/swf"     @change="upData('fileuploadvideo',$event)" />
+          <input name="file" class="upVedioIn" ref="vVideo" type="file" accept="video/*,video/avi,video/mp4,video/flv,video/3gp,video/swf"     @change="upDataV('fileuploadvideo',$event)" />
         </div>
         <div class="gouzi" v-if="vdGou">√</div>
 
@@ -162,6 +162,43 @@
         //   }).catch((res)=>{
         //
         // })
+      },
+      upDataV(str,e){
+
+        let self=this;
+        let file=e.target.files[0];
+        let param = new FormData();  // 创建form对象
+        param.append('file', file, file.name);
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
+        axios.defaults.withCredentials = true;
+        let uk = this.$store.state.uk || sessionStorage.getItem('uk');
+        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
+        alert(file.name)
+        axios.post(url + uk, param, config)
+          .then(res => {
+            if (res.data.code === 100) {
+              var s=res.data.data;
+              if(s.imgs!=undefined){
+                sefl.imgSrc=s.imgs;
+                e.target.value='';
+                this.imgGou=true;
+              }else{
+                sefl.vedioSrc=s.videos;
+                e.target.value='';
+                this.vdGou=true;
+              }
+            }else{
+              var ms=res.data.code+'---'+res.data.message;
+              alert(res.data.message)
+            }
+
+          }).catch((res)=>{
+
+        })
       },
       bindAccountSubmit(){
         if(this.vedioSrc&&this.imgSrc){
