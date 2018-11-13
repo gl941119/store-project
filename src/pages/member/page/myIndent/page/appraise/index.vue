@@ -178,7 +178,7 @@
             'Content-Type': 'multipart/form-data',
           }
         };
-        alert(file.name)
+        // alert(file.name)
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || cache.getSession('uk');
         axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileuploadvideo&uk=' + uk, param, config)
@@ -189,7 +189,7 @@
                 avatar: res.data.data.avatar,
                 videos: res.data.data.videos
               });
-              alert(res.data.data.avatar)
+              // alert(res.data.data.avatar)
               this.$toast('上传成功')
             }
 
@@ -387,5 +387,8 @@
       color: rgba(113, 179, 255, 1);
       line-height: 21px;
     }
+  }
+  .video{
+    width: 345px;
   }
 </style>
