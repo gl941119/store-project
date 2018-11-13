@@ -154,8 +154,9 @@
                 }
               }).then((res)=>{
                 if (res.code === 100) {
-                  thisa.avatar=res.data.imgs;
+                  thisa.avatar=res.data.avatar;
                   thisa.$toast('上传成功');
+                  thisa.init();
                 }else{
                   thisa.$toast(res.message);
                 }
