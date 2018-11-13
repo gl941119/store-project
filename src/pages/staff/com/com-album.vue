@@ -24,7 +24,7 @@
     </div>
 
 <img :src="localIds"/>
-    asdf
+    1234
   </div>
 </template>
 
@@ -49,7 +49,6 @@
         statusA:null,
         cont:0,
         localIds:'',
-        serverId:'',
       }
     },
     mounted(){
@@ -156,7 +155,7 @@ var op=res.localIds[0]+'打开相册和相机';
               success: function (loca) {
                 self.localIds ='http://'+loca.localData;  // localData是图片的base64数据，可以用img标签显示
                 var loa=loca.localData+'localData是图片的base64数据，可以用img标签显示';
-                alert(loa)
+                alert(self.localIds)
               }
             });
             self.uploadImage(res.localIds[0],self);
