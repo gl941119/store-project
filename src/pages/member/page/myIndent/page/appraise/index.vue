@@ -92,9 +92,9 @@
               }
             }).then((res)=>{
               if (res.code === 100) {
-                thisa.arr[thisa.index].videos.push({
+                thisa.arr[thisa.index].imgs.push({
                   avatar: res.data.avatar,
-                  videos: res.data.imgs
+                  imgs: res.data.imgs
                 })
                 thisa.$toast('上传成功');
               }else{
