@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import { Dialog } from 'vant';
   export default {
     name: "com-MySubscribe",
     props:['mySub','status'],
@@ -49,50 +50,76 @@
     methods:{
       startBtn(){
         this.statusBtn=false;
-
-        //订单开始
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=86&act=servicestart',
-          type:'post',
-          data:{
-            orderid:this.mySub.orderId
-          }
-        }).then((res) => {
-          if(res.status){
-            this.$emit('init')
-          }
+        Dialog.confirm({
+          title: '订单',
+          message: '订单开始'
+        }).then(() => {
+          // on confirm
+          //订单开始
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=86&act=servicestart',
+            type:'post',
+            data:{
+              orderid:this.mySub.orderId
+            }
+          }).then((res) => {
+            if(res.status){
+              this.$emit('init')
+            }
+          });
+        }).catch(() => {
+          // on cancel
         });
+
       },
       endBtn(){
-        this.status=true;
-        //订单结束
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=86&act=finish',
-          type:'post',
-          data:{
-            orderid:this.mySub.orderId
-          }
-        }).then((res) => {
-          if(res.status){
-            this.$emit('init')
-          }
+        Dialog.confirm({
+          title: '订单',
+          message: '订单结束'
+        }).then(() => {
+          // on confirm
+          this.status=true;
+          //订单结束
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=86&act=finish',
+            type:'post',
+            data:{
+              orderid:this.mySub.orderId
+            }
+          }).then((res) => {
+            if(res.status){
+              this.$emit('init')
+            }
 
+          });
+        }).catch(() => {
+          // on cancel
         });
+
       },
       quXiaoBtn(){
-        //取消订单
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
-          type:'post',
-          data:{
-            orderid:this.mySub.orderId
-          }
-        }).then((res) => {
-          if(res.status){
-            this.$emit('init')
-          }
+        Dialog.confirm({
+          title: '订单',
+          message: '订单取消'
+        }).then(() => {
+          // on confirm
+          //取消订单
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
+            type:'post',
+            data:{
+              orderid:this.mySub.orderId
+            }
+          }).then((res) => {
+            if(res.status){
+              this.$emit('init')
+            }
 
+          });
+        }).catch(() => {
+          // on cancel
         });
+
       }
     }
   }

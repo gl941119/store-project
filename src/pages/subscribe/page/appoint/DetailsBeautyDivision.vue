@@ -348,14 +348,14 @@
     font-weight:400;
     color:rgba(250,101,207,1);
     background: url('../../../../assets/image/Rectangle5.png') no-repeat;
-    background-size: 96px 20px;
-    margin: 0 5px 10px 5px;
+    background-size: 95px 20px;
+    margin: 0 5px 10px 0px;
   }
   .DetailsBeautyDivisionContVoidItem{
     position: relative;
     width: 95px;
     height: 95px;
-    margin: 0 6px 10px 6px;
+    margin: 0 6px 10px 0px;
     overflow: hidden;
   }
 .DetailsBeautyDivisionContVoidItem img{
@@ -377,7 +377,7 @@
     height: 45px;
   }
   .DetailsBeautyDivisionContTitleTxtSpan{
-    margin: 0 5px 10px 5px;
+    margin: 0 5px 10px 0px;
   }
   .video{
     width: 354px;

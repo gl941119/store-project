@@ -52,8 +52,8 @@
 </template>
 
 <script>
-  import wx from 'weixin-js-sdk'
-  import axios from 'axios'
+
+  import wxHandle from '../../utils/wx'
   var testPhone= /^1[34578]\d{9}$/;
   var testName= /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
     export default {

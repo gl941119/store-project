@@ -3,6 +3,7 @@
 
     <div class="beautyBodyTop">
       <div class="beauty">
+        <img class="beautyHead" src="../../../../assets/image/bankCar.png" />
         <div class="beautyCart">
           <div class="beautyCartBottom">
             <div class="beautyFund">
@@ -27,7 +28,7 @@
 
     <div class="beautyList beautyListMargin">
       <div class="beautyListPading">
-        <van-cell-group>
+        <van-cell-group class="beautyListPading1">
           <van-cell title="我的美丽代言码" is-link class="cellGroup" :to="{ path:'/beautyFund/beautifulEndorsement'}"/>
           <van-cell title="我的上级美丽代言" is-link class="cellGroup" :to="{ path:'/beautyFund/superiorEndorsement'}"/>
           <van-cell title="我的一级美丽代言" is-link class="cellGroup" :to="{ path:'/beautyFund/oneEndorsement'}"/>
@@ -38,7 +39,7 @@
 
     <div class="beautyList">
       <div class="beautyListPading">
-        <van-cell-group>
+        <van-cell-group class="beautyListPading1">
           <van-cell title="积分排行榜" is-link class="cellGroup" :to="{ path:'/beautyFund/IntegralRanking'}"/>
           <van-cell title="美丽代言说明" is-link class="cellGroup" />
         </van-cell-group>
@@ -82,6 +83,9 @@ url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
     }
 </script>
 <style>
+  .beautyListPading1{
+    padding: 0 7px;
+  }
   .cellGroup > div{
     display: flex;
     align-items: center;
@@ -94,7 +98,11 @@ url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
   }
 </style>
 <style lang="scss" scoped>
-
+.beautyHead{
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
   .beautyBody{
     background-color: #F4F4F4;
   }
@@ -115,16 +123,17 @@ url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
     height:$height;
     position: relative;
     margin: 0px auto 0 auto;
-    background:url("../../../../assets/image/bankCar.png") no-repeat;
-    background-size: $width1 $height;
+    /*background:url("../../../../assets/image/bankCar.png") 0% 0% no-repeat;*/
+    /*background-size: cover;*/
   }
   .beautyCart{
     position: absolute;
     width:$width;
     height: 65px;
     left:0px;
-    bottom:8px;
+    bottom:0px;
     padding: $bottom;
+    z-index: 10;
   }
   .beautyCartBottom{
     display: flex;
@@ -152,7 +161,7 @@ url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
 .beautyBtn{
   width: $width1;
   margin: 0 auto;
-  padding: $bottom;
+  padding: $bottom 7px $bottom 7px;
   display: flex;
   align-items: center;
   justify-content: space-between;

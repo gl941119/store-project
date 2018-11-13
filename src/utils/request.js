@@ -41,7 +41,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=' + key[4], 'eid=' + config.binds[key[4]]);
     url = url.replace('eid=' + key[5], 'eid=' + config.binds[key[5]])
   }
-//
+
 // url=url+'&openid=abc123';
 
   type = type.toUpperCase();
