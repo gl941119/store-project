@@ -30,7 +30,7 @@
                 ordersn:this.ordersn
               }
             }).then(res=>{
-              if(code === 100){
+              if(res.code === 100){
                 this.info = res.data.info
               }
             })
