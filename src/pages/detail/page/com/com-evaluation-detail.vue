@@ -58,7 +58,7 @@
     right:0;
   }
   .evaluation-detail {
-    min-height: 161px;
+    /*min-height: 161px;*/
     width: 100%;
     background-color: white;
     margin-bottom: 10px;
@@ -104,7 +104,7 @@
       }
     }
     .content {
-      padding: 0 15px 16px;
+      padding: 0 15px 10px 15px;
       font-size: 10px;
       color: rgba(58, 58, 58, 1);
       &-title {
