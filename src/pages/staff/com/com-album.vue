@@ -24,8 +24,9 @@
     </div>
 
 <img :src="localIds"/>
-    asdf
+    <input type="text" v-model="localIds"/>
   </div>
+
 </template>
 
 <script>
@@ -49,7 +50,6 @@
         statusA:null,
         cont:0,
         localIds:'',
-        serverId:'',
       }
     },
     mounted(){
@@ -101,6 +101,33 @@
           }
         });
       },
+      getLocalImgData(id,thisa){
+        wxHandle('getLocalImgData',{
+          localId: id, // 图片的localID
+          success: function (getLocal) {
+            thisa.localIds =getLocal.localData;  // localData是图片的base64数据，可以用img标签显示
+          }
+        });
+      },
+      downloadImage(id,thi){
+
+        wxHandle('downloadImage',{//从微信服务器下载
+          serverId: id, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+          isShowProgressTips: 1, // 默认为1，显示进度提示
+          success: function (down) {
+            thi.getLocalImgData(down.localId,thi);
+          }
+        });
+      },
+      uploadImage(id,thi){
+        wxHandle('uploadImage',{//上传到微信服务器
+          localId: id, // 需要上传的图片的本地ID，由chooseImage接口获得
+          isShowProgressTips: 1, // 默认为1，显示进度提示
+          success: function (sev) {
+            thi.downloadImage(sev.serverId,thi);
+          }
+        });
+      },
       update(e) {   // 上传照片
         var self = this;
         // let file = e.target.files[0];
@@ -124,33 +151,8 @@
           scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
           sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
           success: function (res) {
-            var s=res.localId+'打开相册和相机'+res.localIds;
-            alert(s);
-            console.log(res)
-            self.localIds = res.localIds; // 回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-alert(self.localIds)
-            wxHandle('uploadImage',{//上传到微信服务器
-              localId: self.localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
-              isShowProgressTips: 1, // 默认为1，显示进度提示
-              success: function (sev) {
-                var s=sev.serverId+'上传到微信服务器';
-                alert(s);
-                console.log(sev)
-                self.serverId = sev.serverId; // 返回图片的服务器端ID
-                alert(self.serverId);
-                wxHandle('downloadImage',{//从微信服务器下载
-                  serverId: self.serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                  isShowProgressTips: 1, // 默认为1，显示进度提示
-                  success: function (down) {
-                    var s=down.localId+'从微信服务器下载';
-                    alert(s);
-                    console.log(down)
-                    alert(down.localId)
-                    var localId = down.localId; // 返回图片下载后的本地ID
-                  }
-                });
-              }
-            });
+            self.getLocalImgData(res.localIds[0],self);
+            // self.uploadImage(res.localIds[0],self);
           }
         });
 
