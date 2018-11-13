@@ -11,7 +11,8 @@
           <div class="eInformationHImg">
             <div class="eInformationHImgB">
               <img :src="avatar" class="uploadImg">
-              <input type="file" name="file" accept="image/png,image/gif,image/jpeg,image/*" @change="update" class="uploadInput">
+              <div @change="update" class="uploadInput"></div>
+              <!--<input type="file" name="file" accept="image/png,image/gif,image/jpeg,image/*" @change="update" class="uploadInput">-->
             </div>
             <div class="exchangeIcon"></div>
           </div>
@@ -83,6 +84,7 @@
 
 <script>
   import axios from 'axios'
+  import wxHandle from '../../utils/wx'
     export default {
         name: "employeeInformation",
       data(){
@@ -136,30 +138,66 @@
             }
           });
         },
+        getLocalImgData(id,thisa){
+
+          let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
+          let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+          wxHandle('getLocalImgData',{
+            localId: id, // 图片的localID
+            success: function (getLocal) {
+              let str=getLocal.localData;
+              thisa.$request({
+                url:urlR,
+                type:'post',
+                data:{
+                  filestr:str
+                }
+              }).then((res)=>{
+                if (res.code === 100) {
+                  thisa.saver(res.data.imgs);
+                }else{
+                  thisa.$toast(res.message);
+                }
+              }).catch((res)=>{
+
+              });
+
+            }
+          });
+        },
         update(e) {   // 上传照片
           var self = this;
-          let file = e.target.files[0];
-          let param = new FormData();  // 创建form对象
-          param.append('file', file, file.name);  // 通过append向form对象添加数据
-          // param.append('chunk', '0') // 添加form表单中其他数据
-          // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
-          let config = {
-            headers: {'Content-Type': 'multipart/form-data'}
-          };
-          axios.defaults.withCredentials = true;
-          // let uk = this.$store.state.uk || Cache.getSession('uk');
-          let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-          var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eids+'&act=fileupload&uk=';
-          axios.post(url + uk, param, config)
-            .then(res => {
-              // console.log(res,res.data.data.avatar)
-              if (res.data.code === 100) {
-                // this.avatar=res.data.data.imgs;
-                this.$toast('上传成功')
-                this.init();
-              }
-
-            })
+          wxHandle('chooseImage', {//打开相册和相机
+            count: 1, // 默认9
+            scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+              self.getLocalImgData(res.localIds[0],self);
+              // self.uploadImage(res.localIds[0],self);
+            }
+          });
+          // let file = e.target.files[0];
+          // let param = new FormData();  // 创建form对象
+          // param.append('file', file, file.name);  // 通过append向form对象添加数据
+          // // param.append('chunk', '0') // 添加form表单中其他数据
+          // // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+          // let config = {
+          //   headers: {'Content-Type': 'multipart/form-data'}
+          // };
+          // axios.defaults.withCredentials = true;
+          // // let uk = this.$store.state.uk || Cache.getSession('uk');
+          // let uk = this.$store.state.uk || sessionStorage.getItem('uk');
+          // var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eids+'&act=fileupload&uk=';
+          // axios.post(url + uk, param, config)
+          //   .then(res => {
+          //     // console.log(res,res.data.data.avatar)
+          //     if (res.data.code === 100) {
+          //       // this.avatar=res.data.data.imgs;
+          //       this.$toast('上传成功')
+          //       this.init();
+          //     }
+          //
+          //   })
         }
 
 

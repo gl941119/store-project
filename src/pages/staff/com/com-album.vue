@@ -104,38 +104,25 @@
       getLocalImgData(id,thisa){
 
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-        let url=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
         let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        };
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
-            // thisa.localIds =getLocal.localData;  // localData是图片的base64数据，可以用img标签显示
-            alert(getLocal.localData)
-
-            alert(urlR)
-
+           let str=getLocal.localData;
             thisa.$request({
               url:urlR,
               type:'post',
               data:{
-                filestr:getLocal.localData
+                filestr:str
               }
             }).then((res)=>{
-              let ggg=res.data.code+'---我曹你吗那个比'
-              alert(ggg)
-              if (res.data.code === 100) {
-                alert(3)
+              if (res.code === 100) {
+                thisa.saver(res.data.imgs);
               }else{
-                alert(2)
+                thisa.$toast(res.message);
               }
             }).catch((res)=>{
-              let ggg=res+'---我曹你吗那个比aaaaaaaaaa'
-              alert(ggg)
+
             });
 
           }
@@ -157,8 +144,8 @@
         };
         // axios.defaults.withCredentials = true;
         // let uk = this.$store.state.uk || Cache.getSession('uk');
-        let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act=fileupload&uk='+uk;
+        // let uk = this.$store.state.uk || sessionStorage.getItem('uk');
+        // var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act=fileupload&uk='+uk;
         wxHandle('chooseImage', {//打开相册和相机
           count: 1, // 默认9
           scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
