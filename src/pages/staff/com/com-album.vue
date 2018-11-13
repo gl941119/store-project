@@ -126,14 +126,16 @@
                 filestr:getLocal.localData
               }
             }).then((res)=>{
-              alert(4)
+              let ggg=res.data.code+'---我曹你吗那个比'
+              alert(ggg)
               if (res.data.code === 100) {
                 alert(3)
               }else{
                 alert(2)
               }
             }).catch((res)=>{
-              alert(1)
+              let ggg=res+'---我曹你吗那个比aaaaaaaaaa'
+              alert(ggg)
             });
 
           }
