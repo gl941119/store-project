@@ -19,7 +19,7 @@ function wxHandle(title,callback) {
           timestamp: d.timestamp, // 必填，生成签名的时间戳
           nonceStr: d.nonceStr, // 必填，生成签名的随机串
           signature: d.signature,// 必填，签名，见附录1
-          jsApiList: [title] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          jsApiList: ['scanQRCode','getLocalImgData','downloadImage','uploadImage','chooseImage','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
         wx.ready(function () {
           wx[title](callback)
