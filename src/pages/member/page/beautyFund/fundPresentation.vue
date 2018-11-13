@@ -27,7 +27,7 @@
     </div>
 
 
-    <div class="fundPresentationPop">可用提现余额20,000.00元</div>
+    <div class="fundPresentationPop">可用提现余额{{ share_amount }}元</div>
 
     <div class="exchangeBtnPadding">
       <div class="exchangeBtn" @click="fundPresentationMoney()">预计2小时内到帐</div>
@@ -46,6 +46,7 @@
             minMoney:'',
             cardName:'',
             cardNUmber:'',
+            share_amount:0
           }
       },
       mounted(){
@@ -62,6 +63,7 @@
               this.minMoney=data.start_amount;//最小金额
               this.cardName=data.card_name;//银行名称
               this.cardNUmber=data.end_no;//尾号
+              this.share_amount=data.share_amount;//可提余额
             })
           },
         fundPresentationMoney(){

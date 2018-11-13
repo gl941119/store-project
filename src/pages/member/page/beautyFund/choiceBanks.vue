@@ -39,7 +39,20 @@
           card:'',
         }
       },
+      mounted(){
+         this.inits();
+      },
       methods:{
+        inits(){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=withdraw',
+            type:'get',
+          }).then((res) => {
+            var data=res.data;
+            this.cardN=data.name;//银行名称
+            this.card=data.card_no;//卡号
+          })
+        },
         returnChoiceBanks(){
           if(this.cardN!==''&&this.card!==''){
             this.$request({

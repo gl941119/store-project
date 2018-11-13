@@ -15,7 +15,11 @@
           </div>
           <div class="DetailsBeautyDivisionName1">{{ signature }}</div>
         </div>
-        <div class="DetailsBeautyDivisionBtn" @click="liJiBtn()">立即预约</div>
+        <div>
+          <div class="isCollectsBox"><van-icon name="like-o" @click="isShouC" :class="[is_collect?'isCollects':'isCollectsEqs']"/></div>
+          <div class="DetailsBeautyDivisionBtn" @click="liJiBtn()">立即预约</div>
+        </div>
+
       </div>
 
       <div class="DetailsBeautyDivisionCont">
@@ -82,7 +86,7 @@
 
 <script>
 
-  import { Popup ,ImagePreview} from 'vant';
+  import { Popup ,ImagePreview,Icon} from 'vant';
     export default {
         name: "DetailsBeautyDivision",
       data(){
@@ -105,13 +109,29 @@
             vedioSrc:'',
             isPlay:false,
             _dom:null,
-            playStatus:''
+            playStatus:'',
+            is_collect:false,
+            ids:'',
           }
       },
       mounted(){
         this.init();
       },
       methods:{
+        isShouC(){
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
+            type: 'get',
+            data: {
+              type: '3',
+              id: this.id
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.is_collect = !this.is_collect
+            }
+          })
+        },
         vanPopup(){
           setTimeout(()=>{
             let myVideo= document.getElementById('myVideo');
@@ -167,6 +187,7 @@
                 this.up=member.up;
                 this.task=member.task;
                 this.intro=member.intro;
+                this.ids=member.id;
 
               }
             });
@@ -182,6 +203,16 @@
 </script>
 
 <style lang="scss" scoped>
+  .isCollectsBox{
+    text-align: center;
+  }
+  .isCollectsEqs{
+    font-size: 20px;
+  }
+  .isCollects{
+    color: red;
+    font-size: 20px;
+  }
 .DetailsBeautyDivisionBox{
   background-color: rgba(244,244,244,1);
 }
