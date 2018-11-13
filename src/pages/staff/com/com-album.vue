@@ -24,8 +24,9 @@
     </div>
 
 <img :src="localIds"/>
-    1234
+    {{localIds}}
   </div>
+
 </template>
 
 <script>

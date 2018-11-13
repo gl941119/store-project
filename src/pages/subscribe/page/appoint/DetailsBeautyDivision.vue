@@ -7,13 +7,15 @@
   <div class="DetailsBeautyDivisionC">
     <div class="DetailsBeautyDivisionPadding">
       <div class="DetailsBeautyDivisionHead">
-        <div class="DetailsBeautyDivisionHImg"><img  :src="avatar" /></div>
-        <div class="DetailsBeautyDivisionH1">
-          <div class="DetailsBeautyDivisionH2">
-            <div class="DetailsBeautyDivisionName">{{ name }}</div>
-            <div class="DetailsBeautyDivisionName1">{{ task }}</div>
+        <div class="DetailsBeautyDivisionHeadFlex">
+          <div class="DetailsBeautyDivisionHImg"><img  :src="avatar" /></div>
+          <div class="DetailsBeautyDivisionH1">
+            <div class="DetailsBeautyDivisionH2">
+              <div class="DetailsBeautyDivisionName">{{ name }}</div>
+              <div class="DetailsBeautyDivisionName1">{{ task }}</div>
+            </div>
+            <div class="DetailsBeautyDivisionName1">{{ signature }}</div>
           </div>
-          <div class="DetailsBeautyDivisionName1">{{ signature }}</div>
         </div>
         <div>
           <div class="isCollectsBox"><van-icon name="like-o" @click="isShouC" :class="[is_collect?'isCollects':'isCollectsEqs']"/></div>
@@ -259,11 +261,19 @@
     padding-bottom: 15px;
     border-bottom: 1px solid rgba(216,216,216,1);;
   }
+  .DetailsBeautyDivisionH1{
+    padding-left: 20px;
+  }
   .DetailsBeautyDivisionH2{
     display: $flex;
     align-items: $alignItems;
     justify-content: flex-start;
     padding-bottom: 5px;
+  }
+  .DetailsBeautyDivisionHeadFlex{
+    display: $flex;
+    align-items: $alignItems;
+    justify-content: flex-start;
   }
   .DetailsBeautyDivisionBtn{
     font-size:12px;
