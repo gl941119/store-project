@@ -102,8 +102,8 @@ display: inline-block;
     width: 15px;
     height: 15px;
     color: #e9584f;
-    background: url("../../../assets/image/address.png") no-repeat;
-    background-size: 15px 15px;
-    border-radius: 50%;
+    margin-left: 10px;
+    background: url("../../../assets/image/staff.png") no-repeat;
+    background-size: contain;
   }
 </style>

@@ -1,30 +1,42 @@
 <template>
   <div class="wrap">
-    <cell :Data="list"  class="cell"></cell>
-    <div class="infoMs" v-if="status">
+    <div class="cell">
+      <div class="cell-name">{{list.name}}</div>
       <div>
-        <div class="header">
-          <span>{{ mySub.sName }}</span>
-        </div>
-        <p class="indent">订单号{{ mySub.orderId }}</p>
-        <p class="indent">预计{{ mySub.time }}到店</p>
+        <span class="cell-content" v-on:click="goUrl">{{list.message}}</span>
+        <van-icon name="arrow" class="cell-icon"/>
       </div>
-      <div>
+
+    </div>
+    <div>
+      <div class="fill"></div>
+      <div class="infoMs" v-if="status">
+
         <div>
-          <van-button type="default" class="header-Btn headerBtn" v-if="mySub.startTime" @click="startBtn">开始</van-button>
-          <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
+          <div class="header">
+            <span>{{ mySub.sName }}</span>
+          </div>
+          <p class="indent">订单号{{ mySub.orderId }}</p>
+          <p class="indent">预计{{ mySub.time }}到店</p>
         </div>
         <div>
-          <van-button type="default" class="header-Btn" v-if="mySub.startTime" @click="quXiaoBtn">取消</van-button>
+          <div>
+            <van-button type="default" class="header-Btn headerBtn" v-if="mySub.startTime" @click="startBtn">开始</van-button>
+            <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
+          </div>
+          <div>
+            <van-button type="default" class="header-Btn" v-if="mySub.startTime" @click="quXiaoBtn">取消</van-button>
+          </div>
         </div>
+      </div>
+
+
+      <div class="connection" v-if="status">
+        <span>客户：{{ mySub.xm }}</span>
+        <span>联系电话：{{ mySub.phone }}</span>
       </div>
     </div>
 
-
-    <div class="connection" v-if="status">
-      <span>客户：{{ mySub.xm }}</span>
-      <span>联系电话：{{ mySub.phone }}</span>
-    </div>
 
   </div>
 </template>
@@ -48,6 +60,9 @@
 
     },
     methods:{
+      goUrl() {
+        this.$router.push({path: this.list.url, query: {}})
+      },
       startBtn(){
         this.statusBtn=false;
         Dialog.confirm({
@@ -137,7 +152,7 @@ position: relative;
     border-radius: 4px;
   }
   .cell{
-    height: 53px
+    height: 40px
 
   }
   .header{
@@ -170,7 +185,6 @@ position: relative;
 
   }
   .fill{
-    margin:7px auto 0;
     width:314px;
     height:1px;
     background:rgba(216,216,216,1);
@@ -193,6 +207,33 @@ position: relative;
 .headerBtn{
   margin-bottom: 10px;
 }
+.cell{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+}
+.cell-name{
+  color: rgba(51, 51, 51, 1);
+  font-size: 15px;
+  font-family: PingFangSC-Regular;
+}
+  .cell-content{
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: rgba(102, 102, 102, 1);
+  }
+  .cell-icon{
+    font-size: 10px;
+    right: 0;
+  }
+  .cell-fill {
+    width: 100%;
+    height: 1px;
+    background: rgba(216, 216, 216, 1);
+  }
+
 
 </style>
 
