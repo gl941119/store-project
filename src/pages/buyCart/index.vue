@@ -1,8 +1,6 @@
 <template>
   <div class="buyCart">
-
     <!--<product-card v-for="item,index in 4" class="product-card" :key="index"></product-card>-->
-
     <!--购物车卡片-->
     <div class="card" v-for="item in goodslist" :key="item.id" >
       <van-checkbox v-model="item.checked" class="checkbox" v-on:click.native="refreshPrice"></van-checkbox>
@@ -142,10 +140,10 @@
         let price = 0;
         this.goodslist.forEach(item => {
           if (item.checked === true) {
-            price += parseInt(item.marketprice) * parseInt(item.total)
+            price += parseFloat(item.marketprice) * parseFloat(item.total)
           }
         })
-        this.price = price * 100
+        this.price = price*100
       },
       removeProduct(id) {//删除商品
         this.$dialog.confirm({

@@ -15,8 +15,6 @@
       </van-tab>
     </van-tabs>
 
-
-
   </div>
 </template>
 
