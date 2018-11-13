@@ -126,19 +126,14 @@
                 filestr:getLocal.localData
               }
             }).then((res)=>{
+              alert(4)
               if (res.data.code === 100) {
-                var s=res.data.data.imgs;
-                thisa.$toast('上传成功');
-                let aa='cccc'+res.data.message;
-                alert(aa)
-                // thisa.saver(s);
+                alert(3)
               }else{
-                let aa='bbbb'+res.data.message;
-                alert(aa)
+                alert(2)
               }
             }).catch((res)=>{
-              let aa='aaaa'+res.data.message;
-              alert(aa)
+              alert(1)
             });
 
           }
