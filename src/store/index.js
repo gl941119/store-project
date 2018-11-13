@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     showFooter: true,
+    hover:0,//footer颜色
     is: '2',
     ShowBuySpecification: false,
     BuySpecification:undefined,
@@ -58,6 +59,9 @@ export default new Vuex.Store({
 
     setClassifyId(state,val){
       state.ClassifyId = val
+    },
+    setHover(state,val){
+      state.hover= val
     }
 
 

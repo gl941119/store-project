@@ -3,27 +3,27 @@
     <ul>
       <router-link tag="li" :to="{ name: 'index'}"
                    v-bind:class="{li_hover:hover===0}"
-                   v-on:click.native="hover = 0">
+                   v-on:click.native="setHover(0)">
         <span class="icon-g"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span
           class="path4"></span><span class="path5"></span><span class="path6"></span></span>
         <p>商城</p>
       </router-link>
       <router-link tag="li" :to="{ name: 'classify'}"
                    v-bind:class="{li_hover:hover===1}"
-                   v-on:click.native="hover = 1">
+                   v-on:click.native="setHover(1)">
         <span class="icon-w"><span class="path1"></span><span class="path2"></span></span>
         <p>分类</p>
       </router-link>
       <router-link tag="li" :to="{ name: 'subscribe',params:{type:'1'}}"
                    v-bind:class="{li_hover:hover===2}"
-                   v-on:click.native="hover = 2"
+                   v-on:click.native="setHover(2)"
       >
         <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>预约</p>
       </router-link>
       <router-link tag="li" :to="{ name: 'buyCart'}"
                    v-bind:class="{li_hover:hover===3}"
-                   v-on:click.native="hover = 3">
+                   v-on:click.native="setHover(3)">
         <span class="icon-c"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>购物车</p>
       </router-link>
@@ -44,21 +44,26 @@
     name: "MyFooter",
     data() {
       return {
-        hover: 0,
         txt: window.sessionStorage.getItem('is_member') === '0' ? '会员中心' : '个人中心',
       }
     },
     computed: {
       isShow() {
         return this.$store.state.showFooter
+      },
+      hover(){
+        return this.$store.state.hover
       }
     },
     methods: {
+      setHover(type){
+        this.$store.commit('setHover',type)
+      },
       infoUrl() {
         if (window.sessionStorage.getItem('is_bind') === '1') {//已绑定
           if (window.sessionStorage.getItem('store') === '0') {//用户
             this.$router.push({name: 'member'});
-            this.hover = 4
+              this.$store.commit('setHover',4)
           } else {//美师
             this.$router.push({name: 'staff'});
           }
