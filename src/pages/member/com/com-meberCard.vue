@@ -1,7 +1,10 @@
 <template>
   <div class="Card">
     <div class="card-top">
-      <img :src="Data.avatar" alt="" class="card-top-avatar">
+      <div class="card-top-avatar">
+        <img :src="Data.avatar" alt="" >
+      </div>
+
       <div class="card-top-title">
         <div class="card-top-title-top">
           <span class="name">{{Data.nick}}</span>
@@ -66,16 +69,24 @@
     &-top {
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
 
       &-avatar{
         width: 50px !important;
-        height: 50px !important;
         border-radius: 250px !important;
+        overflow: hidden;
+        >img{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50px !important;
+          height: 50px !important;
+        }
       }
       &-title {
+        flex: 1;
         margin: 4px 0 0 16px;
-        width: 100%;
+
         &-top {
           width: 100%;
           height: 25px;
