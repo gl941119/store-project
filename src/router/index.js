@@ -216,6 +216,7 @@ let router = new Router({
     {//会员中心--我的评价
       path: '/member/myEvaluate',
       name: 'myEvaluate',
+      meta: {keepAlive: false},
       title:'我的评价',
       component: resolve => require(['../pages/member/page/myEvaluate'], resolve)
     },

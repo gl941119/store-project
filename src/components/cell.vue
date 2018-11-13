@@ -50,7 +50,7 @@
       margin-right: 10px;
       font-family: PingFangSC-Regular;
       font-size: 12px;
-      font-family: PingFangSC-Regular;
+
       color: rgba(102, 102, 102, 1);
       display: block;
       white-space: nowrap;
@@ -60,6 +60,7 @@
     &-icon {
       font-size: 10px;
       right: 0;
+      color: #999999 !important;
     }
     .fill {
       position: absolute;
