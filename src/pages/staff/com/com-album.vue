@@ -24,7 +24,7 @@
     </div>
 
 <img :src="localIds"/>
-    <input type="text" v-value="localIds"/>
+    <input type="text" v-model="localIds"/>
   </div>
 
 </template>
@@ -106,7 +106,6 @@
           localId: id, // 图片的localID
           success: function (getLocal) {
             thisa.localIds =getLocal.localData;  // localData是图片的base64数据，可以用img标签显示
-alert(thisa.localIds)
           }
         });
       },
