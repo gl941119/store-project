@@ -83,7 +83,9 @@
                                v-bind:goods="Data"
                                v-bind:buyNum.sync="buyNum"
                                v-bind:alreadybought.sync="alreadybought"
-                               v-bind:specs.sync="specs"></com-buy-specification>
+                               v-bind:specs.sync="specs"
+                               v-bind:status.sync="status"
+        ></com-buy-specification>
       </van-actionsheet>
       <!--商品购买栏-->
       <van-goods-action class="buy" v-if="type== '1'">
@@ -91,6 +93,13 @@
         <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
         <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"/>
         <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"/>
+        <div class="icon"></div>
+        <div class="icon">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
       </van-goods-action>
       <!--服务购买栏-->
       <van-goods-action class="buy" v-else>
@@ -159,6 +168,7 @@
         SpecificationData: null,
         show_play: false,//是否隐藏播放按钮
         show_img: false,//是否隐藏第一帧图像
+        status:undefined,//购买栏 确定按钮状态 '1' 加入购物车  '2' 立即购买
       }
     },
     mounted() {
@@ -189,9 +199,7 @@
       }
     },
     methods: {
-
       onClickCollect() {//加入收藏
-        console.log(this.is_collect)
         if (this.is_collect) {
           this.$dialog.confirm({
             title: '是否取消收藏'
@@ -215,6 +223,12 @@
           }
         }).then(res => {
           if (res.code === 100) {
+            if(this.is_collect){//-1
+              this.Data.collection = parseInt(this.Data.collection)-1
+            }else{
+              this.Data.collection = parseInt(this.Data.collection)+1
+              this.$toast.success('收藏成功')
+            }
             this.is_collect = !this.is_collect
           }
         })
@@ -227,7 +241,7 @@
           this.$router.push({name: 'bindAccount'});
           return
         }
-        if (this.specs.length === this.num) {//是否选择规格
+        if (this.specs.length === this.num) {//已经选择规格
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=85&act=mycart&id=1',
             type: 'post',
@@ -245,7 +259,8 @@
               this.$toast.fail('添加失败')
             }
           })
-        } else {//未选择
+        } else { //未选择
+          this.status = '1' //加入购物车状态
           this.$store.commit('setShowBuySpecification', true)
         }
       },
@@ -254,8 +269,6 @@
           this.$router.push({name: 'bindAccount'});
           return
         }
-
-
         if (this.specs.length === this.num) {//是否选择规格
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
@@ -273,7 +286,10 @@
               this.$router.push({name: 'indentConfirme'})
             }
           })
-        } else {
+        } else {//未选择
+          this.status = '2' // 立即购买状态
+          //   this.$set(this.status,'2')
+          console.log(this.status)
           this.$store.commit('setShowBuySpecification', true)
         }
       },
@@ -426,9 +442,7 @@
     .is_display {
       display: none;
     }
-
   }
-
   .detali-product {
     height: 100%;
     background-color: #F4F4F4;
@@ -440,11 +454,9 @@
         width: 375px;
       }
       &-video {
-
       }
     }
     .title {
-
       padding: 15px 15px 9px;
       background-color: white;
       &-top {
@@ -633,6 +645,32 @@
       background-color: #71B3FF;
       font-size: 18px;
       color: rgba(255, 255, 255, 1);
+    }
+    .icon{
+      width:18px;
+      height:18px;
+      background:rgba(255,255,255,1);
+      border-radius: 250px;
+      background:rgba(228,57,59,1);
+      border:3px solid white;
+      background-color: #E4393B;
+      left: 87px;
+      top: 7px;
+      position: absolute;
+
+
+      font-size: 10px;
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      >div{
+        border-radius: 250px;
+        width: 2px;
+        height: 2px;
+        background-color: white;
+      }
     }
   }
 

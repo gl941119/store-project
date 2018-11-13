@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <img src="../../assets/image/image-1.png" alt="" class="banner">
     <div class="aboutUs">
       <p class="bg">ABOUT US</p>
@@ -102,7 +101,7 @@
       </dd>
     </div>
     <div class="apply">
-      <a href="tel:028-65278195"  class="Btn"></a>
+      <a href="tel:028-65278195" class="Btn"></a>
     </div>
     <div class="CONTACTUS">
       <p class="bg">CONTACT US</p>
@@ -124,9 +123,6 @@
           <li>成都市高新区环球中心w3区 21楼22号</li>
         </ul>
       </div>
-
-
-
     </div>
   </div>
 
@@ -349,51 +345,52 @@
     width: 100%;
     .Btn {
       width: 345px;
-      height: 50px ;
+      height: 50px;
       display: block;
       margin: 0 auto;
       /*text-align: center;*/
       /*line-height: 40px;*/
       /*background-color: #71B3FF;*/
       /*color: white !important;*/
-      background: url("../../assets/image/tel.png") no-repeat ;
+      background: url("../../assets/image/tel.png") no-repeat;
       background-position: center 3px;
       background-size: 345px 50px;
     }
   }
-  .CONTACTUS{
+
+  .CONTACTUS {
     margin-top: 48px;
     padding: 0 15px;
     position: relative;
-    .bg{
+    .bg {
       position: absolute;
       top: -5px;
       right: 15px;
-      font-size:30px;
-      font-family:PingFangSC-Semibold;
-      font-weight:600;
-      color:rgba(113,179,255,1);
+      font-size: 30px;
+      font-family: PingFangSC-Semibold;
+      font-weight: 600;
+      color: rgba(113, 179, 255, 1);
     }
-    .list{
+    .list {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      >img{
+      > img {
         margin-top: 3px;
         margin-left: 15px;
         width: 28px;
         height: 25px;
       }
-      >ul{
+      > ul {
         flex: 1;
         margin-left: 25px;
-        >li{
-          height:28px;
-          font-size:20px;
-          font-family:PingFangSC-Semibold;
-          font-weight:600;
-          color:rgba(162,162,162,1);
-          line-height:28px;
+        > li {
+          height: 28px;
+          font-size: 20px;
+          font-family: PingFangSC-Semibold;
+          font-weight: 600;
+          color: rgba(162, 162, 162, 1);
+          line-height: 28px;
         }
       }
     }

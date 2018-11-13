@@ -103,7 +103,7 @@ let router = new Router({
     {//热门商品and服务(预约)
       path: '/subscribe/:type',//1 服务 2 商品
       name: 'subscribe',
-      meta: {keepAlive: false},
+      meta: {showFooter: true,keepAlive: false},
       component: resolve => require(['../pages/subscribe'], resolve)
     },
     {//热门商品--预约美师
@@ -137,7 +137,7 @@ let router = new Router({
     {//详情页
       path: '/detail/:type/:id', // type 1 商品  2服务
       name: 'detail',
-      title:'123',
+
       meta: {keepAlive: false},
       component: resolve => require(['../pages/detail'], resolve)
     },

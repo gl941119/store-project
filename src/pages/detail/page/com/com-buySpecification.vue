@@ -61,7 +61,7 @@
 <script>
   export default {
     name: "com-buySpecification",
-    props: ['goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs'],
+    props: ['status','goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs'],
     data() {
       return {
         id: this.$route.params.id,//商品id
@@ -89,11 +89,55 @@
     },
     methods: {
       confirmHandle() {
-        if (this.specs.length !== this.num) {
+        if (this.specs.length !== this.num) {//没有选取规格
           this.$toast.fail('请选择规格')
           return
-        } else {
-          this.$store.commit('setShowBuySpecification', false)//关闭购买栏
+        } else {//已经选取规格
+
+          if (this.status === '1') {//加入购物车
+
+            this.$request({
+              url: 'app/index.php?i=1&c=entry&eid=85&act=mycart&id=1',
+              type: 'post',
+              data: {
+                op: 'add',
+                id: this.id,
+                total: this.buyNum,
+                specs: this.specs.join('_')
+              }
+            }).then(res => {
+              if (res.code === 100) {
+                this.$toast.success('添加成功')
+                this.$store.commit('setShowBuySpecification', false)//关闭购买栏
+              } else {
+                this.$toast.fail('添加购物车失败')
+              }
+            })
+          } else if (this.status === '2') {//立即购买
+
+            this.$request({
+              url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
+              type: 'post',
+              data: {
+                goods: JSON.stringify([{
+                  id: this.id,
+                  optionid: this.specs.join('_'),
+                  num: this.buyNum
+                }])
+              }
+            }).then(res => {
+              if (res.code === 100) {
+                window.sessionStorage.setItem('ordersn', res.data.ordersn)
+                this.$router.push({name: 'indentConfirme'})
+              }
+            })
+
+          } else {//关闭购买栏
+
+            this.$store.commit('setShowBuySpecification', false)//关闭购买栏
+          }
+
+
         }
       },
       onclick(son, tier) {//son 传向下一层数据  tier  层数
@@ -126,15 +170,14 @@
             this.sixData = son.son
             break;
         }
-
         let specs = [this.oneSel, this.twoSel, this.threeSel, this.fourSel, this.fiveSel].filter(item => {
           return item
         })
 
         if (specs.length == this.num) {//选择完成传值
 
-          if(specs.length===1){//后台格式需要
-            specs[0] = specs[0]+"_"
+          if (specs.length === 1) {//后台格式需要
+            specs[0] = specs[0] + "_"
           }
 
           this.$emit('update:specs', specs)//商品id
@@ -143,16 +186,11 @@
         }
       },
       change(val) {//数量查询
-
-        if(this.specs.length===1){//后台格式需要
-          if(!this.specs.indexOf("_")){
-            this.specs[0] = this.specs[0]+"_"
+        if (this.specs.length === 1) {//后台格式需要
+          if (!this.specs.indexOf("_")) {
+            this.specs[0] = this.specs[0] + "_"
           }
-
-
         }
-        console.log(this.specs)
-
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=optionstock',
           type: 'get',
@@ -163,11 +201,9 @@
         }).then(res => {
           if (res.code === 100) {
             this.numMax = res.data.stock
-
             this.$emit('update:buyNum', val)
           }
         })
-
       },
     }
   }

@@ -1,6 +1,5 @@
 <template>
   <div style="background-color: #F4F4F4">
-
     <!--地址-->
     <com-confirmhead :store="store" :user="user"></com-confirmhead>
     <!--商品-->
