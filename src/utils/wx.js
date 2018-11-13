@@ -9,6 +9,7 @@ function wxHandle(title,callback) {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   };
   let r = 'http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url=' + window.location.href;
+  // alert('wx')
   axios.post(r, null, config)
     .then((res) => {
       if (res.data.status) {

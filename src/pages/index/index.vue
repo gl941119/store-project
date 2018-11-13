@@ -5,7 +5,7 @@
     <div class="search">
       <search :value.sync="value" class="search-left" v-on:click.native="goSearch"></search>
       <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
-      <img src="../../assets/image/scan.png" alt="" class="search-right" @click="scanBtn()">
+      <!--<img src="../../assets/image/scan.png" alt="" class="search-right" @click="scanBtn()">-->
     </div>
     <div class="banner">
       <van-swipe :autoplay="3000">
@@ -73,13 +73,13 @@
         window.location.href = link
       },
       scanBtn() {
-        wxHandle('scanQRCode', {
-          needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-          scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-          success: function (res) {
-            var result = res.resultStr + '扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
-          }
-        })
+        // wxHandle('scanQRCode', {
+        //   needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+        //   scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+        //   success: function (res) {
+        //     var result = res.resultStr + '扫码返回的结果'; // 当needResult 为 1 时，扫码返回的结果
+        //   }
+        // })
 
       },
       request() {
@@ -123,7 +123,7 @@
     justify-content: space-between;
     &-left {
       float: left;
-      width: 308px;
+      width: 100%;
       height: 29px;
 
     }

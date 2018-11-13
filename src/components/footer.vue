@@ -15,7 +15,8 @@
         <p>分类</p>
       </router-link>
       <router-link tag="li" :to="{ name: 'subscribe',params:{type:'1'}}"
-                   v-bind:class="{}"
+                   v-bind:class="{li_hover:hover===2}"
+                   v-on:click.native="hover = 2"
       >
         <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>预约</p>

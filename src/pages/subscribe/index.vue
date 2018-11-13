@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-
     <div class="search">
       <div class="search-input">
         <van-icon name="search" class="icon"/>

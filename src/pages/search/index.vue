@@ -5,6 +5,7 @@
       <div class="search-input">
         <van-icon name="search" class="icon"/>
         <input type="text" v-model="value" placeholder="请输入关键字" class="input">
+        <img :class="{show_close:show_close}"  v-on:click="closeHandle" src="../../assets/image/cancle.png" alt="" class="close">
       </div>
       <van-button type="primary" class="search-btn" @click="request()">搜索</van-button>
     </div>
@@ -44,6 +45,7 @@
         showSearch: 0, //0 1 2
         searchResult: null,
         history: JSON.parse(window.localStorage.getItem('searchHistory')),//历史地址
+        show_close:false
       }
     },
     watch: {
@@ -51,12 +53,21 @@
         if (val.length === 0) {
           this.showSearch = 0
         }
-      }
+        if(!!val){//显示关闭
+          this.show_close = true
+        }else{
+          this.show_close = false
+        }
+
+      },
     },
     mounted() {
 
     },
     methods: {
+      closeHandle(){
+        this.value = ''
+      },
       request(val = null) {//搜索
         this.saveHistory();//保存历史
         if (!this.value) return;
@@ -157,10 +168,15 @@
 
       }
       .close {
-
-        font-size: 12px;
+        display: none;
+        width: 12px;
+        height: 12px;
         margin-right: 7px;
       }
+      .show_close{
+        display: block;
+      }
+
 
     }
     &-btn {

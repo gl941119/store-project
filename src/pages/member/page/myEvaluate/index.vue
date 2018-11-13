@@ -1,7 +1,6 @@
 <template>
   <div class="wrap">
-
-    <van-tabs v-model="active" @click="onclick" :swipeable="true" sticky>
+    <van-tabs v-model="active" @change="onclick" :swipeable="true" sticky>
       <van-tab title="商品">
         <div class="fill"></div>
         <!--卡片-->
@@ -17,7 +16,7 @@
               <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
             </div>
           </div>
-          <div class="main-bottom"  v-on:click="goDetail(1,goodsid)">
+          <div class="main-bottom"  v-on:click="goDetail(1,item.goodslist[0].goodsid)">
             <img :src="item.goodslist[0].thumb" alt="">
             <dl>
               <dt>{{item.goodslist[0].title}}</dt>
@@ -44,7 +43,7 @@
               <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
             </div>
           </div>
-          <div class="main-bottom"  v-on:click="goDetail(2,item.goodslist[0].goodsid)">
+          <div class="main-bottom"  v-on:click="goDetail(2,item.sid)">
             <img :src="item.goodslist[0].thumb" alt="">
             <dl>
               <dt>{{item.goodslist[0].title}}</dt>
