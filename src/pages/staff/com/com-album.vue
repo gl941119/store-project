@@ -24,7 +24,7 @@
     </div>
 
 <img :src="localIds"/>
-    {{localIds}}
+    <input type="text" v-value="localIds"/>
   </div>
 
 </template>
