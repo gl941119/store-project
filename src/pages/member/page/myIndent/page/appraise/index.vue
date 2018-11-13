@@ -47,6 +47,8 @@
     <van-popup v-model="show" :click-overlay="vanPopup()">
       <video class="video" id="myVideo" controls ref="videoSourceRef">
         <source :src="vedioSrc" type="video/mp4">
+        <source :src="vedioSrc" type="video/ogg">
+        <source :src="vedioSrc" type="video/mpeg">
         您的浏览器不支持Video标签。
       </video>
     </van-popup>
@@ -92,9 +94,9 @@
               }
             }).then((res)=>{
               if (res.code === 100) {
-                thisa.arr[thisa.index].videos.push({
+                thisa.arr[thisa.index].imgs.push({
                   avatar: res.data.avatar,
-                  videos: res.data.imgs
+                  imgs: res.data.imgs
                 })
                 thisa.$toast('上传成功');
               }else{
