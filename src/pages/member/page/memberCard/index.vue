@@ -71,8 +71,8 @@
   .tiyan{
     margin: 10px auto 0;
     padding: 16px 28px 0 20px;
-    width: 345px;
-    height: 180px;
+    width: 375px;
+    height: 190px;
     background: url("../../../../assets/image/红卡.png") no-repeat center 0px;
     background-size: 365px 190px;
     .title{
@@ -119,8 +119,8 @@
   .huiyuan{
     margin: 20px auto 0;
     padding: 16px 28px 0 20px;
-    width: 345px;
-    height: 180px;
+    width: 375px;
+    height: 190px;
     background: url("../../../../assets/image/蓝卡.png") no-repeat center 0px;
     background-size: 365px 190px;
 

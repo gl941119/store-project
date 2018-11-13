@@ -13,7 +13,7 @@
       </div>
       <div class="fill"></div>
       <div class="am">
-        <p>上午</p>
+        <p>下午</p>
         <ul>
           <li v-for="item,index in afternoon" :key="index"
               v-bind:class="{li_hover:hover== item.start,opacity:item.status}"
@@ -23,7 +23,7 @@
       </div>
       <div class="fill"></div>
       <div class="am">
-        <p>上午</p>
+        <p>晚上</p>
         <ul>
           <li v-for="item,index in night" :key="index"
               v-bind:class="{li_hover:hover== item.start,opacity:item.status}"
@@ -104,6 +104,7 @@
       font-size: 16px;
       font-family: PingFangSC-Regular;
       color: rgba(51, 51, 51, 1);
+
     }
     .main {
       margin-top: 20px;
@@ -146,7 +147,7 @@
 
           }
           .opacity {
-            opacity: 0.5;
+            opacity: 0.4;
           }
         }
 
