@@ -2,7 +2,12 @@
   <div class="buyCart">
     <!--<product-card v-for="item,index in 4" class="product-card" :key="index"></product-card>-->
     <!--购物车卡片-->
-    <div class="card" v-for="item in goodslist" :key="item.id" >
+    <div class="message" v-if="!goodslist.length">
+      <img src="../../assets/image/buyCart.png" alt="">
+      <p>购物车空空如也</p>
+      <!--<van-button type="default" class="btn" v-on:click="goIndex">去逛逛吧</van-button>-->
+    </div>
+    <div class="card" v-for="item in goodslist" :key="item.id" v-else>
       <van-checkbox v-model="item.checked" class="checkbox" v-on:click.native="refreshPrice"></van-checkbox>
       <div class="content" v-on:click.stop="goDetail(item.goodsid)">
         <img :src="item.thumb" alt="">
@@ -68,6 +73,9 @@
       this.request()
     },
     methods: {
+      goIndex() {
+        this.$router.push({name: 'index'})
+      },
       goDetail(goodsid) {
         this.$router.push({name: 'detail', params: {type: '1', id: goodsid}})
       },
@@ -143,7 +151,7 @@
             price += parseFloat(item.marketprice) * parseFloat(item.total)
           }
         })
-        this.price = price*100
+        this.price = price * 100
       },
       removeProduct(id) {//删除商品
         this.$dialog.confirm({
@@ -192,6 +200,43 @@
 
   .submit-bar {
     margin-bottom: 50px;
+  }
+
+  .message {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > img {
+      width: 88px;
+      height: 70px;
+
+    }
+    > P {
+      margin-top: 12px;
+      width: 98px;
+      height: 20px;
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(198, 197, 197, 1);
+      line-height: 20px;
+    }
+    .btn {
+      margin-top: 32px;
+      background-color: #C2DEFE;
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      color: white;
+      font-size: 14px;
+      font-family: PingFangSC-Medium;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 1);
+
+    }
   }
 
   .card {

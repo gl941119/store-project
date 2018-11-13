@@ -59,19 +59,19 @@
             return '已完成'
         }
       },
-      score:function () {
-        return Math.ceil(parseInt(this.item.score)/2)
+      score: function () {
+        return Math.ceil(parseInt(this.item.score) / 2)
       }
     },
     data() {
       return {
         is_member: window.sessionStorage.getItem('is_member'), //0 非会员  1 会员
-        value:3,
+        value: 3,
 
       }
     },
     methods: {
-      goBaidu(){
+      goBaidu() {
         this.$baidu()
       },
       goAppointPay(orderid) {
@@ -218,18 +218,18 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  .icon{
-flex: 1;
-  }
-    >span {
+    .icon {
+      flex: 1;
+    }
+    > span {
 
-      width:65px;
-      height:19px;
-      font-size:13px;
-      font-family:PingFangSC-Regular;
-      font-weight:400;
-      color:rgba(51,51,51,1);
-      line-height:19px;
+      width: 65px;
+      height: 19px;
+      font-size: 13px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 19px;
     }
     &-Btn {
       margin-left: 4px;

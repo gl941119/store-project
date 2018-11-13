@@ -1,7 +1,18 @@
 <template>
   <div>
+    <van-tabs v-model="active" @change="request" :swipeable="true" sticky>
+      <van-tab title="全部">
+        <com-card :item="item" v-for="item,index in appoint" :key="index"></com-card>
+      </van-tab>
+      <van-tab title="已预约">
+        <com-card :item="item" v-for="item,index in appoint" :key="index"></com-card>
+      </van-tab>
+      <van-tab title="已完成">
+        <com-card :item="item" v-for="item,index in appoint" :key="index"></com-card>
+      </van-tab>
 
-    <com-card :item="item"  v-for="item,index in appoint" :key="index"></com-card>
+    </van-tabs>
+
   </div>
 </template>
 
@@ -10,13 +21,29 @@
 
   export default {
     name: "mySubscribe",
-    data(){
-      return{
-        appoint:[]
+    data() {
+      return {
+        appoint: [],
+        active: 0
       }
     },
     components: {
       ComCard
+    },
+    computed:{
+      type:function () {
+        switch (this.active) {
+          case 0:
+            return 1;
+            break;
+          case 1:
+            return 3;
+            break;
+          case 2:
+            return 4;
+            break
+        }
+      }
     },
     mounted() {
       this.request()
@@ -25,9 +52,12 @@
       request() {
         this.$request({
           url: "app/index.php?i=1&c=entry&eid=88&act=appointlist",
-          type: 'get'
+          type: 'post',
+          data:{
+            type:this.type
+          }
         }).then(res => {
-          if(res.code===100){
+          if (res.code === 100) {
             this.appoint = res.data.appoint
           }
 
