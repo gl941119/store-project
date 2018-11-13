@@ -27,7 +27,7 @@
     getLocalImgData(id,thisa){
 
       let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-      let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+      let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eids+'&act=fileupload&uk='+uk;
       wxHandle('getLocalImgData',{
         localId: id, // 图片的localID
         success: function (getLocal) {
