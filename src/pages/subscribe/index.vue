@@ -50,6 +50,7 @@
       }
     },
     mounted() {
+      this.$store.commit('setHover',2)
       // console.log(this.$route.params.type)
       this.handle()
       document.title = this.name

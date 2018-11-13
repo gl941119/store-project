@@ -66,6 +66,7 @@
       }
     },
     mounted() {
+      this.$store.commit('setHover',1)
       this.$request({
         url: 'app/index.php?i=1&c=entry&eid=85&act=category',
         type: 'get',

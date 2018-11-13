@@ -70,6 +70,7 @@
       }
     },
     mounted() {
+      this.$store.commit('setHover',3)
       this.request()
     },
     methods: {
@@ -216,7 +217,7 @@
     }
     > P {
       margin-top: 12px;
-      width: 98px;
+
       height: 20px;
       font-size: 14px;
       font-family: PingFangSC-Regular;

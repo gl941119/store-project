@@ -65,7 +65,7 @@
 
     },
     mounted() {
-
+      this.$store.commit('setHover',0)
       this.request()
     },
     methods: {
