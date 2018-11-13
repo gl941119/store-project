@@ -3,7 +3,7 @@
     <div class="cell-left">头像</div>
     <div class="cell-right">
       <img :src="avatar" alt="" class="cell-right-img">
-      <div @change="update" class="cell-right-upload"></div>
+      <div @click="update" class="cell-right-upload"></div>
       <!--<input  name="file" type="file" accept="image/png,image/gif,image/jpeg,image/*"  @change="update" class="cell-right-upload"/>-->
       <van-icon name="arrow" class="cell-right-icon"/>
     </div>

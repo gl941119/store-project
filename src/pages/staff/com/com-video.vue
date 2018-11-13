@@ -25,10 +25,8 @@
     <van-popup class="showBox" @click-overlay="vanPopup()" v-model="show">
       <div class="upVedio">
         <div class="upVedioTxt">视频封面</div>
-        <div class="upVedioTBox">
+        <div class="upVedioTBox" @click="upData()">
           选择文件
-          <div class="upVedioIn" @change="upData('fileupload',$event)"></div>
-          <!--<input class="upVedioIn" name="file" ref="vImg" type="file" accept="image/*,image/png,image/gif,image/jpeg"    @change="upData('fileupload',$event)"/>-->
         </div>
         <div class="gouzi" v-if="imgGou">√</div>
       </div>
@@ -106,7 +104,8 @@
               }
             }).then((res)=>{
               if (res.code === 100) {
-                thisa.saver(res.data.imgs);
+                thisa.imgSrc=res.data.imgs;
+                thisa.imgGou=true;
               }else{
                 thisa.$toast(res.message);
               }
@@ -117,8 +116,7 @@
           }
         });
       },
-      upData(str,e){
-
+      upData(){
         let self=this;
         wxHandle('chooseImage', {//打开相册和相机
           count: 1, // 默认9
@@ -126,42 +124,9 @@
           sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
           success: function (res) {
             self.getLocalImgData(res.localIds[0],self);
-            // self.uploadImage(res.localIds[0],self);
           }
         });
-        // let file=e.target.files[0];
-        // let param = new FormData();  // 创建form对象
-        // param.append('file', file, file.name);
-        // let config = {
-        //   headers: {
-        //     'Content-Type': 'multipart/form-data'
-        //   }
-        // };
-        // axios.defaults.withCredentials = true;
-        // let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        // var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
-        // alert(file.name)
-        // axios.post(url + uk, param, config)
-        //   .then(res => {
-        //     if (res.data.code === 100) {
-        //       var s=res.data.data;
-        //       if(s.imgs!=undefined){
-        //         sefl.imgSrc=s.imgs;
-        //         e.target.value='';
-        //         this.imgGou=true;
-        //       }else{
-        //         sefl.vedioSrc=s.videos;
-        //         e.target.value='';
-        //         this.vdGou=true;
-        //       }
-        //     }else{
-        //       var ms=res.data.code+'---'+res.data.message;
-        //       alert(res.data.message)
-        //     }
-        //
-        //   }).catch((res)=>{
-        //
-        // })
+
       },
       upDataV(str,e){
 
@@ -177,7 +142,7 @@
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
         var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
-        alert(file.name)
+        // alert(file.name)
         axios.post(url + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
@@ -193,7 +158,7 @@
               }
             }else{
               var ms=res.data.code+'---'+res.data.message;
-              alert(res.data.message)
+              // alert(res.data.message)
             }
 
           }).catch((res)=>{

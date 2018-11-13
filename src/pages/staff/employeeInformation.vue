@@ -11,7 +11,7 @@
           <div class="eInformationHImg">
             <div class="eInformationHImgB">
               <img :src="avatar" class="uploadImg">
-              <div @change="update" class="uploadInput"></div>
+              <div @click="update" class="uploadInput"></div>
               <!--<input type="file" name="file" accept="image/png,image/gif,image/jpeg,image/*" @change="update" class="uploadInput">-->
             </div>
             <div class="exchangeIcon"></div>
