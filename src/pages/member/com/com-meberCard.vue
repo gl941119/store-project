@@ -63,9 +63,9 @@
       display: flex;
       justify-content: space-between;
       .headPhoto {
-        width: 50px;
-        height: 50px;
-        border-radius: 250px;
+        width: 50px !important;
+        height: 50px !important;
+       border-radius: 250px !important;
       }
       &-title {
         margin: 4px 0 0 16px;
