@@ -26,13 +26,13 @@
   .list {
     height: 180px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     align-content: space-around;
     flex-wrap: wrap;
     background-color: #ffffff;
     &-li {
-      width: 25%;
+      width: 20%;
       height: 90px;
       display: flex;
       flex-direction: column;
