@@ -154,7 +154,7 @@ let router = new Router({
       path: '/evaluate/:type/:id',// type 1 商品  2服务
       name: 'evaluate',
       title:'全部评论',
-      meta: {keepAlive: true},
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/detail/page/evaluate'], resolve)
     },
     {//购物车
