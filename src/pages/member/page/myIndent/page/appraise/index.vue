@@ -23,9 +23,10 @@
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
-          <input name="file" type="file" accept="image/png,image/gif,image/jpeg,image/*"
-                 @change="uploadImg" class="upload-img-input"
-                 v-on:click="clickUpload(index)"/>
+          <div class="upload-img-input" @click="uploadImg(index)"></div>
+          <!--<input name="file" type="file" accept="image/png,image/gif,image/jpeg,image/*"-->
+                 <!--@change="uploadImg" class="upload-img-input"-->
+                 <!--v-on:click="clickUpload(index)"/>-->
         </div>
         <div class="upload-img">
           <img src="../../../../../../assets/image/appraise1.png" alt="">
@@ -56,6 +57,7 @@
 <script>
   import cache from '../../../../../../utils/cache'
   import axios from 'axios'
+  import wxHandle from '../../../../../../utils/wx'
 
   export default {
     name: "index",
@@ -75,6 +77,36 @@
       console.log(this.arr)
     },
     methods: {
+      getLocalImgData(id,thisa){
+        let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
+        let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+        wxHandle('getLocalImgData',{
+          localId: id, // 图片的localID
+          success: function (getLocal) {
+            let str=getLocal.localData;
+            thisa.$request({
+              url:urlR,
+              type:'post',
+              data:{
+                filestr:str
+              }
+            }).then((res)=>{
+              if (res.code === 100) {
+                thisa.arr[thisa.index].videos.push({
+                  avatar: res.data.avatar,
+                  videos: res.data.imgs
+                })
+                thisa.$toast('上传成功');
+              }else{
+                thisa.$toast(res.message);
+              }
+            }).catch((res)=>{
+
+            });
+
+          }
+        });
+      },
       vanPopup(){
         setTimeout(()=>{
           let myVideo= document.getElementById('myVideo');
@@ -94,33 +126,43 @@
 
         this.index = index
       },
-      uploadImg(e) {   // 上传照片
-        alert('准备')
+      uploadImg(ins) {   // 上传照片
+        // alert('准备')
         var self = this;
-        let file = e.target.files[0];
-        let param = new FormData();  // 创建form对象
-        param.append('file', file, file.name);  // 通过append向form对象添加数据
-        // param.append('chunk', '0') // 添加form表单中其他数据
-        // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
-        let config = {
-          headers: {'Content-Type': 'multipart/form-data'}
-        };
-        axios.defaults.withCredentials = true;
-        // alert(param)
-        let uk = this.$store.state.uk || cache.getSession('uk');
-        // alert(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=')
-        axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=' + uk, param, config)
-          .then(res => {
-            console.log(res)
-            if (res.data.code === 100) {
-              this.$toast('上传成功')
-              this.arr[this.index].imgs.push({
-                avatar: res.data.data.avatar,
-                imgs: res.data.data.imgs
-              })
-            }
-
-          })
+        this.index = ins;
+        wxHandle('chooseImage', {//打开相册和相机
+          count: 1, // 默认9
+          scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success: function (res) {
+            self.getLocalImgData(res.localIds[0],self);
+            // self.uploadImage(res.localIds[0],self);
+          }
+        });
+        // let file = e.target.files[0];
+        // let param = new FormData();  // 创建form对象
+        // param.append('file', file, file.name);  // 通过append向form对象添加数据
+        // // param.append('chunk', '0') // 添加form表单中其他数据
+        // // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        // let config = {
+        //   headers: {'Content-Type': 'multipart/form-data'}
+        // };
+        // axios.defaults.withCredentials = true;
+        // // alert(param)
+        // let uk = this.$store.state.uk || cache.getSession('uk');
+        // // alert(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=')
+        // axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=' + uk, param, config)
+        //   .then(res => {
+        //     console.log(res)
+        //     if (res.data.code === 100) {
+        //       this.$toast('上传成功')
+        //       this.arr[this.index].imgs.push({
+        //         avatar: res.data.data.avatar,
+        //         imgs: res.data.data.imgs
+        //       })
+        //     }
+        //
+        //   })
       },
       uploadVideo(e) {
         var self = this;
