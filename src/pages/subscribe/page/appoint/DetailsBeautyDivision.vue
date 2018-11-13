@@ -18,7 +18,7 @@
           </div>
         </div>
         <div>
-          <div class="isCollectsBox"><van-icon name="like-o" @click="isShouC" :class="[is_collect?'isCollects':'isCollectsEqs']"/></div>
+          <div class="isCollectsBox"><div  @click="isShouC" :class="[is_collect?'isCollects':'isCollectsEqs']">{{ is_collect?'已收藏':'收藏' }}</div></div>
           <div class="DetailsBeautyDivisionBtn" @click="liJiBtn()">立即预约</div>
         </div>
 
@@ -112,8 +112,9 @@
             isPlay:false,
             _dom:null,
             playStatus:'',
-            is_collect:false,
+            is_collect:null,
             ids:'',
+            isSc:'收藏'
           }
       },
       mounted(){
@@ -190,6 +191,7 @@
                 this.task=member.task;
                 this.intro=member.intro;
                 this.ids=member.id;
+                this.is_collect=data.collection === 1?true:false;
 
               }
             });
@@ -205,15 +207,31 @@
 </script>
 
 <style lang="scss" scoped>
-  .isCollectsBox{
-    text-align: center;
-  }
+
   .isCollectsEqs{
     font-size: 20px;
+    $width: 61px !global;
+    $height: 25px !global;
+    width: $width;
+    height: $height;
+    line-height: $height;
+    border-radius: 4px;
+    border:1px solid #ccc;
+    font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
   }
   .isCollects{
-    color: red;
-    font-size: 20px;
+    color:rgba(153,153,153,1);
+    border-radius: 4px;
+    line-height: $height;
+    border:1px solid #ccc;
+    width: $width;
+    height: $height;
+    font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
   }
 .DetailsBeautyDivisionBox{
   background-color: rgba(244,244,244,1);
@@ -258,7 +276,7 @@
     display: $flex;
     align-items: $alignItems;
     justify-content: space-between;
-    padding-bottom: 15px;
+    padding-bottom: 0px;
     border-bottom: 1px solid rgba(216,216,216,1);;
   }
   .DetailsBeautyDivisionH1{
@@ -295,7 +313,7 @@
     padding-right: 10px;
   }
   .DetailsBeautyDivisionName1{
-    font-size:10px;
+    font-size:11px;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(154,154,154,1);
@@ -417,4 +435,11 @@
   border-bottom:8px solid transparent;
   border-left:10px solid #000;
 }
+  .isCollectsBox{
+    text-align: center;
+    display: $flex;
+    align-items: $alignItems;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
 </style>

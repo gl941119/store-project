@@ -8,9 +8,9 @@
       </div>
 
     </div>
-    <div>
+    <div v-if="status">
       <div class="fill"></div>
-      <div class="infoMs" v-if="status">
+      <div class="infoMs" >
 
         <div>
           <div class="header">
