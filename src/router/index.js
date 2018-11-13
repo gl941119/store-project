@@ -89,14 +89,17 @@ let router = new Router({
       children: [{
         path: 'recommend',
         name: 'recommend',
+        meta: {showFooter: false, keepAlive: true},
         component: resolve => require(['../pages/classify/com/recommend'], resolve),
       }, {
         path: 'clubCard',
         name: 'clubCard',
+        meta: {showFooter: false, keepAlive: true},
         component: resolve => require(['../pages/classify/com/clubCard'], resolve),
       }, {
         path: 'series',
         name: 'series',
+        meta: {showFooter: false, keepAlive: true},
         component: resolve => require(['../pages/classify/com/series'], resolve),
       }]
     },
@@ -137,7 +140,6 @@ let router = new Router({
     {//详情页
       path: '/detail/:type/:id', // type 1 商品  2服务
       name: 'detail',
-
       meta: {keepAlive: false},
       component: resolve => require(['../pages/detail'], resolve)
     },

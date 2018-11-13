@@ -60,5 +60,6 @@
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 1px 8px 0px rgba(224, 224, 224, 0.5);
     border-radius: 4px;
+
   }
 </style>

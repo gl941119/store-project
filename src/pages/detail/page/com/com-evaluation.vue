@@ -1,9 +1,9 @@
 <template>
   <div class="evaluation">
-    <div class="title" v-on:click="goEvaluate">
+    <div class="title" >
       <span class="title-name">评价</span>
       <span class="title-subName">好评率{{good_rate}}%</span>
-      <span class="title-all">查看全部评论</span>
+      <span class="title-all" v-on:click.stop="goEvaluate">查看全部评论</span>
       <van-icon name="arrow" class="title-icon" />
     </div>
     <div class="fill"></div>

@@ -8,10 +8,10 @@
       </div>
       <span class="title-time">{{discuss.createtime}}</span>
     </div>
-    <div class="content">
+    <div class="content" >
       <p class="content-title">{{discuss.content}}</p>
-      <p class="content-img">
-        <img :src="item" alt="" v-for="item in discuss.imgs" v-if="discuss.imgs">
+      <p class="content-img" v-if="discuss.imgs.length!= '0'">
+        <img :src="item" alt="" v-for="item in discuss.imgs" >
       </p>
     </div>
   </div>
