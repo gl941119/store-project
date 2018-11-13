@@ -107,7 +107,7 @@
           serverId: id, // 需要下载的图片的服务器端ID，由uploadImage接口获得
           isShowProgressTips: 1, // 默认为1，显示进度提示
           success: function (down) {
-            thi.localIds ='http://'+down.localId; // 返回图片下载后的本地ID
+            // thi.localIds ='http://'+down.localId; // 返回图片下载后的本地ID
             var lod=down.localId+'从微信服务器下载';
             alert(lod)
           }
@@ -152,11 +152,11 @@
 var op=res.localIds[0]+'打开相册和相机';
             alert(op)
             wxHandle('getLocalImgData',{
-              localId: '', // 图片的localID
-              success: function (res) {
-                var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
-                var loca=res.localData+'localData是图片的base64数据，可以用img标签显示';
-                alert(loca)
+              localId: res.localIds[0], // 图片的localID
+              success: function (loca) {
+                self.localIds ='http://'+loca.localData;  // localData是图片的base64数据，可以用img标签显示
+                var loa=loca.localData+'localData是图片的base64数据，可以用img标签显示';
+                alert(loa)
               }
             });
             self.uploadImage(res.localIds[0],self);
