@@ -102,8 +102,10 @@
         });
       },
       getLocalImgData(id,thisa){
+
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
         let url=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+        let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
         let config = {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -114,40 +116,31 @@
           success: function (getLocal) {
             // thisa.localIds =getLocal.localData;  // localData是图片的base64数据，可以用img标签显示
             alert(getLocal.localData)
-            alert(url)
-            axios.post(url, {filestr:getLocal.localData},config)
-              .then(res => {
-                if (res.data.code === 100) {
-                  var s=res.data.data.imgs;
-                  thisa.$toast('上传成功');
-                  alert(res.data.message)
-                  // thisa.saver(s);
-                }else{
-                  alert(res.data.message)
-                }
 
-              }).catch((res)=>{
-              alert(res.data.message)
-            })
-          }
-        });
-      },
-      downloadImage(id,thi){
+            alert(urlR)
 
-        wxHandle('downloadImage',{//从微信服务器下载
-          serverId: id, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-          isShowProgressTips: 1, // 默认为1，显示进度提示
-          success: function (down) {
-            thi.getLocalImgData(down.localId,thi);
-          }
-        });
-      },
-      uploadImage(id,thi){
-        wxHandle('uploadImage',{//上传到微信服务器
-          localId: id, // 需要上传的图片的本地ID，由chooseImage接口获得
-          isShowProgressTips: 1, // 默认为1，显示进度提示
-          success: function (sev) {
-            thi.downloadImage(sev.serverId,thi);
+            thisa.$request({
+              url:urlR,
+              type:'post',
+              data:{
+                filestr:getLocal.localData
+              }
+            }).then((res)=>{
+              if (res.data.code === 100) {
+                var s=res.data.data.imgs;
+                thisa.$toast('上传成功');
+                let aa='cccc'+res.data.message;
+                alert(aa)
+                // thisa.saver(s);
+              }else{
+                let aa='bbbb'+res.data.message;
+                alert(aa)
+              }
+            }).catch((res)=>{
+              let aa='aaaa'+res.data.message;
+              alert(aa)
+            });
+
           }
         });
       },
