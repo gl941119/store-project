@@ -104,12 +104,18 @@
       getLocalImgData(id,thisa){
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
         let url=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
             // thisa.localIds =getLocal.localData;  // localData是图片的base64数据，可以用img标签显示
             alert(getLocal.localData)
-            axios.post(url, {filestr:getLocal.localData})
+            alert(url)
+            axios.post(url, {filestr:getLocal.localData},config)
               .then(res => {
                 if (res.data.code === 100) {
                   var s=res.data.data.imgs;
@@ -120,7 +126,9 @@
                   alert(res.data.message)
                 }
 
-              })
+              }).catch((res)=>{
+              alert(res.data.message)
+            })
           }
         });
       },
