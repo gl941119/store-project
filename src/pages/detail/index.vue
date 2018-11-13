@@ -163,12 +163,8 @@
     },
     mounted() {
       this.request()
-
       document.title = this.title
-      console.log(this.$refs['media'])
       let media = this.$refs['media']
-
-
       media.addEventListener('play', function () {
         console.log('播放')
 
@@ -176,8 +172,6 @@
       media.addEventListener('pause', function () {
         console.log('停止')
       });
-
-
     },
     watch: {
       specs: function (val) {
@@ -197,6 +191,21 @@
     methods: {
 
       onClickCollect() {//加入收藏
+        console.log(this.is_collect)
+        if (this.is_collect) {
+          this.$dialog.confirm({
+            title: '是否取消收藏'
+          }).then(() => {
+            this.cancleCollect()
+          }).catch(() => {
+            // on cancel
+          });
+        }else{
+          this.cancleCollect()
+        }
+
+      },
+      cancleCollect() {//收藏请求
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
           type: 'get',
@@ -331,8 +340,6 @@
               this.discussType = 1
               this.discuss = res.data.discuss[0] //评论
             }
-
-
           }
         })
       },
@@ -373,9 +380,9 @@
   }
 </script>
 <style>
-  .addBuy{
-    border:0px;
-    border-top:1px solid #eee;
+  .addBuy {
+    border: 0px;
+    border-top: 1px solid #eee;
   }
 </style>
 <style lang="scss" scoped>

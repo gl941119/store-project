@@ -1,6 +1,5 @@
 <template>
   <div style="background-color: #F4F4F4">
-
     <!--地址-->
     <com-confirmhead :store="store" :user="user"></com-confirmhead>
     <!--商品-->
@@ -10,9 +9,9 @@
       <van-button type="danger" class="memberBtn-cancel" v-on:click="memerCancelHandle">取消</van-button>
     </div>
     <div v-else class="notMemberBtn">
-      <van-button type="default" class="notMemberBtn-pay" v-on:click="payHandle">线上支付</van-button>
+      <van-button type="primary" class="memberBtn-confirm" v-if="stype=== '1'" v-on:click="memberConfirmHandel">预约</van-button>
+      <van-button type="default" class="notMemberBtn-pay" v-if="stype=== '0'" v-on:click="payHandle">线上支付</van-button>
       <van-button type="danger" class="notMemberBtn-cancel" v-on:click="cancelHandle">取消支付</van-button>
-
     </div>
   </div>
 </template>
@@ -50,6 +49,7 @@
         tel:undefined,
         nike:undefined,
         orderid:this.$route.params.orderid,//订单号
+        stype:undefined,//体验项目状态
       }
     },
     mounted() {
@@ -64,7 +64,6 @@
           title: '是否取消预约',
           message: ''
         }).then(() => {
-
           this.$request({
             url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
             type:'post',
@@ -85,13 +84,11 @@
           // on cancel
         });
       },
-      memberConfirmHandel(){//会员预约按钮
-
+      memberConfirmHandel(){//会员预约按钮or体验卡
         this.$dialog.confirm({
           title: '是否预约',
           message: ''
         }).then(() => {
-
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
             type: 'POST',
@@ -103,18 +100,10 @@
               this.$router.push({name:'appointPay',params:{orderid:this.orderid}})
             }
           })
-
-
-
-
-
-
         }).catch(() => {
           // on cancel
 
         });
-
-
       },
       memerCancelHandle(){//会员取消按钮
         this.$dialog.confirm({
@@ -137,6 +126,7 @@
           this.store = res.data.store
           this.service = res.data.service
           this.user = res.data.user
+          this.stype = res.data.service.stype//体验项目状态
 
         })
       }

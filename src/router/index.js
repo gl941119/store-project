@@ -81,7 +81,6 @@ let router = new Router({
     {//分类
       path: '/classfiy',
       name: 'classify',
-      title:'S+艾司商城',
       meta: {showFooter: true, keepAlive: true},
       redirect: {
         name: 'recommend'
@@ -94,7 +93,6 @@ let router = new Router({
       }, {
         path: 'clubCard',
         name: 'clubCard',
-        title:'会员卡',
         component: resolve => require(['../pages/classify/com/clubCard'], resolve),
       }, {
         path: 'series',
@@ -122,7 +120,7 @@ let router = new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
     },
     {//热门商品--预约确认
-      path: '/appoint/:orderid',//sid 服务id id 美师id  time选择的时间
+      path: '/confirm/:orderid',//服务预约确认
       name: 'confirm',
       title:'预约支付',
       meta: {keepAlive: false},
@@ -400,9 +398,11 @@ function setTitle(title) {
 }
 
 router.afterEach((transition) => {
+
   let name = transition.name;
   let item = router.options.routes.filter((ele) => { return ele.name === name; });
-  setTitle(item[0].title);
+
+  setTitle(item[0].title||'S+艾司商城');
 });
 
 export default router

@@ -1,6 +1,5 @@
 <template>
   <div class="appoint">
-
     <div class="address">
       <img :src="store.thumb" alt="" class="address-img">
       <dl>
