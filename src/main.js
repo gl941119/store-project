@@ -66,7 +66,7 @@ Vue.component('price-list', PriceList);
 
 
 Vue.prototype.$baidu = function () {//联系卖家
-  return window.open('http://p.qiao.baidu.com/cps/chat?siteId=12754459&userId=26723163')
+  return window.open('http://p.qiao.baidu.com/cps/chat?siteId=12788365&userId=26778230')
 }
 
 
@@ -88,17 +88,16 @@ Vue.prototype.$setInterval = setInterval(function () {//长轮询
 
 
 
-
-import wxHandle from './utils/wx'
-wxHandle('updateAppMessageShareData', {
-  title: '123', // 分享标题
-  desc: '123', // 分享描述
-  link: window.location.href+"7777777777777777", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-  imgUrl: '12333', // 分享图标
-  success: function () {
-    alert('设置成功')
-  }
-})
+// import wxHandle from './utils/wx'
+// wxHandle('updateAppMessageShareData', {
+//   title: '标题', // 分享标题
+//   desc: '类容', // 分享描述
+//   link: window.location.href+"/7777777777777777", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+//   imgUrl: 'o', // 分享图标
+//   success: function () {
+//     alert('设置成功')
+//   }
+// })
 
 
 

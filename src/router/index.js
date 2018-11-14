@@ -378,6 +378,13 @@ let router = new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
     },
+    {//支付跳转页面
+      path:'/transfer',
+      name:'transfer',
+      title:'支付成功',
+      meta:{keepAlive: false},
+      component: resolve => require(['../pages/index/transfer'], resolve)
+    }
 
   ]
 })
