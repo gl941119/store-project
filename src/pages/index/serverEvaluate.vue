@@ -63,6 +63,7 @@
         value: 3,
         list: [],
         content: undefined,
+        orderid:undefined,
       }
     },
     mounted() {
@@ -80,6 +81,7 @@
               item['score'] = 3
             })
             this.list = res.data.evals;
+            this.orderid = res.data.orderid
 
           }
         });
@@ -112,7 +114,7 @@
               this.$toast.success('感谢您的评价')
               let thia = this
               setTimeout(function () {
-                thia.$router.push({name: 'memberSubscribe'})
+                thia.$router.push({name: 'memberPayFinish',params:{orderid:thia.$route.params.orderid}})
               }, 1000)
             }
 
