@@ -10,7 +10,7 @@
     </div>
     <div class="content" >
       <p class="content-title">{{discuss.content}}</p>
-      <p class="content-img" v-if="discuss.imgs.length!= '0'">
+      <p class="content-img" v-if="discuss.imgs">
         <img :src="item" alt="" v-for="item in discuss.imgs" >
       </p>
     </div>

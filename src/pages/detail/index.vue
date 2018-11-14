@@ -357,7 +357,7 @@
               this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
               this.cart_num = res.data.cart_num
             }
-            // console.log(res.data.disucss.)
+
             if (res.data.discuss.length === 0) {
               this.discussType = 0
             } else {
