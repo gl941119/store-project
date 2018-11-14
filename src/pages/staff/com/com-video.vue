@@ -49,9 +49,9 @@
     <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
       <van-circle
         v-model="currentRate"
-        :rate="100"
+        :rate="30"
         :speed="100"
-        :text="text"
+        :text="textJinDu"
         class="circleTxt"
       />
     </van-popup>
@@ -86,6 +86,7 @@
         isPlay:false,
         vdGou:false,
         imgGou:false,
+        currentRate:1,
         showJinDu:false,
         textJinDu:'',
       }
@@ -126,13 +127,14 @@
                   //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
                   //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
                   thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
-                  thisa.text = thisa.currentRate.toFixed(0) + '%';
+                  thisa.textJinDu = thisa.currentRate + '%';
                 }
               },
 
             }).then(res => {
               if (res.data.code === 100) {
-                thisa.imgSrc=res.data.data.imgs;
+                thisa.showJinDu=false;
+                    thisa.imgSrc=res.data.data.imgs;
                     thisa.imgGou=true;
               }else{
                 thisa.$toast(res.data.message);

@@ -25,7 +25,7 @@
     <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
       <van-circle
         v-model="currentRate"
-        :rate="currentRate"
+        :rate="30"
         :speed="100"
         :text="textJinDu"
         class="circleTxt"
@@ -123,9 +123,10 @@
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
+           let str=getLocal.localData;
+
             thisa.showJinDu=true;
             thisa.textJinDu = thisa.currentRate.toFixed(0) + '%';
-           let str=getLocal.localData;
             var params = new URLSearchParams();
             params.append('filestr', str);
             axios({
