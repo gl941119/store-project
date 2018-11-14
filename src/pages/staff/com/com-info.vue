@@ -2,9 +2,9 @@
     <div class="wrap">
       <div class="out">
         <img :src="conInfo.imgSr" alt="" class="out-header">
-        <div class="out-content">
-          <p>{{ conInfo.name }}<span>{{ conInfo.task }}</span></p>
-          <!--<span class="out-content-title">五星科美师</span>-->
+        <div class="outcontent">
+          <div class="outcontentName">{{ conInfo.name }}</div>
+          <div class="outcontentTask">{{ conInfo.task }}</div>
         </div>
         <p class="out-footer">{{ conInfo.gx }}<span @click="employeeInformation()"></span> </p>
       </div>
@@ -55,6 +55,7 @@
         width:100%;
         height:25px;
         >p{
+          text-align: center;
           width:54px;
           height:25px;
           margin: 0 auto;
@@ -105,5 +106,22 @@ display: inline-block;
     margin-left: 10px;
     background: url("../../../assets/image/staff.png") no-repeat;
     background-size: contain;
+  }
+  .outcontent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+  }
+  .outcontentName{
+    font-size:18px;
+    font-family:PingFangSC-Regular;
+    color:rgba(74,74,74,1);
+  }
+  .outcontentTask{
+    font-size:10px;
+    font-family:PingFangSC-Regular;
+    color:rgba(250,101,207,1);
+    padding-left: 5px;
   }
 </style>

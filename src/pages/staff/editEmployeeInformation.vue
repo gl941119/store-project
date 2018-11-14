@@ -52,7 +52,7 @@
             data:par,
           }).then((res) => {
             if(res.status){
-              this.$router.push({name:'employeeInformation'})
+              this.$router.go(-1);
             }
           });
         },
