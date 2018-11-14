@@ -74,7 +74,15 @@
         </div>
       </div>
     </div>
-
+    <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
+      <van-circle
+        v-model="currentRate"
+        :rate="30"
+        :speed="100"
+        :text="textJinDu"
+        class="circleTxt"
+      />
+    </van-popup>
     <!--<div class="eInformationOutPadding">-->
       <!--<div class="eInformationOut" @click="editOut()">退出账户</div>-->
     <!--</div>-->
@@ -94,6 +102,9 @@
           nick:'',//员工姓名
           signature:'',//签名
           avatar:'',//头像
+          currentRate:1,
+          showJinDu:false,
+          textJinDu:'',
         }
       },
       mounted(){
@@ -108,8 +119,8 @@
           }
 
         },
-        editOut(){
-
+        circleEvent(){
+          this.show=false;
         },
         init(){
           this.$request({
@@ -141,11 +152,40 @@
         getLocalImgData(id,thisa){
 
           let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-          let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eids+'&act=fileupload&uk='+uk;
+          let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eids+'&act=fileupload&uk='+uk;
           wxHandle('getLocalImgData',{
             localId: id, // 图片的localID
             success: function (getLocal) {
               let str=getLocal.localData;
+              thisa.showJinDu=true;
+              var params = new URLSearchParams();
+              params.append('filestr', str);
+              axios({
+                url: urlR,
+                method: 'post',
+                data:params,
+                headers: {
+                  'Content-Type':'application/x-www-form-urlencoded'
+                },
+                onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
+                  if (progressEvent.lengthComputable) {
+                    //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                    //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                    thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+                    thisa.textJinDu = thisa.currentRate + '%';
+                  }
+                },
+
+              }).then(res => {
+                if (res.data.code === 100) {
+                  thisa.showJinDu=false;
+                      thisa.avatar=res.data.data.avatar;
+                      thisa.$toast('上传成功');
+                      thisa.init();
+                }else{
+                  thisa.$toast(res.data.message);
+                }
+              })
               // thisa.$request({
               //   url:urlR,
               //   type:'post',
@@ -308,4 +348,7 @@
     position: relative;
     z-index: 1;
   }
+.circle{
+  background-color: transparent;
+}
 </style>

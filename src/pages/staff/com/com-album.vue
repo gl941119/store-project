@@ -39,7 +39,6 @@
   import axios from 'axios'
   import wxHandle from '../../../utils/wx'
   import { Icon ,Toast,ImagePreview  } from 'vant';
-  var c=0;
   export default {
     name: "com-album",
     props:['album'],
@@ -126,7 +125,6 @@
            let str=getLocal.localData;
 
             thisa.showJinDu=true;
-            thisa.textJinDu = thisa.currentRate.toFixed(0) + '%';
             var params = new URLSearchParams();
             params.append('filestr', str);
             axios({
