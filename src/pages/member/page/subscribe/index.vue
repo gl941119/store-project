@@ -2,16 +2,16 @@
   <div>
     <van-tabs v-model="type" @change="change" sticky :swipeable="true">
       <van-tab title="全部">
-        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
       <van-tab title="待付款">
-        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
       <van-tab title="已预约">
-        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
       <van-tab title="已完成">
-        <com-servercard  :item="item" v-for="item in appoint" :key="item.id" @refresh="request"></com-serverCard>
+        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
     </van-tabs>
 
