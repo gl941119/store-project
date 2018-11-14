@@ -57,9 +57,13 @@
     },
     methods: {
       clickMax(list,k){
+        let arr=[];
+        for(let item in list){
+          arr.push(list[item]);
+        }
         ImagePreview({
-          images: list,
-          startPosition: k === 0 ? 1:k,
+          images: arr,
+          startPosition: k,
           onClose() {
             // do something
           }
