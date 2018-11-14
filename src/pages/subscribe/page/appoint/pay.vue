@@ -4,7 +4,7 @@
     <com-confirmhead :store="store" :user="user"></com-confirmhead>
     <!--商品-->
     <com-confirmmain :service="service" :type="'pay'" :date="date" :beauty="beauty"></com-confirmmain>
-    <van-button type="default" class="overBtn" v-on:click="overHandle">已完成预约</van-button>
+    <van-button type="default" v-if="isStore" class="overBtn" v-on:click="overHandle">已完成预约</van-button>
   </div>
 </template>
 
@@ -37,11 +37,14 @@
         },
         date: undefined, //预约时间
         beauty: undefined,
+        isStore:null
 
       }
     },
     mounted() {
       this.request()
+      let storeInt = this.$store.state.Store || sessionStorage.getItem('store');
+      this.isStore=storeInt===1?false:true;
     },
     methods: {
       overHandle() {

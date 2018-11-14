@@ -22,9 +22,15 @@
 
       </div>
     </div>
-
-<img :src="localIds"/>
-    <input type="text" v-model="localIds"/>
+    <van-popup v-model="show" class="circle">
+      <van-circle
+        v-model="currentRate"
+        :rate="currentRate"
+        :speed="100"
+        :text="text"
+        class="circleTxt"
+      />
+    </van-popup>
   </div>
 
 </template>
@@ -50,6 +56,9 @@
         statusA:null,
         cont:0,
         localIds:'',
+        show:false,
+        currentRate:0,
+        text:''
       }
     },
     mounted(){
@@ -112,6 +121,8 @@
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
+            thisa.show=true;
+            thisa.text = thisa.currentRate.toFixed(0) + '%';
            let str=getLocal.localData;
             thisa.$request({
               url:urlR,
@@ -119,9 +130,12 @@
               data:{
                 filestr:str
               }
+            }).onUploadProgress((ress)=>{
+              alert(ress)
             }).then((res)=>{
               if (res.code === 100) {
                 thisa.saver(res.data.imgs);
+                thisa.show=false;
               }else{
                 thisa.$toast(res.message);
               }
@@ -188,8 +202,15 @@
     }
   }
 </script>
-
+<style>
+  .van-circle__text{
+    color: #fff;
+  }
+</style>
 <style lang="scss" scoped>
+  .circle{
+    background-color: transparent;
+  }
   .wrap {
     margin: 15px auto 0;
     padding: 0 15px;
