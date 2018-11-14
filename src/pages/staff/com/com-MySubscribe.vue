@@ -22,10 +22,10 @@
         <div>
           <div>
             <van-button type="default" class="header-Btn headerBtn" v-if="mySub.startTime" @click="startBtn">开始</van-button>
-            <van-button type="default" class="header-Btn" v-else  @click="endBtn">结束</van-button>
+            <van-button type="default" class="header-Btn headerBtnEnd" v-else  @click="endBtn">结束</van-button>
           </div>
           <div>
-            <van-button type="default" class="header-Btn" v-if="mySub.startTime" @click="quXiaoBtn">取消</van-button>
+            <van-button type="default" class="header-Btn headerBtnEsc" v-if="mySub.startTime" @click="quXiaoBtn">取消</van-button>
           </div>
         </div>
       </div>
@@ -233,7 +233,13 @@ position: relative;
     height: 1px;
     background: rgba(216, 216, 216, 1);
   }
-
-
+.headerBtnEsc{
+  background-color: transparent;
+  color:rgba(153,153,153,1);
+}
+.headerBtnEnd{
+  background-color: red;
+  color:#fff;
+}
 </style>
 
