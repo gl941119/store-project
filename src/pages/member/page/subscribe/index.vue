@@ -2,16 +2,16 @@
   <div>
     <van-tabs v-model="type" @change="change" sticky :swipeable="true">
       <van-tab title="全部">
-        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
+        <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
       <van-tab title="待付款">
-        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
+        <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
       <van-tab title="已预约">
-        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
+        <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
       <van-tab title="已完成">
-        <com-servercard  :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
+        <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
     </van-tabs>
 
@@ -30,15 +30,19 @@
       return {
         appoint: [],
         is_member: window.sessionStorage.getItem('is_member'), //0 非会员  1 会员
-        type:0,// 1  全部   2 待付款   3  已预约     4  完成
+        type: 0,// 1  全部   2 待付款   3  已预约     4  完成
       }
     },
     mounted() {
       this.request()
+      let thia = this
+      window.addEventListener("popstate", function (e) {　　//只要B页面按下手机物理返回键，就会被监听到
+
+        thia.$router.push({name: 'member'})
+      }, false);
     },
     methods: {
-      change(index){
-
+      change(index) {
         this.type = index
         this.request()
       },
@@ -46,8 +50,8 @@
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=appointlist',
           type: 'post',
-          data:{
-            type:this.type+1
+          data: {
+            type: this.type + 1
           }
         }).then(res => {
 
