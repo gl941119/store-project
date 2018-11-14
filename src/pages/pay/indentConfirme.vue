@@ -1,24 +1,23 @@
 <template>
   <div class="indentConfirme">
-
     <!--收货地址-->
     <com-address :address="address" v-on:click.native="goAddress"></com-address>
     <div class="main">
       <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"></com-prodectcard>
       <div class="fill"></div>
-      <van-cell title="美丽积分券:" is-link class="cell">
+      <van-cell title="美丽积分券:"  class="cell">
         <span>{{score_nex}}分</span>
       </van-cell>
       <div class="fill"></div>
-      <van-cell title="美丽基金:" is-link class="cell">
+      <van-cell title="美丽基金:"  class="cell">
         <span>{{share_amount}}</span>
       </van-cell>
       <div class="fill"></div>
-      <van-cell title="美丽余额:" is-link class="cell">
+      <van-cell title="美丽余额:"  class="cell">
         <span>{{money}}</span>
       </van-cell>
       <div class="fill"></div>
-      <van-cell title="运送方式:" is-link class="cell">
+      <van-cell title="运送方式:"  class="cell">
         <span class="cell-yunfei">{{freight}}{{ishave=='1'? '元':''}}</span>
       </van-cell>
       <div class="fill"></div>
@@ -107,24 +106,24 @@
 
     },
     methods: {
-      cancleHandle(){
+      cancleHandle() {
         this.$dialog.confirm({
           title: '是否取消订单',
         }).then(() => {
           this.$request({
-            url:'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
-            type:'post',
-            data:{
-              ordersn:window.sessionStorage.getItem('ordersn'),
-              status:-1
+            url: 'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
+            type: 'post',
+            data: {
+              ordersn: window.sessionStorage.getItem('ordersn'),
+              status: -1
             }
-          }).then(res=>{
-            if(res.code===100){
+          }).then(res => {
+            if (res.code === 100) {
               this.$toast.success('取消成功')
               let thia = this
               setTimeout(function () {
-                thia.$router.push({name:'index'})
-              },1000)
+                thia.$router.push({name: 'index'})
+              }, 1000)
             }
           })
         }).catch(() => {
@@ -183,8 +182,8 @@
       goAddress() {//去收货地址
         this.$router.push({name: 'address', params: {type: '0'}})
       },
-      payHandle(){
-        window.location.href = this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid161+'&act=payorder&ordersn='+window.sessionStorage.getItem('ordersn')
+      payHandle() {
+        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161 + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
       }
     }
   }
@@ -289,7 +288,7 @@
     }
   }
 
-.cellRight{
-  padding-right: 15px;
-}
+  .cellRight {
+    padding-right: 15px;
+  }
 </style>

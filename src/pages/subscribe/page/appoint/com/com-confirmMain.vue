@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="card">
+    <div class="card" v-on:click="goDetail(service.sid)">
       <img :src="service.thumb" alt="">
       <dl>
         <dt>{{service.name}}</dt>
@@ -52,7 +52,11 @@
         Is_member: window.sessionStorage.getItem('is_member')
       }
     },
-    methods: {}
+    methods: {
+      goDetail(sid){
+        this.$router.push({name:'detail',params:{type:'2',id:sid}})
+      }
+    }
   }
 </script>
 

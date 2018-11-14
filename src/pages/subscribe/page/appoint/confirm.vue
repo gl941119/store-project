@@ -76,7 +76,6 @@
               setTimeout(()=>{
                 this.$router.go(-1)
               },500)
-
             }
 
           })

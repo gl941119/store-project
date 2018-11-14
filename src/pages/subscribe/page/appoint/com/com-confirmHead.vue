@@ -3,7 +3,7 @@
     <div class="head">
       <div class="head-top">
         <span>{{store.name}}</span>
-        <van-icon name="arrow" class="head-top-icon"/>
+        <!--<van-icon name="arrow" class="head-top-icon"/>-->
       </div>
       <div class="head-bottom">
         <img src="../../../../../assets/image/exhibition2.png" alt="">

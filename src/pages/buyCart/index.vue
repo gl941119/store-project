@@ -5,7 +5,7 @@
     <div class="message" v-if="!goodslist.length">
       <img src="../../assets/image/buyCart.png" alt="">
       <p>购物车空空如也</p>
-      <!--<van-button type="default" class="btn" v-on:click="goIndex">去逛逛吧</van-button>-->
+      <van-button type="default" class="btn" v-on:click="goIndex">去逛逛吧</van-button>
     </div>
     <div class="card" v-for="item in goodslist" :key="item.id" v-else>
       <van-checkbox v-model="item.checked" class="checkbox" v-on:click.native="refreshPrice"></van-checkbox>
@@ -86,7 +86,7 @@
         })
         // 判定勾选
         if (goodslist.length === 0) {
-          this.$toast.fail('请勾选商品')
+          this.$toast.fail('请选择商品')
           return;
         }
         //购物车订单存本地

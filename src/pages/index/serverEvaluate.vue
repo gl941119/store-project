@@ -14,7 +14,8 @@
                 color="#E93A3D"
                 void-color="#C1C0CD"
                 class="red"
-                disabled
+                readonly
+                disabled-color="#E93A3D"
               />
             </div>
           </div>
@@ -43,10 +44,10 @@
 
 
       <div class="serverEvaluateReaBox">
-        <textarea placeholder="服务很不错，第一次体验到这样的服务。" v-model="content" class="serverEvaluateRea"></textarea>
+        <textarea placeholder="请留下您宝贵的建议。" v-model="content" class="serverEvaluateRea"></textarea>
       </div>
 
-      <div class="serverEvaluatePop">评价完成，感谢您的评价</div>
+      <div class="serverEvaluatePop">感谢您的评价</div>
 
       <van-button type="default" class="serverEvaluateReaBtn" v-on:click="submit">完成</van-button>
     </div>
@@ -111,7 +112,7 @@
               this.$toast.success('感谢您的评价')
               let thia = this
               setTimeout(function () {
-                thia.$router.push({name: 'index'})
+                thia.$router.push({name: 'memberSubscribe'})
               }, 1000)
             }
 
