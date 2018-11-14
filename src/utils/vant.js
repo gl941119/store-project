@@ -27,6 +27,7 @@ import {
   Switch,//开关
   Actionsheet,//Actionsheet
   Dialog,//弹窗
+  Circle,//环形进度条
   PullRefresh,//下拉
   Step, Steps,//步骤条
 } from 'vant';
@@ -54,3 +55,4 @@ Vue.use(Actionsheet);
 Vue.use(Dialog);
 Vue.use(PullRefresh);
 Vue.use(Step).use(Steps);
+Vue.use(Circle);
