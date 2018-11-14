@@ -22,12 +22,12 @@
 
       </div>
     </div>
-    <van-popup v-model="show" :click-overlay="circleEvent" class="circle">
+    <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
       <van-circle
         v-model="currentRate"
         :rate="currentRate"
         :speed="100"
-        :text="text"
+        :text="textJinDu"
         class="circleTxt"
       />
     </van-popup>
@@ -56,9 +56,9 @@
         statusA:null,
         cont:0,
         localIds:'',
-        show:false,
-        currentRate:0,
-        text:''
+        currentRate:1,
+        showJinDu:false,
+        textJinDu:'',
       }
     },
     mounted(){
@@ -118,14 +118,13 @@
         });
       },
       getLocalImgData(id,thisa){
-
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
         let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
-            thisa.show=true;
-            thisa.text = thisa.currentRate.toFixed(0) + '%';
+            thisa.showJinDu=true;
+            thisa.textJinDu = thisa.currentRate.toFixed(0) + '%';
            let str=getLocal.localData;
             var params = new URLSearchParams();
             params.append('filestr', str);
@@ -136,18 +135,21 @@
               headers: {
                 'Content-Type':'application/x-www-form-urlencoded'
               },
-
+              onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
+                if (progressEvent.lengthComputable) {
+                  //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                  //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                  thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+                  thisa.textJinDu = thisa.currentRate + '%';
+                }
+              },
 
             }).then(res => {
-              if (res.code === 100) {
-                let c=res+'---'+res.data.imgs;
-                alert(c)
-                thisa.show=false;
-                thisa.saver(res.data.imgs);
+              if (res.data.code === 100) {
+                thisa.showJinDu=false;
+                thisa.saver(res.data.data.imgs);
               }else{
-                let c=res+'-++++-'+res.message+'-=-=-='+res.data.message;
-                alert(c)
-                thisa.$toast(res.message);
+                thisa.$toast(res.data.message);
               }
             })
 //             thisa.$request({

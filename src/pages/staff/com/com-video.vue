@@ -46,6 +46,15 @@
     <van-popup class="showBox" v-model="videoShow">
       <video id="myvideo" class="myvideo" preload="metadata" @canplay="videoSource($event)" controls  ref="videoVideo" ><source  :src="sourcSrc" type="video/mp4" /></video>
     </van-popup>
+    <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
+      <van-circle
+        v-model="currentRate"
+        :rate="100"
+        :speed="100"
+        :text="text"
+        class="circleTxt"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -77,6 +86,8 @@
         isPlay:false,
         vdGou:false,
         imgGou:false,
+        showJinDu:false,
+        textJinDu:'',
       }
     },
     mounted(){
@@ -84,6 +95,9 @@
       this.videoSource(0);
     },
     methods: {
+      circleEvent(){
+        this.showJinDu=false;
+      },
       vanPopup(){
         this.vdGou=false;
           this.imgGou=false;
@@ -91,27 +105,55 @@
       getLocalImgData(id,thisa){
 
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-        let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+        let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
             let str=getLocal.localData;
-            thisa.$request({
-              url:urlR,
-              type:'post',
-              data:{
-                filestr:str
-              }
-            }).then((res)=>{
-              if (res.code === 100) {
-                thisa.imgSrc=res.data.imgs;
-                thisa.imgGou=true;
-              }else{
-                thisa.$toast(res.message);
-              }
-            }).catch((res)=>{
+            thisa.showJinDu=true;
+            thisa.textJinDu = thisa.currentRate.toFixed(0) + '%';
+            var params = new URLSearchParams();
+            params.append('filestr', str);
+            axios({
+              url: urlR,
+              method: 'post',
+              data:params,
+              headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+              },
+              onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
+                if (progressEvent.lengthComputable) {
+                  //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                  //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                  thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+                  thisa.text = thisa.currentRate.toFixed(0) + '%';
+                }
+              },
 
-            });
+            }).then(res => {
+              if (res.data.code === 100) {
+                thisa.imgSrc=res.data.data.imgs;
+                    thisa.imgGou=true;
+              }else{
+                thisa.$toast(res.data.message);
+              }
+            })
+            // thisa.$request({
+            //   url:urlR,
+            //   type:'post',
+            //   data:{
+            //     filestr:str
+            //   }
+            // }).then((res)=>{
+            //   if (res.code === 100) {
+            //     thisa.imgSrc=res.data.imgs;
+            //     thisa.imgGou=true;
+            //   }else{
+            //     thisa.$toast(res.message);
+            //   }
+            // }).catch((res)=>{
+            //
+            // });
 
           }
         });
@@ -143,6 +185,32 @@
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
         var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
         // alert(file.name)
+        var params = new URLSearchParams();
+        params.append('filestr', str);
+        axios({
+          url: urlR,
+          method: 'post',
+          data:params,
+          headers: {
+            'Content-Type':'application/x-www-form-urlencoded'
+          },
+          onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
+            if (progressEvent.lengthComputable) {
+              //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+              //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+              thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+              thisa.text = thisa.currentRate.toFixed(0) + '%';
+            }
+          },
+
+        }).then(res => {
+          if (res.data.code === 100) {
+            thisa.show=false;
+            thisa.saver(res.data.data.imgs);
+          }else{
+            thisa.$toast(res.data.message);
+          }
+        })
         axios.post(url + uk, param, config)
           .then(res => {
             if (res.data.code === 100) {
@@ -442,5 +510,8 @@
     padding: 0 10px;
     font-size: 16px;
     font-weight: 400;
+  }
+  .circle{
+    background-color: transparent;
   }
 </style>
