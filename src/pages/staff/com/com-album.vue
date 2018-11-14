@@ -59,7 +59,7 @@
       clickMax(list,k){
         ImagePreview({
           images: list,
-          startPosition: k,
+          startPosition: k === 0 ? 1:k,
           onClose() {
             // do something
           }
