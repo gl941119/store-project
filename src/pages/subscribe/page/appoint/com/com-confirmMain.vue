@@ -52,17 +52,17 @@
       <div class="fill"></div>
       <li class="list-li">
         <dt>服务评分</dt>
-        <dd>{{score}}</dd>
+        <dd >{{score}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
         <dt>服务费用</dt>
-        <dd>{{service_amount}}</dd>
+        <dd class="colorRed">{{service_amount}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
         <dt>总计</dt>
-        <dd>{{orderprice}}</dd>
+        <dd class="colorRed">{{orderprice}}</dd>
       </li>
     </ul>
 
@@ -183,5 +183,7 @@
       }
     }
   }
-
+.colorRed{
+  color: red !important;
+}
 </style>

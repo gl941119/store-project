@@ -79,9 +79,7 @@
       },
       pay(orderid){
           if(window.sessionStorage.getItem('is_member')== '1'){
-
-
-            this.$router.push({name:'memberPayFinish',params:{orderid:orderid}})
+            this.$router.push({name:'memberPayFinish',params:{orderid:orderid,type:'1'}})
           }else{
             this.$router.push({name:'confirm',params:{orderid:orderid}})
           }
@@ -90,7 +88,7 @@
         this.$baidu()
       },
       goAppointPay(orderid){
-        this.$router.push({name:'appointPay',params:{orderid:orderid,type:'1'}})
+        this.$router.push({name:'memberPayFinish',params:{orderid:orderid,type:'2'}})
       },
       cancleIndent(orderid){//取消订单
         this.$dialog.confirm({
