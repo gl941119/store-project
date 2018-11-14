@@ -82,8 +82,7 @@
             this.$toast.success('支付成功');
             let thia = this
             setTimeout(function () {
-              thia.$router.go(-1)
-
+              thia.$router.push({name:'memberSubscribe'})
             },1000)
           }
           if(res.code===102){
@@ -111,7 +110,7 @@
           this.service_amount = res.data.service_amount //服务费用
           this.orderprice = res.data.orderprice//总价
           this.endtime = res.data.endtime // 服务结束时间
-          this.score = parseInt(res.data.score)/2 //评分
+          this.score = parseInt(res.data.score)/2+'分' //评分
 
         })
       }
