@@ -89,16 +89,16 @@ Vue.prototype.$setInterval = setInterval(function () {//长轮询
 
 
 
-// import wxHandle from './utils/wx'
-// wxHandle('updateAppMessageShareData', {
-//   title: '123', // 分享标题
-//   desc: '123', // 分享描述
-//   link: window.location.href+"7777777777777777", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-//   imgUrl: '12333', // 分享图标
-//   success: function () {
-//     // 设置成功
-//   }
-// })
+import wxHandle from './utils/wx'
+wxHandle('updateAppMessageShareData', {
+  title: '123', // 分享标题
+  desc: '123', // 分享描述
+  link: window.location.href+"7777777777777777", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+  imgUrl: '12333', // 分享图标
+  success: function () {
+    alert('设置成功')
+  }
+})
 
 
 

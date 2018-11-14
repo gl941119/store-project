@@ -62,7 +62,8 @@ export default {
         config = JSON.parse(config)
         return config
       } else {//url上没有config
-        alert('数据获取失败')
+        // alert('数据获取失败')
+        window.location.href= 'http://dev-cd.vasterroad.com/app/./index.php?i=1&c=entry&eid=160'
       }
     } else {//本地获取config
       config = JSON.parse(window.sessionStorage.getItem('config'))
