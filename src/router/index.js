@@ -193,7 +193,7 @@ let router = new Router({
       component: resolve => require(['../pages/member/page/subscribe'], resolve)
     },
     {//会员中心--服务完成
-      path: '/member/finish/:orderid',
+      path: '/member/finish/:orderid/:type',//type 1支付  2查看
       name: 'memberPayFinish',
       title:'服务完成',
       meta: {keepAlive: false},

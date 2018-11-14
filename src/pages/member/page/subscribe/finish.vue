@@ -11,7 +11,10 @@
                      :endtime = 'endtime'
                      :score="score"
     ></com-confirmmain>
-    <van-button type="default" class="btn" v-on:click="payHandle">支付</van-button>
+
+
+    <van-button type="default" class="btn" v-on:click="payHandle" v-if="type=='1'">支付</van-button>
+    <van-button type="default" class="btn" v-on:click="confirmHandle" v-if="type== '2'">已完成支付</van-button>
 
   </div>
 </template>
@@ -27,10 +30,9 @@
     },
     data() {
       return {
+        type:this.$route.params.type,//1 支付  2 查看
         Is_member:this.$store.state.Is_member,//是否会员
-        time: this.$route.params.time,
-        id: this.$route.params.id,
-        sid: this.$route.params.sid,
+
         store:{
           name:undefined,
           address:undefined
@@ -60,7 +62,8 @@
         service_amount:undefined,
         orderprice:undefined,
         endtime:undefined,
-      score:undefined
+      score:undefined,
+        time:undefined
       }
     },
     mounted() {
@@ -70,6 +73,9 @@
       // payHandle(){//非会员线上支付
       //   window.location.href=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid162+'&act=payorder&orderid='+this.orderid
       // },
+      confirmHandle(){
+        this.$router.push({name:'mySubscribe'})
+      },
       payHandle(){
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=86&act=paymoney',
@@ -111,7 +117,6 @@
           this.orderprice = res.data.orderprice//总价
           this.endtime = res.data.endtime // 服务结束时间
           this.score = parseInt(res.data.score)/2+'分' //评分
-
         })
       }
     }
