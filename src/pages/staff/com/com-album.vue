@@ -57,6 +57,7 @@
     },
     methods: {
       clickMax(list,index){
+        console.log(list+'---'+index)
         ImagePreview({
           images: list,
           startPosition: index,
