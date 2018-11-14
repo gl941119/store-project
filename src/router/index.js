@@ -58,7 +58,7 @@ let router = new Router({
       component: resolve => require(['..//pages/index'], resolve)
     },
     {//服务评价
-      path: '/serverEvaluate',
+      path: '/serverEvaluate/:orderid',
       name: "serverEvaluate",
       title:'我的评价',
       meta: {keepAlive: false}, // 不需要被缓存
@@ -191,6 +191,13 @@ let router = new Router({
       title:'我的预约',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/subscribe'], resolve)
+    },
+    {//会员中心--服务完成
+      path: '/member/finish/:orderid',
+      name: 'memberPayFinish',
+      title:'服务完成',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/member/page/subscribe/finish'], resolve)
     },
     {//会员中心--会员卡
       path: '/member/memberCard',

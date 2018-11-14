@@ -78,35 +78,13 @@
         this.$router.push({name:'detail',params:{type:'2',id:sid}})
       },
       pay(orderid){
-
-        this.$dialog.confirm({
-          title: '是否支付?',
-        }).then(() => {
           if(window.sessionStorage.getItem('is_member')== '1'){
-            this.$request({
-              url: 'app/index.php?i=1&c=entry&eid=86&act=paymoney',
-              type: 'post',
-              data: {
-                orderid:this.item.orderid,
-              }
-            }).then((res) => {
-              if(res.code===100){
-                this.$toast.success('支付成功');
-                let thia = this
-                setTimeout(function () {
-                  thia.$emit('refresh')
-                },1000)
-              }
-            })
+
+
+            this.$router.push({name:'memberPayFinish',params:{orderid:orderid}})
           }else{
             this.$router.push({name:'confirm',params:{orderid:orderid}})
           }
-        }).catch(() => {
-          // on cancel
-        });
-
-
-
       },
       goBaidu(){
         this.$baidu()

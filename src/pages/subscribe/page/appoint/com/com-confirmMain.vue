@@ -8,7 +8,6 @@
         <p>￥{{service.price}}</p>
       </dl>
     </div>
-
     <ul class="list" v-if="type=== 'confirm'">
       <div class="fill"></div>
       <li class="list-li">
@@ -16,7 +15,6 @@
         <dd>{{Is_member === '1'?'科美卡会员':'非会员'}}</dd>
       </li>
     </ul>
-
     <ul class="list" v-if="type=== 'pay'">
       <div class="fill"></div>
       <li class="list-li">
@@ -30,6 +28,43 @@
       </li>
     </ul>
 
+    <ul class="list" v-if="type=== 'memberPay'">
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约科美师</dt>
+        <dd>{{member.beauty}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约日期</dt>
+        <dd>{{date}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约到店时间</dt>
+        <dd>{{time}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>服务结束时间</dt>
+        <dd>{{endtime}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>服务评分</dt>
+        <dd>{{score}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>服务费用</dt>
+        <dd>{{service_amount}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>总计</dt>
+        <dd>{{orderprice}}</dd>
+      </li>
+    </ul>
 
   </div>
 </template>
@@ -45,7 +80,13 @@
         default: 'confirm'
       },
       date: {},
-      beauty: {}
+      beauty: {},
+      member:{},
+      time:{},
+      service_amount:{},
+      orderprice:{},
+      endtime:{},
+      score:{}
     },
     data() {
       return {
