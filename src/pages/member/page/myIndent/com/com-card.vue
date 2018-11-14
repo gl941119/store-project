@@ -169,6 +169,7 @@
           arr.push(obj)
         })
         cache.setSession('appraise', arr)
+        console.log(arr)
         this.$router.push({name: 'appraise', params: {id: id, data: arr}})//id 订单号id
       }
     }

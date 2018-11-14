@@ -55,10 +55,10 @@
               if(res.status){
                 var data=res.data;
                 this.code=data.score;
-                this.score='';
+                this.$router.push({name:'exchangeOk',params:{je:this.score}})
               }else{
-                this.code=0;
-                this.score='';
+                // this.code=0;
+                // this.score='';
               }
 
             })

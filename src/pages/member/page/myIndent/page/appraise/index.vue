@@ -20,7 +20,7 @@
       <div class="upload">
         <video class="upload-img" :src="val.avatar" v-for="val,num in item.videos"  @click="videoClick($event,val.avatar)" :key="num"></video>
         <div class="uploadmgIPre" v-for="val,num in item.imgs" :key="num">
-          <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  @click="innerPhotoItemClose(num)"/>
+          <van-icon name="close"  class="innerPhotoItemClose"  @click="innerPhotoItemClose(index,num)"/>
           <img class="upload-img" :src="val.avatar" alt="" >
         </div>
         <div class="upload-img dashed">
@@ -90,14 +90,20 @@
       }
     },
     mounted() {
+
     },
     methods: {
       circleEvent(){
         this.show=false;
       },
-      innerPhotoItemClose(index){
+      innerPhotoItemClose(index,num){
+          alert(index,num)
+        alert(this.arr)
+
+        this.arr[index].imgs.splice(num,1)
 
 
+        alert(this.arr)
 
       },
       getLocalImgData(id,thisa){
@@ -129,6 +135,8 @@
 
             }).then(res => {
               if (res.data.code === 100) {
+
+
                 thisa.showJinDu=false;
                     thisa.arr[thisa.index].imgs.push({
                       avatar: res.data.data.avatar,
