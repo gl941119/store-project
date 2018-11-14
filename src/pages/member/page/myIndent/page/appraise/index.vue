@@ -97,13 +97,7 @@
         this.show=false;
       },
       innerPhotoItemClose(index,num){
-          alert(index,num)
-        alert(this.arr)
-
-        this.arr[index].imgs.splice(num,1)
-
-
-        alert(this.arr)
+        this.arr[index].imgs.splice(num,1);
 
       },
       getLocalImgData(id,thisa){
@@ -192,37 +186,37 @@
       uploadImg(ins) {   // 上传照片
         var self = this;
         this.index = ins;
-        // wxHandle('chooseImage', {//打开相册和相机
-        //   count: 1, // 默认9
-        //   scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
-        //   sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        //   success: function (res) {
-        //     self.getLocalImgData(res.localIds[0],self);
-        //     // self.uploadImage(res.localIds[0],self);
-        //   }
-        // });
-        let file = e.target.files[0];
-        let param = new FormData();  // 创建form对象
-        param.append('file', file, file.name);  // 通过append向form对象添加数据
-        // param.append('chunk', '0') // 添加form表单中其他数据
-        // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
-        let config = {
-          headers: {'Content-Type': 'multipart/form-data'}
-        };
-        axios.defaults.withCredentials = true;
-        // alert(param)
-        let uk = this.$store.state.uk || cache.getSession('uk');
-        axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=' + uk, param, config)
-          .then(res => {
-            if (res.data.code === 100) {
-              this.$toast('上传成功')
-              this.arr[this.index].imgs.push({
-                avatar: res.data.data.avatar,
-                imgs: res.data.data.imgs
-              })
-            }
-
-          })
+        wxHandle('chooseImage', {//打开相册和相机
+          count: 1, // 默认9
+          scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success: function (res) {
+            self.getLocalImgData(res.localIds[0],self);
+            // self.uploadImage(res.localIds[0],self);
+          }
+        });
+        // let file = e.target.files[0];
+        // let param = new FormData();  // 创建form对象
+        // param.append('file', file, file.name);  // 通过append向form对象添加数据
+        // // param.append('chunk', '0') // 添加form表单中其他数据
+        // // console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        // let config = {
+        //   headers: {'Content-Type': 'multipart/form-data'}
+        // };
+        // axios.defaults.withCredentials = true;
+        // // alert(param)
+        // let uk = this.$store.state.uk || cache.getSession('uk');
+        // axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=' + uk, param, config)
+        //   .then(res => {
+        //     if (res.data.code === 100) {
+        //       this.$toast('上传成功')
+        //       this.arr[this.index].imgs.push({
+        //         avatar: res.data.data.avatar,
+        //         imgs: res.data.data.imgs
+        //       })
+        //     }
+        //
+        //   })
       },
       uploadVideo(e) {
         var self = this;
@@ -463,6 +457,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
   .innerPhotoItemClose{
     position: absolute;
