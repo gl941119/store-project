@@ -36,9 +36,9 @@
     mounted() {
       this.request()
       let thia = this
-      window.addEventListener("popstate", function (e) {　　//只要B页面按下手机物理返回键，就会被监听到
-        thia.$router.push({name: 'member'})
-      }, false);
+      // window.addEventListener("popstate", function (e) {　　//只要B页面按下手机物理返回键，就会被监听到
+      //   thia.$router.push({name: 'member'})
+      // }, false);
     },
     methods: {
       change(index) {

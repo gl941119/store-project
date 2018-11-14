@@ -25,10 +25,9 @@
       <!--取消-->
 
       <!--待付款-->
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goAppointPay(item.orderid)">查看详情</van-button>
+      <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goMemberPayFinish(item.orderid)">查看详情</van-button>
       <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
       <van-button type="default" class="bottom-Btn" v-if="showPayBtn" v-on:click="pay(item.orderid)">付款</van-button>
-
     </div>
   </div>
 </template>
@@ -87,7 +86,8 @@
       goBaidu(){
         this.$baidu()
       },
-      goAppointPay(orderid){
+      goMemberPayFinish(orderid){
+        console.log(123)
         this.$router.push({name:'memberPayFinish',params:{orderid:orderid,type:'2'}})
       },
       cancleIndent(orderid){//取消订单

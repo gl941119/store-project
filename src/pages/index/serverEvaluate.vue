@@ -95,12 +95,9 @@
         this.value = Math.ceil(value / this.list.length)
       },
       submit() {
-
-
         this.$dialog.confirm({
           title: '是否提交评论',
         }).then(() => {
-
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=87&act=servicediscuss',
             type: 'post',
@@ -114,7 +111,7 @@
               this.$toast.success('感谢您的评价')
               let thia = this
               setTimeout(function () {
-                thia.$router.push({name: 'memberPayFinish',params:{orderid:thia.$route.params.orderid}})
+                thia.$router.push({name: 'memberPayFinish',params:{orderid:thia.$route.params.orderid,type:'1'}})
               }, 1000)
             }
 
