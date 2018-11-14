@@ -343,6 +343,13 @@ let router = new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/member/page/beautyFund/fundPresentationOk'], resolve)
     },
+    {//积分兑换 - 成功
+      path: '/beautyFund/exchangeOk/:je',
+      name: 'exchangeOk',
+      title:'积分兑换',
+      meta: {keepAlive: false}, // 不需要被缓存
+      component: resolve => require(['../pages/member/page/beautyFund/exchangeOk'], resolve)
+    },
     {//账号绑定
       path: '/bindAccount',
       name: 'bindAccount',

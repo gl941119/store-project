@@ -19,8 +19,11 @@
                 v-model="item.content"></textarea>
       <div class="upload">
         <video class="upload-img" :src="val.avatar" v-for="val,num in item.videos"  @click="videoClick($event,val.avatar)" :key="num"></video>
-        <img class="upload-img" :src="val.avatar" alt="" v-for="val,num in item.imgs" :key="num">
-        <div class="upload-img">
+        <div class="uploadmgIPre" v-for="val,num in item.imgs" :key="num">
+          <van-icon name="close"  class="innerPhotoItemClose"  @click="innerPhotoItemClose(index,num)"/>
+          <img class="upload-img" :src="val.avatar" alt="" >
+        </div>
+        <div class="upload-img dashed">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
           <div class="upload-img-input" @click="uploadImg(index)"></div>
@@ -52,7 +55,15 @@
         您的浏览器不支持Video标签。
       </video>
     </van-popup>
-
+    <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
+      <van-circle
+        v-model="currentRate"
+        :rate="30"
+        :speed="100"
+        :text="textJinDu"
+        class="circleTxt"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -72,39 +83,83 @@
         img: undefined,
         index: undefined,//点击暂存
         show:false,
-        vedioSrc:''
+        vedioSrc:'',
+        currentRate:1,
+        showJinDu:false,
+        textJinDu:'',
       }
     },
     mounted() {
-      console.log(this.arr)
+
     },
     methods: {
+      circleEvent(){
+        this.show=false;
+      },
+      innerPhotoItemClose(index,num){
+        this.arr[index].imgs.splice(num,1);
+
+      },
       getLocalImgData(id,thisa){
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-        let urlR='app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+        let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
             let str=getLocal.localData;
-            thisa.$request({
-              url:urlR,
-              type:'post',
-              data:{
-                filestr:str
-              }
-            }).then((res)=>{
-              if (res.code === 100) {
-                thisa.arr[thisa.index].imgs.push({
-                  avatar: res.data.avatar,
-                  imgs: res.data.imgs
-                })
-                thisa.$toast('上传成功');
-              }else{
-                thisa.$toast(res.message);
-              }
-            }).catch((res)=>{
 
-            });
+            thisa.showJinDu=true;
+            var params = new URLSearchParams();
+            params.append('filestr', str);
+            axios({
+              url: urlR,
+              method: 'post',
+              data:params,
+              headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+              },
+              onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
+                if (progressEvent.lengthComputable) {
+                  //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                  //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                  thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+                  thisa.textJinDu = thisa.currentRate + '%';
+                }
+              },
+
+            }).then(res => {
+              if (res.data.code === 100) {
+
+
+                thisa.showJinDu=false;
+                    thisa.arr[thisa.index].imgs.push({
+                      avatar: res.data.data.avatar,
+                      imgs: res.data.data.imgs
+                    })
+                    thisa.$toast('上传成功');
+              }else{
+                thisa.$toast(res.data.data.message);
+              }
+            })
+            // thisa.$request({
+            //   url:urlR,
+            //   type:'post',
+            //   data:{
+            //     filestr:str
+            //   }
+            // }).then((res)=>{
+            //   if (res.code === 100) {
+            //     thisa.arr[thisa.index].imgs.push({
+            //       avatar: res.data.avatar,
+            //       imgs: res.data.imgs
+            //     })
+            //     thisa.$toast('上传成功');
+            //   }else{
+            //     thisa.$toast(res.message);
+            //   }
+            // }).catch((res)=>{
+            //
+            // });
 
           }
         });
@@ -129,7 +184,6 @@
         this.index = index
       },
       uploadImg(ins) {   // 上传照片
-        // alert('准备')
         var self = this;
         this.index = ins;
         wxHandle('chooseImage', {//打开相册和相机
@@ -152,10 +206,8 @@
         // axios.defaults.withCredentials = true;
         // // alert(param)
         // let uk = this.$store.state.uk || cache.getSession('uk');
-        // // alert(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=')
         // axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileupload&uk=' + uk, param, config)
         //   .then(res => {
-        //     console.log(res)
         //     if (res.data.code === 100) {
         //       this.$toast('上传成功')
         //       this.arr[this.index].imgs.push({
@@ -313,11 +365,8 @@
     flex-wrap: wrap;
     position: relative;
     &-img {
-      margin-right: 10px;
       width: 80px;
       height: 80px;
-      border: 1px solid #C1C0CD;
-      border-style: dashed;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -390,5 +439,33 @@
   }
   .video{
     width: 345px;
+  }
+  .circle{
+    background-color: transparent;
+  }
+  .dashed{
+    border: 1px solid #C1C0CD;
+    border-style: dashed;
+  }
+  .uploadmgIPre{
+    margin-right: 10px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #C1C0CD;
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .innerPhotoItemClose{
+    position: absolute;
+    top:-17px;
+    right:-17px;
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
   }
 </style>
