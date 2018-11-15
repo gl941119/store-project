@@ -398,6 +398,13 @@ let router = new Router({
       title: '支付成功',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/index/transfer'], resolve)
+    },
+    {//专家介绍
+      path: '/exhibition/page/smallBusinessCard',
+      name: 'smallBusinessCard',
+      title: '专家介绍',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/exhibition/page/smallBusinessCard'], resolve)
     }
   ]
 })
