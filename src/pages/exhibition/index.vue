@@ -53,28 +53,28 @@
       <dd class="mt8">以科技服务于大众理论的实践者</dd>
       <ul>
         <li>
-          <img src="../../assets/image/image-1.png" alt="">
+          <img src="../../assets/image/posen.jpg" alt="">
           <dl>
           </dl>
           <dt>崔贤镒</dt>
           <dd>院长</dd>
         </li>
         <li>
-          <img src="../../assets/image/image-1.png" alt="">
+          <img src="../../assets/image/posen.jpg" alt="">
           <dl>
           </dl>
           <dt>崔贤镒</dt>
           <dd>院长</dd>
         </li>
         <li>
-          <img src="../../assets/image/image-1.png" alt="">
+          <img src="../../assets/image/posen.jpg" alt="">
           <dl>
           </dl>
           <dt>崔贤镒</dt>
           <dd>院长</dd>
         </li>
         <li>
-          <img src="../../assets/image/image-1.png" alt="">
+          <img src="../../assets/image/posen.jpg" alt="">
           <dl>
           </dl>
           <dt>崔贤镒</dt>
