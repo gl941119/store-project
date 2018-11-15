@@ -1,6 +1,5 @@
 <template>
   <div class="detail" ref="out">
-
     <van-tabs @click="onClick" swipeable class="tabs">
       <van-tab title="商品"></van-tab>
       <van-tab title="详情"></van-tab>
@@ -315,6 +314,7 @@
 
       },
       onClick(index, title) {//锚点
+
         switch (index) {
           case 0:
             this.$refs['out'].scrollTop = 0
@@ -411,7 +411,7 @@
 </style>
 <style lang="scss" scoped>
   .detail {
-    padding-bottom: 50px;
+    /*padding-bottom: 50px;*/
     position: relative;
   }
 
@@ -552,12 +552,7 @@
         min-height: 165px;
         font-size: 10px;
         color: rgba(153, 153, 153, 1);
-        > p {
-          line-height: 30px;
-        }
-        > > > img {
-          width: 100%;
-        }
+
       }
     }
   }

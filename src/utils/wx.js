@@ -1,12 +1,14 @@
 import axios from 'axios'
 import wx from 'weixin-js-sdk'
-
+import Vue from 'vue'
 
 function wxHandle(title, callback) {
   let config = {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   };
-  let r = this.$upUrl+'app/index.php?' + this.$i +'&c=entry&eid='+this.$eid+'&act=weixinscan&url=' + window.location.href;
+
+  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid + '&act=weixinscan&url=' + window.location.href;
+
   // alert('wx')
   axios.post(r, null, config)
     .then((res) => {

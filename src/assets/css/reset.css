@@ -148,7 +148,7 @@ a:focus {
 
 .presentation-content p{
 
-  line-height: 20px;
+  line-height: 0;
 }
 .presentation-content img{
   max-width: 375px;
