@@ -83,7 +83,7 @@
         this.$router.push({name:'detail',params:{type:'2',id:'2'}})
       },
       goLink(link) {//banner跳转
-        window.location.href = link
+        this.$router.push({name:'introductionInstruments'})
       },
       scanBtn() {
         // wxHandle('scanQRCode', {

@@ -405,6 +405,13 @@ let router = new Router({
       title: '专家介绍',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/exhibition/page/smallBusinessCard'], resolve)
+    },
+    {//仪器介绍
+      path: '/introductionInstruments',
+      name: 'introductionInstruments',
+      title: '仪器介绍',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/introductionInstruments/index'], resolve)
     }
   ]
 })
