@@ -6,7 +6,7 @@ function wxHandle(title, callback) {
   let config = {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   };
-  let r = 'http://dev-cd.vasterroad.com/app/index.php?i=1&c=entry&eid=163&act=weixinscan&url=' + window.location.href;
+  let r = this.$upUrl+'app/index.php?' + this.$i +'&c=entry&eid='+this.$eid+'&act=weixinscan&url=' + window.location.href;
   // alert('wx')
   axios.post(r, null, config)
     .then((res) => {
