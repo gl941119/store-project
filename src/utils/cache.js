@@ -56,7 +56,6 @@ export default {
     if (!window.sessionStorage.getItem('config')) {//url上获取config
       if (window.location.hash.split('?').length != 1) {//url上有config
         let config = window.location.hash.split('?')[1]
-        console.log(config)
         config = this.decode(config)//解码
         window.sessionStorage.setItem('config', config)
         config = JSON.parse(config)

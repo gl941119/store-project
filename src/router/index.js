@@ -420,7 +420,6 @@ function setTitle(title) {
 }
 
 router.afterEach((transition) => {
-
   let name = transition.name;
   let item = router.options.routes.filter((ele) => {
     return ele.name === name;
