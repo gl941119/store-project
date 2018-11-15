@@ -77,7 +77,7 @@
     <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
       <van-circle
         v-model="currentRate"
-        :rate="30"
+        :rate="currentRate"
         :speed="100"
         :text="textJinDu"
         class="circleTxt"
@@ -183,6 +183,7 @@
                       thisa.$toast('上传成功');
                       thisa.init();
                 }else{
+                  thisa.showJinDu=false;
                   thisa.$toast(res.data.message);
                 }
               })
@@ -350,5 +351,8 @@
   }
 .circle{
   background-color: transparent;
+}
+.circleTxt{
+  background-color: #fff;
 }
 </style>

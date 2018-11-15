@@ -63,8 +63,10 @@ Vue.prototype.$baidu = function () {//联系卖家
 
 
 import request from './utils/request'
+import speedProgress from './utils/speedProgress'
 
 Vue.prototype.$request = request;
+Vue.prototype.$sp = speedProgress;
 
 Vue.prototype.$setInterval = setInterval(function () {//长轮询
   Vue.prototype.$request({

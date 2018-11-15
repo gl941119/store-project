@@ -49,11 +49,12 @@
     <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
       <van-circle
         v-model="currentRate"
-        :rate="30"
+        :rate="currentRate"
         :speed="100"
         :text="textJinDu"
         class="circleTxt"
       />
+      <!--<canvas id="canvas" width="100" height="100" ></canvas>-->
     </van-popup>
   </div>
 </template>
@@ -173,26 +174,18 @@
 
       },
       upDataV(str,e){
-
+this.showJinDu=true;
         let self=this;
         let file=e.target.files[0];
         let param = new FormData();  // 创建form对象
         param.append('file', file, file.name);
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        };
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk=';
-        // alert(file.name)
-        var params = new URLSearchParams();
-        params.append('filestr', str);
+        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk='+uk;
         axios({
-          url: urlR,
+          url: url,
           method: 'post',
-          data:params,
+          data:param,
           headers: {
             'Content-Type':'application/x-www-form-urlencoded'
           },
@@ -200,40 +193,45 @@
             if (progressEvent.lengthComputable) {
               //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
               //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
-              thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
-              thisa.text = thisa.currentRate.toFixed(0) + '%';
+              // self.$sp(document.getElementById('canvas'),(progressEvent.loaded / progressEvent.total * 100 | 0));
+              self.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+              self.textJinDu = self.currentRate + '%';
             }
           },
 
         }).then(res => {
+          var s=res.data.data;
           if (res.data.code === 100) {
-            thisa.show=false;
-            thisa.saver(res.data.data.imgs);
+            this.showJinDu=false;
+                    self.vedioSrc=s.videos;
+                    e.target.value='';
+                    this.vdGou=true;
           }else{
-            thisa.$toast(res.data.message);
+            this.showJinDu=false;
+            self.$toast(res.data.message);
           }
         })
-        axios.post(url + uk, param, config)
-          .then(res => {
-            if (res.data.code === 100) {
-              var s=res.data.data;
-              if(s.imgs!=undefined){
-                self.imgSrc=s.imgs;
-                e.target.value='';
-                this.imgGou=true;
-              }else{
-                self.vedioSrc=s.videos;
-                e.target.value='';
-                this.vdGou=true;
-              }
-            }else{
-              var ms=res.data.code+'---'+res.data.message;
-              // alert(res.data.message)
-            }
-
-          }).catch((res)=>{
-
-        })
+        // axios.post(url + uk, param, config)
+        //   .then(res => {
+        //     if (res.data.code === 100) {
+        //       var s=res.data.data;
+        //       if(s.imgs!=undefined){
+        //         self.imgSrc=s.imgs;
+        //         e.target.value='';
+        //         this.imgGou=true;
+        //       }else{
+        //         self.vedioSrc=s.videos;
+        //         e.target.value='';
+        //         this.vdGou=true;
+        //       }
+        //     }else{
+        //       var ms=res.data.code+'---'+res.data.message;
+        //       // alert(res.data.message)
+        //     }
+        //
+        //   }).catch((res)=>{
+        //
+        // })
       },
       bindAccountSubmit(){
         if(this.vedioSrc&&this.imgSrc){
@@ -515,5 +513,8 @@
   }
   .circle{
     background-color: transparent;
+  }
+  .circleTxt{
+    background-color: #fff;
   }
 </style>
