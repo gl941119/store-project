@@ -9,7 +9,7 @@
     <div class="detali-product product">
       <!--banner-->
       <van-swipe  class="swipe">
-        <van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">
+        <van-swipe-item v-for="(item, index) in Data.bimg" :key="index">
           <img :src="item" alt="" class="swipe-img">
         </van-swipe-item>
       </van-swipe>
@@ -25,26 +25,26 @@
         <div class="title-bottom">
           <div class="price-left">
             <div class="price">￥{{Data.price}}</div>
-            <div class="original_price gol">¥398</div>
+            <div class="original_price gol">¥{{Data.o_price}}</div>
           </div>
-          <div class="buy-num gol">231人已购买</div>
+          <div class="buy-num gol">{{Data.num}}人已购买</div>
         </div>
       </div>
-      <div class="membership-grade-padding">
-        <div class="membership-grade-box">
-          <div class="membership-grade-flex">
-            <div class="gol">等级</div>
-            <div class="membership-grade">科美会员</div>
-          </div>
+      <!--<div class="membership-grade-padding">-->
+        <!--<div class="membership-grade-box">-->
+          <!--<div class="membership-grade-flex">-->
+            <!--<div class="gol">等级</div>-->
+            <!--<div class="membership-grade">{{Data.name}}</div>-->
+          <!--</div>-->
 
-        </div>
-      </div>
-      <!--&lt;!&ndash;产品详情&ndash;&gt;-->
-      <!--<div class="presentation" ref="presentation">-->
-      <!--<p class="presentation-title">产品详情</p>-->
-      <!--&lt;!&ndash;<div class="presentation-fill"></div>&ndash;&gt;-->
-      <!--<div class="presentation-content" v-html="Data.content"></div>-->
+        <!--</div>-->
       <!--</div>-->
+      <!--产品详情-->
+      <div class="presentation" ref="presentation">
+      <p class="presentation-title">会员卡详情</p>
+      <!--<div class="presentation-fill"></div>-->
+      <div class="presentation-content" v-html="Data.content"></div>
+      </div>
       <button class="buy" v-on:click="goAppoint">立即购买
       </button>
 
@@ -64,6 +64,7 @@
       return {
         id: this.$route.params.id,
         Data: {},
+        con:''
       }
     },
     mounted() {
