@@ -57,13 +57,13 @@
     },
     methods: {
       setHover(type){
-        this.$store.commit('setHover',type)
+        // this.$store.commit('setHover',type)
       },
       infoUrl() {
         if (window.sessionStorage.getItem('is_bind') === '1') {//已绑定
           if (window.sessionStorage.getItem('store') === '0') {//用户
             this.$router.push({name: 'member'});
-              this.$store.commit('setHover',4)
+              // this.$store.commit('setHover',4)
           } else {//美师
             this.$router.push({name: 'staff'});
           }
