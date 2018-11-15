@@ -8,15 +8,12 @@
     <!--商品-->
     <div class="detali-product product">
       <!--banner-->
-      <!--<van-swipe :autoplay="300000000000000000" class="swipe">-->
-      <!--<van-swipe-item v-if="Data.video">-->
-      <!--<video :src="Data.video" autoplay controls class="swipe-video"/>-->
-      <!--</van-swipe-item>-->
-      <!--<van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">-->
-      <!--<img :src="item" alt="" class="swipe-img">-->
-      <!--</van-swipe-item>-->
-      <!--</van-swipe>-->
-      <img :src="Data.imgurl" alt="" class="swipe">
+      <van-swipe  class="swipe">
+        <van-swipe-item v-for="(item, index) in Data.thumb_url" :key="index">
+          <img :src="item" alt="" class="swipe-img">
+        </van-swipe-item>
+      </van-swipe>
+      <!--<img :src="Data.imgurl" alt="" class="swipe">-->
       <!--详情-->
       <div class="title">
         <div class="title-top">
@@ -26,11 +23,22 @@
           {{Data.descript}}
         </p>
         <div class="title-bottom">
-          <span class="price">￥{{Data.price}}</span>
+          <div class="price-left">
+            <div class="price">￥{{Data.price}}</div>
+            <div class="original_price gol">¥398</div>
+          </div>
+          <div class="buy-num gol">231人已购买</div>
+        </div>
+      </div>
+      <div class="membership-grade-padding">
+        <div class="membership-grade-box">
+          <div class="membership-grade-flex">
+            <div class="gol">等级</div>
+            <div class="membership-grade">科美会员</div>
+          </div>
 
         </div>
       </div>
-
       <!--&lt;!&ndash;产品详情&ndash;&gt;-->
       <!--<div class="presentation" ref="presentation">-->
       <!--<p class="presentation-title">产品详情</p>-->
@@ -106,11 +114,46 @@
 </script>
 
 <style lang="scss" scoped>
+  .gol{
+    font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+  }
+  .original_price{
+    padding-left: 15px;
+  }
+  .price-left,.membership-grade-flex{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .buy-num{
+
+  }
+  .membership-grade-padding{
+    background-color: rgba(244,244,244,1);
+    padding: 10px 0;
+  }
+  .membership-grade-box{
+    background-color: #fff;
+    padding: 10px 15px;
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .membership-grade{
+    font-size:14px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    padding-left: 15px;
+  }
   .buy {
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 125px;
+    width: 100%;
     height: 49px;
     background: rgba(113, 179, 255, 1);
     box-shadow: 0px 4px 7px 0px rgba(204, 226, 249, 1);
