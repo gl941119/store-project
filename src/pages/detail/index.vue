@@ -9,7 +9,7 @@
     <div class="detali-product product">
       <!--banner-->
       <van-swipe :autoplay="300000000000000000" class="swipe">
-        <van-swipe-item class="wrap">
+        <van-swipe-item class="wrap" v-if="Data.video">
           <img src="../../assets/image/play.png" class="wrap-play" :class="{is_display:show_play}"
                v-on:click="videoPlay"></img>
           <img :src="Data.videothumb" :class="{is_display:show_img}" alt="" class="wrap-img">

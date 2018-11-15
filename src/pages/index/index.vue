@@ -80,7 +80,7 @@
     },
     methods: {
       goDetail(){
-        this.$router.push({name:'detail',params:{type:'2',id:'2'}})
+        this.$router.push({name:'detail',params:{type:'1',id:'2'}})
       },
       goLink(link) {//banner跳转
         this.$router.push({name:'introductionInstruments'})
