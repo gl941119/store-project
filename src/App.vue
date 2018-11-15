@@ -17,29 +17,22 @@
 <style lang="scss">
   #app {
     /*font-family:'Microsoft YaHei','PingFangSC','Avenir', Helvetica, Arial, sans-serif;*/
-    /*-webkit-font-smoothing: antialiased;*/
-    /*-moz-osx-font-smoothing: grayscale;*/
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     /*text-align: center;*/
     /*color: #2c3e50;*/
     /*margin-top: 60px;*/
     /*margin-bottom: 49px;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
     width: 375px;
     height: 100%;
-    overflow: auto;
-    padding-bottom: 50px;
-    /*background-color: #F4F4F4;*/
+
   }
 
   .view {
-    /*margin-bottom: 50px;*/
-
-    /*border: 1px solid red;*/
-    /*background-color: #F4F4F4;*/
-
-    box-sizing: content-box;
-    /*margin-bottom: 50px;*/
+    padding-bottom: 50px;
+    /*box-sizing: content-box;*/
     min-height: 100%;
     width: 375px;
     overflow: auto;
