@@ -33,8 +33,8 @@
 
     <!--会员专区-->
     <com-model :data="member_cards"></com-model>
-    <img :src="advTwo.bimg" alt="" v-on:click="goLink(advTwo.link)" class="img">
-    <img :src="advThree.bimg" alt="" v-on:click="goLink(advThree.link)" class="img">
+    <img :src="advTwo.bimg" alt="" v-on:click="goOne(advTwo.link)" class="img">
+    <img :src="advThree.bimg" alt="" v-on:click="goTwo(advThree.link)" class="img">
   </div>
 </template>
 
@@ -84,6 +84,12 @@
       },
       goLink(link) {//banner跳转
         this.$router.push({name:'introductionInstruments'})
+      },
+      goOne(link) {//banner跳转
+        this.$router.push({name:'yiYuan'})
+      },
+      goTwo(){
+        this.$router.push({name:'youthBeauty'})
       },
       scanBtn() {
         // wxHandle('scanQRCode', {
