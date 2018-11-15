@@ -196,6 +196,9 @@
   }
 
   .circle{
-    /*background-color: transparent;*/
+    background-color: transparent;
+  }
+  .circleTxt{
+    background-color: #fff;
   }
 </style>

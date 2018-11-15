@@ -350,6 +350,9 @@
     z-index: 1;
   }
 .circle{
-
+  background-color: transparent;
+}
+.circleTxt{
+  background-color: #fff;
 }
 </style>

@@ -512,6 +512,9 @@ this.showJinDu=true;
     font-weight: 400;
   }
   .circle{
-    /*background-color: transparent;*/
+    background-color: transparent;
+  }
+  .circleTxt{
+    background-color: #fff;
   }
 </style>

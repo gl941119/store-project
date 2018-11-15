@@ -452,8 +452,11 @@
     width: 345px;
   }
 
-  .circle {
-    /*background-color: transparent;*/
+  .circle{
+    background-color: transparent;
+  }
+  .circleTxt{
+    background-color: #fff;
   }
 
   .dashed {

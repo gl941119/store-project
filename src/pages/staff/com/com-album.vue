@@ -284,14 +284,12 @@
     }
   }
 </script>
-<style>
-  .van-circle__text{
-    color: #fff;
-  }
-</style>
 <style lang="scss" scoped>
   .circle{
-    /*background-color: transparent;*/
+    background-color: transparent;
+  }
+  .circleTxt{
+    background-color: #fff;
   }
   .wrap {
     margin: 15px auto 0;
