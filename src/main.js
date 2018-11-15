@@ -104,12 +104,9 @@ Vue.prototype.$setInterval = setInterval(function () {//长轮询
 
 //导航守卫
 router.beforeEach((to, from, next) => {
-    // const token = store.state.token;
     if (to.matched.some(record => record.meta.showFooter)) {
-      // Cache.setSession('show_footer', '1');
       store.commit('setShowFooter', true);
     } else {
-      // Cache.setSession('show_footer', '0');
       store.commit('setShowFooter', false);
     }
     next()

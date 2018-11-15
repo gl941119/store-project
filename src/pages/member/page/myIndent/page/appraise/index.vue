@@ -18,26 +18,27 @@
       <textarea class="area" maxlength="200" placeholder="宝贝的效果如何呢？发表一下自己的感受吧"
                 v-model="item.content"></textarea>
       <div class="upload">
-        <video class="upload-img" :src="val.avatar" v-for="val,num in item.videos"  @click="videoClick($event,val.avatar)" :key="num"></video>
+        <video class="upload-img" :src="val.avatar" v-for="val,num in item.videos"
+               @click="videoClick($event,val.avatar)" :key="num"></video>
         <div class="uploadmgIPre" v-for="val,num in item.imgs" :key="num">
-          <van-icon name="close"  class="innerPhotoItemClose"  @click="innerPhotoItemClose(index,num)"/>
-          <img class="upload-img" :src="val.avatar" alt="" >
+          <van-icon name="close" class="innerPhotoItemClose" @click="innerPhotoItemClose(index,num)"/>
+          <img class="upload-img" :src="val.avatar" alt="">
         </div>
         <div class="upload-img dashed">
           <img src="../../../../../../assets/image/appraise.png" alt="">
           <p>添加图片</p>
           <div class="upload-img-input" @click="uploadImg(index)"></div>
           <!--<input name="file" type="file" accept="image/png,image/gif,image/jpeg,image/*"-->
-                 <!--@change="uploadImg" class="upload-img-input"-->
-                 <!--v-on:click="clickUpload(index)"/>-->
+          <!--@change="uploadImg" class="upload-img-input"-->
+          <!--v-on:click="clickUpload(index)"/>-->
         </div>
         <!--<div class="upload-img">-->
-          <!--<img src="../../../../../../assets/image/appraise1.png" alt="">-->
-          <!--<p>添加视频</p>-->
-          <!--<input name="file" type="file" accept="video/mp4，video/avi,video/*"-->
-                 <!--@change="uploadVideo" class="upload-img-input"-->
-                 <!--v-on:click="clickUpload(index)"-->
-          <!--/>-->
+        <!--<img src="../../../../../../assets/image/appraise1.png" alt="">-->
+        <!--<p>添加视频</p>-->
+        <!--<input name="file" type="file" accept="video/mp4，video/avi,video/*"-->
+        <!--@change="uploadVideo" class="upload-img-input"-->
+        <!--v-on:click="clickUpload(index)"-->
+        <!--/>-->
         <!--</div>-->
 
       </div>
@@ -82,47 +83,47 @@
         area: undefined,
         img: undefined,
         index: undefined,//点击暂存
-        show:false,
-        vedioSrc:'',
-        currentRate:1,
-        showJinDu:false,
-        textJinDu:'',
+        show: false,
+        vedioSrc: '',
+        currentRate: 1,
+        showJinDu: false,
+        textJinDu: '',
       }
     },
     mounted() {
 
     },
     methods: {
-      circleEvent(){
-        this.show=false;
+      circleEvent() {
+        this.show = false;
       },
-      innerPhotoItemClose(index,num){
-        this.arr[index].imgs.splice(num,1);
+      innerPhotoItemClose(index, num) {
+        this.arr[index].imgs.splice(num, 1);
 
       },
-      getLocalImgData(id,thisa){
+      getLocalImgData(id, thisa) {
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-        let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
-        wxHandle('getLocalImgData',{
+        let urlR = thisa.$upUrl + 'app/index.php?' + thisa.$i + '&c=entry&eid=' + thisa.$eid + '&act=fileupload&uk=' + uk;
+        wxHandle('getLocalImgData', {
           localId: id, // 图片的localID
           success: function (getLocal) {
-            let str=getLocal.localData;
+            let str = getLocal.localData;
 
-            thisa.showJinDu=true;
+            thisa.showJinDu = true;
             var params = new URLSearchParams();
             params.append('filestr', str);
             axios({
               url: urlR,
               method: 'post',
-              data:params,
+              data: params,
               headers: {
-                'Content-Type':'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded'
               },
               onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
                 if (progressEvent.lengthComputable) {
                   //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
                   //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
-                  thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+                  thisa.currentRate = (progressEvent.loaded / progressEvent.total * 100 | 0);
                   thisa.textJinDu = thisa.currentRate + '%';
                 }
               },
@@ -131,13 +132,13 @@
               if (res.data.code === 100) {
 
 
-                thisa.showJinDu=false;
-                    thisa.arr[thisa.index].imgs.push({
-                      avatar: res.data.data.avatar,
-                      imgs: res.data.data.imgs
-                    })
-                    thisa.$toast('上传成功');
-              }else{
+                thisa.showJinDu = false;
+                thisa.arr[thisa.index].imgs.push({
+                  avatar: res.data.data.avatar,
+                  imgs: res.data.data.imgs
+                })
+                thisa.$toast('上传成功');
+              } else {
                 thisa.$toast(res.data.data.message);
               }
             })
@@ -164,20 +165,20 @@
           }
         });
       },
-      vanPopup(){
-        setTimeout(()=>{
-          let myVideo= document.getElementById('myVideo');
-          if(myVideo!=null){
-            if(!this.show){
+      vanPopup() {
+        setTimeout(() => {
+          let myVideo = document.getElementById('myVideo');
+          if (myVideo != null) {
+            if (!this.show) {
               myVideo.pause();
             }
           }
 
-        },500)
+        }, 500)
       },
-      videoClick(e,src){
-        this.show=true;
-        this.vedioSrc=src;
+      videoClick(e, src) {
+        this.show = true;
+        this.vedioSrc = src;
       },
       clickUpload(index) {
 
@@ -191,7 +192,7 @@
           scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
           sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
           success: function (res) {
-            self.getLocalImgData(res.localIds[0],self);
+            self.getLocalImgData(res.localIds[0], self);
             // self.uploadImage(res.localIds[0],self);
           }
         });
@@ -263,7 +264,17 @@
 
       },
       confirmHandle() { //确认上传
-        let arr = this.arr
+        function deepClone(arr) {
+          let new_arr = arr.map((item, index) => {
+            let new_obj = {}
+            Object.keys(item).forEach(val => {
+              new_obj[val] = item[val]
+            })
+            return new_obj
+          })
+          return new_arr;
+        }
+        let arr = deepClone(this.arr)
         arr.forEach(item => {
           item.tip = item.tip === true ? '1' : '0'
           item.score = item.score * 2
@@ -272,8 +283,6 @@
           orderid: this.$route.params.id,
           goods: arr,
         }]
-
-
         this.$dialog.confirm({
           title: '是否发布评论',
 
@@ -437,17 +446,21 @@
       line-height: 21px;
     }
   }
-  .video{
+
+  .video {
     width: 345px;
   }
-  .circle{
+
+  .circle {
     background-color: transparent;
   }
-  .dashed{
+
+  .dashed {
     border: 1px solid #C1C0CD;
     border-style: dashed;
   }
-  .uploadmgIPre{
+
+  .uploadmgIPre {
     margin-right: 10px;
     width: 80px;
     height: 80px;
@@ -459,10 +472,11 @@
     align-items: center;
     position: relative;
   }
-  .innerPhotoItemClose{
+
+  .innerPhotoItemClose {
     position: absolute;
-    top:-17px;
-    right:-17px;
+    top: -17px;
+    right: -17px;
     background-color: #000;
     color: #fff;
     font-size: 20px;

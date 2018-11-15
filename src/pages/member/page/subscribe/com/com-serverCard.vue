@@ -87,7 +87,6 @@
         this.$baidu()
       },
       goMemberPayFinish(orderid){
-        console.log(123)
         this.$router.push({name:'memberPayFinish',params:{orderid:orderid,type:'2'}})
       },
       cancleIndent(orderid){//取消订单
@@ -105,14 +104,10 @@
               this.$toast.success('取消成功')
               this.$emit('refresh')
             }
-
           })
         }).catch(() => {
           // on cancel
         });
-
-
-
       }
     }
 
