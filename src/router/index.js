@@ -410,21 +410,21 @@ let router = new Router({
       path: '/introductionInstruments',
       name: 'introductionInstruments',
       title: '仪器介绍',
-      meta: {keepAlive: false},
+      meta: {keepAlive: true},
       component: resolve => require(['../pages/introductionInstruments/index'], resolve)
     },
     {//一元公益项目
       path: '/yiYuan',
       name: 'yiYuan',
       title: '一元公益项目',
-      meta: {keepAlive: false},
+      meta: {keepAlive: true},
       component: resolve => require(['../pages/yiYuan/index'], resolve)
     },
     {//公益活动
       path: '/youthBeauty',
       name: 'youthBeauty',
       title: '公益活动',
-      meta: {keepAlive: false},
+      meta: {keepAlive: true},
       component: resolve => require(['../pages/youthBeauty/index'], resolve)
     }
   ]
