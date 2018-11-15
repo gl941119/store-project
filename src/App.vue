@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <keep-alive >
-      <router-view class="view"  v-if="$route.meta.keepAlive"/>
+    <keep-alive>
+      <router-view class="view" v-if="$route.meta.keepAlive"/>
     </keep-alive>
-    <router-view class="view"  v-if="!$route.meta.keepAlive"/>
+    <router-view class="view" v-if="!$route.meta.keepAlive"/>
     <my-footer></my-footer>
   </div>
 </template>
@@ -23,10 +23,10 @@
     /*color: #2c3e50;*/
     /*margin-top: 60px;*/
     /*margin-bottom: 49px;*/
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;*/
     width: 375px;
-    height: 100%;
+    /*height: 100%;*/
     /*background-color: #F4F4F4;*/
   }
 
@@ -36,6 +36,8 @@
     /*border: 1px solid red;*/
     /*background-color: #F4F4F4;*/
     padding-bottom: 50px;
+    box-sizing: content-box;
+    /*margin-bottom: 50px;*/
     min-height: 100%;
     width: 375px;
     overflow: auto;

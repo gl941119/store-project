@@ -6,19 +6,21 @@
 
     <div class="nav">
       <ul class="nav-left">
-        <li v-on:click="handleChangeComponent('recommend')"
-            :class="{li_hover:hover === '-1'}"
-        >推荐
-        </li>
-        <li v-on:click="handleChangeComponent('clubCard')"
-            :class="{li_hover:hover === '0'}"
-        >会员卡
-        </li>
-        <li v-for="item,index in category" :key="item.id"
-            v-on:click="handleChangeComponent('series',item.id)"
-            :class="{li_hover:hover === item.id}"
-        >{{item.name}}
-        </li>
+        <div class="nav-left-div">
+          <li v-on:click="handleChangeComponent('recommend')"
+              :class="{li_hover:hover === '-1'}"
+          >推荐
+          </li>
+          <li v-on:click="handleChangeComponent('clubCard')"
+              :class="{li_hover:hover === '0'}"
+          >会员卡
+          </li>
+          <li v-for="item,index in category" :key="item.id"
+              v-on:click="handleChangeComponent('series',item.id)"
+              :class="{li_hover:hover === item.id}"
+          >{{item.name}}
+          </li>
+        </div>
       </ul>
 
       <router-view class="nav-right"/>
@@ -44,9 +46,9 @@
 
       }
     },
-    computed:{
-      hover:function () {
-       return this.$store.state.classify_hover
+    computed: {
+      hover: function () {
+        return this.$store.state.classify_hover
       }
     },
     methods: {
@@ -67,12 +69,12 @@
             break;
         }
         // this.isCurrentTabComponent = name
-        this.$router.push({name:name})
+        this.$router.push({name: name})
       }
     },
     mounted() {
       console.log(1)
-      this.$store.commit('setHover',1)
+      this.$store.commit('setHover', 1)
       this.$request({
         url: 'app/index.php?i=1&c=entry&eid=85&act=category',
         type: 'get',
@@ -89,7 +91,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .search_wrap{
+  .search_wrap {
     width: 100%;
     background-color: white;
     padding: 5px 0;
@@ -102,29 +104,35 @@
     }
   }
 
-
   .nav {
-    height: 514px;
+    height: 100%;
     background: white;
     border-top: 1px solid #F4F4F4;
     &-left {
+
+      overflow-y: scroll;
       width: 80px;
-      height: 514px;
+      height: 100%;
       border-right: 1px solid #F4F4F4;
       float: left;
-      > li {
-        height: 45px;
-        background: rgba(255, 255, 255, 1);
-        text-align: center;
-        font-size: 15px;
-        color: rgba(60, 60, 60, 1);
-        line-height: 45px;
+      &-div {
+        width: 100%;
+        /*padding-bottom: 50px;*/
+        > li {
+          height: 45px;
+          background: rgba(255, 255, 255, 1);
+          text-align: center;
+          font-size: 15px;
+          color: rgba(60, 60, 60, 1);
+          line-height: 45px;
+        }
+        .li_hover {
+          color: #71B3FF;
+          background: url("../../assets/image/icon-fenge.png") no-repeat left center;
+          background-size: 3px 25px;
+        }
       }
-      .li_hover {
-        color: #71B3FF;
-        background: url("../../assets/image/icon-fenge.png") no-repeat left center;
-        background-size: 3px 25px;
-      }
+
     }
     &-right {
       width: 280px;

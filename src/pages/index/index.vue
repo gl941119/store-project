@@ -110,7 +110,7 @@
 <style lang="scss" scoped>
   .index {
     background-color: #F4F4F4;
-    padding-bottom: 50px;
+
 
   }
 
