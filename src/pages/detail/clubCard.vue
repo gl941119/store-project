@@ -123,6 +123,7 @@
   }
   .original_price{
     padding-left: 15px;
+    text-decoration: line-through;
   }
   .price-left,.membership-grade-flex{
     display: flex;
