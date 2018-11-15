@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     showFooter: true,
     hover:0,//footer颜色
+    classify_hover:-1,//分类栏选择
     is: '2',
     ShowBuySpecification: false,
     BuySpecification:undefined,
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     },
     setHover(state,val){
       state.hover= val
+    },
+    setClassify_hover(state,val){
+      state.classify_hover = val
     }
 
 

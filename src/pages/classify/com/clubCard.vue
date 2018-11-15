@@ -16,6 +16,7 @@
       }
     },
     mounted() {
+      this.$store.commit('setClassify_hover','0')
       this.request()
     },
     methods: {

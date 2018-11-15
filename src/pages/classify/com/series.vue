@@ -21,6 +21,9 @@
         goodslist: null,
       }
     },
+    updated(){
+      this.$store.commit('setClassify_hover',this.cate)//更改hover颜色
+    },
     mounted() {
       this.request()
     },
