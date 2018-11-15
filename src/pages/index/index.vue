@@ -18,7 +18,7 @@
     <com-list :data="data.cate"></com-list>
     <!--热销商品-->
     <com-model :data="goods_essence"></com-model>
-    <img :src="advOne.bimg" alt="" v-on:click="goLink(advOne.link)" class="img">
+    <img :src="advOne.bimg" alt="" v-on:click="goThree(advOne.link)" class="img">
     <!--热门体验卡-->
     <!--<com-model :data="expre_cards"></com-model>-->
 
@@ -79,11 +79,15 @@
       this.request()
     },
     methods: {
+      goThree(){
+        this.$router.push({name:'introductionInstruments'})
+      },
       goDetail(){
         this.$router.push({name:'detail',params:{type:'1',id:'2'}})
       },
       goLink(link) {//banner跳转
-        this.$router.push({name:'introductionInstruments'})
+        // this.$router.push({path:link})
+        window.location.href = link
       },
       goOne(link) {//banner跳转
         this.$router.push({name:'yiYuan'})
