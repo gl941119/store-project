@@ -26,16 +26,18 @@
     /*display: flex;*/
     /*flex-direction: column;*/
     width: 375px;
-    /*height: 100%;*/
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 50px;
     /*background-color: #F4F4F4;*/
   }
 
   .view {
     /*margin-bottom: 50px;*/
-    /*overflow: auto;*/
+
     /*border: 1px solid red;*/
     /*background-color: #F4F4F4;*/
-    padding-bottom: 50px;
+
     box-sizing: content-box;
     /*margin-bottom: 50px;*/
     min-height: 100%;

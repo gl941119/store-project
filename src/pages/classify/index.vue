@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <div class="search_wrap">
       <search :value="value" class="search" v-on:click.native="goSearch"></search>
     </div>
@@ -91,6 +91,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .wrap{
+    height: 100%;
+  }
   .search_wrap {
     width: 100%;
     background-color: white;
@@ -105,14 +108,14 @@
   }
 
   .nav {
-    height: 100%;
-    background: white;
+      height: 100%;
+background-color: white;
     border-top: 1px solid #F4F4F4;
     &-left {
 
       overflow-y: scroll;
       width: 80px;
-      height: 100%;
+      height: 517px;
       border-right: 1px solid #F4F4F4;
       float: left;
       &-div {
