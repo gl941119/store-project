@@ -20,9 +20,9 @@
     <com-model :data="goods_essence"></com-model>
     <img :src="advOne.bimg" alt="" v-on:click="goLink(advOne.link)" class="img">
     <!--热门体验卡-->
-    <com-model :data="expre_cards" :type="false"></com-model>
+    <com-model :data="expre_cards"></com-model>
     <!--会员专区-->
-    <com-model :data="member_cards" :type="false"></com-model>
+    <com-model :data="member_cards"></com-model>
     <img :src="advTwo.bimg" alt="" v-on:click="goLink(advTwo.link)" class="img">
     <img :src="advThree.bimg" alt="" v-on:click="goLink(advThree.link)" class="img">
   </div>

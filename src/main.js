@@ -10,7 +10,7 @@ import './assets/fonts/style.css'
 
 //重置样式
 import './assets/css/reset.css';
- //vant引入
+//vant引入
 import './utils/vant'
 
 if (process.env.NODE_ENV === 'development') {
@@ -21,23 +21,15 @@ if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$eidpay = 158; //支付
 
 } else {
-  let config =  Cache.getConfig()
-  Vue.prototype.$i = 'i='+config.uid;
-  Vue.prototype.$upUrl = config.domain+'/';
+  let config = Cache.getConfig()
+  Vue.prototype.$i = 'i=' + config.uid;
+  Vue.prototype.$upUrl = config.domain + '/';
   Vue.prototype.$eid = config.binds['87']; //图片视频上传
   Vue.prototype.$eidpay = config.binds['89']; //支付
   Vue.prototype.$eid162 = config.binds['86']; //支付
   Vue.prototype.$eid161 = config.binds['85']; //支付
   Vue.prototype.$eids = config.binds['88']; //支付
 }
-
-
-
-
-
-
-
-
 
 
 Vue.config.productionTip = false
@@ -71,6 +63,7 @@ Vue.prototype.$baidu = function () {//联系卖家
 
 
 import request from './utils/request'
+
 Vue.prototype.$request = request;
 
 Vue.prototype.$setInterval = setInterval(function () {//长轮询
@@ -88,29 +81,15 @@ Vue.prototype.$setInterval = setInterval(function () {//长轮询
 
 
 
-// import wxHandle from './utils/wx'
-// wxHandle('updateAppMessageShareData', {
-//   title: '标题', // 分享标题
-//   desc: '类容', // 分享描述
-//   link: window.location.href+"/7777777777777777", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-//   imgUrl: 'o', // 分享图标
-//   success: function () {
-//     alert('设置成功')
-//   }
-// })
-
-
-
-
 //导航守卫
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.showFooter)) {
-      store.commit('setShowFooter', true);
-    } else {
-      store.commit('setShowFooter', false);
-    }
-    next()
-  });
+  if (to.matched.some(record => record.meta.showFooter)) {
+    store.commit('setShowFooter', true);
+  } else {
+    store.commit('setShowFooter', false);
+  }
+  next()
+});
 
 
 //插件

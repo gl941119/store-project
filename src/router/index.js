@@ -48,7 +48,7 @@ let router = new Router({
       path: '/index',
       name: 'index',
       title: 'S+艾司商城',
-      meta: {showFooter: true, keepAlive: true},
+      meta: {showFooter: true, keepAlive: false},
       component: resolve => require(['..//pages/index'], resolve)
     },
     {//服务评价
@@ -427,7 +427,6 @@ function setTitle(title) {
 }
 
 router.afterEach((transition) => {
-
   let name = transition.name;
   let item = router.options.routes.filter((ele) => {
     return ele.name === name;

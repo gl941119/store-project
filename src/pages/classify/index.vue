@@ -20,9 +20,9 @@
         >{{item.name}}
         </li>
       </ul>
-      <keep-alive>
+
       <router-view class="nav-right"/>
-      </keep-alive>
+
     </div>
   </div>
 </template>
@@ -41,7 +41,12 @@
         isCurrentTabComponent: 'recommend',
         value: undefined,
         category: null,
-        hover: '-1'
+
+      }
+    },
+    computed:{
+      hover:function () {
+       return this.$store.state.classify_hover
       }
     },
     methods: {
@@ -51,14 +56,14 @@
       handleChangeComponent(name, id) {
         switch (name) {
           case 'recommend':
-            this.hover = '-1';
+            // this.$store.commit('setClassify_hover','-1')
             break;
           case 'clubCard':
-            this.hover = '0';
+            // this.$store.commit('setClassify_hover','0')
             break;
           case 'series':
-            this.hover = id;
             this.$store.commit('setClassifyId', id)
+            // this.$store.commit('setClassify_hover',id)
             break;
         }
         // this.isCurrentTabComponent = name

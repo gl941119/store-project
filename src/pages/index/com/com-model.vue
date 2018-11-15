@@ -4,7 +4,7 @@
       <div class="model-top-fill"></div>
       <span class="model-top-title">{{data.name}}</span>
       <span class="model-top-more" v-on:click.self="doThat" v-if="type">查看更多</span>
-      <van-icon name="arrow" class="model-top-icon" v-if="type"/>
+      <van-icon name="arrow" class="model-top-icon" />
     </div>
     <ul class="model-buttom">
       <li class="model-buttom-li" v-for="item in data.data" :key="item.id" v-on:click="goclubCardDetail(item.id)">
@@ -31,7 +31,12 @@
     },
     methods: {
       doThat() {
-        this.$router.push({path: '/subscribe/2'})
+        if(this.data.name === '热销精品'){
+          this.$router.push({path: '/subscribe/2'})
+        }else{
+          this.$router.push({name:'clubCard'})
+        }
+
       },
       goclubCardDetail(id) {
         if(this.data.name === '热销精品'){
