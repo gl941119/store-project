@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
       <div class="out">
-        <img :src="conInfo.imgSr" alt="" class="out-header" >
+        <img :src="conInfo.imgSr" alt="" class="out-header">
         <div class="outcontent">
           <div class="outcontentName">{{ conInfo.name }}</div>
           <div class="outcontentTask">{{ conInfo.task }}</div>
@@ -36,8 +36,8 @@
                 latitude: latitude, // 纬度，浮点数，范围为90 ~ -90
                 longitude: longitude, // 经度，浮点数，范围为180 ~ -180。
                 name: '酒店', // 位置名
-                address: '', // 地址详情说明
-                scale: 20, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                address: '附近酒店', // 地址详情说明
+                scale: 10, // 地图缩放级别,整形值,范围从1~28。默认为最大
                 infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
               });
             }

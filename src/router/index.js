@@ -426,6 +426,13 @@ let router = new Router({
       title: '公益活动',
       meta: {keepAlive: true},
       component: resolve => require(['../pages/youthBeauty/index'], resolve)
+    },
+    {//预约主页
+      path: '/subscribeHomePage',
+      name: 'subscribeHomePage',
+      title: '预约主页',
+      meta: {keepAlive: true},
+      component: resolve => require(['../pages/subscribeHomePage'], resolve)
     }
   ]
 })
