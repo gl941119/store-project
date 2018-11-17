@@ -19,7 +19,6 @@ if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$eid = 156; //图片视频上传  87
   Vue.prototype.$eids = 157; //会员头像上传 88
   Vue.prototype.$eidpay = 158; //支付
-
 } else {
   let config = Cache.getConfig()
   Vue.prototype.$i = 'i=' + config.uid;

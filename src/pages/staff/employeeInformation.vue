@@ -156,6 +156,7 @@
           wxHandle('getLocalImgData',{
             localId: id, // 图片的localID
             success: function (getLocal) {
+              console.log(this)
               let str=getLocal.localData;
               thisa.showJinDu=true;
               var params = new URLSearchParams();
@@ -175,7 +176,6 @@
                     thisa.textJinDu = thisa.currentRate + '%';
                   }
                 },
-
               }).then(res => {
                 if (res.data.code === 100) {
                   thisa.showJinDu=false;

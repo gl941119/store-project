@@ -24,7 +24,6 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
   }
 
   if (process.env.NODE_ENV === 'development') {
-
     url = url.replace('eid=84', 'eid=153&dom=index');
     url = url.replace('eid=85', 'eid=153&dom=goods');
     url = url.replace('eid=86', 'eid=153&dom=service');
@@ -33,22 +32,11 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=89', 'eid=153&dom=card');
   } else {
     let config =  Cache.getConfig()
-
-    let keys = Object.keys(config.binds);
     let key = config.binds;
-    // debugger;
     url = url.replace('i=1', 'i=' + config.uid);
-    // url = url.replace('eid=' + key[0], 'eid=' + config.binds[key[0]]);
-    // url = url.replace('eid=' + key[1], 'eid=' + config.binds[key[1]]);
-    // url = url.replace('eid=' + key[2], 'eid=' + config.binds[key[2]]);
-    // url = url.replace('eid=' + key[3], 'eid=' + config.binds[key[3]]);
-    // url = url.replace('eid=' + key[4], 'eid=' + config.binds[key[4]]);
-    // url = url.replace('eid=' + key[5], 'eid=' + config.binds[key[5]])
     for(let item in key){
-      // console.log(key[item].eid);
       url = url.replace('eid=' + key[item].id, 'eid=' + key[item].eid+'&dom='+key[item].dom);
     }
-
   }
 
 // url=url+'&openid=abc123';
