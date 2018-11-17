@@ -76,24 +76,10 @@
     mounted() {
       this.$store.commit('setHover', 0)
       this.request()
-      this.vibration()
+
     },
     methods: {
-      vibration(){
-        // 振动2秒
-        // if (navigator.vibrate) {
-        //   navigator.vibrate(2000);
-        // } else if (navigator.webkitVibrate) {
-        //   navigator.webkitVibrate(2000);
-        // }
 
-// 振动多次
-// 参数分别是震动3秒，等待2秒，然后振动1秒
-        navigator.vibrate([3000, 2000, 1000]);
-// // 震动 'SOS' in Morse.
-//         window.navigator.vibrate([100,30,100,30,100,200,200,30,200,30,200,200,100,30,100,30,100]);
-
-      },
       goThree(){
         this.$router.push({name:'introductionInstruments'})
       },
