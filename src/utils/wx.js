@@ -1,6 +1,7 @@
 
 import wx from 'weixin-js-sdk'
-import request from './request'
+import Vue from 'vue'
+import axios from  'axios'
 
 function wxHandle(title, callback) {
   let config = {
