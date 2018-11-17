@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import Cache from './utils/cache';
+import Wx from './utils/wx';
 // iconfont
 import './assets/fonts/style.css'
 
@@ -67,6 +68,7 @@ import speedProgress from './utils/speedProgress'
 
 Vue.prototype.$request = request;
 Vue.prototype.$sp = speedProgress;
+Vue.prototype.$wx = Wx;
 
 Vue.prototype.$setInterval = setInterval(function () {//长轮询
   Vue.prototype.$request({
