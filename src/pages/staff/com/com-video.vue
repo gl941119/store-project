@@ -107,7 +107,7 @@
       getLocalImgData(id,thisa){
 
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-        let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid+'&act=fileupload&uk='+uk;
+        let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid.eid+'&dom='+thisa.$eid.dom+'&act=fileupload&uk='+uk;
         wxHandle('getLocalImgData',{
           localId: id, // 图片的localID
           success: function (getLocal) {
@@ -181,7 +181,7 @@ this.showJinDu=true;
         param.append('file', file, file.name);
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || sessionStorage.getItem('uk');
-        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid+'&act='+str+'&uk='+uk;
+        var url=this.$upUrl+'app/index.php?'+this.$i+'&c=entry&eid='+this.$eid.eid+'&dom='+this.$eid.dom+'&act='+str+'&uk='+uk;
         axios({
           url: url,
           method: 'post',

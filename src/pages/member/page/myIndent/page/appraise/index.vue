@@ -103,7 +103,7 @@
       },
       getLocalImgData(id, thisa) {
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-        let urlR = thisa.$upUrl + 'app/index.php?' + thisa.$i + '&c=entry&eid=' + thisa.$eid + '&act=fileupload&uk=' + uk;
+        let urlR = thisa.$upUrl + 'app/index.php?' + thisa.$i + '&c=entry&eid=' + thisa.$eid.eid + '&dom='+thisa.$eid.dom+'&act=fileupload&uk=' + uk;
         wxHandle('getLocalImgData', {
           localId: id, // 图片的localID
           success: function (getLocal) {
@@ -235,7 +235,7 @@
         // alert(file.name)
         axios.defaults.withCredentials = true;
         let uk = this.$store.state.uk || cache.getSession('uk');
-        axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid + '&act=fileuploadvideo&uk=' + uk, param, config)
+        axios.post(this.$upUrl + 'app/index.php?i=1&c=entry&eid=' + this.$eid.eid + '&dom='+thisa.$eid.dom+'&act=fileuploadvideo&uk=' + uk, param, config)
           .then(res => {
 
             if (res.data.code === 100) {
