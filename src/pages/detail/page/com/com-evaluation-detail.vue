@@ -36,7 +36,7 @@
         this.nick = val.nick;
         this.score = parseInt(val.score) / 2;
         this.imgs = val.imgs;
-        this.createtime = val.createtime.split(' ')[0];
+        this.createtime = val.createtime === undefined ? '': val.createtime.split(' ')[0];
         this.content =val.content;
       }
     },

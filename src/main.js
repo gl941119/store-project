@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import Cache from './utils/cache';
+import Wx from './utils/wx';
 // iconfont
 import './assets/fonts/style.css'
 
@@ -16,18 +17,18 @@ import './utils/vant'
 if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$i = 'i=1';
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
-  Vue.prototype.$eid = 156; //图片视频上传  87
-  Vue.prototype.$eids = 157; //会员头像上传 88
-  Vue.prototype.$eidpay = 158; //支付
+  Vue.prototype.$eid = {id:156,dom:'comm'}; //图片视频上传  87
+  Vue.prototype.$eids = {id:157,dom:'ucenter'}; //会员头像上传 88
+  Vue.prototype.$eidpay = {id:158,dom:'card'}; //支付
 } else {
   let config = Cache.getConfig()
   Vue.prototype.$i = 'i=' + config.uid;
   Vue.prototype.$upUrl = config.domain + '/';
-  Vue.prototype.$eid = config.binds['87']; //图片视频上传
-  Vue.prototype.$eidpay = config.binds['89']; //支付
-  Vue.prototype.$eid162 = config.binds['86']; //支付
-  Vue.prototype.$eid161 = config.binds['85']; //支付
-  Vue.prototype.$eids = config.binds['88']; //支付
+  Vue.prototype.$eid = {eid:config.binds['87'].eid,dom:config.binds['87'].dom}; //图片视频上传
+  Vue.prototype.$eidpay = {eid:config.binds['89'].eid,dom:config.binds['89'].dom}; //支付
+  Vue.prototype.$eid162 = {eid:config.binds['86'].eid,dom:config.binds['86'].dom}; //支付
+  Vue.prototype.$eid161 = {eid:config.binds['85'].eid,dom:config.binds['85'].dom}; //支付
+  Vue.prototype.$eids = {eid:config.binds['88'].eid,dom:config.binds['88'].dom}; //支付
 }
 
 
@@ -66,6 +67,7 @@ import speedProgress from './utils/speedProgress'
 
 Vue.prototype.$request = request;
 Vue.prototype.$sp = speedProgress;
+Vue.prototype.$wx = Wx;
 
 Vue.prototype.$setInterval = setInterval(function () {//长轮询
   Vue.prototype.$request({

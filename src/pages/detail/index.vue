@@ -178,13 +178,13 @@
     mounted() {
       this.request()
       document.title = this.title
-      let media = this.$refs['media']
-      media.addEventListener('play', function () {
-        console.log('播放')
-      });
-      media.addEventListener('pause', function () {
-        console.log('停止')
-      });
+      // let media = this.$refs['media']
+      // media.addEventListener('play', function () {
+      //   console.log('播放')
+      // });
+      // media.addEventListener('pause', function () {
+      //   console.log('停止')
+      // });
     },
     watch: {
       specs: function (val) {
