@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$eid = {id:156,dom:'comm'}; //图片视频上传  87
   Vue.prototype.$eids = {id:157,dom:'ucenter'}; //会员头像上传 88
   Vue.prototype.$eidpay = {id:158,dom:'card'}; //支付
-
 } else {
   let config = Cache.getConfig()
   Vue.prototype.$i = 'i=' + config.uid;

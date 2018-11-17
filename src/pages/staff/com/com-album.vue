@@ -123,7 +123,6 @@
           localId: id, // 图片的localID
           success: function (getLocal) {
            let str=getLocal.localData;
-
             thisa.showJinDu=true;
             var params = new URLSearchParams();
             params.append('filestr', str);
@@ -142,7 +141,6 @@
                   thisa.textJinDu = thisa.currentRate + '%';
                 }
               },
-
             }).then(res => {
               if (res.data.code === 100) {
                 thisa.showJinDu=false;
