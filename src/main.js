@@ -16,8 +16,8 @@ import './utils/vant'
 if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$i = 'i=1';
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
-  Vue.prototype.$eid = 156; //图片视频上传  87
-  Vue.prototype.$eids = 157; //会员头像上传 88
+  Vue.prototype.$eid = {id:156,dom:'comm'}; //图片视频上传  87
+  Vue.prototype.$eids = {id:157,dom:'ucenter'}; //会员头像上传 88
   Vue.prototype.$eidpay = 158; //支付
 
 } else {
