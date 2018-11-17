@@ -7,7 +7,7 @@ function wxHandle(title, callback) {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   };
 
-  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid + '&act=weixinscan&url=' + window.location.href;
+  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid.id + '&dom='+Vue.prototype.$eid.dom+'&act=weixinscan&url=' + window.location.href;
 
   // alert('wx')
   axios.post(r, null, config)
