@@ -1,7 +1,7 @@
 <template>
   <div class="user_body">
     <div class="user_flex user_box">
-      <div class="user_header"><img src="../../../assets/image/s_1.jpg"></div>
+      <div class="user_header"><img src="../../../../assets/image/s_1.jpg"></div>
       <div class="user_right">
         <div class="user_flex user_padding">
           <div class="user_name">雷斯然</div>
@@ -24,19 +24,19 @@
       </div>
       <div class="user_con_listNav">
         <div class="user_con_item1">
-          <div class="user_con_itemIcon"><img src="../../../assets/image/dfk.png"></div>
+          <div class="user_con_itemIcon"><img src="../../../../assets/image/dfk.png"></div>
           <div class="user_con_itemTxt">待付款</div>
         </div>
         <div class="user_con_item2">
-          <div class="user_con_itemIcon"><img src="../../../assets/image/yy.png"></div>
+          <div class="user_con_itemIcon"><img src="../../../../assets/image/yy.png"></div>
           <div class="user_con_itemTxt">已预约</div>
         </div>
         <div class="user_con_item3">
-          <div class="user_con_itemIcon"><img src="../../../assets/image/dfk.png"></div>
+          <div class="user_con_itemIcon"><img src="../../../../assets/image/dfk.png"></div>
           <div class="user_con_itemTxt">已完成</div>
         </div>
         <div class="user_con_item4">
-          <div class="user_con_itemIcon"><img src="../../../assets/image/dpj.png"></div>
+          <div class="user_con_itemIcon"><img src="../../../../assets/image/dpj.png"></div>
           <div class="user_con_itemTxt">待评价</div>
         </div>
       </div>

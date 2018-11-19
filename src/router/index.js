@@ -440,14 +440,14 @@ let router = new Router({
       name: 'userCenter',
       title: '预约中心',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/subscribeHome/userCenter'], resolve)
+      component: resolve => require(['../pages/subscribeHome/page/userCenter'], resolve)
     },
     {//套餐购买 仪器+商品
       path: '/subscribeHome/InstrumentCommodity',
       name: 'InstrumentCommodity',
       title: '套餐购买-仪器+商品',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/subscribeHome/InstrumentCommodity'], resolve)
+      component: resolve => require(['../pages/subscribeHome/page/InstrumentCommodity'], resolve)
     }
   ]
 })

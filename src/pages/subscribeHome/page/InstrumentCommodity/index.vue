@@ -7,7 +7,7 @@
         <div class="InsComm_more"></div>
       </div>
       <div class="InsComm_flex_start">
-        <div class="InsComm_addressIcon"><img src="../../../assets/image/exhibition2.png"></div>
+        <div class="InsComm_addressIcon"><img src="../../../../assets/image/exhibition2.png"></div>
         <div class="InsComm_address">四川成都市高新区环球中心w3区21楼</div>
       </div>
       <div class="InsComm_border"></div>
@@ -22,7 +22,7 @@
       <div class="InsComm_border1"></div>
       <!--list start-->
       <div class="InsComm_flex_start">
-        <div><img src="../../../assets/image/t1.jpg"></div>
+        <div><img src="../../../../assets/image/t1.jpg"></div>
         <div></div>
       </div>
       <!--list end-->
