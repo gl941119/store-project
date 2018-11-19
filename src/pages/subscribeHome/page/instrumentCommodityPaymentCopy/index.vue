@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bodyBg">
     <div class="InsComm_null"></div>
     <div class="InsComm_list">
 
@@ -221,6 +221,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .bodyBg{
+    background-color: #fff;
+    padding-bottom: 0px;
+  }
   .InsComm_null{
     width: 100%;
     height: 10px;

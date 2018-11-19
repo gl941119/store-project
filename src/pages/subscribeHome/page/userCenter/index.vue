@@ -92,9 +92,10 @@
 
 <style lang="scss" scoped>
   .user_body{
-    width: 345px;
-    margin: 0 auto;
+    /*width: 345px;*/
+    /*margin: 0 auto;*/
     padding: 10px 0;
+    background-color: #fff;
   }
   .user_flex{
     display: flex;
