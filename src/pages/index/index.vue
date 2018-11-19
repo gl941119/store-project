@@ -20,14 +20,14 @@
     <img :src="advOne.bimg" alt="" v-on:click="goThree(advOne.link)" class="img">
     <!--热门体验卡-->
     <!--<com-model :data="expre_cards"></com-model>-->
-
-    <div class="model">
-      <div class="model-top">
-        <div class="model-top-fill"></div>
-        <span class="model-top-title">58元体验区</span>
-      </div>
-      <img src="../../assets/image/hover.png" alt="" v-on:click="goDetail">
-    </div>
+    <!--58元体验区-->
+    <!--<div class="model">-->
+      <!--<div class="model-top">-->
+        <!--<div class="model-top-fill"></div>-->
+        <!--<span class="model-top-title">58元体验区</span>-->
+      <!--</div>-->
+      <!--<img src="../../assets/image/hover.png" alt="" v-on:click="goDetail">-->
+    <!--</div>-->
 
 
     <!--会员专区-->
@@ -175,52 +175,4 @@
   }
 
 
-
-
-  .model {
-    margin-top: 10px;
-    height: 200px;
-    padding: 11px 15px;
-    background-color: #ffffff;
-    &-top {
-      float: left;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      &-fill {
-        width: 4px;
-        height: 18px;
-        background-color: #71B3FF;
-      }
-      &-title {
-        flex: 1;
-        font-size: 18px;
-        color: #333333;
-        margin-left: 10px;
-        height: 25px;
-        color: rgba(51, 51, 51, 1);
-      }
-      &-more {
-        height: 19px;
-        line-height: 19px;
-        margin-right: 7px;
-        color: rgba(153, 153, 153, 1);
-        font-size: 13px;
-        font-family: PingFangSC-Regular;
-      }
-      &-icon {
-        height: 19px;
-        line-height: 19px;
-
-        font-size: 10px;
-      }
-    }
-
-   >img{
-     margin-top: 11px;
-     width: 345px;
-     height: 134px;
-   }
-  }
 </style>
