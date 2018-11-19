@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 Vue.config.productionTip = false
 //全局组件
 import MyFooter from './components/footer'
+import subFooter from './components/subscribeFooter'
 import Navbar from './components/navbar'
 import ProductCard from './components/productCard'
 import ServerCard from './components/serverCard'
@@ -46,6 +47,7 @@ import Search from './components/search'
 import PriceList from './components/priceList' //金额列表
 
 Vue.component('my-footer', MyFooter);
+Vue.component('subscribe-footer',subFooter)
 Vue.component('navbar', Navbar);
 Vue.component('product-card', ProductCard);
 Vue.component('server-card', ServerCard);
@@ -90,6 +92,11 @@ router.beforeEach((to, from, next) => {
     store.commit('setShowFooter', true);
   } else {
     store.commit('setShowFooter', false);
+  }
+  if (to.matched.some(record => record.meta.sub_showFooter)) {
+    store.commit('setSub_showFooter', true);
+  } else {
+    store.commit('setSub_showFooter', false);
   }
   next()
 });
