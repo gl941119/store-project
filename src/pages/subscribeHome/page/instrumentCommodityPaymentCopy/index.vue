@@ -223,6 +223,7 @@
 <style lang="scss" scoped>
   .bodyBg{
     background-color: #fff;
+    padding-bottom: 0px;
   }
   .InsComm_null{
     width: 100%;
