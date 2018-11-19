@@ -17,7 +17,7 @@
         <p>所有预约</p>
       </router-link>
 
-      <router-link tag="li" to=""
+      <router-link tag="li" :to="{name:'userCenter'}"
                    v-bind:class="{li_hover:hover===2}"
                    v-on:click.native="setHover(2)">
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
