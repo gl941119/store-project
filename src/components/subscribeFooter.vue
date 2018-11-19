@@ -1,7 +1,7 @@
 <template>
   <div v-if="isShow" class="footer">
     <ul>
-      <router-link tag="li" :to="{ name: 'index'}"
+      <router-link tag="li" :to="{}"
                    v-bind:class="{li_hover:hover===0}"
                    v-on:click.native="setHover(0)">
         <span class="icon-g"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span
@@ -46,7 +46,17 @@
       }
     },
     methods: {
-      setHover(){
+      setHover(num){
+        switch (num) {
+          case 0:
+            this.$router.push({name:'subscribeHome'})
+            break;
+          case 1:
+            break;
+          case 2:
+            this.$router.push({name:'userCenter'})
+            break;
+        }
 
       }
     }

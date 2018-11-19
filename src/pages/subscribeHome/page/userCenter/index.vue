@@ -74,10 +74,7 @@
               <div class="user_con_moreIcon"></div>
             </div>
           </div>
-          <div class="user_con_border"></div>
         </div>
-
-
       </div>
     </div>
 
@@ -86,7 +83,10 @@
 
 <script>
   export default {
-    name: "index"
+    name: "index",
+    mounted(){
+      this.$store.commit('setSub_hover',2)
+    }
   }
 </script>
 
@@ -130,6 +130,7 @@
   }
   .user_padding{
     padding-bottom: 5px;
+    /*align-items: flex-end;*/
   }
   .user_signature{
     font-size:10px;
@@ -141,6 +142,7 @@
     padding:10px 20px;
   }
   .user_content{
+    padding-bottom: 13px;
     width: 340px;
     margin: 0 auto;
     background:rgba(255,255,255,1);
@@ -188,6 +190,7 @@
     margin: 10px 0;
   }
   .user_con_listNav{
+
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -220,7 +223,7 @@
     height: 25px;
   }
   .user_con_itemTxt{
-    padding: 5px 0;
+    padding: 5px 0 0px;
   }
   .user_null{
     height: 20px;

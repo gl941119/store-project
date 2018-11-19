@@ -172,7 +172,7 @@
             this.$toast.success('提交成功')
             let thia = this
             setTimeout(function () {
-              thia.$router.push({name: 'transfer'})
+              thia.$router.push({name: 'success'})
             }, 500)
           }
         })

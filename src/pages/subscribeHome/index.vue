@@ -7,7 +7,7 @@
         <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
         <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
       </van-swipe>
-<div class="subscribeHomePage_null"></div>
+      <div class="subscribeHomePage_null"></div>
       <div class="subscribeHomePage_content">
         <div class="subscribeHomePage_header">
           <div class="subscribeHomePage_flex">
@@ -43,7 +43,7 @@
       <div class="subscribeHomePage_null"></div>
       <div><img src="../../assets/image/img_2.png" class="subscribeHomePage_advertisement"></div>
       <div class="subscribeHomePage_null"></div>
-      <div><img src="../../assets/image/img_1.png"  class="subscribeHomePage_advertisement"></div>
+      <div><img src="../../assets/image/img_1.png" class="subscribeHomePage_advertisement"></div>
     </div>
 
   </div>
@@ -51,91 +51,109 @@
 
 <script>
   export default {
-    name: "index"
+    name: "index",
+    mounted(){
+      this.$store.commit('setSub_hover',0)
+    }
   }
 </script>
 
 <style lang="scss" scoped>
-  .subscribeHomePage_body{
+  .subscribeHomePage_body {
     height: calc(100vh - 50px);
-    overflow-y:auto ;
+    overflow-y: auto;
   }
-  .subscribeHomePage_footer{
+  .subscribeHomePage_footer {
     height: 49px;
-    border-top:1px solid rgba(224,224,224,1);
+    border-top: 1px solid rgba(224, 224, 224, 1);
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-  .subscribeHomePage_banner{
+
+  .subscribeHomePage_banner {
     width: 100%;
     height: 220px;
   }
-  .subscribeHomePage_banner img{
+
+  .subscribeHomePage_banner img {
     width: 100%;
     height: 220px;
   }
-  .subscribeHomePage_null{
+
+  .subscribeHomePage_null {
     height: 10px;
-    background-color: rgba(244,244,244,1);
+    background-color: rgba(244, 244, 244, 1);
   }
-  .subscribeHomePage_content{
+
+  .subscribeHomePage_content {
     padding: 10px 20px;
   }
-  .subscribeHomePage_header{
+
+  .subscribeHomePage_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .subscribeHomePage_solid{
-    width:4px;
-    height:18px;
-    background:rgba(113,179,255,1);
+
+  .subscribeHomePage_solid {
+    width: 4px;
+    height: 18px;
+    background: rgba(113, 179, 255, 1);
   }
-  .subscribeHomePage_title{
-    font-size:18px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(51,51,51,1);
+
+  .subscribeHomePage_title {
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
     padding-left: 15px;
   }
-  .subscribeHomePage_more{
-    font-size:13px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(153,153,153,1);
+
+  .subscribeHomePage_more {
+    font-size: 13px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
   }
-  .subscribeHomePage_flex{
+
+  .subscribeHomePage_flex {
     display: flex;
     align-items: center;
     justify-content: flex-start;
   }
-  .subscribeHomePage_more_img{
+
+  .subscribeHomePage_more_img {
     width: 6px;
   }
-  .subscribeHomePage_more_txt{
+
+  .subscribeHomePage_more_txt {
     padding-right: 10px;
   }
-  .subscribeHomePage_list{
-    display:-webkit-flex;
+
+  .subscribeHomePage_list {
+    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    -webkit-flex-flow:wrap;
-    flex-flow:wrap;
+    -webkit-flex-flow: wrap;
+    flex-flow: wrap;
     padding: 10px 0 0 0;
   }
-  .subscribeHomePage_item{
+
+  .subscribeHomePage_item {
     width: 160px;
     margin-bottom: 10px;
   }
-  .subscribeHomePage_item_img{
+
+  .subscribeHomePage_item_img {
     width: 160px;
   }
-  .subscribeHomePage_item_txt{
-    font-size:15px;
-    font-family:MicrosoftYaHei;
-    color:rgba(51,51,51,1);
+
+  .subscribeHomePage_item_txt {
+    font-size: 15px;
+    font-family: MicrosoftYaHei;
+    color: rgba(51, 51, 51, 1);
     width: 160px;
     overflow: hidden;
     height: 25px;
@@ -143,28 +161,34 @@
     margin-top: 10px;
     text-align: center;
   }
-  .subscribeHomePage_advertisement{
+
+  .subscribeHomePage_advertisement {
     width: 100%;
   }
-  .subscribeHomePage_padding{
+
+  .subscribeHomePage_padding {
     padding: 0px;
   }
-  .subscribeHomePage_footer_item{
+
+  .subscribeHomePage_footer_item {
     padding-top: 32px;
-    font-size:10px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(102,102,102,1);
+    font-size: 10px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(102, 102, 102, 1);
   }
-  .subscribeHomePage_footer_img{
+
+  .subscribeHomePage_footer_img {
     background: url('../../assets/image/s_homepage.png') 0% 5px no-repeat;
     background-size: 20px 25px;
   }
-  .subscribeHomePage_footer_img1{
+
+  .subscribeHomePage_footer_img1 {
     background: url('../../assets/image/s_homepage.png') 0% 5px no-repeat;
     background-size: 20px 25px;
   }
-  .subscribeHomePage_footer_img2{
+
+  .subscribeHomePage_footer_img2 {
     background: url('../../assets/image/s_homepage.png') 0% 5px no-repeat;
     background-size: 20px 25px;
   }

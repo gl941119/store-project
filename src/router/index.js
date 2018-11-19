@@ -287,6 +287,20 @@ let router = new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/pay'], resolve)
     },
+    {//支付成功跳转页面
+      path: '/success',
+      name: 'success',
+      title: '支付成功',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/pay/success'], resolve)
+    },
+    {//支付失败跳转页面
+      path: '/failure',
+      name: 'failure',
+      title: '支付失败',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/pay/failure'], resolve)
+    },
     {//美丽基金
       path: '/member/beautyFund',
       name: 'beautyFund',
@@ -392,13 +406,7 @@ let router = new Router({
       meta: {keepAlive: false}, // 不需要被缓存
       component: resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
     },
-    {//支付跳转页面
-      path: '/transfer',
-      name: 'transfer',
-      title: '支付成功',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/index/transfer'], resolve)
-    },
+
     {//专家介绍
       path: '/exhibition/page/smallBusinessCard',
       name: 'smallBusinessCard',
@@ -439,7 +447,7 @@ let router = new Router({
       path: '/subscribeHome/userCenter',
       name: 'userCenter',
       title: '预约中心',
-      meta: {keepAlive: false},
+      meta: {keepAlive: false,sub_showFooter:true},
       component: resolve => require(['../pages/subscribeHome/page/userCenter'], resolve)
     },
     {//套餐购买 仪器+商品
