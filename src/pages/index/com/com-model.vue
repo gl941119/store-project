@@ -53,11 +53,11 @@
 <style lang="scss" scoped>
   .model {
     margin-top: 10px;
-    height: 200px;
-    padding: 11px 15px;
+
+    padding: 11px 15px 0px;
     background-color: #ffffff;
     &-top {
-      float: left;
+
       width: 100%;
       display: flex;
       align-items: center;
@@ -93,15 +93,16 @@
 
     &-buttom {
       width: 100%;
-      float: left;
       margin-top: 11px;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
       &-li {
-        width: 112px;
+        margin-bottom: 11px;
+        width: 167px;
         > img {
-          width: 112px;
-          height: 112px;
+          width: 167px;
+          height: 167px;
         }
         > p {
           width: 100%;

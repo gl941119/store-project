@@ -35,7 +35,7 @@ let router = new Router({
     {
       path: '/',
       redirect: {
-        name: 'index',
+        name: 'subscribeHome',
       },
     },
     {//官网展示
@@ -427,28 +427,28 @@ let router = new Router({
       meta: {keepAlive: true},
       component: resolve => require(['../pages/youthBeauty/index'], resolve)
     },
+    // ——————————————————————————————————预约主页——————————————————————————————————
     {//预约主页
-      path: '/subscribeHomePage',
-      name: 'subscribeHomePage',
+      path: '/subscribeHome',
+      name: 'subscribeHome',
       title: '预约主页',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/subscribeHomePage'], resolve)
+      meta: {keepAlive: false,sub_showFooter:true},
+      component: resolve => require(['../pages/subscribeHome'], resolve)
     },
     {//预约用户中心
-      path: '/subscribeHomePage/userCenter',
+      path: '/subscribeHome/userCenter',
       name: 'userCenter',
-      title: '预约主页',
+      title: '预约中心',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/subscribeHomePage/userCenter'], resolve)
+      component: resolve => require(['../pages/subscribeHome/userCenter'], resolve)
     },
     {//套餐购买 仪器+商品
-      path: '/subscribeHomePage/InstrumentCommodity',
+      path: '/subscribeHome/InstrumentCommodity',
       name: 'InstrumentCommodity',
       title: '套餐购买-仪器+商品',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/subscribeHomePage/InstrumentCommodity'], resolve)
+      component: resolve => require(['../pages/subscribeHome/InstrumentCommodity'], resolve)
     }
-
   ]
 })
 

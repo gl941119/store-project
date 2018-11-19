@@ -5,6 +5,7 @@
     </keep-alive>
     <router-view class="view" v-if="!$route.meta.keepAlive"/>
     <my-footer></my-footer>
+    <subscribe-footer></subscribe-footer>
   </div>
 </template>
 

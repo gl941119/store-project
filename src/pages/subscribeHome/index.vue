@@ -45,11 +45,7 @@
       <div class="subscribeHomePage_null"></div>
       <div><img src="../../assets/image/img_1.png"  class="subscribeHomePage_advertisement"></div>
     </div>
-    <div class="subscribeHomePage_footer">
-      <div class="subscribeHomePage_footer_item subscribeHomePage_footer_img">首页</div>
-      <div class="subscribeHomePage_footer_item subscribeHomePage_footer_img1">所有预约</div>
-      <div class="subscribeHomePage_footer_item subscribeHomePage_footer_img2">我的</div>
-    </div>
+
   </div>
 </template>
 

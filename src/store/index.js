@@ -7,7 +7,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     showFooter: true,
+    sub_showFooter:true,//预约主页footer状态
     hover:0,//footer颜色
+    sub_hover:0,//预约主页footer颜色
     classify_hover:-1,//分类栏选择
     is: '2',
     ShowBuySpecification: false,
@@ -25,6 +27,12 @@ export default new Vuex.Store({
   mutations: {
     setShowFooter(state, val) {
       state.showFooter = val;
+    },
+    setSub_showFooter(state,val){
+      state.sub_showFooter = val
+    },
+    setSub_hover(state,val){
+      state.sub_hover = val
     },
     setShowBuySpecification(state, val) {
       state.ShowBuySpecification = val
