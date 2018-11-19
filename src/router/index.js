@@ -431,9 +431,24 @@ let router = new Router({
       path: '/subscribeHomePage',
       name: 'subscribeHomePage',
       title: '预约主页',
-      meta: {keepAlive: true},
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribeHomePage'], resolve)
+    },
+    {//预约用户中心
+      path: '/subscribeHomePage/userCenter',
+      name: 'userCenter',
+      title: '预约主页',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribeHomePage/userCenter'], resolve)
+    },
+    {//套餐购买 仪器+商品
+      path: '/subscribeHomePage/InstrumentCommodity',
+      name: 'InstrumentCommodity',
+      title: '套餐购买-仪器+商品',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribeHomePage/InstrumentCommodity'], resolve)
     }
+
   ]
 })
 
