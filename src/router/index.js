@@ -448,6 +448,27 @@ let router = new Router({
       title: '套餐购买-仪器+商品',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribeHome/page/InstrumentCommodity'], resolve)
+    },
+    {//套餐购买 仪器+商品+支付
+      path: '/subscribeHome/instrumentCommodityPayment',
+      name: 'instrumentCommodityPayment',
+      title: '套餐购买-仪器+商品+支付',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribeHome/page/instrumentCommodityPayment'], resolve)
+    },
+    {//套餐购买 仪器+商品+支付+copy
+      path: '/subscribeHome/instrumentCommodityPaymentCopy',
+      name: 'instrumentCommodityPaymentCopy',
+      title: '套餐购买-仪器+商品+支付+copy',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribeHome/page/instrumentCommodityPaymentCopy'], resolve)
+    },
+    {//订单确认 无减免支付
+      path: '/subscribeHome/acknowledgementOfOrder',
+      name: 'acknowledgementOfOrder',
+      title: '订单确认',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribeHome/page/acknowledgementOfOrder'], resolve)
     }
   ]
 })

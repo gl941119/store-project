@@ -1,24 +1,40 @@
 <template>
   <div>
     <div class="InsComm_null"></div>
-    <div class="InsComm_padding">
-      <div class="InsComm_space_between">
-        <div class="InsComm_topName">S+艾司科美健康管理中心</div>
-        <div class="InsComm_more"></div>
-      </div>
+    <div class="InsComm_list">
+
+      <!--list start-->
       <div class="InsComm_flex_start">
-        <div class="InsComm_addressIcon"><img src="../../../../assets/image/exhibition2.png"></div>
-        <div class="InsComm_address">四川成都市高新区环球中心w3区21楼</div>
+        <div class="InsComm_listImg"><img src="../../../../assets/image/t1.jpg"></div>
+        <div class="InsComm_listRight">
+          <div>
+            <div class="InsComm_listName">
+              对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
+
+              Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
+            <div class="InsComm_listRightTop">
+              对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
+              Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
+          </div>
+          <div class="InsComm_space_between">
+            <div class="InsCommPay_price">¥1980</div>
+            <div class="InsComm_flex_start">
+              <div class="InsCommPay_reduce">-</div>
+              <input type="number"  v-model="val" @change="valLength"  class="InsCommPay_input">
+              <div class="InsCommPay_add">+</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="InsComm_border"></div>
-      <div class="InsComm_txt">用户姓名：lemon</div>
-      <div class="InsComm_border"></div>
-      <div class="InsComm_txt">用户电话：15263321290</div>
-      <div class="InsComm_border"></div>
+
+      <!--list end-->
     </div>
     <div class="InsComm_null"></div>
     <div class="InsComm_list">
-      <div class="InsComm_title">服务</div>
+      <div class="InsComm_space_between">
+        <div class="InsComm_title">服务</div>
+        <div class="InsCommPay_Pop">连锁店通用</div>
+      </div>
       <div class="InsComm_border1"></div>
       <!--list start-->
       <div class="InsComm_flex_start InsComm_listMargin">
@@ -86,7 +102,13 @@
     </div>
     <div class="InsComm_null"></div>
     <div class="InsComm_list">
-      <div class="InsComm_title">商品</div>
+      <div class="InsComm_space_between">
+        <div class="InsComm_title">商品</div>
+        <div class="InsComm_flex_start">
+          <div class="InsCommPay_transport">运送</div>
+          <div class="InsCommPay_stayStore">留店</div>
+        </div>
+      </div>
       <div class="InsComm_border1"></div>
       <!--list start-->
       <div class="InsComm_flex_start InsComm_listMargin">
@@ -151,6 +173,22 @@
         </div>
       </div>
       <!--list end-->
+    </div>
+    <div class="InsComm_null"></div>
+    <div class="InsCommPayCopy_address">
+      <div class="InsComm_space_between">
+        <div>
+          <div class="InsComm_flex_start InsCommPayCopy_padding">
+            <div class="InsCommPayCopy_name">王大锤</div>
+            <div class="InsCommPayCopy_phone">189****1232</div>
+          </div>
+          <div class="InsComm_flex_start" >
+            <div class="InsCommPayCopy_default">默认</div>
+            <div class="InsCommPayCopy_infoAddress">四川成都市高新区中和镇孤帆远影2号</div>
+          </div>
+        </div>
+        <div class="InsCommPayCopy_more"></div>
+      </div>
     </div>
     <div class="InsComm_btnBg">
       <div class="InsComm_btn">
@@ -164,7 +202,21 @@
 
 <script>
   export default {
-    name: "index"
+    name: "index",
+    data(){
+      return {
+        val:1
+      }
+    },
+    methods:{
+      valLength(){
+        let val=this.val;
+        if(val.length>3){
+          this.val=val.slice(0,3);
+        }
+
+      }
+    }
   }
 </script>
 
@@ -237,7 +289,6 @@
   }
   .InsComm_title{
     font-size:16px;
-    font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(72,72,72,1);
   }
@@ -310,5 +361,104 @@ width: 256px;
     text-align: center;
     font-weight:400;
     color:rgba(162,162,162,1);
+  }
+  .InsCommPay_Pop{
+    font-size:12px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+  }
+  .InsCommPay_transport{
+  width:35px;
+  height:18px;
+  border-radius:11px;
+  border:1px solid;
+  line-height:18px;
+    font-size:10px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    text-align: center;
+    margin: 0 10px;
+  }
+  .InsCommPay_stayStore{
+    text-align: center;
+    width:35px;
+    height:18px;
+    background:rgba(113,179,255,1);
+    border-radius:11px;
+    font-size:10px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    line-height: 18px;
+  }
+  .InsCommPay_price{
+    font-size:15px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(222,25,25,1);
+  }
+  .InsCommPay_reduce,.InsCommPay_add{
+    color: #71B3FF;
+  }
+  .InsCommPay_reduce,.InsCommPay_add,.InsCommPay_input{
+width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    border: 1px solid #71B3FF;
+    font-size: 12px;
+  }
+  .InsCommPay_input{
+    color: #fff;
+    border-radius: 0px;
+    background-color: #71B3FF;
+    outline: none;
+    border: 0px;
+  }
+  .InsCommPayCopy_address{
+    padding: 10px 20px;
+  }
+  .InsCommPayCopy_more{
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    transform: rotate(45deg);
+    content: '';
+    width: 9px;
+    height: 9px;
+  }
+  .InsCommPayCopy_name{
+    font-size:15px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(51,51,51,1);
+  }
+  .InsCommPayCopy_phone{
+    font-size:15px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(51,51,51,1);
+    padding-left: 20px;
+  }
+  .InsCommPayCopy_infoAddress{
+    font-size:14px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    padding-left: 10px;
+    width: 280px;
+  }
+  .InsCommPayCopy_default{
+    width: 30px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    color: #E9584F;
+    border-radius: 4px;
+    border: 1px solid #E9584F;
+  }
+  .InsCommPayCopy_padding{
+    padding-bottom: 5px;
   }
 </style>
