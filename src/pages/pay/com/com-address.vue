@@ -30,7 +30,7 @@
 
 <style lang="scss" scoped>
   .list {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     width: 100%;
 
     &-card {

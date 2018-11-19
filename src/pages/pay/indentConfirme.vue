@@ -1,58 +1,75 @@
 <template>
   <div class="indentConfirme">
+    <div class="control">
+      <p>选择运送方式</p>
+      <van-button type="default" class="btn" :class="{hover_btn:status==='0'}" v-on:click="status = '0'">留店</van-button>
+      <van-button type="default" class="btn" :class="{hover_btn:status==='1'}" v-on:click="status = '1'">寄送到家</van-button>
+    </div>
+    <div class="model" v-if="status==='0'" v-on:click="selectStore">
+      <p class="title">S+艾司科美健康管理中心</p>
+      <p class="subTitle">四川成都市高新区环球中心w3区21楼</p>
+      <van-icon name="arrow" class="icon"/>
+    </div>
+    <!--<div class="model" v-else v-on:click="selectMail">-->
+      <!--<p class="title">四川成都市高新区中和镇孤帆远影2号</p>-->
+      <!--<p class="subTitle">四川成都市高新区中和镇孤帆远影2号</p>-->
+      <!--<van-icon name="arrow" class="icon"/>-->
+    <!--</div>-->
+    <van-actionsheet
+      v-model="show"
+      :actions="actions"
+      @select="onSelect"
+    />
+
+
+
     <!--收货地址-->
-    <com-address :address="address" v-on:click.native="goAddress"></com-address>
+    <com-address  v-if="status==='1'" :address="address" v-on:click.native="goAddress" ></com-address>
     <div class="main">
       <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"></com-prodectcard>
-      <div class="fill"></div>
-      <van-cell title="美丽积分券:"  class="cell">
-        <span>{{score_nex}}分</span>
-      </van-cell>
-      <div class="fill"></div>
-      <van-cell title="美丽基金:"  class="cell">
-        <span>{{share_amount}}</span>
-      </van-cell>
-      <div class="fill"></div>
-      <van-cell title="美丽余额:"  class="cell">
-        <span>{{money}}</span>
-      </van-cell>
-      <div class="fill"></div>
-      <van-cell title="运送方式:"  class="cell">
-        <span class="cell-yunfei">{{freight}}{{ishave=='1'? '元':''}}</span>
-      </van-cell>
       <div class="fill"></div>
       <div class="cell">
         <span class="cell-name">买家留言:</span>
         <input type="text" class="cell-input" placeholder="选填" v-model="leave">
       </div>
-      <div class="fill"></div>
     </div>
+    <!--<div class="balance">-->
+      <!--<span class="cell-right">￥&nbsp;{{freight}}</span>-->
+    <!--</div>-->
+    <van-cell title="美丽积分券" class="balance">
+      <span class="balance-right">{{allprice}}</span>
+    </van-cell>
     <div class="aggregate">
       <van-cell title="商品金额" class="cell">
         <span class="cell-right">￥&nbsp;{{allprice}}</span>
       </van-cell>
-      <van-cell title="积分券减免" class="cell">
-        <span class="cell-right">-&nbsp;￥&nbsp;{{score_nex}}</span>
-      </van-cell>
-      <van-cell title="美丽基金减免" class="cell">
-        <span class="cell-right">-&nbsp;￥&nbsp;{{user_share_amount}}</span>
-      </van-cell>
       <van-cell title="运费" class="cell">
-        <span class="cell-right">+&nbsp;￥&nbsp;{{freight}}</span>
+        <span class="cell-right">￥&nbsp;{{freight}}</span>
       </van-cell>
-      <div class="allPrice">
-        <span class="allPrice-title">总金额：</span>
-        <span class="cell-right cellRight">+&nbsp;￥&nbsp;{{allmoney}}</span>
-      </div>
+      <van-cell title="积分券抵扣" class="cell">
+        <span class="cell-right">￥&nbsp;{{score_nex}}</span>
+      </van-cell>
+      <van-cell title="实付" class="cell">
+        <span class="cell-right">￥&nbsp;{{allmoney}}</span>
+      </van-cell>
     </div>
 
-    <van-button class="submitBtn" type="default" v-if="allmoney == '0'"
-                style="background-color: #71B3FF;color: #FFFFFF;" v-on:click="submit">提交订单
-    </van-button>
-    <div v-else>
-      <van-button class="submitBtn" type="primary" v-on:click="payHandle">支付</van-button>
-      <van-button class="submitBtn" type="danger" v-on:click="cancleHandle">取消</van-button>
+    <!--<van-button class="submitBtn" type="default" v-if="allmoney == '0'"-->
+                <!--style="background-color: #71B3FF;color: #FFFFFF;" v-on:click="submit">提交订单-->
+    <!--</van-button>-->
+
+    <!--<div v-else>-->
+      <!--<van-button class="submitBtn" type="primary" v-on:click="payHandle">支付</van-button>-->
+      <!--<van-button class="submitBtn" type="danger" v-on:click="cancleHandle">取消</van-button>-->
+    <!--</div>-->
+
+    <div class="pay">
+      <dt>合计：</dt>
+      <dd>¥ 1980.00</dd>
+      <van-button type="default" class="btn">提交订单</van-button>
     </div>
+
+
   </div>
 </template>
 
@@ -87,12 +104,28 @@
         allprice: undefined,//商品金额
         score_nex: undefined,//积分券减免
         allmoney: undefined,//总金额
-        user_share_amount: undefined,//美丽基金减免
+        show: false,//门店弹窗
+        actions: [
+          {
+            name: '选项'
+          },
+          {
+            name: '选项',
+            subname: '描述信息'
+          },
+          {
+            loading: true
+          },
+          {
+            name: '禁用选项',
+            disabled: true
+          }
+        ],
+        status:'0',//门店选择状态
+
       }
     },
     mounted() {
-
-
       // if (window.sessionStorage.getItem('address')) {
       //   this.address = JSON.parse(window.sessionStorage.getItem('address'))
       //   console.log(this.address)
@@ -106,6 +139,19 @@
 
     },
     methods: {
+      onSelect(item){
+        this.show = false;
+        // Toast(item.name);
+      },
+      selectStore(){//选择门店
+        this.show = true
+
+
+
+      },
+      selectMail(){//选择地址
+
+      },
       cancleHandle() {
         this.$dialog.confirm({
           title: '是否取消订单',
@@ -157,7 +203,7 @@
           this.allprice = res.data.allrecord.allprice  //商品金额
           this.score_nex = res.data.allrecord.score_nex  //积分券减免
           this.allmoney = res.data.allrecord.money  //总金额
-          this.user_share_amount = res.data.allrecord.share_amount
+
         })
       },
       submit() {//提交订单
@@ -190,8 +236,65 @@
 </script>
 
 <style lang="scss" scoped>
+  .control{
+    padding:  12px 15px ;
+    background-color: white;
+    >P{
+      height:21px;
+      font-size:15px;
+      font-family:PingFangSC-Medium;
+      font-weight:500;
+      color:rgba(51,51,51,1);
+      line-height:21px;
+    }
+    .btn{
+      margin-top: 14px;
+      width:62px;
+      height:24px;
+      border-radius:4px;
+      font-size:14px;
+      font-family:PingFangSC-Regular;
+      line-height:24px;
+    }
+    .hover_btn{
+      background-color: #71B3FF;
+      color: white;
+    }
+  }
+  .model{
+    padding:  6px 15px 20px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    .title{
+
+      height:21px;
+      font-size:15px;
+      font-family:PingFangSC-Medium;
+      font-weight:500;
+      color:rgba(51,51,51,1);
+      line-height:21px;
+    }
+    .subTitle{
+      margin-top: 4px;
+      height:20px;
+      font-size:14px;
+      font-family:PingFangSC-Regular;
+      font-weight:400;
+      color:rgba(153,153,153,1);
+      line-height:20px;
+    }
+    .icon{
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      margin-top: -10px;
+
+    }
+  }
   .indentConfirme {
     background-color: #F4F4F4;
+  }
     .main {
       width: 100%;
       background-color: white;
@@ -243,7 +346,7 @@
         }
       }
     }
-  }
+
 
   .submitBtn {
     width: 345px;
@@ -252,13 +355,28 @@
     margin: 18px auto 0;
 
   }
+  .balance{
+    margin-top: 10px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 15px !important;
+    &-right{
+      width:20px;
+      height:17px;
+      font-size:12px;
+      font-family:PingFangSC-Regular;
+      font-weight:400;
+      color:rgba(153,153,153,1);
+      line-height:17px;
+    }
+  }
 
   .aggregate {
     width: 100%;
     margin-top: 10px;
     .cell {
       /*border: 0 !important;*/
-      height: 25px !important;
+      height: 28px !important;
       display: flex;
       align-items: center;
       padding: 0 15px !important;
@@ -268,26 +386,52 @@
         /*width: 69px;*/
         height: 21px;
         font-size: 15px;
-        color: rgba(231, 59, 61, 1);
+        color: #E73B3D;
       }
     }
-    .allPrice {
-      height: 25px;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      &-title {
-        margin-right: 24px;
-        /*width: 60px;*/
-        height: 21px;
-        font-size: 15px;
-        color: rgba(51, 51, 51, 1);
 
-      }
-    }
   }
 
+
+
+  .pay{
+    height: 49px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    >dt{
+      height:21px;
+      font-size:15px;
+      font-family:PingFangSC-Regular;
+      color:rgba(51,51,51,1);
+      line-height:21px;
+      margin-right: 7px;
+    }
+    >dd{
+      height:21px;
+      font-size:15px;
+      font-family:PingFangSC-Regular;
+      color:rgba(51,51,51,1);
+      line-height:21px;
+      color: #E73B3D;
+      margin-right: 13px;
+    }
+    .btn{
+      width: 123px;
+      height: 100%;
+      background-color: #71B3FF;
+      font-size:18px;
+      font-family:PingFangSC-Regular;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+      line-height:49px;
+    }
+
+  }
   .cellRight {
     padding-right: 15px;
   }
