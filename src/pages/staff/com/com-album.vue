@@ -14,7 +14,7 @@
         </div>
         <div class="innerPhoto">
           <div  v-for="(item,index,k) in album.listImg"  ref="imgBoxs" class="innerPhotoItem"  >
-            <img :src="item" alt="" class="innerPhotoImg" :data-k="index" @click="clickMax(album.listImg,k)" @touchstart="innerPhotoItemEv($event,index)" @touchend="innerPhotoItemEnd($event,index)">
+            <img :src="item" alt="" class="innerPhotoImg" :data-k="index" @click="clickMax(album.listImg,index)" @touchstart="innerPhotoItemEv($event,index)" @touchend="innerPhotoItemEnd($event,index)">
             <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  @click="innerPhotoItemClose(index)"/>
           </div>
         </div>
