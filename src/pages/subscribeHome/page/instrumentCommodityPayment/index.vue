@@ -19,9 +19,9 @@
           <div class="InsComm_space_between">
             <div class="InsCommPay_price">¥1980</div>
             <div class="InsComm_flex_start">
-              <div class="InsCommPay_reduce">-</div>
+              <div class="InsCommPay_reduce" @click="reduce">-</div>
               <input type="number"  v-model="val" @change="valLength"  class="InsCommPay_input">
-              <div class="InsCommPay_add">+</div>
+              <div class="InsCommPay_add" @click="InsCommPayAdd">+</div>
             </div>
           </div>
         </div>
@@ -195,10 +195,28 @@
     methods:{
       valLength(){
         let val=this.val;
-        if(val.length>3){
-          this.val=val.slice(0,3);
+        if(val>99){
+          this.val=val.slice(0,2);
         }
 
+      },
+      reduce(){
+        let val=this.val;
+        --val;
+        if(val<=0){
+          this.val=1;
+        }else{
+          this.val=val;
+        }
+      },
+      InsCommPayAdd(){
+        let val=this.val;
+        ++val;
+        if(val>99){
+          this.val=val.slice(0,3);
+        }else{
+         this.val=val;
+        }
       }
     }
   }
@@ -389,16 +407,18 @@ width: 256px;
   }
   .InsCommPay_reduce,.InsCommPay_add{
     color: #71B3FF;
+    font-weight: 600;
+    font-size: 20px;
   }
   .InsCommPay_reduce,.InsCommPay_add,.InsCommPay_input{
 width: 25px;
     height: 25px;
     text-align: center;
-    line-height: 25px;
+    line-height: 20px;
     border: 1px solid #71B3FF;
-    font-size: 12px;
   }
   .InsCommPay_input{
+    font-size: 15px;
     color: #fff;
     border-radius: 0px;
     background-color: #71B3FF;
