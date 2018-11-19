@@ -469,6 +469,13 @@ let router = new Router({
       title: '订单确认',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribeHome/page/acknowledgementOfOrder'], resolve)
+    },
+    {//美丽积分劵
+      path: '/subscribeHome/beautyIntegrals',
+      name: 'beautyIntegrals',
+      title: '美丽积分劵',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribeHome/page/beautyIntegrals'], resolve)
     }
   ]
 })
