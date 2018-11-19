@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bodyBg">
       <div class="null"></div>
       <div class="padding">
         <div class="space_between">
@@ -27,6 +27,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .bodyBg{
+    background-color: #fff;
+  }
 .more{
   border-top: 1px solid #999;
   border-right: 1px solid #999;

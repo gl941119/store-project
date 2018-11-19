@@ -148,6 +148,7 @@
   }
   .subscribeHomePage_padding{
     padding: 0px;
+    background-color: #fff;
   }
   .subscribeHomePage_footer_item{
     padding-top: 32px;
