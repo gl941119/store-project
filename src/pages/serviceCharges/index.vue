@@ -1,75 +1,75 @@
 <template>
-<div class="serviceCharges_bg">
-<div class="serviceCharges_body">
-  <div class="null"></div>
-  <div class="serviceCharges_padding">
-    <div class="serviceCharges_flex">
-      <div class="serviceCharges_imgBox"><img src="../../assets/image/t1.jpg"></div>
-      <div class="serviceCharges_right">
-        <div class="serviceCharges_title">青春美肤系列-美白嫩肤</div>
-        <div class="serviceCharges_cent">唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力</div>
-        <div class="serviceCharges_price">¥1980</div>
+  <div class="serviceCharges_bg">
+    <div class="serviceCharges_body">
+      <div class="null"></div>
+      <div class="serviceCharges_padding">
+        <div class="serviceCharges_flex">
+          <div class="serviceCharges_imgBox"><img src="../../assets/image/t1.jpg"></div>
+          <div class="serviceCharges_right">
+            <div class="serviceCharges_title">青春美肤系列-美白嫩肤</div>
+            <div class="serviceCharges_cent">唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力</div>
+            <div class="serviceCharges_price">¥1980</div>
+          </div>
+        </div>
+        <div class="border"></div>
+        <div class="space_between serviceCharges_li">
+          <div class="serviceCharges_leftTitle">预约科美师</div>
+          <div class="serviceCharges_rightTitle">6号科美师张小倩</div>
+        </div>
+        <div class="null_height"></div>
+        <div class="border"></div>
+        <div class="space_between serviceCharges_li">
+          <div class="serviceCharges_leftTitle">服务开始时间</div>
+          <div class="serviceCharges_rightTitle">2018-09-26 09:47</div>
+        </div>
+        <div class="border"></div>
+        <div class="space_between serviceCharges_li">
+          <div class="serviceCharges_leftTitle">服务结束时间</div>
+          <div class="serviceCharges_rightTitle">2018-09-26 09:47</div>
+        </div>
+        <div class="border"></div>
+        <div class="space_between serviceCharges_li">
+          <div class="serviceCharges_leftTitle">服务评分</div>
+          <div class="serviceCharges_rightTitle">三星评价</div>
+        </div>
+        <div class="border"></div>
+        <div class="space_between serviceCharges_li">
+          <div class="serviceCharges_leftTitle">服务费用</div>
+          <div class="colorTxt">¥60</div>
+        </div>
+        <div class="border"></div>
+        <div class="space_between serviceCharges_li">
+          <div class="serviceCharges_leftTitle">合计</div>
+          <div class="colorTxt">¥60</div>
+        </div>
+        <div class="border"></div>
       </div>
     </div>
-    <div class="border"></div>
-    <div class="space_between serviceCharges_li">
-      <div class="serviceCharges_leftTitle">预约科美师</div>
-      <div class="serviceCharges_rightTitle">6号科美师张小倩</div>
+    <div class="serviceCharges_nav">
+      <div class="serviceCharges_numBox">
+        <span class="serviceCharges_numTxt">合计：</span>
+        <span class="serviceCharges_priceNum">¥ 60.00</span>
+      </div>
+      <div class="serviceCharges_buy">付款</div>
     </div>
-    <div class="border"></div>
-    <div class="null_height"></div>
-    <div class="border"></div>
-    <div class="space_between serviceCharges_li">
-      <div class="serviceCharges_leftTitle">服务开始时间</div>
-      <div class="serviceCharges_rightTitle">2018-09-26 09:47</div>
-    </div>
-    <div class="border"></div>
-    <div class="space_between serviceCharges_li">
-      <div class="serviceCharges_leftTitle">服务结束时间</div>
-      <div class="serviceCharges_rightTitle">2018-09-26 09:47</div>
-    </div>
-    <div class="border"></div>
-    <div class="space_between serviceCharges_li">
-      <div class="serviceCharges_leftTitle">服务评分</div>
-      <div class="serviceCharges_rightTitle">三星评价</div>
-    </div>
-    <div class="border"></div>
-    <div class="space_between serviceCharges_li">
-      <div class="serviceCharges_leftTitle">服务费用</div>
-      <div class="colorTxt">¥60</div>
-    </div>
-    <div class="border"></div>
-    <div class="space_between serviceCharges_li">
-      <div class="serviceCharges_leftTitle">合计</div>
-      <div class="colorTxt">¥60</div>
-    </div>
-    <div class="border"></div>
   </div>
-</div>
-  <div class="serviceCharges_nav">
-<div class="serviceCharges_numBox">
-  <span class="serviceCharges_numTxt">合计：</span>
-  <span class="serviceCharges_priceNum">¥ 60.00</span>
-</div>
-    <div class="serviceCharges_buy">付款</div>
-  </div>
-</div>
 </template>
 
 <script>
-    export default {
-        name: "index"
-    }
+  export default {
+    name: "index"
+  }
 </script>
 
 <style lang="scss" scoped>
   .serviceCharges_bg{
-background-color: #fff;
+    background-color: #fff;
+    padding-bottom: 0px;
   }
-.serviceCharges_body{
-  height: calc(100vh - 50px);
-  background-color: #F4F4F4;
-}
+  .serviceCharges_body{
+    height: calc(100vh - 50px);
+    background-color: #F4F4F4;
+  }
   .serviceCharges_nav{
     height: 49px;
     background-color: #fff;
@@ -115,7 +115,7 @@ background-color: #fff;
     justify-content: flex-start;
   }
   .serviceCharges_imgBox,.serviceCharges_imgBox img{
-width: 80px;
+    width: 80px;
     height: 80px;
   }
   .serviceCharges_right{
@@ -162,8 +162,9 @@ width: 80px;
     color:rgba(153,153,153,1);
   }
   .null_height{
-    height: 33px;
+    height: 32px;
     width: 100%;
+    border-top:1px solid rgba(216,216,216,1);
   }
   .colorTxt{
     color:rgba(222,25,25,1);
