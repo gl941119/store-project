@@ -73,7 +73,7 @@ let router = new Router({
       component: resolve => require(['../pages/search'], resolve)
     },
     {//分类
-      path: '/classfiy',
+      path: '/classify',
       name: 'classify',
       meta: {showFooter: true, keepAlive: false},
       redirect: {
@@ -100,9 +100,9 @@ let router = new Router({
     {//热门商品and服务(预约)
       path: '/subscribe/:type',//1 服务 2 商品
       name: 'subscribe',
-      meta: {sub_showFooter:true, keepAlive: false},
+      meta: {sub_showFooter: true, keepAlive: false},
       beforeEnter: function (to, from, next) {
-        if(to.params.type==='2'){ //商品
+        if (to.params.type === '2') { //商品
           store.commit('setSub_showFooter', false);
         }
         next()
@@ -454,14 +454,14 @@ let router = new Router({
       path: '/subscribeHome',
       name: 'subscribeHome',
       title: '预约主页',
-      meta: {keepAlive: false,sub_showFooter:true},
+      meta: {keepAlive: false, sub_showFooter: true},
       component: resolve => require(['../pages/subscribeHome'], resolve)
     },
     {//预约用户中心
       path: '/subscribeHome/userCenter',
       name: 'userCenter',
       title: '预约中心',
-      meta: {keepAlive: false,sub_showFooter:true},
+      meta: {keepAlive: false, sub_showFooter: true},
       component: resolve => require(['../pages/subscribeHome/page/userCenter'], resolve)
     },
     {//套餐购买 仪器+商品

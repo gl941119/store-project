@@ -64,20 +64,18 @@
     margin-bottom: 10px;
     .title {
       height: 35px;
-      padding: 7px 15px 14px;
+      /*padding: 7px 15px 14px;*/
+      padding: 0 15px;
       vertical-align: middle;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       &-name {
-
         font-size: 12px;
         color: rgba(153, 153, 153, 1);
         vertical-align: middle;
       }
       &-grade {
-
-
         margin-left: 5px;
         width: 11px;
         height: 11px;
@@ -86,12 +84,12 @@
       &-giveMark {
         flex: 1;
         vertical-align: middle;
-        margin-top: 4px;
+        margin-top: 2px;
         margin-left: 12px;
         display: inline-block;
         > img {
           width: 12px;
-          height: 12px;
+          height: 10px;
           margin-left: 7px;
         }
       }

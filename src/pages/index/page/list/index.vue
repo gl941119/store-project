@@ -33,6 +33,7 @@
         }).then((res) => {
           this.Data = res.data.goodslist
           this.catename = res.data.catename
+          document.title = res.data.catename
         })
       },
 
