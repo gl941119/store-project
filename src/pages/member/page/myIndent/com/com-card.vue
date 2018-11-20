@@ -9,7 +9,10 @@
       <img :src="item.thumb" alt="" class="card-top-img">
       <div class="card-top-content">
         <span class="card-top-content-title">{{item.title}}</span>
-        <p class="card-top-content-ml">{{item.optionname}}</p>
+        <div class="card-top-content-ml">
+          <div>{{item.optionname}}</div>
+          <div>X1</div>
+        </div>
         <p class="my-price price">¥{{item.price}}</p>
       </div>
     </div>
@@ -17,8 +20,8 @@
       共一件商品 合计：{{good.orderprice}}元
     </div>
     <div class="card-bottom">
-      <van-icon name="pending-evaluate" class="card-bottom-icon"/>
-      <span class="card-bottom-connection" v-on:click="gobaidu">联系卖家</span>
+      <!--<van-icon name="pending-evaluate" class="card-bottom-icon"/>-->
+      <!--<span class="card-bottom-connection" v-on:click="gobaidu">联系卖家</span>-->
       <van-button round plain type="default" class="confirmBtn"
                   v-if="good.status== '0'"
                   v-on:click="goindentConfirme(good.goods[0].ordersn)"
@@ -224,10 +227,13 @@
           color: rgba(153, 153, 153, 1);
           line-height: 17px;
           width: 100%;
-          display: block;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          /*display: block;*/
+          /*white-space: nowrap;*/
+          /*overflow: hidden;*/
+          /*text-overflow: ellipsis;*/
 
         }
         .price {
