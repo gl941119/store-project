@@ -10,11 +10,13 @@
       <van-tab title="已预约">
         <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
-      <van-tab title="已完成">
+      <!--<van-tab title="已完成">-->
+        <!--<com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>-->
+      <!--</van-tab>-->
+      <van-tab title="已取消">
         <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request"></com-serverCard>
       </van-tab>
     </van-tabs>
-
   </div>
 </template>
 
@@ -30,15 +32,11 @@
       return {
         appoint: [],
         is_member: window.sessionStorage.getItem('is_member'), //0 非会员  1 会员
-        type: 0,// 1  全部   2 待付款   3  已预约     4  完成
+        type: this.$route.params.type,// 1  全部   2 待付款   3  已预约     4  完成
       }
     },
     mounted() {
       this.request()
-      let thia = this
-      // window.addEventListener("popstate", function (e) {　　//只要B页面按下手机物理返回键，就会被监听到
-      //   thia.$router.push({name: 'member'})
-      // }, false);
     },
     methods: {
       change(index) {
@@ -53,7 +51,6 @@
             type: this.type + 1
           }
         }).then(res => {
-
           if (res.code === 100) {
             this.appoint = res.data.appoint
             this.appoint.forEach(item => {
@@ -73,8 +70,6 @@
                 alert('无法判断会员')
               }
               item['type'] = type
-
-
             })
           }
         })

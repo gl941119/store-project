@@ -1,10 +1,7 @@
 <template>
   <div class="wrap">
 
-    <van-tabs v-model="active" @click="onClick" :swipeable="true" sticky>
-      <van-tab title="商品">
-        <product-card :Data="item" v-for="item in productList" :key="item.id"></product-card>
-      </van-tab>
+    <van-tabs v-model="active" @click="onClick" :swipeable="true" sticky v-if="type==='2'">
       <van-tab title="服务">
         <server-card :Data = 'item' v-for="item in serverList" :key="item.id"></server-card>
       </van-tab>
@@ -12,6 +9,7 @@
         <staff-card :Data = 'item' v-for="item in staffList" :key="item.id"></staff-card>
       </van-tab>
     </van-tabs>
+    <product-card :Data="item" v-for="item in productList" :key="item.id"></product-card>
   </div>
 </template>
 
@@ -20,6 +18,7 @@
     name: "meCollect",
     data() {
       return {
+        type:this.$route.params.type,  // 1 商品 2 服务
         active: undefined,
         productList: [],
         staffList:[],
@@ -31,43 +30,44 @@
     },
     methods: {
       request() {
+        console.log(this.type)
+        let status
+        if(this.type === 1){//商品
+          status = 1
+        }else if(this.active === 0){//服务
+          status = 2
+        }else{//美师
+          status = 3
+        }
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=87&uk=TWPBNNP9ZBVI9VOPE0&act=collectionlist',
           type: 'get',
           data:{
-            type:this.active+1
+            type:status
           }
         }).then((res) => {
           if(res.code===100){
-            if(this.active === 0){//商品
-
-              this.productList = res.data.list
-            }
-            if(this.active === 1){//服务
-
-              this.serverList = res.data.list
-            }
-
-            if(this.active ===2){//美师
-              this.staffList = res.data.list
+            switch (status) {
+              case 1:
+                this.productList = res.data.list;
+                break
+              case 2:
+                this.serverList = res.data.list;
+                break;
+              case 3:
+                this.staffList = res.data.list;
+                break;
             }
           }
-
         })
       },
       onClick(index, title) {
-
         this.request()
-
       }
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
-
-  .wrap {
-
-  }
 </style>
