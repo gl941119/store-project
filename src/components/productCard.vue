@@ -8,6 +8,7 @@
       <p class="card-right-price my-price">￥{{Data.price}}</p>
       <p class="card-right-comment">{{Data.discuss_total}}条评价&nbsp;&nbsp;好评率{{Data.good_rate}}%</p>
     </div>
+
   </div>
 </template>
 
@@ -41,6 +42,7 @@
     background: rgba(255, 255, 255, 1);
     box-shadow:0px 1px 11px 0px rgba(211,211,211,0.5);
     border-radius: 4px;
+    overflow: hidden;
     display: flex;
     justify-content: space-between;
     &-left {

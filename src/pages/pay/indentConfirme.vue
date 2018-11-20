@@ -20,9 +20,6 @@
       :actions="actions"
       @select="onSelect"
     />
-
-
-
     <!--收货地址-->
     <com-address  v-if="status==='1'" :address="address" v-on:click.native="goAddress" ></com-address>
     <div class="main">

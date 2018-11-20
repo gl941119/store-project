@@ -2,7 +2,9 @@
   <div>
 
     <select-bar @emitSort="setSort"></select-bar>
+    <div class="main" >
     <product-card v-for="item in Data" :key="Data.id" :Data="item" ></product-card>
+    </div>
   </div>
 </template>
 
@@ -44,5 +46,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .main{
+    margin-top: 52px;
+  }
 </style>

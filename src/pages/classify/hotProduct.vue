@@ -30,24 +30,19 @@
       width: 115px;
       height: 40px;
       font-size: 16px;
-
       color: #333333;
       line-height: 40px;
-
     }
     li:hover {
       color: #E4393B;
     }
   }
-
   .fill {
     width: 375px;
     height: 1px;
     background: rgba(216, 216, 216, 1);
   }
-
   .product-card {
     margin-top: 15px !important;
   }
-
 </style>

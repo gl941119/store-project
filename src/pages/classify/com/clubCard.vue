@@ -16,7 +16,7 @@
       }
     },
     mounted() {
-      this.$store.commit('setClassify_hover','0')
+      this.$store.commit('setClassify_hover', '0')
       this.request()
     },
     methods: {
@@ -31,8 +31,8 @@
           this.cards = res.data.cards
         })
       },
-      goclubCardDetail(id){
-        this.$router.push({name:'clubCardDetail',params:{id:id}})
+      goclubCardDetail(id) {
+        this.$router.push({name: 'clubCardDetail', params: {id: id}})
       }
 
     }

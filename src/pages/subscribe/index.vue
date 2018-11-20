@@ -8,8 +8,8 @@
       <van-button type="primary" class="search-btn" @click="handle">搜索</van-button>
     </div>
     <div class="result" v-if="showSearch === 1">
+      <select-bar @emitSort="setSort"></select-bar>
       <div v-if="type === '1'">
-        <select-bar @emitSort="setSort"></select-bar>
         <server-card
           v-for="item in serverData"
           :key="item.id"
@@ -17,7 +17,6 @@
         ></server-card>
       </div>
       <div v-if="type === '2'">
-        <select-bar @emitSort="setSort"></select-bar>
         <product-card v-for="item in productData" :key="item.id" :Data="item"></product-card>
       </div>
     </div>
@@ -49,14 +48,21 @@
         return this.type === '1' ? '热门服务' : '热门精华'
       }
     },
+    watch: {
+      value: function (val) {//搜索栏为空触发搜索
+        if (!val) {
+          this.handle()
+        }
+      }
+    },
+    created() {
+      this.$store.commit('setSub_hover', 1)
+    },
     mounted() {
-      this.$store.commit('setHover',2)
-      // console.log(this.$route.params.type)
       this.handle()
       document.title = this.name
     },
     methods: {
-
       handle() {
         if (this.type === '1') {//服务
           this.reqServer()
@@ -103,7 +109,6 @@
         })
       },
       setSort(val) {
-        console.log(val)
         this.sort = val;
         this.handle()
       },
@@ -111,12 +116,7 @@
       onSearch() {
       },
       emitSort(val) {
-
       },
-      atOnceBuy(id) {
-        console.log(id)
-
-      }
     }
   }
 </script>
@@ -124,7 +124,6 @@
 <style lang="scss" scoped>
   .wrap {
     background-color: white;
-
   }
 
   .search {
@@ -142,7 +141,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-
       .icon {
         font-size: 15px;
         margin-left: 10px;
@@ -156,14 +154,12 @@
         font-family: PingFangSC-Regular;
         color: rgba(153, 153, 153, 1);
         line-height: 17px;
-
       }
       .close {
 
         font-size: 12px;
         margin-right: 7px;
       }
-
     }
     &-btn {
       margin-left: 10px;
@@ -201,6 +197,4 @@
     }
 
   }
-
-
 </style>

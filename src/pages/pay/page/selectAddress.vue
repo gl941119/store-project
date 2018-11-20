@@ -1,14 +1,13 @@
 <template>
-
+    
 </template>
 
 <script>
     export default {
-        name: "searchBar"
+        name: "selectAddress"
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
 
 </style>

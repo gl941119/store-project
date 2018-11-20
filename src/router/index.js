@@ -100,10 +100,10 @@ let router = new Router({
     {//热门商品and服务(预约)
       path: '/subscribe/:type',//1 服务 2 商品
       name: 'subscribe',
-      meta: {showFooter: true, keepAlive: false},
+      meta: {sub_showFooter:true, keepAlive: false},
       beforeEnter: function (to, from, next) {
         if(to.params.type==='2'){ //商品
-          store.commit('setShowFooter', false);
+          store.commit('setSub_showFooter', false);
         }
         next()
       },

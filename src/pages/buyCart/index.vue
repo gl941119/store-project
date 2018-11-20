@@ -1,6 +1,6 @@
 <template>
   <div class="buyCart">
-    <!--<product-card v-for="item,index in 4" class="product-card" :key="index"></product-card>-->
+
     <!--购物车卡片-->
     <div class="message" v-if="!goodslist.length">
       <img src="../../assets/image/buyCart.png" alt="">
@@ -37,6 +37,7 @@
     </div>
     <!--提交栏-->
     <van-submit-bar
+      v-if="goodslist.length"
       :price="price"
       button-text="提交订单"
       @submit="onSubmit"

@@ -14,13 +14,7 @@
         <span class="icon-w"><span class="path1"></span><span class="path2"></span></span>
         <p>分类</p>
       </router-link>
-      <router-link tag="li" :to="{ name: 'subscribe',params:{type:'1'}}"
-                   v-bind:class="{li_hover:hover===2}"
-                   v-on:click.native="setHover(2)"
-      >
-        <span class="icon-b"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-        <p>预约</p>
-      </router-link>
+
       <router-link tag="li" :to="{ name: 'buyCart'}"
                    v-bind:class="{li_hover:hover===3}"
                    v-on:click.native="setHover(3)">
@@ -78,6 +72,7 @@
 
 <style lang="scss" scoped>
   .footer {
+    border-top: 1px solid #D8D8D8;
     overflow: hidden;
     width: 100%;
     height: 50px;

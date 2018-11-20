@@ -1,11 +1,11 @@
 <template>
   <div class="recommend">
-    <img class="recommend-banner" :src="adv.bimg" alt="">
+    <img class="recommend-banner" :src="adv.bimg" alt="" v-on:click="goLink(adv.link)">
     <div class="server">
       <div class="server-title">
         <span class="server-title-name">推荐服务</span>
-        <span class="server-title-more" v-on:click="routerPush('/subscribe/1')">查看更多</span>
-        <van-icon name="arrow" class="server-title-icon"></van-icon>
+        <!--<span class="server-title-more" v-on:click="routerPush('/subscribe/1')">查看更多</span>-->
+        <!--<van-icon name="arrow" class="server-title-icon"></van-icon>-->
       </div>
       <div class="server-img">
         <img v-for="item in services" :key="item.id" :src="item.simg" alt=""
@@ -15,8 +15,8 @@
     <div class="product">
       <div class="product-title">
         <span class="product-title-name">推荐精华</span>
-        <span class="product-title-more" v-on:click="routerPush('/subscribe/2')">查看更多</span>
-        <van-icon name="arrow" class="product-title-icon"></van-icon>
+        <!--<span class="product-title-more" v-on:click="routerPush('/subscribe/2')">查看更多</span>-->
+        <!--<van-icon name="arrow" class="product-title-icon"></van-icon>-->
       </div>
       <ul>
         <li v-for="item in goods" :key="item.id">
@@ -26,7 +26,6 @@
         </li>
       </ul>
     </div>
-
   </div>
 </template>
 
@@ -45,22 +44,21 @@
       }
     },
     mounted() {
-      console.log(123)
       this.$store.commit('setClassify_hover','-1')
       this.request()
     },
     methods: {
+      goLink(link){
+        window.location.href = link
+      },
       routerPush(url) {
         this.$router.push({path: url})
       },
-
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=category',
           type: 'get',
-
         }).then((res) => {
-          console.log(res)
           this.services = res.data.services
           this.goods = res.data.goods
           this.adv = res.data.adv
