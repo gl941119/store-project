@@ -442,6 +442,13 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/pay/indentInfo'], resolve)
     },
+    {//订单交易完成
+      path: '/pay/transactionCompletion',
+      name: 'transactionCompletion',
+      title: '订单交易完成',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/pay/transactionCompletion'], resolve)
+    },
     // ——————————————————————————————————预约主页——————————————————————————————————
     {//预约主页
       path: '/subscribeHome',
