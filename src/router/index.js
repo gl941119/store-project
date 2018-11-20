@@ -137,6 +137,13 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/pay'], resolve)
     },
+    {//门店选择
+      path: '/subscribe/page/appoint/selectStore',
+      name: 'selectStore',
+      title: '门店选择',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/subscribe/page/appoint/selectStore'], resolve)
+    },
     {//详情页
       path: '/detail/:type/:id', // type 1 商品  2服务
       name: 'detail',
@@ -512,6 +519,13 @@ let router = new Router({
       title: '美丽积分劵',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribeHome/page/beautyIntegrals'], resolve)
+    },
+    {//美丽积分劵
+      path: '/serviceCharges',
+      name: 'serviceCharges',
+      title: '服务费用支付',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/serviceCharges'], resolve)
     }
   ]
 })
