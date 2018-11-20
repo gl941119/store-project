@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <p v-if="discusslist.length==0" class="notEvaluation">暂无评论</p>
-    <div v-else class="main" v-for="item,num in discusslist" :key="num" >
+    <div v-else class="main" v-for="item,num in discusslist" :key="num">
       <div class="main-top">
         <img :src="item.avatar" alt="">
         <span class="main-top-name">{{item.nick}}</span>
@@ -9,17 +9,16 @@
       <div class="main-middle">
         <p class="main-middle-text">{{item.content}}</p>
         <div class="main-middle-img">
-          <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
+          <img :src="img" alt="" v-for="img,index in item.imgs" :key="index" v-on:click="showImageHandle(num,index)">
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
   import ComEvaluationDetail from './com/com-evaluation-detail'
-
+  import {ImagePreview} from 'vant';
   export default {
     name: "index",
     components: {
@@ -32,9 +31,18 @@
     },
     mounted() {
       this.request()
-
     },
     methods: {
+      showImageHandle(num, index) {//预览图片
+        let images = this.discusslist[num].imgs
+        ImagePreview({
+          images: images,
+          startPosition: index,
+          onClose() {
+            // do something
+          }
+        });
+      },
       request() {
         this.$request({
           url: "app/index.php?i=1&c=entry&eid=87&act=discusslist",
@@ -46,12 +54,10 @@
         }).then(res => {
           if (res.code === 100) {
             this.discusslist = res.data.discusslist
-
           }
         })
       }
     }
-
   }
 </script>
 
@@ -72,13 +78,12 @@
     padding: 30px 0;
     text-align: center;
 
-
-    height:42px;
-    font-size:15px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(51,51,51,1);
-    line-height:21px;
+    height: 42px;
+    font-size: 15px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    line-height: 21px;
   }
 
   .main {
@@ -128,8 +133,8 @@
         align-content: flex-start;
         > img {
           margin: 3px 10px 0 0;
-          width:105px;
-          height:105px;
+          width: 105px;
+          height: 105px;
         }
       }
     }

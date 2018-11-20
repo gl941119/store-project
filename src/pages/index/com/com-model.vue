@@ -30,19 +30,19 @@
 
     },
     methods: {
-      doThat() {
+      doThat() {//查看更多
         if(this.data.name === '热销精品'){
           this.$router.push({path: '/subscribe/2'})
-        }else{
-          this.$router.push({name:'clubCard'})
+        }else{//推荐
+          this.$router.push({name:'classify'})
         }
 
       },
-      goclubCardDetail(id) {
+      goclubCardDetail(id) {//商品跳转
         if(this.data.name === '热销精品'){
           this.$router.push({name:'detail',params:{type:'1',id:id}})
         }else{
-          this.$router.push({name: 'clubCardDetail',params:{id:id}})
+          // this.$router.push({name: 'clubCardDetail',params:{id:id}})
         }
 
       }

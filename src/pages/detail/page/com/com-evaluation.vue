@@ -1,14 +1,14 @@
 <template>
-  <div class="evaluation">
+  <div class="evaluation" v-on:click.stop="goEvaluate">
     <div class="title" >
       <span class="title-name">评价</span>
       <span class="title-subName">好评率{{good_rate}}%</span>
-      <span class="title-all" v-on:click.stop="goEvaluate">查看全部评论</span>
+      <span class="title-all" >查看全部评论</span>
       <van-icon name="arrow" class="title-icon" />
     </div>
     <div class="fill"></div>
-    <com-evaluation-detail :discuss="discuss" v-show="discussType==1"></com-evaluation-detail>
-    <div v-show="discussType==0" class="noEvaluation">
+    <com-evaluation-detail :discuss="item" v-show="discuss.length" v-for="item,index in discuss" :key="index" ></com-evaluation-detail>
+    <div v-show="!discuss.length" class="noEvaluation">
       暂无评论
     </div>
   </div>
@@ -19,15 +19,14 @@
 
   export default {
     name: "com-evaluation",
-    props:['good_rate','discuss','discussType'],
-    watch:{
-      discussType:function (val) {
-        // console.log(val)
-        // console.log(val ===1)
-      }
-    },
+    props:['good_rate','discuss'],
     components: {
       ComEvaluationDetail
+    },
+    data(){
+      return {
+        discussType: 0
+      }
     },
     methods:{
       goEvaluate(){
@@ -74,21 +73,23 @@
         font-size: 10px;
       }
     }
+    .fill{
+      margin: 0 auto;
+      width:345px;
+      height:1px;
+      background:rgba(216,216,216,1);
+    }
+    .noEvaluation{
+      padding: 30px 0;
+      text-align: center;
+      font-size:20px;
+      font-weight:400;
+      color:rgba(58,58,58,1);
+      line-height:14px;
+    }
   }
-  .noEvaluation{
-    padding: 30px 0;
-    text-align: center;
-    font-size:20px;
-    font-weight:400;
-    color:rgba(58,58,58,1);
-    line-height:14px;
-  }
-  .fill{
-    margin: 0 auto;
-    width:345px;
-    height:1px;
-    background:rgba(216,216,216,1);
-  }
+
+
 
 
 </style>

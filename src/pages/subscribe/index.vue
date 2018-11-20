@@ -45,7 +45,7 @@
     },
     computed: {
       name: function () {
-        return this.type === '1' ? '热门服务' : '热门精华'
+        return this.type === '1' ? '热门服务' : '热门商品'
       }
     },
     watch: {

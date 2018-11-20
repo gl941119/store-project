@@ -3,8 +3,6 @@
     <!--搜索栏-->
     <div class="search">
       <search :value.sync="value" class="search-left" v-on:click.native="goSearch"></search>
-      <!--<van-search placeholder="请输入搜索关键词" v-model="value" class="search-left"/>-->
-      <!--<img src="../../assets/image/scan.png" alt="" class="search-right" @click="scanBtn()">-->
     </div>
     <div class="banner">
       <van-swipe :autoplay="3000">
@@ -28,8 +26,6 @@
       <!--</div>-->
       <!--<img src="../../assets/image/hover.png" alt="" v-on:click="goDetail">-->
     <!--</div>-->
-
-
     <!--会员专区-->
     <com-model :data="member_cards"></com-model>
     <img :src="advTwo.bimg" alt="" v-on:click="goOne(advTwo.link)" class="img">
@@ -80,9 +76,7 @@
     },
     methods: {
 
-      goThree(){
-        this.$router.push({name:'introductionInstruments'})
-      },
+
       goDetail(){
         this.$router.push({name:'detail',params:{type:'1',id:'2'}})
       },
@@ -91,10 +85,16 @@
         window.location.href = link
       },
       goOne(link) {//banner跳转
-        this.$router.push({name:'yiYuan'})
+        // this.$router.push({name:'yiYuan'})
+        window.location.href = link
       },
-      goTwo(){
-        this.$router.push({name:'youthBeauty'})
+      goTwo(link){
+        // this.$router.push({name:'youthBeauty'})
+        window.location.href = link
+      },
+      goThree(link){
+        // this.$router.push({name:'introductionInstruments'})
+        window.location.href = link
       },
       scanBtn() {
         // wxHandle('scanQRCode', {

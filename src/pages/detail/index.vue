@@ -55,18 +55,6 @@
           <div></div>
         </div>
       </div>
-      <!--运送至-->
-      <div class="address-cell" v-if="type== '1'">
-        <div class="address-cell-title">运费</div>
-        <div class="address-cell-content">
-          <p>{{freight}}</p>
-        </div>
-        <div class="address-cell-right">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
       <!--产品详情-->
       <div class="presentation" ref="presentation">
         <p class="presentation-title">产品详情</p>
@@ -74,7 +62,7 @@
       </div>
       <!--评价-->
       <div ref="evaluation"></div>
-      <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss" :discussType="discussType"></ComEvaluation>
+      <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss"></ComEvaluation>
       <!--选择规格-->
       <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
         <com-buy-specification :goods_spec="goods_spec"
@@ -137,7 +125,7 @@
         buyNum: 1,//购买数量
         alreadybought: [],//购买商品名称
         num: undefined,//规格层数
-        freight: '免运费',
+        // freight: '免运费',
         icon: 'like-o',
         optionid: undefined,
         Data: {
@@ -156,16 +144,16 @@
           "good_rate": null,
         },
         goods_spec: null,
-        discuss: {//评论
-          card_id: undefined,
-          content: undefined,
-          createtime: undefined,
-          imgs: null,
-          level_img: undefined,
-          nick: undefined,
-          score: undefined
-        },
-        discussType: 0,
+        // discuss: {//评论
+        //   card_id: undefined,
+        //   content: undefined,
+        //   createtime: undefined,
+        //   imgs: null,
+        //   level_img: undefined,
+        //   nick: undefined,
+        //   score: undefined
+        // },
+        discuss:[],//评论
         address: undefined,//收货地址
         goodsData: null,
         SpecificationData: null,
@@ -178,19 +166,9 @@
     mounted() {
       this.request()
       document.title = this.title
-      // let media = this.$refs['media']
-      // media.addEventListener('play', function () {
-      //   console.log('播放')
-      // });
-      // media.addEventListener('pause', function () {
-      //   console.log('停止')
-      // });
+
     },
-    watch: {
-      specs: function (val) {
-        this.countFreight()//计算运费
-      }
-    },
+
     computed: {
       ShowSpecification: {//show商品规格栏
         set: function (val) {
@@ -357,37 +335,12 @@
               this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
               this.cart_num = res.data.cart_num
             }
+            this.discuss = res.data.discuss // 评论
 
-            if (res.data.discuss.length === 0) {
-              this.discussType = 0
-            } else {
-              this.discussType = 1
-              this.discuss = res.data.discuss[0] //评论
-            }
           }
         })
       },
-      countFreight() {
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=85&act=freight',
-          type: 'post',
-          data: {
-            id: this.id,
-            specs: this.specs.join('_')
-          }
-        }).then(res => {
-          if (res.code === 100) {
-            if (res.data.freight.ishave) {
-              this.freight = '￥' + res.data.freight.freight + '元'
-            } else {
-              this.freight = res.data.freight.freight
-            }
-            this.Data.marketprice = res.data.marketprice
-            this.Data.productprice = res.data.productprice
-          }
-        })
 
-      },
       onFocus() {
         // console.log(123)
       },

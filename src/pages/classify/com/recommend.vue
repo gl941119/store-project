@@ -24,38 +24,7 @@
                v-on:click="routerPush('/detail/1/'+item.id)">
           <p>{{item.title}}</p>
         </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
-        <div  class="product_list_item" >
-          <img src="../../../assets/image/t1.jpg" >
-          <p>美白精华液</p>
-        </div>
+
       </div>
     </div>
   </div>
