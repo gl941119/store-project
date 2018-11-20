@@ -11,7 +11,7 @@
         <span class="card-top-content-title">{{item.title}}</span>
         <div class="card-top-content-ml">
           <div>{{item.optionname}}</div>
-          <div>X1</div>
+          <div>X{{item.total}}</div>
         </div>
         <p class="my-price price">¥{{item.price}}</p>
       </div>

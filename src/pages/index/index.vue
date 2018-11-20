@@ -13,21 +13,11 @@
     </div>
     <!--分类列表-->
     <com-list :data="data.cate"></com-list>
-    <!--热销商品-->
-    <com-model :data="goods_essence"></com-model>
+    <!--热门-->
+    <com-model :data="goods_hot"></com-model>
     <img :src="advOne.bimg" alt="" v-on:click="goThree(advOne.link)" class="img">
-    <!--热门体验卡-->
-    <!--<com-model :data="expre_cards"></com-model>-->
-    <!--58元体验区-->
-    <!--<div class="model">-->
-      <!--<div class="model-top">-->
-        <!--<div class="model-top-fill"></div>-->
-        <!--<span class="model-top-title">58元体验区</span>-->
-      <!--</div>-->
-      <!--<img src="../../assets/image/hover.png" alt="" v-on:click="goDetail">-->
-    <!--</div>-->
-    <!--会员专区-->
-    <com-model :data="member_cards"></com-model>
+    <!--精品-->
+    <com-model :data="goods_essence"></com-model>
     <img :src="advTwo.bimg" alt="" v-on:click="goOne(advTwo.link)" class="img">
     <img :src="advThree.bimg" alt="" v-on:click="goTwo(advThree.link)" class="img">
   </div>
@@ -48,8 +38,9 @@
       return {
         data: {},
         goods_essence: {},
-        expre_cards: {},
-        member_cards: {},
+
+        goods_hot:{},
+
         adv: [],
         value: undefined,
         advOne: {
@@ -75,8 +66,6 @@
 
     },
     methods: {
-
-
       goDetail(){
         this.$router.push({name:'detail',params:{type:'1',id:'2'}})
       },
@@ -115,9 +104,8 @@
           type: 'get'
         }).then((res) => {
           this.data = res.data;
-          this.goods_essence = res.data.goods_hot;
-          this.expre_cards = res.data.expre_cards;
-          this.member_cards = res.data.member_cards;
+          this.goods_essence = res.data.goods_essence;
+          this.goods_hot = res.data.goods_hot;
           this.advOne = res.data.adv[0];
           this.advTwo = res.data.adv[1];
           this.advThree = res.data.adv[2]

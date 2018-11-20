@@ -200,7 +200,7 @@ let router = new Router({
       component: resolve => require(['../pages/member'], resolve)
     },
     {//会员中心--我的预约
-      path: '/member/mySubscribe',
+      path: '/member/mySubscribe/:type',// 0  全部   1 待付款  2  已预约     3  完成  4已取消
       name: 'memberSubscribe',
       title: '我的预约',
       meta: {keepAlive: false},
@@ -221,7 +221,7 @@ let router = new Router({
       component: resolve => require(['../pages/member/page/memberCard'], resolve)
     },
     {//会员中心--我的收藏
-      path: '/member/myCollect',
+      path: '/member/myCollect/:type',//1 商品 2 服务
       name: 'myCollect',
       title: '我的收藏',
       meta: {keepAlive: false},

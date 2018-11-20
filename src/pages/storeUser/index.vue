@@ -44,7 +44,7 @@
 
     <div class="user_null"></div>
     <ul class="list">
-      <router-link tag="li" :to="{path:'/member/myCollect'}" class="list-li">
+      <router-link tag="li" :to="{name:'myCollect',params:{type:1}}" class="list-li">
         <span>我的收藏</span>
         <van-icon name="arrow" class="icon"/>
       </router-link>
