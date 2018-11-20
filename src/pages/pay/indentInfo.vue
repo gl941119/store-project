@@ -3,17 +3,17 @@
     <div class="indentInfo_top">等待卖家付款</div>
     <div class="indentInfo_padding">
       <div class="space_between">
-        <div class="flex_start">
+        <div class="flex_start indentInfo_padding4">
           <div class="indentInfo_name">王大锤</div>
           <div class="indentInfo_phone">189****1232</div>
         </div>
-        <div class="indentInfo_transportMode">运送到家</div>
+        <div class="indentInfo_transportMode">已收货</div>
       </div>
       <div class="indentInfo_address">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
     </div>
     <div class="null"></div>
-    <div class="indentInfo_padding">
-      <div class="flex_start">
+    <div class="indentInfo_padding1">
+      <div class="flex_start indentInfo_padding2">
         <div class="InsComm_listImg"><img src="../../assets/image/t1.jpg"></div>
         <div class="InsComm_listRight">
           <div>
@@ -52,27 +52,27 @@
       </div>
     </div>
     <div class="null"></div>
-    <div class="indentInfo_padding">
-      <div class="space_between">
+    <div class="indentInfo_padding1">
+      <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">商品金额</div>
         <div class="indentInfo_r">¥ 400.00</div>
       </div>
-      <div class="space_between">
+      <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">积分券抵扣</div>
         <div class="indentInfo_r">¥200.00</div>
       </div>
-      <div class="space_between">
+      <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">运费</div>
         <div class="indentInfo_r">¥20.00</div>
       </div>
-      <div class="space_between">
+      <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">订单总价：</div>
         <div class="indentInfo_r">¥200.00</div>
       </div>
 
     </div>
     <div class="null"></div>
-    <div class="indentInfo_padding">
+    <div class="indentInfo_padding1">
       <div class="flex_start indentInfo_pad">
         <div class="indentInfo_solid"></div><div class="indentInfo_title">订单信息</div>
       </div>
@@ -86,6 +86,18 @@
       </div>
       <div class="flex_start indentInfo_pad">
         <div class="indentInfo_title1">创建时间</div>
+        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+      </div>
+      <div class="flex_start indentInfo_pad">
+        <div class="indentInfo_title1">付款时间</div>
+        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+      </div>
+      <div class="flex_start indentInfo_pad">
+        <div class="indentInfo_title1">发货时间</div>
+        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+      </div>
+      <div class="flex_start indentInfo_pad">
+        <div class="indentInfo_title1">收货时间</div>
         <div class="indentInfo_title11">2018-11-12 11:23:56</div>
       </div>
     </div>
@@ -111,9 +123,7 @@
   .border{
     height: 1px;
     width: 100%;
-    margin: 10px 0;
-  }
-  .border{
+    margin: 12px 0;
     background-color: rgba(216,216,216,1);
   }
   .more{
@@ -154,7 +164,10 @@
     background:linear-gradient(135deg,rgba(170,242,255,1) 0%,rgba(113,179,255,1) 100%);
   }
   .indentInfo_padding{
-    padding: 10px 20px;
+    padding: 12px 15px;
+  }
+  .indentInfo_padding1{
+    padding: 15px;
   }
   .indentInfo_name{
     font-size:15px;
@@ -167,7 +180,7 @@
     font-family:PingFangSC-Medium;
     font-weight:500;
     color:rgba(51,51,51,1);
-    padding-left: 15px;
+    padding-left: 21px;
   }
   .indentInfo_address{
     font-size:14px;
@@ -221,6 +234,7 @@
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(153,153,153,1);
+    padding-right: 15px;
   }
   .indentInfo_l{
     font-size:15px;
@@ -239,7 +253,7 @@
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(51,51,51,1);
-    padding-left: 10px;
+    padding-left: 8px;
   }
   .indentInfo_solid{
     width: 3px;
@@ -247,7 +261,7 @@
     background-color: #71B3FF;
   }
   .indentInfo_title1{
-    width: 70px;
+    width: 60px;
     font-size:12px;
     font-family:PingFangSC-Regular;
     font-weight:400;
@@ -258,9 +272,10 @@
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(153,153,153,1);
+    padding-left: 12px;
   }
   .indentInfo_pad{
-    padding-bottom: 5px;
+    padding-bottom: 6px;
   }
   .indentInfo_cancel{
     font-size:14px;
@@ -285,9 +300,15 @@
     text-align: center;
     background-color: #71B3FF;
     border-radius: 25px;
-    margin: 0 10px;
+    margin: 0 15px 0 17px;
   }
   .indentInfo_btn{
-    padding: 20px 0;
+    height: 49px;
+  }
+  .indentInfo_pading{
+    padding-bottom: 4px;
+  }
+  .indentInfo_padding4{
+    padding-bottom: 4px;
   }
 </style>

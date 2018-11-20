@@ -48,8 +48,8 @@
 
 <style lang="scss" scoped>
   .more{
-    border-top: 1px solid #999;
-    border-right: 1px solid #999;
+    border-top: 1px solid #333;
+    border-right: 1px solid #333;
     transform: rotate(45deg);
     content: '';
     width: 9px;
@@ -71,7 +71,7 @@
     background-color: rgba(244,244,244,1);
   }
   .selectAddress{
-    padding: 10px 20px;
+    padding: 20px 15px;
   }
   .selectAddress_padding{
     padding-bottom: 5px;
@@ -98,8 +98,7 @@
     font-size:14px;
     font-family:PingFangSC-Regular;
     font-weight:400;
-    color:rgba(51,51,51,1);
-    /*padding-left: 10px;*/
+    color:rgba(153,153,153,1);
     width: 280px;
   }
 </style>
