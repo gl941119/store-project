@@ -7,8 +7,7 @@
           <div class="space_between">
             <div>
               <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
+                <div class="selectAddress_name">四川成都市高新区中和镇孤帆远影</div>
               </div>
               <div class="flex_start" >
                 <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
@@ -25,8 +24,7 @@
           <div class="space_between">
             <div>
               <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
+                <div class="selectAddress_name">四川成都市高新区中和镇孤帆远影</div>
               </div>
               <div class="flex_start" >
                 <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
@@ -37,125 +35,7 @@
         </div>
         <div class="null"></div>
       </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
-      <div>
-        <div class="selectAddress">
-          <div class="space_between">
-            <div>
-              <div class="flex_start selectAddress_padding">
-                <div class="selectAddress_name">王大锤</div>
-                <div class="selectAddress_phone">189****1232</div>
-              </div>
-              <div class="flex_start" >
-                <div class="selectAddress_infoAddress">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
-              </div>
-            </div>
-            <div class="more"></div>
-          </div>
-        </div>
-        <div class="null"></div>
-      </div>
+
       <!--list end-->
     </div>
 </template>
