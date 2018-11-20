@@ -193,7 +193,7 @@
     background-color: rgba(216,216,216,1);
   }
   .user_con_listNav{
-padding-top: 16px;
+
     display: flex;
     align-items: center;
     justify-content: space-around;

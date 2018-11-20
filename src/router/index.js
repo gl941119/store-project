@@ -178,6 +178,13 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff/mySubscribe'], resolve)
     },
+    {//商城用户中心
+      path: '/storeUser',
+      name: 'storeUser',
+      title: '用户中心',
+      meta: {showFooter: true, keepAlive: false},
+      component: resolve => require(['../pages/storeUser'], resolve)
+    },
     {//会员中心
       path: '/member',
       name: 'member',

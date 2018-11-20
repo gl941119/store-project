@@ -37,7 +37,7 @@
     },
     mounted() {
       this.request()
-      this.$store.commit('setHover',4)//footer颜色
+
     },
     methods: {
       request() {

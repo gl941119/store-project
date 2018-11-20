@@ -24,7 +24,6 @@
         <img src="../../../assets/image/待评价.png" alt="">
         <p>待评价</p>
       </router-link>
-
     </ul>
   </div>
 </template>

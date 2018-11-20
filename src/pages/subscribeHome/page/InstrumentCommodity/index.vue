@@ -141,7 +141,6 @@
           <div>
             <div class="InsComm_listName">
               对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
-
               Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
             <div class="InsComm_listRightTop">
               对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
