@@ -78,6 +78,7 @@
 
 <style lang="scss" scoped>
   .footer {
+    border-top:1px solid #979797;
     overflow: hidden;
     width: 100%;
     height: 50px;
