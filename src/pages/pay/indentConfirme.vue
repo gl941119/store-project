@@ -141,8 +141,8 @@
         // Toast(item.name);
       },
       selectStore(){//选择门店
-        this.show = true
-
+        this.show = true;
+this.$router.push({name:'selectAddress'});
 
 
       },

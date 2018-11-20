@@ -182,14 +182,16 @@
 .product_list_item{
   width: 80px;
   height: 93px;
+  margin-bottom: 5px;
 }
   .product_list_item img{
     width: 75px;
     height: 69px;
   }
   .product_list_item p{
-    height: 25px;
-    line-height: 25px;
+    height: 20px;
+    line-height: 20px;
     overflow: hidden;
+    text-align: center;
   }
 </style>

@@ -449,6 +449,13 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/pay/transactionCompletion'], resolve)
     },
+    {//地址列表
+      path: '/pay/page/transactionCompletion',
+      name: 'selectAddress',
+      title: '地址列表',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/pay/page/selectAddress'], resolve)
+    },
     // ——————————————————————————————————预约主页——————————————————————————————————
     {//预约主页
       path: '/subscribeHome',
