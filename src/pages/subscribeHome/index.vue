@@ -22,28 +22,28 @@
 
         <div class="subscribeHomePage_list">
           <div class="subscribeHomePage_item">
-            <div><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
           </div>
           <div class="subscribeHomePage_item">
-            <div><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
           </div>
           <div class="subscribeHomePage_item">
-            <div><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
           </div>
           <div class="subscribeHomePage_item">
-            <div><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
           </div>
 
         </div>
       </div>
+      <div class="subscribeHome_height"><img src="../../assets/image/img_2.png" class="subscribeHomePage_advertisement"></div>
       <div class="subscribeHomePage_null"></div>
-      <div><img src="../../assets/image/img_2.png" class="subscribeHomePage_advertisement"></div>
+      <div class="subscribeHome_height"><img src="../../assets/image/img_1.png" class="subscribeHomePage_advertisement"></div>
       <div class="subscribeHomePage_null"></div>
-      <div><img src="../../assets/image/img_1.png" class="subscribeHomePage_advertisement"></div>
     </div>
 
   </div>
@@ -87,7 +87,7 @@
   }
 
   .subscribeHomePage_content {
-    padding: 10px 20px;
+    padding: 10px 15px 2px 15px;
   }
 
   .subscribeHomePage_header {
@@ -128,7 +128,7 @@
   }
 
   .subscribeHomePage_more_txt {
-    padding-right: 10px;
+    padding-right: 7px;
   }
 
   .subscribeHomePage_list {
@@ -138,16 +138,16 @@
     align-items: center;
     -webkit-flex-flow: wrap;
     flex-flow: wrap;
-    padding: 10px 0 0 0;
+    padding: 11px 0 0 0;
   }
 
   .subscribeHomePage_item {
     width: 160px;
-    margin-bottom: 10px;
   }
 
   .subscribeHomePage_item_img {
     width: 160px;
+    height: 167px;
   }
 
   .subscribeHomePage_item_txt {
@@ -158,12 +158,16 @@
     overflow: hidden;
     height: 25px;
     line-height: 25px;
-    margin-top: 10px;
+    margin: 8px 0;
     text-align: center;
   }
 
   .subscribeHomePage_advertisement {
     width: 100%;
+    height: 146px;
+  }
+  .subscribeHome_height{
+    height: 146px;
   }
 
   .subscribeHomePage_padding {
@@ -192,5 +196,9 @@
   .subscribeHomePage_footer_img2 {
     background: url('../../assets/image/s_homepage.png') 0% 5px no-repeat;
     background-size: 20px 25px;
+  }
+  .subscribeHom_height167{
+    height: 167px;
+    width: 167px;
   }
 </style>
