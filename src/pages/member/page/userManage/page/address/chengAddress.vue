@@ -5,44 +5,52 @@
       <li class="list-cell">
         <div class="list-cell-title">收货人</div>
         <input type="text" v-model="realname" class="list-cell-content" placeholder="姓名">
+        <div class="fill"></div>
       </li>
-      <div class="fill"></div>
+
       <li class="list-cell">
         <div class="list-cell-title">联系人</div>
-        <input type="text" v-model="mobile" class="list-cell-content"  placeholder="手机号码">
+        <input type="text" v-model="mobile" class="list-cell-content" placeholder="手机号码">
+        <div class="fill"></div>
       </li>
-      <div class="fill"></div>
+
       <li class="list-cell" v-on:click="show = true">
         <div class="list-cell-title">所在地区</div>
         <input type="text" disabled v-model="area" class="list-cell-content">
         <van-icon name="arrow" class="list-cell-icon"/>
+        <div class="fill"></div>
       </li>
-      <div class="fill"></div>
+
       <li class="list-cell">
         <div class="list-cell-title">详细地址</div>
-        <input type="text" v-model="address" class="list-cell-content"  placeholder="详细地址需填写楼层或房间号">
-        <van-icon name="close" class="list-cell-icon" v-on:click="address = undefined" />
+        <input type="text" v-model="address" class="list-cell-content" placeholder="详细地址需填写楼层或房间号">
+        <van-icon name="close" class="list-cell-icon" v-on:click="address = undefined"/>
+        <div class="fill"></div>
       </li>
-      <div class="fill"></div>
-      <li class="list-cell default">
-        <div class="list-cell-title ">设为默认地址</div>
-        <van-switch v-model="checked" class="list-cell-icon defaultIcon"/>
-      </li>
-      <div class="fill"></div>
       <li class="list-cell">
-
       </li>
     </ul>
+
+    <div class="default">
+      <div class="default-title">设为默认地址</div>
+      <van-switch v-model="checked" class="default-icon defaultIcon"/>
+    </div>
+
+
+    <div class="remove" v-if="id != 0" v-on:click="deleteSubmit">
+      <p>删除收获地址</p>
+    </div>
     <div class="addBtn" v-if="id == 0">
       <van-button type="primary" v-on:click="addSubmit">确定</van-button>
     </div>
     <div class="changeBtn" v-else>
+
       <van-button type="primary" v-on:click="changeSubmit">确定</van-button>
-      <van-button type="primary" v-on:click="deleteSubmit">删除地址</van-button>
+      <!--<van-button type="primary" >删除地址</van-button>-->
     </div>
 
     <van-popup v-model="show" position="bottom" :overlay="true" :lazy-render="true">
-      <van-area :area-list="areaList" :columns-num="3" title="标题"
+      <van-area :area-list="areaList" :columns-num="3" title="详细地址"
                 @confirm="confirmHandle"
                 @cancel="cancelHandle"/>
     </van-popup>
@@ -96,18 +104,27 @@
 
       },
       deleteSubmit() {
-        this.$request({
-          url: "app/index.php?i=1&c=entry&eid=88&act=deladdress",
-          type: 'get',
-          data: {
-            id: this.id
-          }
-        }).then((res) => {
-          if (res.code === 100) {
-            this.$toast.success('删除成功')
-            this.$router.go(-1)
-          }
-        })
+
+
+        this.$dialog.confirm({
+          title: '确定要删除该地址吗？'
+        }).then(() => {
+          this.$request({
+            url: "app/index.php?i=1&c=entry&eid=88&act=deladdress",
+            type: 'get',
+            data: {
+              id: this.id
+            }
+          }).then((res) => {
+            if (res.code === 100) {
+              this.$toast.success('删除成功')
+              this.$router.go(-1)
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
+
       },
       changeSubmit() {//提交修改
         if (!this.realname) {
@@ -210,6 +227,7 @@
       height: 45px;
       background: rgba(255, 255, 255, 1);
       overflow: hidden;
+      position: relative;
       &-title {
         float: left;
         width: 60px;
@@ -236,18 +254,18 @@
         font-size: 12px;
         color: rgba(204, 204, 204, 1);
       }
+      .fill {
+        margin: 0 auto;
+        width: 345px;
+        height: 1px;
+        background: rgba(216, 216, 216, 1);
+        position: absolute;
+        bottom: 0;
+      }
     }
   }
-
-  .fill {
-    margin: 0 auto;
-    width: 345px;
-    height: 1px;
-    background: rgba(216, 216, 216, 1);
-  }
-
   .changeBtn {
-    margin-top: 112px;
+    margin-top: 36px;
     text-align: center;
     button:first-child {
       width: 345px;
@@ -256,18 +274,9 @@
       box-shadow: 0px 5px 7px 0px rgba(204, 226, 249, 1);
       border-radius: 4px;
     }
-    button:last-child {
-      margin-top: 10px;
-      width: 345px;
-      height: 45px;
-      background: rgba(228, 57, 59, 1);
-      border-radius: 4px;
-
-    }
   }
-
   .addBtn {
-    margin-top: 112px;
+    margin-top: 36px;
     text-align: center;
     button {
       width: 345px;
@@ -277,12 +286,34 @@
       border-radius: 4px;
     }
   }
-
   .default {
-    height: 60px;
+    margin-top: 15px;
+    width: 375px;
+    height: 50px;
+    background: rgba(255, 255, 255, 1);
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-title {
+      height: 20px;
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+      color: rgba(51, 51, 51, 1);
+    }
+  }
+  .remove{
+    margin-top: 15px;
+    width:375px;
+    height:50px;
+    background:rgba(255,255,255,1);
+    padding: 0 15px;
+    line-height: 50px;
+    font-size:14px;
+    color:rgba(228,57,59,1);
+    line-height:50px;
   }
 
-  .defaultIcon {
-    margin-top: -14px;
-  }
+
 </style>
