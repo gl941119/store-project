@@ -105,7 +105,7 @@
       <div class="InsComm_space_between">
         <div class="InsComm_title">商品</div>
         <div class="InsComm_flex_start">
-          <div class="InsCommPay_transport">运送</div>
+          <div class="InsCommPay_transport InsCommPay_transport_select">运送</div>
           <div class="InsCommPay_stayStore">留店</div>
         </div>
       </div>
@@ -381,20 +381,20 @@ width: 256px;
     font-size:10px;
     font-family:PingFangSC-Regular;
     font-weight:400;
-    color:rgba(153,153,153,1);
     text-align: center;
+    color:rgba(153,153,153,1);
     margin: 0 10px;
   }
   .InsCommPay_stayStore{
     text-align: center;
     width:35px;
+    border:1px solid;
     height:18px;
-    background:rgba(113,179,255,1);
     border-radius:11px;
     font-size:10px;
     font-family:PingFangSC-Regular;
     font-weight:400;
-    color:rgba(255,255,255,1);
+    color:rgba(153,153,153,1);
     line-height: 18px;
   }
   .InsCommPay_price{
@@ -464,5 +464,9 @@ width: 25px;
   }
   .InsCommPayCopy_padding{
     padding-bottom: 5px;
+  }
+  .InsCommPay_transport_select{
+    background:rgba(113,179,255,1);
+    color:rgba(255,255,255,1);
   }
 </style>

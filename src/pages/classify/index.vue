@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap_body">
     <div class="search_wrap">
       <search :value="value" class="search" v-on:click.native="goSearch"></search>
     </div>
@@ -71,8 +71,8 @@
 </script>
 
 <style lang="scss" scoped>
-  .wrap {
-    height: 100%;
+  .wrap_body{
+    padding-bottom: 50px;
   }
 
   .search_wrap {
@@ -92,16 +92,20 @@
     height: 100%;
     background-color: white;
     border-top: 1px solid #F4F4F4;
+    display: flex;
+    justify-content: flex-start;
     &-left {
 
       overflow-y: scroll;
       width: 80px;
-      height: 517px;
+
+      height: calc(100vh - 90px);
+      /*height: 517px;*/
       border-right: 1px solid #F4F4F4;
-      float: left;
+      /*float: left;*/
       &-div {
         width: 100%;
-        /*padding-bottom: 50px;*/
+        padding-bottom: 0px;
         > li {
           height: 45px;
           background: rgba(255, 255, 255, 1);
@@ -120,7 +124,9 @@
     }
     &-right {
       width: 280px;
-      float: left;
+      height: calc(100vh - 90px);
+      overflow-y: scroll;
+      /*float: left;*/
     }
   }
 </style>
