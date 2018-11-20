@@ -18,13 +18,45 @@
         <span class="product-title-more" v-on:click="routerPush('/subscribe/2')">查看更多</span>
         <van-icon name="arrow" class="product-title-icon"></van-icon>
       </div>
-      <ul>
-        <li v-for="item in goods" :key="item.id">
+      <div class="product_list">
+        <div class="product_list_item" v-for="item in goods" :key="item.id">
           <img :src="item.thumb" alt=""
                v-on:click="routerPush('/detail/1/'+item.id)">
           <p>{{item.title}}</p>
-        </li>
-      </ul>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+        <div  class="product_list_item" >
+          <img src="../../../assets/image/t1.jpg" >
+          <p>美白精华液</p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -172,6 +204,25 @@
     }
 
   }
-
-
+.product_list{
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  -webkit-flex-wrap:wrap;
+  flex-wrap:wrap;
+  padding-top: 7px;
+}
+.product_list_item{
+  width: 80px;
+  height: 93px;
+}
+  .product_list_item img{
+    width: 75px;
+    height: 69px;
+  }
+  .product_list_item p{
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+  }
 </style>
