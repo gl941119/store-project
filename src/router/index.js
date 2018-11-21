@@ -526,6 +526,13 @@ let router = new Router({
       title: '服务费用支付',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/serviceCharges'], resolve)
+    },
+    {//取消预约
+      path: '/staff/cancelReservation',
+      name: 'cancelReservation',
+      title: '取消预约',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/staff/cancelReservation'], resolve)
     }
   ]
 })
