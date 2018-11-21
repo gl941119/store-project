@@ -113,27 +113,8 @@
 
       },
       quXiaoBtn(){
-        Dialog.confirm({
-          title: '订单',
-          message: '订单取消'
-        }).then(() => {
-          // on confirm
-          //取消订单
-          this.$request({
-            url:'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
-            type:'post',
-            data:{
-              orderid:this.mySub.orderId
-            }
-          }).then((res) => {
-            if(res.status){
-              this.$emit('init')
-            }
+        this.$router.push({name:'cancelReservation'});
 
-          });
-        }).catch(() => {
-          // on cancel
-        });
 
       }
     }

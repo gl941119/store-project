@@ -2,7 +2,7 @@
   <div class="address">
 
     <ul class="list">
-      <li v-for="item in listData" :key="item.id" class="list-card" v-on:click="goIndentConfirme(item)" >
+      <li v-for="item,index in listData" :key="item.id" class="list-card" v-on:click="goIndentConfirme(item)" >
         <div class="list-card-top">
           <span class="list-card-top-realname">{{item.realname}}</span>
           <span class="list-card-top-mobile">{{item.mobile}}</span>
@@ -13,9 +13,12 @@
         </div>
         <div class="list-card-bottom">
 
-          <div class="list-card-bottom-address"><div class="default" v-if="item.isdefault==='1'">默认</div>{{item.address}}</div>
+          <div class="list-card-bottom-address">
+            <div class="default" v-if="item.isdefault==='1'">默认</div>
+          <div :class="{'list-card-bottom-padding':showCss(listData.length,index)}">{{item.address}}</div>
+          </div>
         </div>
-        <div class="fill"></div>
+        <div :class="{fill:showCss(listData.length,index)}"></div>
       </li>
     </ul>
     <van-button type="primary" class="addAddress" v-on:click="goAddAddress">添加收货地址</van-button>
@@ -34,6 +37,9 @@
       this.request()
     },
     methods: {
+      showCss(len,index){
+        return len-1===index?false:true
+      },
       goAddAddress(){
         this.$router.push({name:"changeAddress",params:{id:0}})
       },
@@ -74,9 +80,8 @@
 
     &-card {
       position: relative;
-      padding: 12px 15px;
+      padding: 12px 15px 12px 15px;
       width: 375px;
-      height: 90px;
       background: rgba(255, 255, 255, 1);
       &-top {
         overflow: hidden;
@@ -91,7 +96,7 @@
         }
         &-mobile {
           flex: 1;
-          margin-left: 15px;
+          margin-left: 21px;
           font-size: 15px;
           font-weight: 500;
           color: rgba(51, 51, 51, 1);
@@ -111,10 +116,9 @@
         display: block;
         text-overflow: ellipsis;
         .default {
-          float: left;
           text-align: center;
+          line-height: normal;
           width: 30px;
-          height: 15px;
           border-radius: 2px;
           border: 1px solid rgba(231, 59, 61, 1);
           font-size: 10px;
@@ -122,13 +126,17 @@
           display: flex;
           justify-content: center;
           align-items: center;
-        margin-top: 2px;
         }
         &-address {
-
+display: flex;
+          align-items: center;
+          justify-content: flex-start;
           font-size: 14px;
           color: rgba(102, 102, 102, 1);
           line-height: 18px;
+        }
+        &-padding{
+          padding-left: 5px;
         }
       }
 
@@ -140,8 +148,8 @@
     position: absolute;
     bottom: 0;
     width: 345px;
-    height: 1px;
-    background: rgba(216, 216, 216, 1);
+    height: 1.1px;
+    background-color: rgba(216, 216, 216, 1);
   }
 
   .addAddress {
