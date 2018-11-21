@@ -47,6 +47,7 @@
 <style lang="scss" scoped>
 .cancelReservation_body{
   padding-bottom: 0px;
+  background-color: #fff;
 }
   .cancelReservation_bodyBox{
     height: calc(100vh - 50px);
