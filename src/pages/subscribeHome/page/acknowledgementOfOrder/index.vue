@@ -139,7 +139,7 @@
     background-color: rgba(216,216,216,0.5);
   }
   .InsComm_padding{
-    padding: 10px 20px;
+    padding: 10px 15px;
   }
   .InsComm_space_between{
     display: flex;
@@ -186,7 +186,7 @@
     color:rgba(51,51,51,1);
   }
   .InsComm_list{
-    padding: 10px 20px;
+    padding: 10px 15px;
   }
   .InsComm_title{
     font-size:16px;

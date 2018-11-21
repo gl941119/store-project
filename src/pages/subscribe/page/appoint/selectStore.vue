@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="selectAddress_body">
     <div class="null"></div>
     <div class="body_padding">
 
@@ -73,6 +73,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .selectAddress_body{
+    background-color: #fff;
+  }
   .more{
     border-top: 1px solid #333;
     border-right: 1px solid #333;

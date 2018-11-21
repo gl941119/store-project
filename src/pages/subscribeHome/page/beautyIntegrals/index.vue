@@ -54,7 +54,7 @@
   background-color: rgba(244,244,244,1);
 }
   .padding{
-    padding: 10px 20px;
+    padding: 10px 15px;
   }
   .beautyIntegrals{
     font-size:16px;
