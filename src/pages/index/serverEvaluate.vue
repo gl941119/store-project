@@ -1,56 +1,56 @@
 <template>
   <div>
 <ServerEvaluate></ServerEvaluate>
-    <div class="serverEvaluate">
-      <div class="serverEvaluateWbg">
-        <div class="serverEvaluateW">
-          <div class="serverEvaluateWL">
-            <div class="serverEvaluateT">综合</div>
-            <div>
-              <van-rate
-                v-model="value"
-                :size="26"
-                :count="5"
-                color="#E93A3D"
-                void-color="#C1C0CD"
-                class="red"
-                readonly
-                disabled-color="#E93A3D"
-              />
-            </div>
-          </div>
-          <div>{{ value }}分</div>
-        </div>
-      </div>
-    </div>
+    <!--<div class="serverEvaluate">-->
+      <!--<div class="serverEvaluateWbg">-->
+        <!--<div class="serverEvaluateW">-->
+          <!--<div class="serverEvaluateWL">-->
+            <!--<div class="serverEvaluateT">综合</div>-->
+            <!--<div>-->
+              <!--<van-rate-->
+                <!--v-model="value"-->
+                <!--:size="26"-->
+                <!--:count="5"-->
+                <!--color="#E93A3D"-->
+                <!--void-color="#C1C0CD"-->
+                <!--class="red"-->
+                <!--readonly-->
+                <!--disabled-color="#E93A3D"-->
+              <!--/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>{{ value }}分</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
 
-    <div class="serverEvaluateWbg serverEvaluateWbg1">
-      <div class="serverEvaluateW serverEvaluateWw" v-for="(item,index) in list" :key="item.id">
-        <div class="serverEvaluateWL">
-          <div class="serverEvaluateT">{{ item.name }}</div>
-          <div>
-            <van-rate
-              v-model="item.score"
-              :size="26"
-              :count="5"
-              color="#E93A3D"
-              void-color="#C1C0CD"
-              @change="change"
-            />
-          </div>
-        </div>
-        <div>{{item.score}}分</div>
-      </div>
+    <!--<div class="serverEvaluateWbg serverEvaluateWbg1">-->
+      <!--<div class="serverEvaluateW serverEvaluateWw" v-for="(item,index) in list" :key="item.id">-->
+        <!--<div class="serverEvaluateWL">-->
+          <!--<div class="serverEvaluateT">{{ item.name }}</div>-->
+          <!--<div>-->
+            <!--<van-rate-->
+              <!--v-model="item.score"-->
+              <!--:size="26"-->
+              <!--:count="5"-->
+              <!--color="#E93A3D"-->
+              <!--void-color="#C1C0CD"-->
+              <!--@change="change"-->
+            <!--/>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div>{{item.score}}分</div>-->
+      <!--</div>-->
 
 
-      <div class="serverEvaluateReaBox">
-        <textarea placeholder="请留下您宝贵的建议。" v-model="content" class="serverEvaluateRea"></textarea>
-      </div>
+      <!--<div class="serverEvaluateReaBox">-->
+        <!--<textarea placeholder="请留下您宝贵的建议。" v-model="content" class="serverEvaluateRea"></textarea>-->
+      <!--</div>-->
 
-      <div class="serverEvaluatePop">感谢您的评价</div>
+      <!--<div class="serverEvaluatePop">感谢您的评价</div>-->
 
-      <van-button type="default" class="serverEvaluateReaBtn" v-on:click="submit">完成</van-button>
-    </div>
+      <!--<van-button type="default" class="serverEvaluateReaBtn" v-on:click="submit">完成</van-button>-->
+    <!--</div>-->
 
   </div>
 </template>
@@ -71,7 +71,7 @@
       }
     },
     mounted() {
-      this.initO();
+      // this.initO();
     },
 
     methods: {
