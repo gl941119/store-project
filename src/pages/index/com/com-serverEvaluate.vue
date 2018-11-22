@@ -66,10 +66,7 @@
         </div>
 
         <div class="serverEvaluateCom_tab">
-          <div class="serverEvaluateCom_tabBtn serverEvaluateCom_tabBtnSelect">服务态度好</div>
-          <div class="serverEvaluateCom_tabBtn">服务态度好</div>
-          <div class="serverEvaluateCom_tabBtn">服务态度好</div>
-          <div class="serverEvaluateCom_tabBtn">服务态度好</div>
+          <div class="serverEvaluateCom_tabBtn" v-for="item,k in arr" ref="serverDiv" @click="serverTab(k,item)">{{item}}</div>
         </div>
 
         <div class="serverEvaluateCom_textareaBox">
@@ -109,11 +106,11 @@
           </div>
 
           <div class="serverEvaluateCom_upImg">
-            <img src="" class="serverEvaluateCom_upImgs">
-            <img src="" class="serverEvaluateCom_upImgs">
-            <img src="" class="serverEvaluateCom_upImgs">
-            <img src="" class="serverEvaluateCom_upImgs">
-            <div class="serverEvaluateCom_upImgBtn">
+            <div class="serverEvaluateCom_upImgs" v-for="item,index in arrUpImg">
+              <img :src="item" class="serverEvaluateCom_upImgs">
+              <van-icon name="clear" class="upImgClose" @click="upImgClose(item,index)"/>
+            </div>
+            <div class="serverEvaluateCom_upImgBtn" @click="upLoadImg">
               <div>
                 <div><img src="../../../assets/image/appraise.png"/></div>
                 <div class="serverEvaluateCom_upAddImg">添加图片</div>
@@ -133,23 +130,113 @@
 
     </div>
 
-    <div class="serverEvaluateCom_submit">提交</div>
+    <div class="serverEvaluateCom_submit" @click="_submit">提交</div>
+
+    <van-popup v-model="showJinDu" :click-overlay="circleEvent" class="circle">
+      <van-circle
+        v-model="currentRate"
+        :rate="currentRate"
+        :speed="100"
+        :text="textJinDu"
+        class="circleTxt"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
+  import wxHandle from '../../../utils/wx'
+  import axios from 'axios'
   export default {
     name: "com-serverEvaluate",
     data(){
       return {
         value:0,
         object:0,
-      mode:false
+      mode:false,
+        currentRate:1,
+        showJinDu:false,
+        textJinDu:'',
+        arrUpImg:[],
+        serverArr:[],
+        arr:['服务态度好1','服务态度好2','服务态度好3','服务态度好4',"服务态度好5",'服务态度好6'],
+        serverId:[]
+
       }
     },
     methods:{
+      _submit(){
+        console.log(this.serverId)
+      },
+      serverTab(i,text){//服务选项
+        let serverRef=this.$refs.serverDiv;
+        if(serverRef[i].className==='serverEvaluateCom_tabBtnSelect'){
+          serverRef[i].className='serverEvaluateCom_tabBtn';
+          this.serverId.splice(i,1);
+        }else{
+          serverRef[i].className='serverEvaluateCom_tabBtnSelect';
+          this.serverId.push({id:i,name:text})
+        }
+      },
+      upImgClose(val,k){//删除图片
+        this.arrUpImg.splice(k,1)
+      },
+      circleEvent(){
+        this.showJinDu=false;
+      },
       AnonymousMode(){//是否匿名
 this.mode = !this.mode;
+      },
+    getLocalImgData(id,thisa){
+      let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
+      let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eid.eid+'&dom='+thisa.$eid.dom+'&act=fileupload&uk='+uk;
+      wxHandle('getLocalImgData',{
+        localId: id, // 图片的localID
+        success: function (getLocal) {
+          let str=getLocal.localData;
+          thisa.showJinDu=true;
+          var params = new URLSearchParams();
+          params.append('filestr', str);
+          axios({
+            url: urlR,
+            method: 'post',
+            data:params,
+            headers: {
+              'Content-Type':'application/x-www-form-urlencoded'
+            },
+            onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
+              if (progressEvent.lengthComputable) {
+                //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                thisa.currentRate =(progressEvent.loaded / progressEvent.total * 100 | 0);
+                thisa.textJinDu = thisa.currentRate + '%';
+              }
+            },
+          }).then(res => {
+            if (res.data.code === 100) {
+              thisa.showJinDu=false;
+              this.arrUpImg.push(res.data.data.imgs)
+              // this.arrUpImg=res.data.data.imgs
+
+              // res.data.data.imgs
+            }else{
+              thisa.showJinDu=false;
+              thisa.$toast(res.data.message);
+            }
+          })
+        }
+      });
+    },
+      upLoadImg(){//图片上传
+        let self=this;
+        wxHandle('chooseImage', {//打开相册和相机
+          count: 1, // 默认9
+          scanType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success: function (res) {
+            self.getLocalImgData(res.localIds[0],self);
+          }
+        });
       }
 
 
@@ -341,8 +428,9 @@ background-color: #fff;
  .serverEvaluateCom_upImgs{
     width: 80px;
     height: 80px;
-    margin-right: 10px;
-   margin-bottom: 5px;
+   position: relative;
+    margin-right: 25px;
+   margin-bottom: 15px;
   }
   .serverEvaluateCom_upImgBtn{
     width: 78px;
@@ -391,5 +479,17 @@ font-size: 20px;
     font-weight:400;
     color:rgba(255,255,255,1);
     text-align: center;
+  }
+  .circle{
+    background-color: transparent;
+  }
+  .circleTxt{
+    background-color: #fff;
+  }
+  .upImgClose{
+    position: absolute;
+    top:-15px;
+    right:-15px;
+    font-size: 20px;
   }
 </style>
