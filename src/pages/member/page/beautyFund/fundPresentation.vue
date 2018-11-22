@@ -28,9 +28,11 @@
 
 
     <div class="fundPresentationPop">可用提现余额{{ share_amount }}元</div>
+    <div class="fundPresentationPop">美丽基金提现比例为1：1</div>
+
 
     <div class="exchangeBtnPadding">
-      <div class="exchangeBtn" @click="fundPresentationMoney()">预计2小时内到帐</div>
+      <div class="exchangeBtn" @click="fundPresentationMoney()">提现</div>
     </div>
 
   </div>
@@ -103,7 +105,6 @@
 <style lang="scss" scoped>
   .exchangeWidthBg{
     background-color: #fff;
-    padding-bottom: 10px;
   }
 .exchangeBox{
   background-color: rgba(244,244,244,1);
@@ -128,7 +129,7 @@
 .fundPresentationPop{
      width: $width;
      margin: 0 auto;
-     padding: 5px 0;
+     padding-top: 8px;
   color: rgba(136,136,136,1);
   font-weight: 400;
   font-size: 13px;
@@ -164,7 +165,7 @@ width: $width;
   background-size: $width 50px;
 }
 .exchangeBtnPadding{
-  padding-top:50px;
+  padding-top:28px;
 }
 .exchangeFlex{
   display: flex;

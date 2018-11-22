@@ -534,7 +534,128 @@ let router = new Router({
       title: '取消预约',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/staff/cancelReservation'], resolve)
+    },
+    //---------------------------------------- 套餐 -------------------------------------
+    {//套餐首页
+      path: '/setMealHome',
+      name: 'setMealHome',
+      title: 'S+艾司商城',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/'], resolve)
+    },
+    {//套餐非会员中心
+      path: '/setMealHome/page/setMealMember',
+      name: 'setMealMember',
+      title: '会员中心',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealMember/index'], resolve)
+    },
+    {//套餐会员中心
+      path: '/setMealHome/page/setMealMember/memberCenter',
+      name: 'memberCenter',
+      title: '会员中心',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealMember/memberCenter'], resolve)
+    },
+    {//普通套餐
+      path: '/setMealHome/page/commonSetMeal',
+      name: 'commonSetMeal',
+      title: '普通套餐',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/commonSetMeal/'], resolve)
+    },
+    {//热门套餐
+      path: '/setMealHome/page/hotPackage',
+      name: 'hotPackage',
+      title: '热门套餐',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/hotPackage/'], resolve)
+    },
+    {//美丽代言说明
+      path: '/setMealHome/page/beautifulEndorsement',
+      name: 'beautifulEndorsements',
+      title: '美丽代言说明',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/beautifulEndorsement/'], resolve)
+    },
+    {//代言自己
+      path: '/setMealHome/page/endorseOneself',
+      name: 'endorseOneself',
+      title: '美丽代言说明',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/endorseOneself/'], resolve)
+    },
+    {//代言分享
+      path: '/setMealHome/page/endorseOneself/endorsementSharing',
+      name: 'endorsementSharing',
+      title: '美丽代言说明',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/endorseOneself/endorsementSharing'], resolve)
+    },
+    {//我的团队
+      path: '/setMealHome/page/myTeam',
+      name: 'myTeam',
+      title: '我的团队',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/myTeam/'], resolve)
+    },
+    {//美丽积分
+      path: '/setMealHome/page/beautifulPoints',
+      name: 'beautifulPoints',
+      title: '美丽积分',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/beautifulPoints/'], resolve)
+    },
+    {//美丽基金
+      path: '/setMealHome/page/setMealbeautyFund',
+      name: 'setMealbeautyFund',
+      title: '美丽基金',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealbeautyFund/'], resolve)
+    },
+    {//美丽积分券
+      path: '/setMealHome/page/beautifulIntegrals',
+      name: 'beautifulIntegrals',
+      title: '美丽积分券',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/beautifulIntegrals/'], resolve)
+    },
+    {//已购服务
+      path: '/setMealHome/page/purchasedService',
+      name: 'purchasedService',
+      title: '已购服务',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/purchasedService/'], resolve)
+    },
+    {//已购商品
+      path: '/setMealHome/page/purchasedCommodities',
+      name: 'purchasedCommodities',
+      title: '已购商品',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/purchasedCommodities/'], resolve)
+    },
+    {//套餐详情
+      path: '/setMealHome/page/packageDetails',
+      name: 'packageDetails',
+      title: '套餐详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/packageDetails/'], resolve)
+    },
+    {//套餐订单详情
+      path: '/setMealHome/page/setMealOrderinfo',
+      name: 'setMealOrderinfo',
+      title: '订单详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/'], resolve)
+    },
+    {//待收货
+      path: '/setMealHome/page/setMealOrderinfo/goodsToBeReceived',
+      name: 'goodsToBeReceived',
+      title: '订单详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/goodsToBeReceived'], resolve)
     }
+
   ]
 })
 

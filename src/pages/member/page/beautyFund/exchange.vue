@@ -18,7 +18,10 @@
     </div>
   </div>
 </div>
-
+<div class="exchangePop">
+  <div class="exchangePop_p">该积分兑换至美丽基金，美丽基金可进行提现操作</div>
+  <div>该积分兑换至美丽基金比例为1：1</div>
+</div>
 
     <div class="exchangeBtnPadding">
       <div class="exchangeBtn" @click="exchangeSub()">兑换</div>
@@ -121,7 +124,7 @@ width: $width;
   background-size: $width 50px;
 }
 .exchangeBtnPadding{
-  padding-top:50px;
+  padding-top:28px;
 }
 .exchangeFlex{
   display: flex;
@@ -162,5 +165,16 @@ width: $width;
     height: 11px;
     background: url('../../../../assets/image/icon-enter.png') no-repeat;
     background-size: 6px 11px;
+  }
+  .exchangePop{
+    width: $width;
+    margin: 0 auto;
+    font-size:13px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+  }
+  .exchangePop_p{
+    padding-bottom: 7px;
   }
 </style>
