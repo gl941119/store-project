@@ -5,7 +5,7 @@
       <div class="title-content">
         <div class="title-content-name">
           <p>{{Data.name}}</p>
-          <p>NO{{Data.displayorder}}</p>
+          <p>NO.{{Data.displayorder}}号</p>
         </div>
         <p>{{Data.task}}</p>
       </div>
@@ -16,7 +16,7 @@
         <span>综合评价</span>
         <van-rate v-model="value" class="bottom-evaluate-main" :readonly="true"/>
       </div>
-      <van-button type="default" class="bottom-buy" v-on:click.stop="goSelectTime(Data.id,Data.sid)">立即预约</van-button>
+      <van-button type="primary" class="bottom-buy" v-on:click.stop="goSelectTime(Data.id,Data.sid)">立即预约</van-button>
     </div>
   </div>
 </template>

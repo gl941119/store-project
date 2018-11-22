@@ -14,7 +14,7 @@
             <div class="subscribeHomePage_solid"></div>
             <div class="subscribeHomePage_title">热门服务</div>
           </div>
-          <div class="subscribeHomePage_more">
+          <div class="subscribeHomePage_more" v-on:click="goSubscribe">
             <span class="subscribeHomePage_more_txt">查看更多</span>
             <img src="../../assets/image/icon-enter.png" class="subscribeHomePage_more_img">
           </div>
@@ -54,6 +54,13 @@
     name: "index",
     mounted(){
       this.$store.commit('setSub_hover',0)
+    },
+    methods:{
+      goSubscribe(){//热门服务
+        this.$router.push({name:'subscribe',params:{type:'1'}})
+
+
+      }
     }
   }
 </script>

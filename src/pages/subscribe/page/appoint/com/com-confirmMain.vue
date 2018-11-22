@@ -11,8 +11,8 @@
     <ul class="list" v-if="type=== 'confirm'">
       <div class="fill"></div>
       <li class="list-li">
-        <dt>是否会员</dt>
-        <dd>{{Is_member === '1'?'科美卡会员':'非会员'}}</dd>
+        <dt>用户留言:</dt>
+       <input type="text" v-model="leaveMessage">
       </li>
     </ul>
     <ul class="list" v-if="type=== 'pay'">
@@ -28,7 +28,7 @@
       </li>
     </ul>
 
-    <ul class="list" v-if="type=== 'memberPay'">
+    <ul class="list" v-if="type=== 0">
       <div class="fill"></div>
       <li class="list-li">
         <dt>预约科美师</dt>
@@ -37,34 +37,121 @@
       <div class="fill"></div>
       <li class="list-li">
         <dt>预约日期</dt>
-        <dd>{{date}}</dd>
+        <dd>{{data.date}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
-        <dt>预约到店时间</dt>
-        <dd>{{time}}</dd>
+        <dt>预约费用</dt>
+        <dd class="colorRed">￥{{service.price}}</dd>
+      </li>
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>服务费用</dt>-->
+        <!--<dd class="colorRed">{{data.service_amount}}</dd>-->
+      <!--</li>-->
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>总计</dt>-->
+        <!--<dd class="colorRed">{{data.allprice}}</dd>-->
+      <!--</li>-->
+    </ul>
+
+    <ul class="list" v-if="type=== 1">
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约科美师</dt>
+        <dd>{{member.beauty}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
-        <dt>服务结束时间</dt>
-        <dd>{{endtime}}</dd>
+        <dt>预约日期</dt>
+        <dd>{{data.date}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
-        <dt>服务评分</dt>
-        <dd >{{score}}</dd>
+        <dt>服务评价</dt>
+        <dd>{{data.score}}星</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约费用</dt>
+        <dd class="colorRed">￥{{service.price}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+      <dt>服务费用</dt>
+      <dd class="colorRed">{{data.service_amount}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+      <dt>总计</dt>
+      <dd class="colorRed">{{data.allprice}}</dd>
+      </li>
+    </ul>
+    <!--支付完成-->
+    <ul class="list" v-if="type=== 2||type=== -1">
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约科美师</dt>
+        <dd>{{member.beauty}}</dd>
+      </li>
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约日期</dt>
+        <dd>{{data.date}}</dd>
+      </li>
+      <div class="fill"></div>
+
+      <div class="fill"></div>
+      <li class="list-li">
+        <dt>预约费用</dt>
+        <dd class="colorRed">￥{{service.price}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
         <dt>服务费用</dt>
-        <dd class="colorRed">{{service_amount}}</dd>
+        <dd class="colorRed">{{data.service_amount}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
         <dt>总计</dt>
-        <dd class="colorRed">{{orderprice}}</dd>
+        <dd class="colorRed">{{data.allprice}}</dd>
       </li>
     </ul>
+
+
+
+
+
+
+
+    <!--<ul class="list" v-if="type=== 'info'">-->
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>预约科美师</dt>-->
+        <!--<dd>{{member.beauty}}</dd>-->
+      <!--</li>-->
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>预约日期</dt>-->
+        <!--<dd>{{starttime}}</dd>-->
+      <!--</li>-->
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>预约费用</dt>-->
+        <!--<dd>{{time}}</dd>-->
+      <!--</li>-->
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>服务费用</dt>-->
+        <!--<dd class="colorRed">{{service_amount}}</dd>-->
+      <!--</li>-->
+      <!--<div class="fill"></div>-->
+      <!--<li class="list-li">-->
+        <!--<dt>总计</dt>-->
+        <!--<dd class="colorRed">{{orderprice}}</dd>-->
+      <!--</li>-->
+    <!--</ul>-->
 
   </div>
 </template>
@@ -86,11 +173,24 @@
       service_amount:{},
       orderprice:{},
       endtime:{},
-      score:{}
+      score:{},
+      value:{},
+      data:{}
     },
     data() {
       return {
         Is_member: window.sessionStorage.getItem('is_member')
+      }
+    },
+    computed:{
+      leaveMessage:{
+        get(){
+          return this.value
+        },
+        set(val){
+          this.$emit('update:value',val)
+
+        }
       }
     },
     methods: {
@@ -164,6 +264,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      >input{
+        flex: 1;
+      }
       dt {
 
         height: 20px;

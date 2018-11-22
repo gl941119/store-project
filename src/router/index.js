@@ -122,7 +122,7 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/selectTime'], resolve)
     },
-    {//热门商品--预约确认
+    {//服务预约确认
       path: '/confirm/:orderid',//服务预约确认
       name: 'confirm',
       title: '预约支付',
@@ -130,12 +130,12 @@ let router = new Router({
       component: resolve => require(['../pages/subscribe/page/appoint/confirm'], resolve)
     },
 
-    {//热门商品--预约完成
-      path: '/appointPay/:orderid',//orderid 预约订单
-      name: 'appointPay',
+    {//服务预约详情
+      path: '/serviceInfo/:orderid',//orderid 预约订单
+      name: 'serviceInfo',
       title: '预约完成',
       meta: {keepAlive: false},
-      component: resolve => require(['../pages/subscribe/page/appoint/pay'], resolve)
+      component: resolve => require(['../pages/subscribe/page/appoint/info'], resolve)
     },
     {//门店选择
       path: '/subscribe/page/appoint/selectStore',

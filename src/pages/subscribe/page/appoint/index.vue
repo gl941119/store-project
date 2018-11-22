@@ -7,11 +7,12 @@
         <dd>{{store.address}}</dd>
       </dl>
       <a :href="'tel:'+store.mobile" class="address-tel"></a>
+
     </div>
     <div class="fill"></div>
     <div class="product">
       <!--<product-card :Data="service" :select="true" class="product-card"></product-card>-->
-      <server-card :Data="service" :btn="false" ></server-card>
+      <server-card :Data="service" v-on:click.native="goDetail(service.id)"></server-card>
     </div>
 
     <div class="cosmetologist">
@@ -33,6 +34,7 @@
         store: {},
         service: {},
         member: [],
+        show:false,//弹出层
 
       }
 
@@ -41,6 +43,9 @@
       this.request()
     },
     methods: {
+      goDetail(id){
+        this.$router.push({name:'detail',params:{type:'2',id:id}})
+      },
       request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=86&act=appointone&sid=2',
@@ -101,6 +106,7 @@
       background: url("../../../../assets/image/tel1.png") no-repeat;
       background-size: 30px 30px;
 
+
     }
   }
 
@@ -130,6 +136,9 @@
       &-card {
         margin-bottom: 15px;
       }
+    }
+    .popup{
+      width: 100%;
     }
   }
 

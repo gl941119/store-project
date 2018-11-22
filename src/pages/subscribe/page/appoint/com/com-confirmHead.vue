@@ -12,13 +12,16 @@
     </div>
     <div class="fill"></div>
     <div class="name">
-      <span>预约姓名:&nbsp;&nbsp;{{user.name}}</span>
+      <span v-if="inputStatus">预约姓名:&nbsp;&nbsp;
+      <input type="text" v-model="val" class="input" placeholder="请务必留真实姓名">
+      </span>
+      <span v-else>预约姓名:&nbsp;&nbsp;{{user.name}}</span>
       <!--<input type="text" class="ml5" v-model="name">-->
 
     </div>
     <div class="fill"></div>
     <div class="name">
-      <span>预约电话:&nbsp;&nbsp;{{user.mobile}}</span>
+      <span>预约电话:&nbsp;&nbsp;&nbsp;{{user.mobile}}</span>
       <!--<input type="text" class="ml5" v-model="tel">-->
     </div>
 
@@ -28,21 +31,24 @@
 <script>
   export default {
     name: "com-confirmHead",
-    props: ['store','user'],
+    props: ['store','user','value','inputStatus'],
     data() {
       return {
-        name: undefined,
-        tel: undefined
+
       }
     },
-    watch:{
-      name:function (val) {
-        this.$emit('name',val)
-      },
-      tel:function (val) {
-        this.$emit('tel',val)
+    computed:{
+      val:{
+        get:function () {
+          return this.value
+        },
+        set:function (val) {
+          this.$emit('update:value',val)
+        }
+
       }
-    }
+    },
+
   }
 </script>
 
@@ -103,6 +109,9 @@
         font-family: PingFangSC-Regular;
         color: rgba(51, 51, 51, 1);
         line-height: 30px;
+        >input{
+            background-color: white;
+        }
       }
       >input{
         flex: 1;
