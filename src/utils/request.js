@@ -22,6 +22,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
       message: '加载中...'
     });
   }
+  console.log(123)
 
   if (process.env.NODE_ENV === 'development') {
     url = url.replace('eid=84', 'eid=153&dom=index');
@@ -45,6 +46,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
   let uk = store.state.uk || Cache.getSession('uk');
   data['uk'] = uk;
   if (type === 'GET') {
+
     return axios.get(url, {
       params: data,
       headers: {},

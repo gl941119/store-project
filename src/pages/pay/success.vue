@@ -23,7 +23,7 @@
     },
     methods: {
       goMyIndent() {
-        this.$router.push({name: 'myIndent', params: {type: '2'}})
+        this.$router.push({name: 'indentInfo'})
         clearInterval(window.tiem)
       },
       goIndex() {

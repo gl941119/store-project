@@ -1,63 +1,38 @@
 <template>
   <div class="wrap">
-    <van-tabs v-model="active" @change="onclick" :swipeable="true" sticky>
-      <van-tab title="商品">
-        <div class="fill"></div>
-        <!--卡片-->
-        <div class="main" v-for="item,num in discusslist" :key="num" v-if="!!item.goodslist.length">
-          <div class="main-top">
-            <img :src="item.avatar" alt="">
-            <span class="main-top-name">{{item.name}}</span>
-          </div>
-          <div class="main-middle">
-            <p class="main-middle-title">{{item.goodslist[0].title}}：{{item.goodslist[0].total}}</p>
-            <p class="main-middle-text">{{item.content}}</p>
-            <div class="main-middle-img">
-              <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
-            </div>
-          </div>
-          <div class="main-bottom"  v-on:click="goDetail(1,item.goodslist[0].goodsid)">
-            <img :src="item.goodslist[0].thumb" alt="">
-            <dl>
-              <dt>{{item.goodslist[0].title}}</dt>
-              <dd>
-                <span class="price">¥{{item.goodslist[0].price}}</span>
-                <span class="type">{{Math.ceil(parseInt(item.score)/2)}}星好评</span>
-              </dd>
-            </dl>
-          </div>
+    <div class="fill"></div>
+    <!--卡片-->
+    <div class="main" v-for="item,num in discusslist" :key="num" v-if="!!item.goodslist.length">
+      <div class="main-top">
+        <img :src="item.avatar" alt="">
+        <span class="main-top-name">{{item.name}}</span>
+      </div>
+      <div class="main-middle">
+        <p class="main-middle-title">{{item.goodslist[0].title}}：{{item.goodslist[0].total}}</p>
+        <p class="main-middle-text">{{item.content}}</p>
+        <div class="main-middle-img">
+          <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
         </div>
-      </van-tab>
-      <van-tab title="服务">
-        <div class="fill"></div>
-        <!--卡片-->
-        <div class="main" v-for="item,num in discusslist" :key="num" v-if="!!item.goodslist.length">
-          <div class="main-top">
-            <img :src="item.avatar" alt="">
-            <span class="main-top-name">{{item.name}}</span>
-          </div>
-          <div class="main-middle">
-            <p class="main-middle-title">{{item.goodslist[0].title}}：{{item.goodslist[0].total}}</p>
-            <p class="main-middle-text">{{item.content}}</p>
-            <div class="main-middle-img">
-              <img :src="img" alt="" v-for="img,index in item.imgs" :key="index">
-            </div>
-          </div>
-          <div class="main-bottom"  v-on:click="goDetail(2,item.sid)">
-            <img :src="item.goodslist[0].thumb" alt="">
-            <dl>
-              <dt>{{item.goodslist[0].title}}</dt>
-              <dd>
-                <span class="price">¥{{item.goodslist[0].price}}</span>
-                <span class="type">{{Math.ceil(parseInt(item.score)/2)}}星好评</span>
-              </dd>
-            </dl>
-          </div>
-        </div>
+      </div>
 
 
-      </van-tab>
-    </van-tabs>
+      <div class="main-bottom" v-on:click="goDetail(2,item.sid)">
+        <img :src="item.goodslist[0].thumb" alt="">
+        <dl>
+          <dt>{{item.goodslist[0].title}}</dt>
+          <dd>
+            <span class="price">¥{{item.goodslist[0].price}}</span>
+            <span class="type">{{Math.ceil(parseInt(item.score)/2)}}星好评</span>
+          </dd>
+        </dl>
+      </div>
+      <div class="main-bottomExtend">
+        <p class="main-bottomExtend-title">对8号美师评价：</p>
+        <p class="main-bottomExtend-content">服务很热情，技术很熟练，唯一美中不足就是，生意太好啦，每次想约都约不到啊。</p>
+      </div>
+
+
+    </div>
 
   </div>
 </template>
@@ -67,32 +42,32 @@
     name: "index",
     data() {
       return {
-        active: 0,
-        discusslist:[],
+        active: 1,
+        discusslist: [],
       }
     },
-    mounted(){
+    mounted() {
       this.request()
     },
-    methods:{
-      goDetail(type,id){
-        console.log(type,id)
-        this.$router.push({name:'detail',params:{type:type,id:id}})
+    methods: {
+      goDetail(type, id) {
+
+        this.$router.push({name: 'detail', params: {type: type, id: id}})
       },
-      request(){
+      request() {
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=88&act=discusslist',
-          type:'post',
-          data:{
-            type:this.active+1
+          url: 'app/index.php?i=1&c=entry&eid=88&act=discusslist',
+          type: 'post',
+          data: {
+            type: this.active + 1
           }
-        }).then(res=>{
+        }).then(res => {
           this.discusslist = res.data.discusslist
-          console.log( this.discusslist)
+          console.log(this.discusslist)
         })
 
       },
-      onclick(){
+      onclick() {
         this.request()
       }
 
@@ -102,19 +77,21 @@
 </script>
 
 <style lang="scss" scoped>
-  .wrap{
+  .wrap {
     height: 100%;
     background-color: #F4F4F4;
   }
-  .fill{
+
+  .fill {
     width: 100%;
     height: 1px;
     background-color: #D8D8D8;
   }
+
   .main {
     width: 100%;
     padding: 15px 15px;
-background-color: white;
+    background-color: white;
     margin-bottom: 10px;
     &-top {
       height: 29px;
@@ -210,6 +187,34 @@ background-color: white;
       }
 
     }
+    &-bottomExtend{
+      /*height: 52px;*/
+
+      width: 100%;
+      background-color: #F8F8F8;
+      display: flex;
+      justify-content: flex-start;
+
+      &-title{
+
+        width: 95px;
+        margin-top: 12px;
+        margin-left: 7px;
+        font-size:10px;
+        color:rgba(102,102,102,1);
+
+
+      }
+      &-content{
+        /*height: 80px;*/
+        flex: 1;
+        margin-top: 12px;
+        margin-bottom: 5px;
+        display: inline;
+      }
+
+    }
+
   }
 
 

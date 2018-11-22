@@ -1,73 +1,54 @@
 <template>
   <div class="indentInfo">
-    <div class="indentInfo_top">等待卖家付款</div>
+    <div class="indentInfo_top">{{statusTitle}}</div>
     <div class="indentInfo_padding">
       <div class="space_between">
         <div class="flex_start indentInfo_padding4">
-          <div class="indentInfo_name">王大锤</div>
-          <div class="indentInfo_phone">189****1232</div>
+          <div class="indentInfo_name">{{user.realname}}</div>
+          <div class="indentInfo_phone">{{user.mobile}}</div>
         </div>
-        <div class="indentInfo_transportMode">已收货</div>
+        <div class="indentInfo_transportMode">{{is_send == '0' ? '留店':'运送到家'}}</div>
       </div>
-      <div class="indentInfo_address">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
+      <div class="indentInfo_address">{{user.address}}</div>
     </div>
     <div class="null"></div>
     <div class="indentInfo_padding1">
-      <div class="flex_start indentInfo_padding2">
+      <div class="flex_start indentInfo_padding2" v-for="item,index in goodslist" :key="index">
         <div class="InsComm_listImg"><img src="../../assets/image/t1.jpg"></div>
         <div class="InsComm_listRight">
           <div>
             <div class="InsComm_listName">
-              对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
-
-              Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
+                {{item.title}}
+            </div>
             <div class="InsComm_listRightTop">
-              对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
-              Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
+              {{item.description}}
+            </div>
           </div>
           <div class="space_between">
-            <div class="InsCommPay_price">¥1980</div>
-            <div class="InsCommOrder">数量：1</div>
+            <div class="InsCommPay_price">¥{{item.marketprice}}</div>
+            <div class="InsCommOrder">数量：{{item.num}}</div>
           </div>
         </div>
-      </div>
-      <div class="border"></div>
-      <div class="flex_start">
-        <div class="InsComm_listImg"><img src="../../assets/image/t1.jpg"></div>
-        <div class="InsComm_listRight">
-          <div>
-            <div class="InsComm_listName">
-              对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
-
-              Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
-            <div class="InsComm_listRightTop">
-              对一些较贵重的首饰、制衣、精密仪器、手机以及各种计算机类商品的所用货架。
-              Some of the more expensive jewelry, clothing, precision instruments, mobile phones and a variety of commodities used in the computer shelf. </div>
-          </div>
-          <div class="space_between">
-            <div class="InsCommPay_price">¥1980</div>
-            <div class="InsCommOrder">数量：1</div>
-          </div>
-        </div>
+        <div class="border"></div>
       </div>
     </div>
     <div class="null"></div>
     <div class="indentInfo_padding1">
       <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">商品金额</div>
-        <div class="indentInfo_r">¥ 400.00</div>
+        <div class="indentInfo_r">¥ {{allprice}}</div>
       </div>
       <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">积分券抵扣</div>
-        <div class="indentInfo_r">¥200.00</div>
+        <div class="indentInfo_r">¥ {{score_nex}}</div>
       </div>
       <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">运费</div>
-        <div class="indentInfo_r">¥20.00</div>
+        <div class="indentInfo_r">¥ {{freight}}</div>
       </div>
       <div class="space_between indentInfo_pading">
         <div class="indentInfo_l">订单总价：</div>
-        <div class="indentInfo_r">¥200.00</div>
+        <div class="indentInfo_r">¥ {{allmoney}}</div>
       </div>
 
     </div>
@@ -76,38 +57,67 @@
       <div class="flex_start indentInfo_pad">
         <div class="indentInfo_solid"></div><div class="indentInfo_title">订单信息</div>
       </div>
-      <div class="flex_start indentInfo_pad">
+      <div class="flex_start indentInfo_pad" v-if="get_score_nex">
         <div class="indentInfo_title1">美丽积分券</div>
-        <div class="indentInfo_title11">获得20美丽积分券</div>
+        <div class="indentInfo_title11">获得{{get_score_nex}}美丽积分券</div>
       </div>
-      <div class="flex_start indentInfo_pad">
+      <div class="flex_start indentInfo_pad" v-if="ordersn">
         <div class="indentInfo_title1">订单编号</div>
-        <div class="indentInfo_title11">yeuwye23233</div>
+        <div class="indentInfo_title11">{{ordersn}}</div>
       </div>
-      <div class="flex_start indentInfo_pad">
+      <div class="flex_start indentInfo_pad" v-if="createtime">
         <div class="indentInfo_title1">创建时间</div>
-        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+        <div class="indentInfo_title11">{{createtime}}</div>
       </div>
-      <div class="flex_start indentInfo_pad">
+      <div class="flex_start indentInfo_pad" v-if="pay_time">
         <div class="indentInfo_title1">付款时间</div>
-        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+        <div class="indentInfo_title11">{{pay_time}}</div>
       </div>
-      <div class="flex_start indentInfo_pad">
+      <div class="flex_start indentInfo_pad" v-if="send_time">
         <div class="indentInfo_title1">发货时间</div>
-        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+        <div class="indentInfo_title11">{{send_time}}</div>
       </div>
-      <div class="flex_start indentInfo_pad">
+      <div class="flex_start indentInfo_pad" v-if="take_time">
         <div class="indentInfo_title1">收货时间</div>
-        <div class="indentInfo_title11">2018-11-12 11:23:56</div>
+        <div class="indentInfo_title11">{{take_time}}</div>
       </div>
     </div>
     <div class="null"></div>
-    <div class="space_between indentInfo_btn">
-      <div></div>
-      <div class="flex_start">
-        <div class="indentInfo_cancel">取消订单</div>
-        <div class="indentInfo_pay">付款</div>
-      </div>
+    <div class="footer">
+      <!--<van-button type="default" class="payBtn">付款</van-button>-->
+      <van-button round plain type="default" class="cancelBtn"
+                  v-if="status== '0'"
+                  v-on:click="cancelHandle"
+      >
+        取消订单
+      </van-button>
+      <van-button round plain type="default" class="confirmBtn"
+                  v-if="status== '0'"
+
+      >
+        去付款
+      </van-button>
+      <van-button round plain type="default" class="confirmBtn"
+                  v-if="status== '2'||status== '1'"
+      >
+        确认收货
+      </van-button>
+
+
+
+      <van-button round plain type="default" class="cancelBtn" v-if="status== '2'"
+
+      >
+        查看物流
+      </van-button>
+
+      <van-button round plain type="default" class="confirmBtn"
+                  v-if="status== '3'"
+
+      >
+        评价
+      </van-button>
+
     </div>
 
   </div>
@@ -115,15 +125,131 @@
 
 <script>
   export default {
-    name: "indentInfo"
+    name: "indentInfo",
+    data(){
+      return {
+        user:{},
+        goodslist:[],
+        get_score_nex:undefined,//美丽积分券
+        allprice:undefined,//商品金额
+        score_nex:undefined,//积分券抵扣
+        freight:undefined,//运费
+        allmoney:undefined,//订单总价
+        ordersn:undefined,//订单编号
+        createtime:undefined,//
+        pay_time:undefined,
+        send_time:undefined,
+        take_time:undefined,
+        status:undefined,//状态
+        is_send:undefined,//是否留店
+
+      }
+    },
+    computed:{
+
+      statusTitle:function () {
+        switch (this.status) {
+          case '0':
+            return '等待买家付款';
+            break;
+          case '1':
+            return '待发货';
+            break;
+          case '2':
+            return '待收货';
+            break;
+          case '3':
+            return '待评价';
+            break;
+          case '4':
+            return '交易完成';
+            break
+        }
+      }
+    },
+
+
+    mounted(){
+
+      this.request()
+    },
+    methods:{
+      cancelHandle() {//取消订单
+        this.$dialog.confirm({
+          title: '是否取消订单',
+        }).then(() => {
+          this.reqChange('-1')
+        }).catch(() => {
+
+          // on cancel
+        });
+      },
+      reqChange(status) {//修改订单状态
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
+          type:'get',
+          data:{
+            ordersn: 56456,
+            status: status
+          }
+        }).then(res=>{
+          if (res.code === 100) {
+            if (staus === -1) {
+              this.$toast.success('取消成功')
+              let thia = this
+              setTimeout(function () {
+                thia.$route.go(-1)
+              }, 1000)
+            }
+            if (staus === 3) {
+              this.$toast.success('收货成功')
+              let thia = this
+              setTimeout(function () {
+                // thia.$emit('refresh')
+              }, 1000)
+            }
+          }
+        })
+      },
+      request(){
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
+          type: 'post',
+          data: {
+            ordersn: window.sessionStorage.getItem('ordersn')
+          }
+        }).then(res => {
+          if (res.code === 100) {
+          this.user = res.data.user;
+            this.goodslist = res.data.goodslist;
+            this.get_score_nex = res.data.get_score_nex; //美丽积分券
+            this.allprice = res.data.allrecord.allprice;  //商品金额
+            this.score_nex = res.data.allrecord.score_nex;  //积分券抵扣
+            this.freight = res.data.freight.freight;//运费
+            this.allmoney = res.data.allrecord.money;  //总金额
+            this.ordersn = res.data.ordersn; //订单编号
+            this.createtime = res.data.createtime;
+            this.pay_time = res.data.pay_time;
+            this.send_time = res.data.send_time;
+            this.take_time  = res.data.take_time;
+            this.status = res.data.status;//状态
+            this.is_send = res.data.is_send
+
+          }
+        })
+      }
+    }
+
   }
 </script>
 
 <style lang="scss" scoped>
   .border{
+    position: absolute;
+    bottom: 0;
     height: 1px;
     width: 100%;
-    margin: 12px 0;
+    margin: 12px 0 0;
     background-color: rgba(216,216,216,1);
   }
   .more{
@@ -140,6 +266,7 @@
     justify-content: space-between;
   }
   .flex_start{
+
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -151,7 +278,15 @@
   }
   .indentInfo{
     padding-bottom: 0px;
-    background-color: #fff;
+    background-color: #f4f4f4;
+    height: 100%;
+
+  }
+  .indentInfo_padding2{
+    position: relative;
+    overflow: hidden;
+    height: 110px;
+
   }
   .indentInfo_top{
     height:103px;
@@ -165,9 +300,11 @@
   }
   .indentInfo_padding{
     padding: 12px 15px;
+    background-color: white;
   }
   .indentInfo_padding1{
     padding: 15px;
+    background-color: white;
   }
   .indentInfo_name{
     font-size:15px;
@@ -202,26 +339,30 @@
     height: 80px;
   }
   .InsComm_listRight{
+    height: 80px;
     width: 256px;
     padding-left: 10px;
   }
   .InsComm_listName{
-    height: 25px;
+    margin-top:2px ;
+    height: 23px;
     overflow: hidden;
-    line-height: 25px;
     font-size:16px;
-    font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(72,72,72,1);
   }
   .InsComm_listRightTop{
-    height: 47px;
-    overflow: hidden;
+    height: 35px;
     font-size:12px;
-    font-family:PingFangSC-Regular;
     line-height:17px;
     font-weight:400;
     color:rgba(153,153,153,1);
+    overflow: hidden;
+    text-overflow:ellipsis;//文本溢出显示省略号
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
   }
   .InsCommPay_price{
     font-size:15px;
@@ -277,38 +418,40 @@
   .indentInfo_pad{
     padding-bottom: 6px;
   }
-  .indentInfo_cancel{
-    font-size:14px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(151,151,151,1);
-    width: 90px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 25px;
-    border: 1px solid #F4F4F4;
-  }
-  .indentInfo_pay{
-    font-size:14px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-    width: 90px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background-color: #71B3FF;
-    border-radius: 25px;
-    margin: 0 15px 0 17px;
-  }
-  .indentInfo_btn{
-    height: 49px;
-  }
   .indentInfo_pading{
     padding-bottom: 4px;
   }
   .indentInfo_padding4{
     padding-bottom: 4px;
+  }
+
+  .footer{
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    .confirmBtn{
+      margin:12px 15px 8px 0;
+      width: 90px;
+      height: 30px;
+      background-color: #71B3FF;
+      border-radius: 30px;
+      font-size:14px;
+      color:rgba(255,255,255,1);
+      line-height:30px;
+
+    }
+    .cancelBtn {
+      margin:12px 15px 8px 0;
+      width: 90px;
+      height: 30px;
+      background-color: white;
+      font-size:14px;
+      color:rgba(151,151,151,1);
+      line-height:30px;
+      border-radius: 30px;
+    }
   }
 </style>

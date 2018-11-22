@@ -1,10 +1,10 @@
 <template>
   <div class="card">
-    <span class="card-status">{{status}}</span>
+    <span class="card-status" v-if="this.good.goods[0].is_send=='0'">留店</span>
+    <span class="card-status" v-else>{{status}}</span>
     <div class="card-top"
          v-for="item in good.goods"
          :key="item.goodsid"
-         v-on:click="goDetail(item.goodsid)"
     >
       <img :src="item.thumb" alt="" class="card-top-img">
       <div class="card-top-content">
@@ -21,40 +21,38 @@
     </div>
     <div class="card-bottom">
       <!--<van-icon name="pending-evaluate" class="card-bottom-icon"/>-->
-      <!--<span class="card-bottom-connection" v-on:click="gobaidu">联系卖家</span>-->
+      <!--<span class="card-bottom-connection" v-on:click.stop="gobaidu">联系卖家</span>-->
       <van-button round plain type="default" class="confirmBtn"
                   v-if="good.status== '0'"
-                  v-on:click="goindentConfirme(good.goods[0].ordersn)"
+                  v-on:click.stop="goindentConfirme(good.goods[0].ordersn)"
       >
-        付款
+        去付款
       </van-button>
       <van-button round plain type="default" class="confirmBtn"
                   v-if="good.status== '2'||good.status== '1'"
-                  v-on:click="confirmHandle(good.goods[0].ordersn)">
+                  v-on:click.stop="confirmHandle(good.goods[0].ordersn)">
         确认收货
       </van-button>
 
       <van-button round plain type="default" class="cancelBtn"
                   v-if="good.status== '0'"
-                  v-on:click="cancelHandle(good.goods[0].ordersn)">
+                  v-on:click.stop="cancelHandle(good.goods[0].ordersn)">
         取消订单
       </van-button>
 
-
       <van-button round plain type="default" class="cancelBtn" v-if="good.status== '2'"
-                  v-on:click="logisticsHandle(good.goods[0].ordersn)"
+                  v-on:click.stop="logisticsHandle(good.goods[0].ordersn)"
       >
         查看物流
       </van-button>
 
       <van-button round plain type="default" class="confirmBtn"
                   v-if="good.status== '3'"
-                  v-on:click="goAppraise(good.goods[0].ordersn)"
+                  v-on:click.stop="goAppraise(good.goods[0].ordersn)"
       >
         评价
       </van-button>
     </div>
-
   </div>
 </template>
 
@@ -78,11 +76,14 @@
             return '待发货';
             break
           case '2':
-            return '已发货';
+            return '待发货';
+            break
           case '3':
             return '待评价';
+            break
           case '4':
             return '交易完成';
+            break
           default:
             return undefined
         }
@@ -154,9 +155,7 @@
         })
 
       },
-      goDetail(id) {//跳转
-        this.$router.push({name: 'detail', params: {id: id, type: '1'}})
-      },
+
       goAppraise(id) {//跳转评价
         let arr = []
         this.good.goods.forEach((item) => {
@@ -199,7 +198,7 @@
     &-top {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 7px;
+      /*margin-bottom: 7px;*/
       &-img {
         width: 75px;
         height: 75px;
@@ -246,8 +245,9 @@
       }
     }
     &-middle {
-      height: 42px;
-      line-height: 42px;
+      /*height: 42px;*/
+      /*line-height: 40px;*/
+      margin: 7px 0;
       text-align: right;
       font-size: 14px;
       color: rgba(51, 51, 51, 1);

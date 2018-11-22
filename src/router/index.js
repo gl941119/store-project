@@ -255,7 +255,7 @@ let router = new Router({
       component: resolve => require(['../pages/member/page/userManage/page/userChange'], resolve)
     },
     {//会员中心--用户管理--地址
-      path: '/member/userManage/address/:type',//0 购物时选择状态 1 会员中心编辑状态
+      path: '/member/userManage/address/:type',//0 购物时选择状态 1 会员中心编辑状态  0弃用
       name: 'address',
       title: '收货地址',
       meta: {keepAlive: false}, // 不需要被缓存
@@ -292,8 +292,15 @@ let router = new Router({
       path: '/indentConfirme',
       name: 'indentConfirme',
       title: '订单确认',
-      meta: {keepAlive: false},
+      meta: {keepAlive: true},
       component: resolve => require(['../pages/pay/indentConfirme'], resolve)
+    },
+    {//订单详情
+      path: '/pay/indentInfo', //ordersn  订单号
+      name: 'indentInfo',
+      title: '订单详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/pay/indentInfo'], resolve)
     },
     {//支付
       path: '/pay',
@@ -449,13 +456,7 @@ let router = new Router({
       meta: {keepAlive: true},
       component: resolve => require(['../pages/youthBeauty/index'], resolve)
     },
-    {//订单详情
-      path: '/pay/indentInfo',
-      name: 'indentInfo',
-      title: '订单详情',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/pay/indentInfo'], resolve)
-    },
+
     {//订单交易完成
       path: '/pay/transactionCompletion',
       name: 'transactionCompletion',
