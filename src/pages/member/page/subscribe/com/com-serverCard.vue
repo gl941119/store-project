@@ -9,21 +9,20 @@
         </dt>
         <dd>
           <span>{{item.displayorder}}号美师</span>
-          <span>预计{{item.plan_date}}到店</span>
         </dd>
-        <p>¥{{item.price}}</p>
+        <p>预计{{item.plan_date}}到店</p>
+        <!--<p>¥{{item.price}}</p>-->
       </dl>
     </div>
     <div class="address">
       <img src="../../../../../assets/image/exhibition2.png" alt="">
       <span>{{item.address}}店</span>
-      <p>共一件商品 合计：{{item.price}}元</p>
+      <!--<p>共一件商品 合计：{{item.price}}元</p>-->
     </div>
     <div class="bottom">
-      <van-icon name="pending-evaluate" class="bottom-icon"/>
-      <span v-on:click="goBaidu">联系卖家</span>
+      <!--<van-icon name="pending-evaluate" class="bottom-icon"/>-->
+      <!--<span v-on:click="goBaidu">联系卖家</span>-->
       <!--取消-->
-
       <!--待付款-->
       <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goMemberPayFinish(item.orderid)">查看详情</van-button>
       <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
@@ -119,7 +118,7 @@
     margin: 18px auto 0;
     padding: 10px 10px;
     width: 345px;
-    height: 163px;
+    /*height: 163px;*/
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 1px 11px 0px rgba(211, 211, 211, 0.5);
     border-radius: 4px;
@@ -174,15 +173,24 @@
           line-height: 17px;
         }
       }
-      > p {
-        margin-top: 7px;
-        height: 23px;
-        font-size: 16px;
-        font-family: PingFangSC-Medium;
-        font-weight: 500;
-        color: rgba(233, 58, 61, 1);
-        line-height: 23px;
+      >p{
+        margin-top: 11px;
+        height: 17px;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+
+        color: rgba(153, 153, 153, 1);
+        line-height: 17px;
       }
+      /*> p {*/
+        /*margin-top: 7px;*/
+        /*height: 23px;*/
+        /*font-size: 16px;*/
+        /*font-family: PingFangSC-Medium;*/
+        /*font-weight: 500;*/
+        /*color: rgba(233, 58, 61, 1);*/
+        /*line-height: 23px;*/
+      /*}*/
     }
   }
 
@@ -196,7 +204,6 @@
     > img {
       width: 12px;
       height: 15px;
-
     }
     > span {
       flex: 1;
@@ -220,10 +227,10 @@
   }
 
   .bottom {
-    height: 27px;
-    margin-top: 14px;
+    /*height: 27px;*/
+
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     &-icon {
       font-size: 16px;
@@ -241,6 +248,7 @@
       line-height: 20px;
     }
     &-Btn {
+      margin-top: 14px;
       margin-left: 4px;
       width: 70px;
       height: 27px;

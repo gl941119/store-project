@@ -1,12 +1,12 @@
 <template>
   <div>
-
     <van-tabs v-model="active" @change="tabChange" sticky :swipeable="true">
       <van-tab title="全部">
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
                   @refresh="request"
+                  v-on:click.native="goIndentInfo(item.goods[0].ordersn)"
         ></com-card>
       </van-tab>
       <van-tab title="待付款">
@@ -14,6 +14,7 @@
                   :key="key"
                   :good="item"
                   @refresh="request"
+                  v-on:click.native="goIndentInfo(item.goods[0].ordersn)"
         ></com-card>
       </van-tab>
       <van-tab title="待发货">
@@ -21,6 +22,7 @@
                   :key="key"
                   :good="item"
                   @refresh="request"
+                  v-on:click.native="goIndentInfo(item.goods[0].ordersn)"
         ></com-card>
       </van-tab>
       <van-tab title="待收货">
@@ -28,6 +30,7 @@
                   :key="key"
                   :good="item"
                   @refresh="request"
+                  v-on:click.native="goIndentInfo(item.goods[0].ordersn)"
         ></com-card>
       </van-tab>
       <van-tab title="待评价">
@@ -35,6 +38,15 @@
                   :key="key"
                   :good="item"
                   @refresh="request"
+                  v-on:click.native="goIndentInfo(item.goods[0].ordersn)"
+        ></com-card>
+      </van-tab>
+      <van-tab title="留店">
+        <com-card v-for="item,key in goodslist"
+                  :key="key"
+                  :good="item"
+                  @refresh="request"
+                  v-on:click.native="goIndentInfo(item.goods[0].ordersn)"
         ></com-card>
       </van-tab>
     </van-tabs>
@@ -59,15 +71,18 @@
       }
     },
     mounted() {
-      // this.tabChange()
+      this.tabChange()
       this.active =this.$route.params.type
-
-
     },
-
     methods: {
-      request() {
+      goIndentInfo(ordersn){//跳转详情
+        console.log(ordersn)
+        window.sessionStorage.setItem('ordersn',ordersn)
+        this.$router.push({name:'indentInfo'})
 
+
+      },
+      request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=myorderlist',
           type: 'POST',
@@ -80,6 +95,8 @@
         })
       },
       tabChange(index) {
+
+
         switch (index) {
           case 0:
             this.ltype = 1;
@@ -101,7 +118,11 @@
             this.ltype = 5;
             this.status = 3;
             break;
+          case 5:
+            this.ltype = 6;
+            break;
         }
+
         this.request()
       }
     }

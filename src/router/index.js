@@ -295,6 +295,13 @@ let router = new Router({
       meta: {keepAlive: true},
       component: resolve => require(['../pages/pay/indentConfirme'], resolve)
     },
+    {//订单详情
+      path: '/pay/indentInfo', //ordersn  订单号
+      name: 'indentInfo',
+      title: '订单详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/pay/indentInfo'], resolve)
+    },
     {//支付
       path: '/pay',
       name: 'pay',
@@ -449,13 +456,7 @@ let router = new Router({
       meta: {keepAlive: true},
       component: resolve => require(['../pages/youthBeauty/index'], resolve)
     },
-    {//订单详情
-      path: '/pay/indentInfo',
-      name: 'indentInfo',
-      title: '订单详情',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/pay/indentInfo'], resolve)
-    },
+
     {//订单交易完成
       path: '/pay/transactionCompletion',
       name: 'transactionCompletion',
