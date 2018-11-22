@@ -640,6 +640,20 @@ let router = new Router({
       title: '套餐详情',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/packageDetails/'], resolve)
+    },
+    {//套餐订单详情
+      path: '/setMealHome/page/setMealOrderinfo',
+      name: 'setMealOrderinfo',
+      title: '订单详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/'], resolve)
+    },
+    {//待收货
+      path: '/setMealHome/page/setMealOrderinfo/goodsToBeReceived',
+      name: 'goodsToBeReceived',
+      title: '订单详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/goodsToBeReceived'], resolve)
     }
 
   ]
