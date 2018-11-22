@@ -1,17 +1,6 @@
 <template>
   <div class="beautyBody">
 
-    <!--<div class="exchangeTop" @click="returnChoiceBanks()">-->
-      <!--<div class="exchangeBody">-->
-        <!--<div class="exchangeTxt">-->
-          <!--<div class="exchangeImgBox"><img src="../../../../assets/image/yh_icon.gif" /></div>-->
-          <!--<div class="fundPresentationPadding">-->
-            <!--<div class="fundPresentationYhTitle fundPresentationPadding10">中国工商</div>-->
-            <!--<div class="fundPresentationYhWh">尾号1222储蓄卡</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
     <div class="bindAccountBox">
       <div class=" bindAccountBoxMTop accountFlex">
        <div class="fundPresentationYhTitle">银行卡号：</div>
@@ -24,7 +13,7 @@
 
     </div>
     <div class="bindAccountSubmitBox">
-      <div class="bindAccountSubmit" @click="returnChoiceBanks()">绑定银行卡</div>
+      <div class="bindAccountSubmit" @click="returnChoiceBanks()">提交</div>
     </div>
 
   </div>
