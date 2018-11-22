@@ -1,6 +1,6 @@
 <template>
   <div>
-
+<ServerEvaluate></ServerEvaluate>
     <div class="serverEvaluate">
       <div class="serverEvaluateWbg">
         <div class="serverEvaluateW">
@@ -56,8 +56,12 @@
 </template>
 
 <script>
+  import ServerEvaluate from './com/com-serverEvaluate'
   export default {
     name: "serverEvaluate",
+    components:{
+      ServerEvaluate
+    },
     data() {
       return {
         value: 3,
