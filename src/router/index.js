@@ -98,7 +98,7 @@ let router = new Router({
       }]
     },
     {//热门商品and服务(预约)
-      path: '/subscribe/:type',//1 服务 2 商品
+      path: '/subscribe/:type/:ishot',//type 1 服务 2 商品    ishot // 1热门  0 所有   2默认
       name: 'subscribe',
       meta: {sub_showFooter: true, keepAlive: false},
       beforeEnter: function (to, from, next) {
@@ -309,7 +309,7 @@ let router = new Router({
       component: resolve => require(['../pages/pay'], resolve)
     },
     {//支付成功跳转页面
-      path: '/success',
+      path: '/success/:orderid/:type',// orderid 订单号   type  1 商品   2服务
       name: 'success',
       title: '支付成功',
       meta: {keepAlive: false},

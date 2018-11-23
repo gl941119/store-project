@@ -5,7 +5,7 @@
       <dl>
         <dt>
           <span>{{item.service_name}}</span>
-          <span>{{type}}</span>
+          <span>{{item.type}}</span>
         </dt>
         <dd>
           <span>{{item.displayorder}}号美师</span>
@@ -17,7 +17,7 @@
     <div class="address">
       <img src="../../../../../assets/image/exhibition2.png" alt="">
       <span>{{item.address}}店</span>
-      <!--<p>共一件商品 合计：{{item.price}}元</p>-->
+      <p v-if="item.type=='待付款'">服务费: <span>￥{{item.price}}</span></p>
     </div>
     <div class="bottom">
       <!--<van-icon name="pending-evaluate" class="bottom-icon"/>-->
@@ -25,8 +25,8 @@
       <!--取消-->
       <!--待付款-->
       <!--<van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goMemberPayFinish(item.orderid)">查看详情</van-button>-->
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
-      <van-button type="default" class="bottom-Btn" v-if="showPayBtn" v-on:click="pay(item.orderid)">支付</van-button>
+      <!--<van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>-->
+      <van-button type="default" class="bottom-Btn" v-if="item.type=='待付款'"  v-on:click.stop="pay(item.orderid)">支付</van-button>
     </div>
   </div>
 </template>
@@ -39,12 +39,11 @@
       type:function () {
         switch (this.item.type) {
           case '0':
-            return '已取消'
+            return '全部'
           case '1':
             return '待付款'
           case '2':
             return '已预约'
-
           case '3':
             return '已取消'
         }
@@ -74,11 +73,28 @@
     methods:{
 
       pay(orderid){
-          if(window.sessionStorage.getItem('is_member')== '1'){
-            this.$router.push({name:'memberPayFinish',params:{orderid:orderid,type:'1'}})
-          }else{
-            this.$router.push({name:'confirm',params:{orderid:orderid}})
-          }
+
+
+
+        if(window.sessionStorage.getItem('is_member')== '0'){//非會員
+          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+        }else{//會員
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
+            type: 'post',
+            data: {
+              orderid: orderid
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('提交成功')
+              let thia = this
+              setTimeout(function () {
+                thia.$router.push({name: 'success',params:{orderid:orderid,type:'2'}})
+              }, 500)
+            }
+          })
+        }
       },
       goBaidu(){
         this.$baidu()
@@ -214,13 +230,20 @@
       line-height: 17px;
     }
     > p {
-
       height: 20px;
       font-size: 14px;
       font-family: PingFangSC-Regular;
-
       color: rgba(51, 51, 51, 1);
       line-height: 20px;
+      >span{
+        color: red;
+
+        font-size:16px;
+        font-family:PingFangSC-Medium;
+        font-weight:500;
+        color:rgba(233,58,61,1);
+        line-height:23px;
+      }
     }
   }
 

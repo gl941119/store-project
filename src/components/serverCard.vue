@@ -2,6 +2,7 @@
   <div class="card" >
     <img :src="Data.thumb" alt="" class="card-left">
     <div class="card-right">
+      <van-button plain type="primary" class="card-right-cancelBtn" v-on:click.stop="cancelCollect(Data.id)" v-if="collect">取消收藏</van-button>
       <p class="card-right-name">{{Data.name}}</p>
       <p class="card-right-content">{{Data.description}}</p>
       <p class="card-right-price my-price">￥{{Data.marketprice}}</p>
@@ -20,11 +21,35 @@
       },
       btn:{
         default:true
+      },
+      collect:{
+        default: false
       }
     },
     mounted(){
     },
     methods:{
+      cancelCollect(id){
+        this.$dialog.confirm({
+          title: '是否取消收藏',
+        }).then(() => {
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=87&act=collection',
+            type: 'get',
+            data: {
+              type: '2',
+              id: id
+            }
+          }).then(res => {
+            if (res.code === 100) {
+                this.$emit('refresh')
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
+
+      },
       goDetail(id){
         this.$router.push({name:'detail',params:{type:'2',id:id}})
 
@@ -57,6 +82,22 @@
       flex: 1;
       width: 130px;
       margin-left: 15px;
+      position: relative;
+      overflow: hidden;
+      &-cancelBtn{
+        position: absolute;
+        right: 10px;
+        top: 9px;
+        border: 1px solid #999999 !important;
+        color: #999999;
+
+        width:60px;
+        height:19px;
+        line-height: 19px;
+        font-size:10px;
+
+        color:rgba(153,153,153,1);
+      }
       &-name {
         margin-top: 9px;
         font-size: 16px;

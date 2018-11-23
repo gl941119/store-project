@@ -9,7 +9,7 @@
         <p>首页</p>
       </router-link>
 
-      <router-link tag="li" :to="{name: 'subscribe',params:{type:'1'}}"
+      <router-link tag="li" :to="{name: 'subscribe',params:{type:'1',ishot:'0'}}"
                    v-bind:class="{li_hover:hover===1}"
 
       >

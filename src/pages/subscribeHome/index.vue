@@ -2,10 +2,9 @@
   <div class="subscribeHomePage_padding">
     <div class="subscribeHomePage_body">
       <van-swipe class="subscribeHomePage_banner" :autoplay="3000">
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
+        <van-swipe-item v-for="item,index in slide" :key="index">
+          <img :src="item.bimg" v-if="item.bimg" v-on:click="goLink(item.link)">
+        </van-swipe-item>
       </van-swipe>
       <div class="subscribeHomePage_null"></div>
       <div class="subscribeHomePage_content">
@@ -21,28 +20,16 @@
         </div>
 
         <div class="subscribeHomePage_list">
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
+          <div class="subscribeHomePage_item" v-for="item in  sdata" :key="item.id" v-on:click="goDetails(item.id)" >
+            <div class="subscribeHom_height167"><img :src="item.simg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHomePage_item_txt">{{item.name}}</div>
           </div>
 
         </div>
       </div>
-      <div class="subscribeHome_height"><img src="../../assets/image/img_2.png" class="subscribeHomePage_advertisement"></div>
+      <div class="subscribeHome_height"><img :src="adv[0].bimg" v-if="adv[0].bimg" class="subscribeHomePage_advertisement" v-on:click="goLink(adv[0].link)"></div>
       <div class="subscribeHomePage_null"></div>
-      <div class="subscribeHome_height"><img src="../../assets/image/img_1.png" class="subscribeHomePage_advertisement"></div>
+      <div class="subscribeHome_height"><img :src="adv[1].bimg" v-if="adv[1].bimg" class="subscribeHomePage_advertisement" v-on:click="goLink(adv[0].link)"></div>
       <div class="subscribeHomePage_null"></div>
     </div>
 
@@ -52,14 +39,41 @@
 <script>
   export default {
     name: "index",
+    data(){
+      return{
+        adv:[],
+        sdata:[],
+        slide:[]
+      }
+    },
     mounted(){
       this.$store.commit('setSub_hover',0)
+      this.request()
     },
     methods:{
+      goDetails(id){
+        this.$router.push({name:'detail',params:{type:'2',id:id}})
+      },
+      goLink(link){//广告位跳转
+        window.location.href = link
+      },
+      request(){//
+
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=86&act=indexdata',
+          type:'get',
+        }).then(res=>{
+          if(res.code===100){
+            this.adv = res.data.adv
+            this.sdata =res.data.sdata
+            this.slide = res.data.slide
+
+          }
+        })
+
+      },
       goSubscribe(){//热门服务
-        this.$router.push({name:'subscribe',params:{type:'1'}})
-
-
+        this.$router.push({name:'subscribe',params:{type:'1',ishot:'1'}})
       }
     }
   }

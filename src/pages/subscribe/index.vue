@@ -13,7 +13,6 @@
         <li @click="clickHandle('2')" v-bind:class="{li_hover: hover=== '2' }">销量</li>
         <li @click="clickHandle('3')" v-bind:class="{li_hover: hover=== '3' }">价格</li>
       </ul>
-
       <div v-if="type === '1'">
         <server-card
           v-for="item in serverData"
@@ -39,6 +38,7 @@
     data() {
       return {
         type: this.$route.params.type,
+        ishot:this.$route.params.ishot,
         showAction: true,
         bgColor: '#F4F4F4',
         sort: 1,
@@ -47,13 +47,17 @@
         productData: null,
         reqData: null,
         value: undefined,
-        hover:'1'
+        hover:'1',
       }
     },
 
     computed: {
       name: function () {
-        return this.type === '1' ? '热门服务' : '热门商品'
+        if (this.type === '1'){//服务
+          return this.ishot  == '1' ? '热门服务':'所有服务'
+        }else{//商品
+          return   '热门商品'
+        }
       }
     },
     watch: {
@@ -64,6 +68,7 @@
       }
     },
     created() {
+
       this.$store.commit('setSub_hover', 1)
     },
     mounted() {
@@ -93,7 +98,7 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=list',
           data: {
             sort: this.sort,
-            search: this.value
+            search: this.value,
           },
           type: 'get'
         }).then((res) => {
@@ -112,7 +117,8 @@
           url: 'app/index.php?i=1&c=entry&eid=86&act=list',
           data: {
             sort: this.sort,
-            search: this.value
+            search: this.value,
+            ishot: this.ishot
           },
           type: 'get'
         }).then((res) => {

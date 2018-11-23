@@ -2,10 +2,10 @@
   <div class="wrap">
     <img src="../../assets/image/transfer.png" alt="">
     <dt>恭喜您支付成功</dt>
-    <dd>订单状态会变成“已支付”</dd>
+    <!--<dd>订单状态会变成“已支付”</dd>-->
     <p>{{second}}秒后自动跳转首页</p>
     <van-button type="default" class="btn" v-on:click="goMyIndent">查看订单</van-button>
-    <van-button type="default" class="back" v-on:click="goIndex">返回首页</van-button>
+    <van-button type="default" class="back" v-on:click="goIndex">去逛逛</van-button>
   </div>
 </template>
 
@@ -14,6 +14,8 @@
     name: "transfer",
     data() {
       return {
+        orderid:this.$route.params.orderid,//订单号
+        type:this.$route.params.type,//1 商品  2 服务   3 套餐
         second: 3,
         tiem: null
       }

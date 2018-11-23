@@ -36,11 +36,11 @@
           <!--<img src="../../../../assets/image/dfk.png">-->
           <!--<div class="user_con_itemTxt">已完成</div>-->
         <!--</router-link>-->
-        <router-link tag="li" class="user_con_item1" :to="{name:'memberSubscribe',params:{type:4}}">
-          <img src="../../../../assets/image/dpj.png">
-          <div class="user_con_itemTxt">待评价</div>
-        </router-link>
-        <router-link tag="li" class="user_con_item1" :to="{name:'memberSubscribe',params:{type:5}}">
+        <!--<router-link tag="li" class="user_con_item1" :to="{name:'memberSubscribe',params:{type:4}}">-->
+          <!--<img src="../../../../assets/image/dpj.png">-->
+          <!--<div class="user_con_itemTxt">待评价</div>-->
+        <!--</router-link>-->
+        <router-link tag="li" class="user_con_item1" :to="{name:'memberSubscribe',params:{type:3}}">
           <img src="../../../../assets/image/dpj.png">
           <div class="user_con_itemTxt">已取消</div>
         </router-link>

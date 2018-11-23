@@ -95,8 +95,6 @@
           this.$toast.fail('请输入预约姓名')
           return;
         }
-
-
           if (this.Is_member === '1') {//会员
             this.$dialog.confirm({
               title: '是否预约',
@@ -108,7 +106,6 @@
                 data: {
                   realname:this.value,
                   message:this.leaveMessage,
-
                   orderid: this.orderid
                 }
               }).then((res) => {
@@ -127,7 +124,9 @@
         this.$dialog.confirm({
           title: '是否取消预约',
         }).then(() => {
-          this.$router.go(-1)
+          // this.$router.go(-1)
+          this.cancelIndent()
+
         }).catch(() => {
           // on cancel
         });
@@ -135,30 +134,30 @@
       payHandle() {//非会员线上支付
         window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid162.eid + '&dom=' + this.$eid162.dom + '&act=payorder&orderid=' + this.orderid
       },
-      // cancelHandle() {//非会员取消
-      //   this.$dialog.confirm({
-      //     title: '是否取消预约',
-      //     message: ''
-      //   }).then(() => {
-      //     this.$request({
-      //       url: 'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
-      //       type: 'post',
-      //       data: {
-      //         orderid: this.orderid,
-      //       }
-      //     }).then(res => {
-      //       if (res.code === 100) {
-      //         this.$toast.success('取消成功');
-      //         setTimeout(() => {
-      //           this.$router.go(-1)
-      //         }, 500)
-      //       }
-      //
-      //     })
-      //   }).catch(() => {
-      //     // on cancel
-      //   });
-      // },
+      cancelIndent() {//取消订单
+        this.$dialog.confirm({
+          title: '是否取消预约',
+          message: ''
+        }).then(() => {
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
+            type: 'post',
+            data: {
+              orderid: this.orderid,
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('取消成功');
+              setTimeout(() => {
+                this.$router.go(-1)
+              }, 500)
+            }
+
+          })
+        }).catch(() => {
+          // on cancel
+        });
+      },
 
 
       request() {
