@@ -178,7 +178,7 @@
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    padding:61px 0 0 0;
+    padding:77px 0 0 0;
   }
   .member_tab{
     width: 33.333%;

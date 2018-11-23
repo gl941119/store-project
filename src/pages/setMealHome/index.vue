@@ -73,7 +73,8 @@
         this.$router.push({name:str})
       },
       infoEv(){//是否是会员
-        // 1 会员 0非会员
+        // 1 memberCenter 会员
+        // 0 setMealMember 非会员
         parseInt(this.isMember)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
       },
       indexReques(){

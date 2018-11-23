@@ -23,7 +23,7 @@
                     <div class="myTeam_myHeadFlexImg"><img :src="item.avatar"></div>
                     <div class="myTeam_myHeadFlexName">{{item.nick}}</div>
                   </div>
-                  <div class="myTeam_myHeadFlexR">积分：2000.00</div>
+                  <div class="myTeam_myHeadFlexR">积分：{{item.score}}</div>
                 </div>
               </div>
 
@@ -36,7 +36,7 @@
                     <div class="myTeam_myHeadFlexImg"><img :src="item.avatar"></div>
                     <div class="myTeam_myHeadFlexName">{{item.nick}}</div>
                   </div>
-                  <div class="myTeam_myHeadFlexR">积分：2000.02</div>
+                  <div class="myTeam_myHeadFlexR">积分：{{item.score}}</div>
                 </div>
               </div>
 
