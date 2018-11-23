@@ -1,28 +1,43 @@
 <template>
     <div class="commonSetMeal">
 
-      <div class="commonSetMeal_box">
-        <div class="commonSetMeal_imgBox"><img src="../../../../assets/image/s_1.jpg"></div>
+      <div class="commonSetMeal_box" v-for="item in dataList">
+        <div class="commonSetMeal_imgBox"><img :src="item.simg"></div>
         <div class="commonSetMeal_right">
-          <div class="commonSetMeal_title">保湿滋养套餐</div>
+          <div class="commonSetMeal_title">{{item.name}}</div>
           <div class="commonSetMeal_cont"></div>
-          <div class="commonSetMeal_price">¥200.00</div>
+          <div class="commonSetMeal_price">¥{{item.o_price}}</div>
         </div>
       </div>
-      <div class="commonSetMeal_box">
-        <div class="commonSetMeal_imgBox"><img src="../../../../assets/image/s_1.jpg"></div>
-        <div class="commonSetMeal_right">
-          <div class="commonSetMeal_title">保湿滋养套餐</div>
-          <div class="commonSetMeal_cont"></div>
-          <div class="commonSetMeal_price">¥200.00</div>
-        </div>
-      </div>
+
     </div>
 </template>
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+      data(){
+          return {
+            dataList:null//数据列表s
+          }
+      },
+      mounted(){
+        this.indexReques();
+      },
+      methods:{
+        indexReques(){
+          // vip=1 热门套餐
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=153&dom=meal&act=list&vip=0',
+            type:'post'
+          }).then(res=>{
+            if(res.status){
+              let d=res.data;
+              this.dataList=d.list;
+            }
+          })
+        }
+      }
     }
 </script>
 

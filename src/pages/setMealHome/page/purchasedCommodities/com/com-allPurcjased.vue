@@ -1,42 +1,32 @@
 <template>
 <div>
-  <div class="purchasedService_list">
+  <div class="purchasedService_list" v-for="item in Data">
 
     <div class="purchasedService_listTop">
       <div class="purchasedService_flex">
         <div class="purchasedService_listSolid"></div>
-        <div class="purchasedService_listT">1980套餐</div>
+        <div class="purchasedService_listT">{{item.name}}</div>
       </div>
-      <div class="purchasedService_listRStatus">{{Data}}</div>
+      <div class="purchasedService_listRStatus">{{statusEv(item.is_send,item.status)}}</div>
     </div>
 
-    <div class="purchasedService_itemBox">
-      <div class="purchasedService_itemImg"><img src="../../../../../assets/image/t1.jpg"></div>
+    <div class="purchasedService_itemBox" v-for="t in item.goods">
+      <div class="purchasedService_itemImg"><img :src="t.thumb"></div>
       <div class="purchasedService_itemR">
-        <div class="purchasedService_itemRT">保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜</div>
+        <div class="purchasedService_itemRT">{{t.title}}</div>
         <div class="purchasedService_itemRCont"></div>
         <div class="purchasedService_itemB">
-          <div class="purchasedService_itemPrice">¥98.00</div>
-          <div class="purchasedService_frequency">次数：20</div>
+          <div class="purchasedService_itemPrice">¥{{t.marketprice}}</div>
+          <div class="purchasedService_frequency">次数：{{t.count}}</div>
         </div>
       </div>
     </div>
-
-    <div class="purchasedService_itemBox">
-      <div class="purchasedService_itemImg"><img src="../../../../../assets/image/t1.jpg"></div>
-      <div class="purchasedService_itemR">
-        <div class="purchasedService_itemRT">保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜</div>
-        <div class="purchasedService_itemRCont"></div>
-        <div class="purchasedService_itemB">
-          <div class="purchasedService_itemPrice">¥98.00</div>
-          <div class="purchasedService_frequency">次数：20</div>
-        </div>
-      </div>
-    </div>
-    <div class="package_to_be_received">
+<div class="purchasedService_itemBottom"></div>
+    <div class="package_to_be_received" v-if="goodsToBeReceived(item.is_send,item.status)">
       <div class="packageBtnFind">查看物流</div>
       <div class="packageBtnOk">确认收货</div>
     </div>
+
   </div>
 
 
@@ -49,7 +39,38 @@
 <script>
     export default {
         name: "com-allPurcjased",
-      props:['Data']
+      props:['Data'],
+      data(){
+          return {
+
+          }
+      },
+      mounted(){
+
+      },
+      methods:{
+        receivedStatus(send,status){
+            let s=parseInt(status);
+            let sen=parseInt(send);
+            var str='';
+            if(sen===1&&s===1){
+              str='代发货';
+            }else if(sen===1&&s===2){
+              str='待收货';
+            }else if(sen===1&&s===3){
+              str='交易完成';
+            }
+            return str;
+          },
+        goodsToBeReceived(send,status){
+          return parseInt(send)===1&&parseInt(status)===2?true:false;
+        },
+        statusEv(send,status){
+return parseInt(send)==0?'留店':this.receivedStatus(send,status);
+        }
+      }
+
+
     }
 </script>
 
@@ -159,5 +180,9 @@
   .packageBtnOk{
     color:rgba(233,58,61,1);
     border: 1px solid rgba(233,58,61,1);
+  }
+  .purchasedService_itemBottom{
+    height: 13px;
+    width: 100%;
   }
 </style>

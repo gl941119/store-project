@@ -23,7 +23,7 @@
         </div>
         <div>
           <p class="oneDyBottom">销售额</p>
-          <p class="oneDyTxtJe">¥{{ item.allamount }}</p>
+          <p class="oneDyTxtJe">¥{{ item.allscore }}</p>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
             var list=res.data.list;
             this.imgSrc=user.avatar;
             this.names=user.name;
-            this.money=user.allamount;
+            this.money=user.allscore;
             this.num=user.num;
             this.arr=list;
             this.listLen=list.length;

@@ -18,7 +18,7 @@
         name: "fundPresentationOk",
       methods:{
         fundButOk(){
-          this.$router.push({name:'fundPresentation'});
+          this.$router.go(-1);
         }
       }
     }

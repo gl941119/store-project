@@ -22,7 +22,6 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
       message: '加载中...'
     });
   }
-  console.log(123)
 
   if (process.env.NODE_ENV === 'development') {
     url = url.replace('eid=84', 'eid=153&dom=index');
@@ -31,6 +30,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=87', 'eid=153&dom=comm');
     url = url.replace('eid=88', 'eid=153&dom=ucenter');
     url = url.replace('eid=89', 'eid=153&dom=card');
+    url = url.replace('eid=90', 'eid=153&dom=meal');
   } else {
     let config =  Cache.getConfig()
     let key = config.binds;
@@ -40,7 +40,8 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     }
   }
 
-// url=url+'&openid=p3qYOh';
+
+url=url+'&openid=TfikQA';
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');

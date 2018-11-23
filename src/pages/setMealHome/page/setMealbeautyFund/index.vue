@@ -1,7 +1,7 @@
 <template>
   <div class="beautifulPoints">
     <div class="beautifulPoints_top">
-      <div class="beautifulPoints_topNum">20</div>
+      <div class="beautifulPoints_topNum">{{score}}</div>
       <div class="beautifulPoints_topName">美丽基金</div>
       <div class="beautifulPoints_topBtnBox">
         <div class="beautifulPoints_topBtn" @click="()=>{this.$router.push({name:'fundPresentation'})}">提现</div>
@@ -12,52 +12,15 @@
 
     <div class="beautifulPoints_list">
 
-      <div class="beautifulPoints_flex">
+      <div class="beautifulPoints_flex" v-for="item in dataList">
         <div>
-          <div class="beautifulPoints_flexName">提现至中国银行（尾号1123）</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
+          <div class="beautifulPoints_flexName">{{item.title}}</div>
+          <div class="beautifulPoints_flexTime">{{item.createtime}}</div>
         </div>
-        <div class="beautifulPoints_flexPrice">+40</div>
+        <div class="beautifulPoints_flexPriceJ" v-if="parseInt(item.status)===2">-{{item.score}}</div>
+        <div class="beautifulPoints_flexPrice" v-if="parseInt(item.status)===1" >+{{item.score}}</div>
       </div>
-      <div class="beautifulPoints_flex">
-        <div>
-          <div class="beautifulPoints_flexName">提现至中国银行（尾号1123）</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-        </div>
-        <div class="beautifulPoints_flexPrice">+40</div>
-      </div>
-      <div class="beautifulPoints_flex">
-        <div>
-          <div class="beautifulPoints_flexName">美丽积分兑换</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-        </div>
-        <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-      </div>
-      <div class="beautifulPoints_flex">
-        <div>
-          <div class="beautifulPoints_flexName">美丽积分兑换</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-        </div>
-        <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-      </div><div class="beautifulPoints_flex">
-      <div>
-        <div class="beautifulPoints_flexName">美丽积分兑换</div>
-        <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-      </div>
-      <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-    </div><div class="beautifulPoints_flex">
-      <div>
-        <div class="beautifulPoints_flexName">美丽积分兑换</div>
-        <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-      </div>
-      <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-    </div><div class="beautifulPoints_flex">
-      <div>
-        <div class="beautifulPoints_flexName">美丽积分兑换</div>
-        <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-      </div>
-      <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-    </div>
+
     </div>
   </div>
 </template>
@@ -65,9 +28,30 @@
 <script>
   export default {
     name: "index",
+    data(){
+      return {
+        dataList:{},
+        score:0
+      }
+    },
+    mounted(){
+this.initEv();
+    },
     methods:{
+      initEv(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=share_amount_record',
+          type:'post'
+        }).then(res=>{
+          if(res.status){
+            let d=res.data;
+            this.score=d.share_o_amount;
+            this.dataList=d.list;
+          }
+        });
+      }
+    },
 
-    }
   }
 </script>
 
@@ -140,6 +124,7 @@
     font-weight:400;
     color:rgba(74,74,74,1);
     padding: 16px 0 7px 0;
+    width: 250px;
   }
   .beautifulPoints_flexTime{
     font-size:11px;
