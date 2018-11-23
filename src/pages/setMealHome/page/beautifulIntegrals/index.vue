@@ -1,7 +1,7 @@
 <template>
   <div class="beautifulPoints">
     <div class="beautifulPoints_top">
-      <div class="beautifulPoints_topNum">20</div>
+      <div class="beautifulPoints_topNum">{{score}}</div>
       <div class="beautifulPoints_topName">美丽积分券</div>
     </div>
 
@@ -9,52 +9,15 @@
 
     <div class="beautifulPoints_list">
 
-      <div class="beautifulPoints_flex">
+      <div class="beautifulPoints_flex" v-for="item in dataList">
         <div>
-          <div class="beautifulPoints_flexName">王大锤消费</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
+          <div class="beautifulPoints_flexName">{{item.title}}</div>
+          <div class="beautifulPoints_flexTime">{{item.createtime}}</div>
         </div>
-        <div class="beautifulPoints_flexPrice">+40</div>
+        <div class="beautifulPoints_flexPriceJ" v-if="parseInt(item.status)===2">-{{item.score_nex}}</div>
+        <div class="beautifulPoints_flexPrice" v-if="parseInt(item.status)===1" >+{{item.score_nex}}</div>
       </div>
-      <div class="beautifulPoints_flex">
-        <div>
-          <div class="beautifulPoints_flexName">王大锤消费</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-        </div>
-        <div class="beautifulPoints_flexPrice">+40</div>
-      </div>
-      <div class="beautifulPoints_flex">
-        <div>
-          <div class="beautifulPoints_flexName">积分券抵扣-泰莉萨冻干粉</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-        </div>
-        <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-      </div>
-      <div class="beautifulPoints_flex">
-        <div>
-          <div class="beautifulPoints_flexName">积分券抵扣-泰莉萨冻干粉</div>
-          <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-        </div>
-        <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-      </div><div class="beautifulPoints_flex">
-      <div>
-        <div class="beautifulPoints_flexName">积分券抵扣-泰莉萨冻干粉</div>
-        <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-      </div>
-      <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-    </div><div class="beautifulPoints_flex">
-      <div>
-        <div class="beautifulPoints_flexName">积分券抵扣-泰莉萨冻干粉</div>
-        <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-      </div>
-      <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-    </div><div class="beautifulPoints_flex">
-      <div>
-        <div class="beautifulPoints_flexName">积分券抵扣-泰莉萨冻干粉</div>
-        <div class="beautifulPoints_flexTime">2018.01.01 14：20</div>
-      </div>
-      <div class="beautifulPoints_flexPrice beautifulPoints_flexPriceJ">+40</div>
-    </div>
+
     </div>
   </div>
 </template>
@@ -62,9 +25,30 @@
 <script>
   export default {
     name: "index",
+    data(){
+      return {
+        dataList:{},
+        score:0
+      }
+    },
+    mounted(){
+      this.initEv();
+    },
     methods:{
+      initEv(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=score_nex_record',
+          type:'post'
+        }).then(res=>{
+          if(res.status){
+            let d=res.data;
+            this.score=d.score_nex;
+            this.dataList=d.list;
+          }
+        });
+      }
+    },
 
-    }
   }
 </script>
 
@@ -137,6 +121,7 @@
     font-weight:400;
     color:rgba(74,74,74,1);
     padding: 16px 0 7px 0;
+    width: 250px;
   }
   .beautifulPoints_flexTime{
     font-size:11px;
