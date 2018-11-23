@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="main" v-on:click="goDetail(item.sid)">
+    <div class="main" >
       <img :src="item.simg" alt="" class="main-img">
       <dl>
         <dt>
@@ -24,9 +24,9 @@
       <!--<span v-on:click="goBaidu">联系卖家</span>-->
       <!--取消-->
       <!--待付款-->
-      <van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goMemberPayFinish(item.orderid)">查看详情</van-button>
+      <!--<van-button type="default" class="bottom-Btn" v-if="item.type==='2'||item.type==='3'" v-on:click="goMemberPayFinish(item.orderid)">查看详情</van-button>-->
       <van-button type="default" class="bottom-Btn" v-if="item.type==='1'&&is_member==='0'" v-on:click="cancleIndent(item.orderid)">取消订单</van-button>
-      <van-button type="default" class="bottom-Btn" v-if="showPayBtn" v-on:click="pay(item.orderid)">付款</van-button>
+      <van-button type="default" class="bottom-Btn" v-if="showPayBtn" v-on:click="pay(item.orderid)">支付</van-button>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@
             return '已预约'
 
           case '3':
-            return '已完成'
+            return '已取消'
         }
       },
       showPayBtn:function () {
@@ -72,9 +72,7 @@
       }
     },
     methods:{
-      goDetail(sid){
-        this.$router.push({name:'detail',params:{type:'2',id:sid}})
-      },
+
       pay(orderid){
           if(window.sessionStorage.getItem('is_member')== '1'){
             this.$router.push({name:'memberPayFinish',params:{orderid:orderid,type:'1'}})

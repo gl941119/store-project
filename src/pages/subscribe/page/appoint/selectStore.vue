@@ -21,44 +21,6 @@
           </div>
         </div>
       </div>
-
-
-
-      <div class="selectAddress_item">
-        <div class="selectAddress_itemImg"><img src="../../../../assets/image/image-1.png"></div>
-        <div class="selectAddress_itemR">
-          <div class="selectAddress_top">
-            <div class="selectAddress_name">环球中心店</div>
-            <div class="selectAddress_imgBox"><a :href="'tel:' + 17169300878"><img src="../../../../assets/image/tel1.png" class="selectAddress_imgP"></a></div>
-          </div>
-          <div class="space_between selectAddress_info">
-            <div class="selectAddress_txt">已服务2990人次 </div>
-            <div class="selectAddress_hao">好评率98%</div>
-          </div>
-          <div class="flex_start selectAddress_box">
-            <img src="../../../../assets/image/exhibition2.png" class="selectAddress_imgIcon">
-            <div class="selectAddress_address">四川成都市高新区中环球中心四川成都市高新区中环球中心</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="selectAddress_item">
-        <div class="selectAddress_itemImg"><img src="../../../../assets/image/image-1.png"></div>
-        <div class="selectAddress_itemR">
-          <div class="selectAddress_top">
-            <div class="selectAddress_name">环球中心店</div>
-            <div class="selectAddress_imgBox"><a :href="'tel:' + 17169300878"><img src="../../../../assets/image/tel1.png" class="selectAddress_imgP"></a></div>
-          </div>
-          <div class="space_between selectAddress_info">
-            <div class="selectAddress_txt">已服务2990人次 </div>
-            <div class="selectAddress_hao">好评率98%</div>
-          </div>
-          <div class="flex_start selectAddress_box">
-            <img src="../../../../assets/image/exhibition2.png" class="selectAddress_imgIcon">
-            <div class="selectAddress_address">四川成都市高新区中环球中心四川成都市高新区中环球中心</div>
-          </div>
-        </div>
-      </div>
       <!--item end-->
     </div>
   </div>

@@ -154,13 +154,18 @@ a:focus {
   max-width: 375px;
 
 }
+.mt6{
+  margin-top: 6px;
+}
 .mt8{
   margin-top: 8px;
 }
 .mt10 {
   margin-top: 10px;
 }
-
+.mt12 {
+  margin-top: 12px;
+}
 .mt13 {
   margin-top: 13px;
 }

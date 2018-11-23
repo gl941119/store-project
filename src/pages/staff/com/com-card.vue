@@ -75,7 +75,7 @@
         this.$baidu()
       },
       goAppointPay(orderid) {
-        this.$router.push({name: 'appointPay', params: {orderid: orderid}})
+        this.$router.push({name: 'serviceInfo', params: {orderid: orderid}})
       },
       cancleIndent(orderid) {//取消订单
         this.$dialog.confirm({
@@ -100,7 +100,7 @@
         });
       },
       goAppointPay() {
-        this.$router.push({name: 'appointPay', params: {orderid: this.item.orderid}})
+        this.$router.push({name: 'serviceInfo', params: {orderid: this.item.orderid}})
       }
     }
 
