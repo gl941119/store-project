@@ -13,8 +13,8 @@
     </div>
     <div class="null"></div>
     <div class="indentInfo_padding1">
-      <div class="flex_start indentInfo_padding2" v-for="item,index in goodslist" :key="index">
-        <div class="InsComm_listImg"><img src="../../assets/image/t1.jpg"></div>
+      <div class="flex_start indentInfo_padding2" v-for="item,index in goodslist" :key="index" v-on:click="goDetail(item.goodsid)">
+        <div class="InsComm_listImg"><img src="item.thumb"></div>
         <div class="InsComm_listRight">
           <div>
             <div class="InsComm_listName">
@@ -174,6 +174,9 @@
       this.request()
     },
     methods:{
+      goDetail(id){
+        this.$router.push({name:'detail',params:{type:'1',id:id}})
+      },
       cancelHandle() {//取消订单
         this.$dialog.confirm({
           title: '是否取消订单',
@@ -189,7 +192,7 @@
           url:'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
           type:'get',
           data:{
-            ordersn: 56456,
+            ordersn: window.sessionStorage.getItem('ordersn'),
             status: status
           }
         }).then(res=>{

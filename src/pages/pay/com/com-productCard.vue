@@ -54,6 +54,7 @@
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=updateorder',
           type: 'post',
+          isToast:false,
           data: {
             ordersn: window.sessionStorage.getItem('ordersn'),
             goods:JSON.stringify(goods)

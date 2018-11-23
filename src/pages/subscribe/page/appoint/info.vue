@@ -12,9 +12,6 @@
     <!--提示,已预约状态下才有-->
     <com-tip v-if="type===0"></com-tip>
 
-
-
-
     <!--<van-button type="default" v-if="isStore" class="overBtn" v-on:click="overHandle">已完成预约</van-button>-->
 
     <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===0">已预约</van-button>
@@ -90,7 +87,37 @@
     },
     methods: {
       payHandle(){
-        // window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+
+        if(window.sessionStorage.getItem('is_member')== '0'){//非會員
+          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+        }else{//會員
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
+            type: 'post',
+            data: {
+              orderid: this.$route.params.orderid
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('提交成功')
+              let thia = this
+              setTimeout(function () {
+                thia.$router.push({name: 'success',params:{}})
+              }, 500)
+            }
+          })
+        }
+
+
+
+
+
+
+
+
+
+
+
       },
       gorouter(){
         this.$router.go(-1)
@@ -121,13 +148,13 @@
             sp_status = res.data.sp_status,
             is_use = res.data.is_use;
 
-          if (is_use == '0' && sp_status == '1') { //已预约
+          if (is_use == '0' && status == '0') { //已预约
             this.type = 0
           } else if (is_use == '1' && status == '0') {//待付款
             this.type = 1
           } else if (is_use == '1' && status == '1') {// 支付完成
             this.type = 2
-          } else if (is_use == '1' && status == '-1') {//已取消
+          } else if (is_use == '0' && status == '-1') {//已取消
             this.type = -1
           }
           console.log(this.type)

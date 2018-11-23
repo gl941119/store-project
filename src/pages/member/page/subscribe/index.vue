@@ -61,7 +61,7 @@
           if (res.code === 100) {
             this.appoint = res.data.appoint
             this.appoint.forEach(item => {
-              // let type;
+              let type;
               // let is_use = item.is_use, status = item.status;
               // if (is_use == '0' ) { //已预约
               //   type = 0
@@ -72,7 +72,7 @@
               // } else if (is_use == '0' && status == '-1') {//已取消
               //   type = -1
               // }
-              item['type'] = parseInt(item.status_name)-1
+              item['type'] = item.status_name
             })
           }
         })

@@ -14,6 +14,8 @@
     name: "transfer",
     data() {
       return {
+        orderid:this.$route.params.orderid,//订单号
+        type:this.$route.params.type,//1 商品  2 服务   3 套餐
         second: 3,
         tiem: null
       }

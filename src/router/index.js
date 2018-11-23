@@ -309,7 +309,7 @@ let router = new Router({
       component: resolve => require(['../pages/pay'], resolve)
     },
     {//支付成功跳转页面
-      path: '/success',
+      path: '/success/:orderid/:type',// orderid 订单号   type  1 商品   2服务
       name: 'success',
       title: '支付成功',
       meta: {keepAlive: false},

@@ -2,7 +2,7 @@
   <div class="subscribeHomePage_padding">
     <div class="subscribeHomePage_body">
       <van-swipe class="subscribeHomePage_banner" :autoplay="3000">
-        <van-swipe-item v-for="item in slide"><img :src="item.bimg"  v-on:click="goLink(item.link)"></van-swipe-item>
+        <van-swipe-item v-for="item,index in slide" :key="index"><img :src="item.bimg"  v-on:click="goLink(item.link)"></van-swipe-item>
       </van-swipe>
       <div class="subscribeHomePage_null"></div>
       <div class="subscribeHomePage_content">
