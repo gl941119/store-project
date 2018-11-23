@@ -3,25 +3,26 @@
     <img src="../../../../assets/image/header_banner.png" class="member_headerBanner">
     <div class="member_top">
       <div class="member_topHeader">
-        <img src="../../../../assets/image/t2.jpg"/>
+        <img :src="user.avatar" v-if="user.avatar"/>
+        <img src="../../../../assets/image/defaule.jpg" v-else/>
         <span class="member_setting" @click="tab('userManage')"><img src="../../../../assets/image/setting_icon.png"/></span>
       </div>
       <div class="member_name">
-        <div class="member_nameBox">雷斯然</div>
-        <div class="member_icon"><img src="../../../../assets/image/icon_vip.png"/></div>
+        <div class="member_nameBox">{{user.name}}</div>
+        <!--<div class="member_icon"><img src="../../../../assets/image/icon_vip.png"/></div>-->
       </div>
-      <div class="member_time">会员到期时间：2020年xx月xx日</div>
+      <!--<div class="member_time">会员到期时间：2020年xx月xx日</div>-->
       <div class="member_moneyBox">
         <div class="member_tab" @click="tab('beautifulPoints')">
-          <div class="member_number">2000</div>
+          <div class="member_number">{{user.score}}</div>
           <div class="member_txt">美丽积分</div>
         </div>
         <div class="member_tab" @click="tab('setMealbeautyFund')">
-          <div class="member_number">2000</div>
+          <div class="member_number">{{user.share_amount}}</div>
           <div class="member_txt">美丽基金</div>
         </div>
         <div class="member_tab" @click="tab('beautifulIntegrals')">
-          <div class="member_number">2000</div>
+          <div class="member_number">{{user.score_nex}}</div>
           <div class="member_txt">美丽积分券</div>
         </div>
       </div>
@@ -77,16 +78,31 @@
 
 <script>
   export default {
-    name: "index",
+    name: "index",//非会员
     data(){
       return {
-        showDiv:true
+        showDiv:true,
+        user:{}
       }
+    },
+    mounted(){
+      this.initEv();
     },
     methods:{
       tab(str){
         this.$router.push({name:str})
-      }
+      },
+      initEv(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
+          type:'post'
+        }).then((res)=>{
+          if(res.status){
+            let d=res.data;
+            this.user=d.user;
+          }
+        });
+      },
     }
   }
 </script>

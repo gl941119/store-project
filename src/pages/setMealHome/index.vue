@@ -2,10 +2,7 @@
   <div class="subscribeHomePage_padding">
     <div class="subscribeHomePage_body">
       <van-swipe class="subscribeHomePage_banner" :autoplay="3000">
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
-        <van-swipe-item><img src="../../assets/image/s_banner.png"></van-swipe-item>
+        <van-swipe-item v-for="item in slide"><img :src="item.bimg"  v-on:click="goLink(item.link)"></van-swipe-item>
       </van-swipe>
       <div class="subscribeHomePage_null"></div>
       <div class="subscribeHomePage_content">
@@ -21,21 +18,9 @@
         </div>
 
         <div class="subscribeHomePage_list">
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
+          <div class="subscribeHomePage_item" v-for="item in vipdata">
+            <div class="subscribeHom_height167"><img :src="item.simg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHomePage_item_txt">{{item.name}}</div>
           </div>
 
         </div>
@@ -53,40 +38,59 @@
         </div>
 
         <div class="subscribeHomePage_list">
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
-          </div>
-          <div class="subscribeHomePage_item">
-            <div class="subscribeHom_height167"><img src="../../assets/image/s_1.jpg" class="subscribeHomePage_item_img"></div>
-            <div class="subscribeHomePage_item_txt">柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜柏妢柏滋养面膜</div>
+          <div class="subscribeHomePage_item" v-for="item in mdata">
+            <div class="subscribeHom_height167"><img :src="item.simg" class="subscribeHomePage_item_img"></div>
+            <div class="subscribeHomePage_item_txt">{{item.name}}</div>
           </div>
 
         </div>
       </div>
     </div>
-
+<div @click="infoEv">会员中心</div>
   </div>
 </template>
 
 <script>
   export default {
     name: "index",
+    data(){
+      return {
+        slide:[],//banner
+        mdata:[],//普通套餐
+        vipdata:[],//vip套餐
+        isMember:null,//会员状态
+      }
+    },
     mounted(){
-      this.$store.commit('setSub_hover',0)
+      this.$store.commit('setSub_hover',0);
+      this.indexReques();
     },
     methods:{
+      goLink(url){
+        window.location.href = url;
+      },
       findMore(str){
         this.$router.push({name:str})
+      },
+      infoEv(){//是否是会员
+        // 1 会员 0非会员
+        parseInt(this.isMember)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
+      },
+      indexReques(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=90&act=indexdata',
+          type:'get'
+        }).then(res=>{
+          if(res.status){
+            let d=res.data;
+            this.slide=d.slide;
+            this.mdata=d.mdata;
+            this.vipdata=d.vipdata;
+            this.isMember=res.user.is_member;
+          }
+        })
       }
+
     }
   }
 </script>

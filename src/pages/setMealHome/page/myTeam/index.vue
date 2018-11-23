@@ -1,61 +1,45 @@
 <template>
     <div class="myTeam">
-      <div>
+      <div v-for="item in one">
         <div class="null"></div>
         <div class="myTeam_my">
-          <div class="myTeam_myHead"><img src="../../../../assets/image/t1.jpg"></div>
+          <div class="myTeam_myHead"><img :src="item.avatar"></div>
           <div class="myTeam_myRight">
-            <div class="myTeam_myName">王大锤</div>
+            <div class="myTeam_myName">{{item.nick}}</div>
             <div class="myTeam_myUp">我的上级美丽代言人</div>
           </div>
         </div>
-        <div class="null"></div>
+
       </div>
 
       <div>
+        <div class="null"></div>
           <van-tabs @click="onTag">
             <van-tab title="一级美丽代言">
               <div class="nullFff"></div>
-              <div class="myTeam_item">
+              <div class="myTeam_item" v-for="item in two">
                 <div class="myTeam_flex">
                   <div class="myTeam_myHeadFlex">
-                    <div class="myTeam_myHeadFlexImg"><img src="../../../../assets/image/t1.jpg"></div>
-                    <div class="myTeam_myHeadFlexName">王大锤</div>
+                    <div class="myTeam_myHeadFlexImg"><img :src="item.avatar"></div>
+                    <div class="myTeam_myHeadFlexName">{{item.nick}}</div>
                   </div>
                   <div class="myTeam_myHeadFlexR">积分：2000.00</div>
                 </div>
               </div>
-              <div class="myTeam_item">
-                <div class="myTeam_flex">
-                  <div class="myTeam_myHeadFlex">
-                    <div class="myTeam_myHeadFlexImg"><img src="../../../../assets/image/t1.jpg"></div>
-                    <div class="myTeam_myHeadFlexName">王大锤</div>
-                  </div>
-                  <div class="myTeam_myHeadFlexR">积分：2000.00</div>
-                </div>
-              </div>
+
             </van-tab>
             <van-tab title="二级美丽代言">
               <div class="nullFff"></div>
-              <div class="myTeam_item">
+              <div class="myTeam_item" v-for="item in three">
                 <div class="myTeam_flex">
                   <div class="myTeam_myHeadFlex">
-                    <div class="myTeam_myHeadFlexImg"><img src="../../../../assets/image/t1.jpg"></div>
-                    <div class="myTeam_myHeadFlexName">王大锤</div>
+                    <div class="myTeam_myHeadFlexImg"><img :src="item.avatar"></div>
+                    <div class="myTeam_myHeadFlexName">{{item.nick}}</div>
                   </div>
                   <div class="myTeam_myHeadFlexR">积分：2000.02</div>
                 </div>
               </div>
 
-              <div class="myTeam_item">
-                <div class="myTeam_flex">
-                  <div class="myTeam_myHeadFlex">
-                    <div class="myTeam_myHeadFlexImg"><img src="../../../../assets/image/t1.jpg"></div>
-                    <div class="myTeam_myHeadFlexName">王大锤</div>
-                  </div>
-                  <div class="myTeam_myHeadFlexR">积分：2000.01</div>
-                </div>
-              </div>
             </van-tab>
           </van-tabs>
       </div>
@@ -64,16 +48,82 @@
 </template>
 
 <script>
+  let arr=[];
     export default {
         name: "index",
-
       data(){
           return {
-
+            one:{},
+            two:{},
+            three:{},
+            dataList:{}
           }
       },
+      mounted(){
+        let arr=[];
+          this.initOne();
+        this.initTwo();
+      },
       methods:{
+          initOne(){
+
+            this.$request({
+              url:'app/index.php?i=1&c=entry&eid=88&act=beautylist',
+              type:'post',
+              data:{
+                type:1
+              }
+            }).then((res)=>{
+              if(res.status){
+                let data=res.data;
+                 this.one=data.share?data.share:{};
+              }
+
+            });
+          },initTwo(){
+
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=beautylist',
+            type:'post',
+            data:{
+              type:2
+            }
+          }).then((res)=>{
+            if(res.status){
+              let data=res.data;
+              this.two=data.share?data.share:{};
+            }
+
+          });
+        },initThree(){
+
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=beautylist',
+            type:'post',
+            data:{
+              type:3
+            }
+          }).then((res)=>{
+            if(res.status){
+              let data=res.data;
+              this.three=data.share?data.share:{};
+            }
+
+          });
+        },
         onTag(index,title){
+          var box = document.getElementsByClassName("van-tab");
+          let cName=box[index].className.indexOf('van-tab--active');
+          console.log(this.dataList)
+          if(index===0){
+              if(cName==-1){
+                this.initTwo();
+              }
+            }else if(index===1){
+              if(cName=-1){
+                this.initThree();
+              }
+            }
 
         }
       }
