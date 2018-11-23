@@ -1,36 +1,24 @@
 <template>
     <div class="purchasedService">
 
-      <div class="purchasedService_list">
+      <div class="purchasedService_list" v-for="item in dataList">
 
         <div class="purchasedService_listTop">
           <div class="purchasedService_flex">
             <div class="purchasedService_listSolid"></div>
-            <div class="purchasedService_listT">1980套餐</div>
+            <div class="purchasedService_listT">{{item.name}}</div>
           </div>
           <div></div>
         </div>
 
-        <div class="purchasedService_itemBox">
-          <div class="purchasedService_itemImg"><img src="../../../../assets/image/t1.jpg"></div>
+        <div class="purchasedService_itemBox" v-for="itemData in item.service">
+          <div class="purchasedService_itemImg"><img :src="itemData.simg"></div>
           <div class="purchasedService_itemR">
-            <div class="purchasedService_itemRT">保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜</div>
+            <div class="purchasedService_itemRT">{{itemData.name}}</div>
             <div class="purchasedService_itemRCont"></div>
             <div class="purchasedService_itemB">
-              <div class="purchasedService_itemPrice">¥98.00</div>
-              <div class="purchasedService_frequency">次数：20</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="purchasedService_itemBox">
-          <div class="purchasedService_itemImg"><img src="../../../../assets/image/t1.jpg"></div>
-          <div class="purchasedService_itemR">
-            <div class="purchasedService_itemRT">保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜保湿滋养面膜</div>
-            <div class="purchasedService_itemRCont"></div>
-            <div class="purchasedService_itemB">
-              <div class="purchasedService_itemPrice">¥98.00</div>
-              <div class="purchasedService_frequency">次数：20</div>
+              <div class="purchasedService_itemPrice">¥{{itemData.marketprice}}</div>
+              <div class="purchasedService_frequency">次数：{{itemData.count}}</div>
             </div>
           </div>
         </div>
@@ -41,7 +29,33 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+      data(){
+          return {
+            dataList:{},
+          }
+      },
+      mounted(){
+          this.initEv();
+      },
+      methods:{
+        initEv(){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=mealorderlist',
+            type:'post',
+            data:{
+              type:2
+            }
+          }).then(res=>{
+            if(res.status){
+              let d=res.data;
+              this.dataList=d.meallist;
+            }
+          });
+        }
+
+
+      }
     }
 </script>
 

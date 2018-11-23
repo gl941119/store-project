@@ -1,17 +1,17 @@
 <template>
     <div class="purchasedCommodities">
-      <van-tabs v-model="active" swipeable>
+      <van-tabs swipeable @click="tabsEv">
         <van-tab title="全部">
-          <ComAllPurcjased Data="全部"></ComAllPurcjased>
+          <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
       </van-tab>
         <van-tab title="已留店">
-          <ComAllPurcjased Data="已留店"></ComAllPurcjased>
+          <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
         </van-tab>
         <van-tab title="待发货">
-          <ComAllPurcjased Data="待发货"></ComAllPurcjased>
+          <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
         </van-tab>
         <van-tab title="待收货">
-          <ComAllPurcjased Data="待收货"></ComAllPurcjased>
+          <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
         </van-tab>
       </van-tabs>
     </div>
@@ -23,6 +23,53 @@
         name: "index",
       components:{
         ComAllPurcjased
+      },
+  data(){
+        return {
+          dataList:{},
+        }
+      },mounted(){
+        this.initEv(1);
+      },methods:{
+        tabsEv(index,title){
+          let vanTab=document.getElementsByClassName('van-tab');
+          console.log(index)
+          if(index===0){
+            if(vanTab[index].className.indexOf('van-tab--active')==-1){
+              this.initEv(1);
+            }
+          }else if(index===1){
+            if(vanTab[index].className.indexOf('van-tab--active')==-1){
+              this.initEv(2);
+            }
+          }else if(index===2){
+            if(vanTab[index].className.indexOf('van-tab--active')==-1){
+              this.initEv(3);
+            }
+          }else if(index===3){
+            if(vanTab[index].className.indexOf('van-tab--active')==-1){
+              this.initEv(4);
+            }
+          }
+
+        },
+        initEv(tl){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=mealorderlist',
+            type:'post',
+            data:{
+              type:1,
+              tlist:tl
+            }
+          }).then(res=>{
+            if(res.status){
+              let d=res.data;
+              this.dataList=d.meallist;
+            }
+          });
+        }
+
+
       }
     }
 </script>
