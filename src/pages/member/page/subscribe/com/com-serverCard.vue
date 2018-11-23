@@ -17,7 +17,7 @@
     <div class="address">
       <img src="../../../../../assets/image/exhibition2.png" alt="">
       <span>{{item.address}}店</span>
-      <!--<p>共一件商品 合计：{{item.price}}元</p>-->
+      <p v-if="item.type=='1'">服务费: <span>￥{{item.price}}</span></p>
     </div>
     <div class="bottom">
       <!--<van-icon name="pending-evaluate" class="bottom-icon"/>-->
@@ -39,12 +39,11 @@
       type:function () {
         switch (this.item.type) {
           case '0':
-            return '已取消'
+            return '全部'
           case '1':
             return '待付款'
           case '2':
             return '已预约'
-
           case '3':
             return '已取消'
         }
@@ -214,13 +213,20 @@
       line-height: 17px;
     }
     > p {
-
       height: 20px;
       font-size: 14px;
       font-family: PingFangSC-Regular;
-
       color: rgba(51, 51, 51, 1);
       line-height: 20px;
+      >span{
+        color: red;
+
+        font-size:16px;
+        font-family:PingFangSC-Medium;
+        font-weight:500;
+        color:rgba(233,58,61,1);
+        line-height:23px;
+      }
     }
   }
 

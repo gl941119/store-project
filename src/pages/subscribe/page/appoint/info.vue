@@ -7,19 +7,22 @@
     <!--商品-->
     <com-confirmmain :service="service" :type="type" :data="data" :member="member"></com-confirmmain>
     <!--订单信息-->
-    <com-indentinfo class="indentInfo" :type="'success'" :orderid="data.orderid"
-                    :time="data.date+' '+data.time"></com-indentinfo>
+    <com-indentinfo class="indentInfo" :type="'success'"
+                    :data="data"></com-indentinfo>
     <!--提示,已预约状态下才有-->
     <com-tip v-if="type===0"></com-tip>
+
+
+
 
     <!--<van-button type="default" v-if="isStore" class="overBtn" v-on:click="overHandle">已完成预约</van-button>-->
 
     <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===0">已预约</van-button>
       <!--支付-->
     <div class="payBtn" v-if="type===1">
-        <span>合计：</span>
-        <span>¥ 60.00</span>
-      <van-button plain type="primary">支付</van-button>
+        <span class="payBtn-all">合计：</span>
+        <span class="payBtn-price">￥ {{data.allprice}}</span>
+      <van-button plain type="primary" class="payBtn-pay" v-on:click.native="payHandle">支付</van-button>
     </div>
     <!--支付完成-->
     <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===2">支付完成</van-button>
@@ -86,6 +89,9 @@
       }
     },
     methods: {
+      payHandle(){
+        // window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+      },
       gorouter(){
         this.$router.go(-1)
       },
@@ -121,7 +127,7 @@
             this.type = 1
           } else if (is_use == '1' && status == '1') {// 支付完成
             this.type = 2
-          } else if (is_use == '-1' && is_use == '1') {//已取消
+          } else if (is_use == '1' && status == '-1') {//已取消
             this.type = -1
           }
           console.log(this.type)
@@ -134,6 +140,42 @@
 </script>
 
 <style lang="scss" scoped>
+  .payBtn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &-all{
+        margin-right: 7px;
+
+      height:21px;
+      font-size:15px;
+
+      color:rgba(51,51,51,1);
+      line-height:21px;
+    }
+    &-price{
+      margin-right: 28px;
+
+      height:21px;
+      font-size:15px;
+      color:rgba(231,59,61,1);
+      line-height:21px;
+    }
+    &-pay{
+      width: 123px;
+      height: 50px;
+      background-color: #71B3FF;
+      font-size:18px;
+      color:rgba(255,255,255,1);
+      line-height:50px;
+
+    }
+  }
   .btn{
     width: 100%;
     height: 50px;

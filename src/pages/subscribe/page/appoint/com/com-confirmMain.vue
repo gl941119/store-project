@@ -42,7 +42,7 @@
       <div class="fill"></div>
       <li class="list-li">
         <dt>预约费用</dt>
-        <dd class="colorRed">￥{{service.price}}</dd>
+        <dd class="colorRed">￥{{data.o_amount}}</dd>
       </li>
       <!--<div class="fill"></div>-->
       <!--<li class="list-li">-->
@@ -75,17 +75,17 @@
       <div class="fill"></div>
       <li class="list-li">
         <dt>预约费用</dt>
-        <dd class="colorRed">￥{{service.price}}</dd>
+        <dd class="colorRed">￥ {{data.o_amount}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
       <dt>服务费用</dt>
-      <dd class="colorRed">{{data.service_amount}}</dd>
+      <dd class="colorRed">￥ {{data.o_service_amount}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
       <dt>总计</dt>
-      <dd class="colorRed">{{data.allprice}}</dd>
+      <dd class="colorRed">￥ {{data.allprice}}</dd>
       </li>
     </ul>
     <!--支付完成-->
@@ -105,17 +105,17 @@
       <div class="fill"></div>
       <li class="list-li">
         <dt>预约费用</dt>
-        <dd class="colorRed">￥{{service.price}}</dd>
+        <dd class="colorRed">￥ {{data.o_amount}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
         <dt>服务费用</dt>
-        <dd class="colorRed">{{data.service_amount}}</dd>
+        <dd class="colorRed">￥ {{data.o_service_amount}}</dd>
       </li>
       <div class="fill"></div>
       <li class="list-li">
         <dt>总计</dt>
-        <dd class="colorRed">{{data.allprice}}</dd>
+        <dd class="colorRed">￥ {{data.allprice}}</dd>
       </li>
     </ul>
 
@@ -195,6 +195,7 @@
     },
     methods: {
       goDetail(sid){
+        console.log(sid)
         this.$router.push({name:'detail',params:{type:'2',id:sid}})
       }
     }

@@ -40,7 +40,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     }
   }
 
-url=url+'&openid=p3qYOh';
+// url=url+'&openid=p3qYOh';
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');

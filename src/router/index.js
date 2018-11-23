@@ -98,7 +98,7 @@ let router = new Router({
       }]
     },
     {//热门商品and服务(预约)
-      path: '/subscribe/:type',//1 服务 2 商品
+      path: '/subscribe/:type/:ishot',//type 1 服务 2 商品    ishot // 1热门  0 所有   2默认
       name: 'subscribe',
       meta: {sub_showFooter: true, keepAlive: false},
       beforeEnter: function (to, from, next) {
