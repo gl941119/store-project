@@ -26,7 +26,7 @@
           <div class="member_txt">美丽积分券</div>
         </div>
       </div>
-      <div class="member_bannerImg"><img src="../../../../assets/image/banner_ffyuan.png"/></div>
+      <div class="member_bannerImg"><img src="../../../../assets/image/banner_ffyuan.png" @click="tab('setMealHome')"/></div>
       <div class="member_list member_list1">
         <div class="member_item" @click="tab('purchasedCommodities')">
           <div class="member_listImg"><img src="../../../../assets/image/icon_5.png"/></div>
@@ -61,15 +61,15 @@
     <van-popup class="showDiv" v-model="showDiv">
       <div>
         <div class="member_popup"><img src="../../../../assets/image/pop_01.jpg"></div>
-        <div class="member_popupCont">
-          <div class="member_popupTitle">会员特权</div>
-          <div class="member_popupItem">1.成为会员后可以获得美丽积分券，兑换好礼。</div>
-          <div class="member_popupItem">2.成为会员后可以获得美丽代言资格。</div>
-          <div class="member_popupItem">3.成为会员后可以获得美丽基金。</div>
-          <div class="member_popupItem">4.美丽基金可以提现。</div>
+        <div class="member_popupCont" v-html="cont">
+          <!--<div class="member_popupTitle">会员特权</div>-->
+          <!--<div class="member_popupItem">1.成为会员后可以获得美丽积分券，兑换好礼。</div>-->
+          <!--<div class="member_popupItem">2.成为会员后可以获得美丽代言资格。</div>-->
+          <!--<div class="member_popupItem">3.成为会员后可以获得美丽基金。</div>-->
+          <!--<div class="member_popupItem">4.美丽基金可以提现。</div>-->
         </div>
         <div class="member_popupBtnBox">
-          <div class="member_popupBtn">成为会员</div>
+          <div class="member_popupBtn" @click="tab('setMealHome')">成为会员</div>
         </div>
       </div>
     </van-popup>
@@ -82,7 +82,9 @@
     data(){
       return {
         showDiv:true,
-        user:{}
+        user:{},
+        title:'',
+        cont:''
       }
     },
     mounted(){
@@ -100,6 +102,8 @@
           if(res.status){
             let d=res.data;
             this.user=d.user;
+            let scgc=d.article['a_1'];
+            this.cont=scgc.content;
           }
         });
       },

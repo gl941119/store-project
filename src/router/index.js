@@ -642,7 +642,7 @@ let router = new Router({
       component: resolve => require(['../pages/setMealHome/page/packageDetails/'], resolve)
     },
     {//套餐订单详情
-      path: '/setMealHome/page/setMealOrderinfo',
+      path: '/setMealHome/page/setMealOrderinfo/:ids',
       name: 'setMealOrderinfo',
       title: '订单详情',
       meta: {keepAlive: false},

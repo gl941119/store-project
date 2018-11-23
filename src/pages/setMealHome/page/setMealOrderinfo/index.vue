@@ -1,61 +1,48 @@
 <template>
     <div class="setMealOrderinfo">
-<div class="setMealOrderinfo_b">交易完成</div>
+<div class="setMealOrderinfo_b">{{arrData.transactionStatus}}</div>
       <div class="setMealOrderinfo_p">
         <div class="setMealOrderinfo_fl">
           <div class="setMealOrderinfo_flInfo">
-            <div class="setMealOrderinfo_Name">王大锤</div>
-            <div class="setMealOrderinfo_Phone">189****1232</div>
+            <div class="setMealOrderinfo_Name">{{arrData.realname}}</div>
+            <div class="setMealOrderinfo_Phone" v-if="arrData.mobileShow">{{arrData.mobile}}</div>
           </div>
-          <div class="setMealOrderinfo_status">已收货</div>
+          <div class="setMealOrderinfo_status">{{arrData.status_name}}</div>
         </div>
 
-        <div class="setMealOrderinfo_address">四川成都市高新区中和镇孤帆远影2号四川成都市高新区中和镇孤帆远影2号</div>
 
-        <div class="setMealOrderinfo_commodity">
-          <div class="commodity_img"><img src="../../../../assets/image/t1.jpg"></div>
-          <div class="commodity_info">
-            <div class="commodity_title">
-              <div class="commodity_titleTxt">1980套餐1980套餐1980套餐1980套餐1980套餐</div>
-              <div class="commodity_seeInfo" @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</div>
-            </div>
-            <div class="commodity_content">唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力</div>
-            <div class="price_num">
-              <div class="commodity_price">¥1980</div>
-              <div class="commodity_num">x1</div>
-            </div>
-          </div>
-        </div>
+        <div class="setMealOrderinfo_address">{{arrData.addres}}</div>
 
         <div class="setMealOrderinfo_commodity">
-          <div class="commodity_img"><img src="../../../../assets/image/t1.jpg"></div>
+          <div class="commodity_img"><img :src="mdata.simg"></div>
           <div class="commodity_info">
             <div class="commodity_title">
-              <div class="commodity_titleTxt">1980套餐1980套餐1980套餐1980套餐1980套餐</div>
+              <div class="commodity_titleTxt">{{mdata.name}}</div>
               <div class="commodity_seeInfo" @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</div>
             </div>
-            <div class="commodity_content">唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力唤醒皮肤活力</div>
+            <div class="commodity_content">{{mdata.description}}</div>
             <div class="price_num">
-              <div class="commodity_price">¥1980</div>
-              <div class="commodity_num">x1</div>
+              <div class="commodity_price">¥{{mdata.price}}</div>
+              <div class="commodity_num">x{{odata.num}}</div>
             </div>
           </div>
         </div>
+
 
       </div>
       <div class="null"></div>
       <div class="price_calculationBox">
         <div class="price_calculation">
           <div class="price_calculation_title">套餐金额</div>
-          <div class="price_calculation_price">¥ 1980.00</div>
+          <div class="price_calculation_price">¥ {{mdata.price}}</div>
         </div>
         <div class="price_calculation">
           <div class="price_calculation_title">运费</div>
-          <div class="price_calculation_price">¥ 10.00</div>
+          <div class="price_calculation_price">¥ {{odata.dispatchprice}}</div>
         </div>
         <div class="price_calculation">
           <div class="price_calculation_title">合计</div>
-          <div class="price_calculation_price">¥ 1980.00</div>
+          <div class="price_calculation_price">¥ {{odata.orderprice}}</div>
         </div>
       </div>
       <div class="null"></div>
@@ -67,23 +54,23 @@
 </div>
         <div class="oderInfo_list">
           <div>订单编号</div>
-          <div>vyeuwye23233</div>
+          <div>{{odata.orderid}}</div>
         </div>
         <div class="oderInfo_list">
           <div>创建时间</div>
-          <div>2018-11-12 11:23:56</div>
+          <div>{{odata.createtime}}</div>
         </div>
         <div class="oderInfo_list">
           <div>付款时间</div>
-          <div>2018-11-12 11:23:56</div>
+          <div>{{odata.pay_time}}</div>
         </div>
-        <div class="oderInfo_list">
+        <div class="oderInfo_list" v-if="arrData.deliverGoods">
           <div>发货时间</div>
-          <div>2018-11-12 11:23:56</div>
+          <div>{{arrData.deliverGoodsT}}</div>
         </div>
-        <div class="oderInfo_list">
+        <div class="oderInfo_list" v-if="arrData.receivingGoods">
           <div>收货时间</div>
-          <div>2018-11-12 11:23:56</div>
+          <div>{{arrData.take_time}}</div>
         </div>
       </div>
 
@@ -96,7 +83,93 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+      data(){
+          return {
+            id:this.$route.params.ids,
+            mdata:{},
+            odata:{},
+            store:{},//留店
+            user:{},//用户
+            odata:{},//订单
+            arrData:{},
+          }
+      },
+      mounted(){
+this.initEv();
+      },
+      methods:{
+initEv(){
+  this.$request({
+    url:'app/index.php?i=1&c=entry&eid=90&act=orderinfo',
+    type:'post',
+    data:{
+      orderid:this.id
+    }
+  }).then((res)=>{
+    if(res.status){
+      let d=res.data;
+      this.mdata=d.mdata;
+      this.odata=d.odata;
+      this.store=d.store;
+      if(parseInt(d.odata.is_send)===0&&parseInt(d.odata.status)===3){
+this.addres=d.store.addres;
+this.arrData={
+  realname:d.store.name,
+  mobile:d.user.mobile,
+  mobileShow:false,
+  deliverGoods:false,
+  receivingGoods:false,
+  addres:d.store.addres,
+  status_name:'留店',
+  transactionStatus:'交易完成'
+};
+      }
+      if(parseInt(d.odata.is_send)===1&&parseInt(d.odata.status)===1){
+        this.arrData={
+          realname:d.user.realname,
+          mobile:d.user.mobile,
+          mobileShow:true,
+          deliverGoods:false,
+          receivingGoods:false,
+          addres:d.user.address,
+          status_name:'发送到家',
+          transactionStatus:'待发货'
+        };
+      }
+
+      if(parseInt(d.odata.is_send)===1&&parseInt(d.odata.status)===2){
+        this.arrData={
+          realname:d.user.realname,
+          mobile:d.user.mobile,
+          mobileShow:true,
+          deliverGoods:true,
+          receivingGoods:false,
+          addres:d.user.address,
+          status_name:'发送到家',
+          transactionStatus:'待发货',
+          deliverGoodsT:d.odata.send_time
+        };
+      }
+      if(parseInt(d.odata.is_send)===1&&parseInt(d.odata.status)===2){
+        this.arrData={
+          realname:d.user.realname,
+          mobile:d.user.mobile,
+          mobileShow:true,
+          deliverGoods:true,
+          receivingGoods:true,
+          addres:d.user.address,
+          status_name:'发送到家',
+          transactionStatus:'待发货',
+          deliverGoodsT:d.odata.send_time,
+          take_time:d.odata.take_time
+        };
+      }
+
+    }
+  })
+}
+      }
     }
 </script>
 
@@ -134,6 +207,9 @@
     font-family:PingFangSC-Medium;
     font-weight:500;
     color:rgba(51,51,51,1);
+  }
+  .setMealOrderinfo_Phone{
+    padding-left: 21px;
   }
   .setMealOrderinfo_fl{
     $flex:flex !global;

@@ -2,20 +2,10 @@
 <div class="beautifulEndorsement">
 <div class="beautifulEndorsement_p">
   <div class="beautifulEndorsement_b">
-    <div class="beautifulEndorsement_t">商城代言规则</div>
-    <div class="beautifulEndorsement_c">
-      <p>凡在本商城购买科美卡，即可成为S+艾司的三星美丽代言人。</p>
-      <p>凡在本商城购买科美卡，即可成为S+艾司的三星美丽代言人。</p>
-      <p>凡在本商城购买科美卡，即可成为S+艾司的三星美丽代言人。</p>
-    </div>
-    <div class="beautifulEndorsement_c">
-      <p class="beautifulEndorsement_pTitle">美丽积分的积累： </p>
-      <p>享受一级美丽代言人消费3%的美丽积分</p>
-      <p>享受二级美丽代言人消费2%的美丽积分</p>
-       <p class="beautifulEndorsement_pTitle">美丽积分可按照1:1兑换美丽基金</p>
-    </div>
+    <div class="beautifulEndorsement_t">{{title}}</div>
+    <div class="beautifulEndorsement_c" v-html="cont"></div>
     <div class="beautifulEndorsement_pBtn">
-      <div class="beautifulEndorsement_pBtnBox">发展美丽代言人</div>
+      <div class="beautifulEndorsement_pBtnBox" @click="beautifulEndorsementSub">发展美丽代言人</div>
     </div>
   </div>
 </div>
@@ -24,7 +14,34 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+      data(){
+          return {
+            title:'',
+            cont:''
+          }
+      },
+      mounted(){
+this.initEv();
+      },
+      methods:{
+        beautifulEndorsementSub(){
+          this.$router.push({name:'endorseOneself'});
+        },
+        initEv(){
+          this.$request({
+            url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
+            type:'post'
+          }).then((res)=>{
+            if(res.status){
+              let d=res.data;
+              let scgc=d.article['a_2'];
+              this.title=scgc.title;
+              this.cont=scgc.content;
+            }
+          });
+        }
+      }
     }
 </script>
 
@@ -57,6 +74,7 @@
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(102,102,102,1);
+    line-height:21px;
   }
   .beautifulEndorsement_pTitle{
 padding-top: 20px;

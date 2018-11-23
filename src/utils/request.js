@@ -40,7 +40,8 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     }
   }
 
-url=url+'&openid=TfikQA';
+  url=url+'&openid=TfikQA';//会员
+  // url=url+'&openid=p3qYOh';//非会员
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');

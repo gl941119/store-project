@@ -3,17 +3,20 @@
 <div class="endorseOneself_b">
   <div class="endorseOneself_body">
     <div class="endorseOneself_headerBox endorseOneself_headPadding">
-      <div class="endorseOneself_header"><img src="../../../../assets/image/log.png"></div>
+      <div class="endorseOneself_header">
+        <img :src="avatar" v-if="avatar?avatar:false">
+        <img v-else src="../../../../assets/image/defaule.jpg">
+      </div>
     </div>
     <div class="endorseOneself_headerBox endorseOneself_headPadding1">
-      <div class="endorseOneself_name">雷斯然</div>
+      <div class="endorseOneself_name">{{name}}</div>
     </div>
-    <div class="endorseOneself_cont">S+艾司普勒斯科技美容集团运营总部位于香港。经过10多年的不断探索与发展，己经成为享誉业界的集科技美容、医学美容、生物科技为一体的综合性美容集团。</div>
+    <div class="endorseOneself_cont" v-html="cont"></div>
     <div class="endorseOneself_border"></div>
     <div class="endorseOneself_yTitle">邀请码</div>
-    <div class="endorseOneself_code">Y0000520</div>
+    <div class="endorseOneself_code">{{code}}</div>
     <div class="endorseOneself_subBox">
-      <div class="endorseOneself_sub">去分享</div>
+      <div class="endorseOneself_sub" @click="shareEv">去分享</div>
     </div>
   </div>
 </div>
@@ -21,9 +24,59 @@
 </template>
 
 <script>
-    export default {
-        name: "index"
+  import wxHandle from '../../../../utils/wx'
+
+  export default {
+    name: "index",
+    data(){
+      return {
+        title:'',
+        cont:'',
+        avatar:'',
+        name:'',
+        code:''
+      }
+    },
+    mounted(){
+      this.initEv();
+    },
+    methods:{
+      beautifulEndorsementSub(){
+        this.$router.push({name:'endorseOneself'});
+      },
+      shareEv(){
+        wxHandle('onMenuShareAppMessage', {
+          title: '', // 分享标题
+          desc: '', // 分享描述
+          link: '', // 分享链接
+          imgUrl: '', // 分享图标
+          type: 'link', // 分享类型,music、video或link，不填默认为link
+          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+      },
+      initEv(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
+          type:'post'
+        }).then((res)=>{
+          if(res.status){
+            let d=res.data;
+            let scgc=d.article['a_3'];
+            this.code=d.user.invitation_code;
+            this.cont=scgc.content;
+            this.name=d.user.name;
+            this.avatar=d.user.avatar;
+          }
+        });
+      }
     }
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -63,7 +116,6 @@
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(102,102,102,1);
-    text-indent: 20px;
     line-height:20px;
   }
   .endorseOneself_border{

@@ -7,10 +7,10 @@
         <div class="purchasedService_listSolid"></div>
         <div class="purchasedService_listT">{{item.name}}</div>
       </div>
-      <div class="purchasedService_listRStatus">{{statusEv(item.is_send,item.status)}}</div>
+      <div class="purchasedService_listRStatus"  @click="statusInfo(item.orderid)">{{statusEv(item.is_send,item.status)}}</div>
     </div>
 
-    <div class="purchasedService_itemBox" v-for="t in item.goods">
+    <div class="purchasedService_itemBox" v-for="t in item.goods" @click="oderInfoEv(t.id)">
       <div class="purchasedService_itemImg"><img :src="t.thumb"></div>
       <div class="purchasedService_itemR">
         <div class="purchasedService_itemRT">{{t.title}}</div>
@@ -21,6 +21,7 @@
         </div>
       </div>
     </div>
+
 <div class="purchasedService_itemBottom"></div>
     <div class="package_to_be_received" v-if="goodsToBeReceived(item.is_send,item.status)">
       <div class="packageBtnFind">查看物流</div>
@@ -49,12 +50,18 @@
 
       },
       methods:{
+        statusInfo(oId){
+          this.$router.push({name:'setMealOrderinfo',params:{ids:oId}});
+        },
+        oderInfoEv(id){
+          this.$router.push({name:'detail',params:{type:1,id:id}});
+        },
         receivedStatus(send,status){
             let s=parseInt(status);
             let sen=parseInt(send);
             var str='';
             if(sen===1&&s===1){
-              str='代发货';
+              str='待发货';
             }else if(sen===1&&s===2){
               str='待收货';
             }else if(sen===1&&s===3){

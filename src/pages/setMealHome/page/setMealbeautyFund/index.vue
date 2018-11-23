@@ -15,6 +15,7 @@
       <div class="beautifulPoints_flex" v-for="item in dataList">
         <div>
           <div class="beautifulPoints_flexName">{{item.title}}</div>
+          <div class="beautifulPoints_msg">{{item.message}}</div>
           <div class="beautifulPoints_flexTime">{{item.createtime}}</div>
         </div>
         <div class="beautifulPoints_flexPriceJ" v-if="parseInt(item.status)===2">-{{item.score}}</div>
@@ -143,5 +144,11 @@ this.initEv();
     font-family:PingFangSC-Semibold;
     font-weight:600;
     color:rgba(102,102,102,1);
+  }
+  .beautifulPoints_msg{
+    font-size:14px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(113,179,255,1);
   }
 </style>

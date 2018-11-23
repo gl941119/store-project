@@ -33,7 +33,6 @@
       },methods:{
         tabsEv(index,title){
           let vanTab=document.getElementsByClassName('van-tab');
-          console.log(index)
           if(index===0){
             if(vanTab[index].className.indexOf('van-tab--active')==-1){
               this.initEv(1);

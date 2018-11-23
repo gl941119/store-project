@@ -11,7 +11,7 @@
           <div></div>
         </div>
 
-        <div class="purchasedService_itemBox" v-for="itemData in item.service">
+        <div class="purchasedService_itemBox" v-for="itemData in item.service" @click="oderInfoEv(itemData.id)">
           <div class="purchasedService_itemImg"><img :src="itemData.simg"></div>
           <div class="purchasedService_itemR">
             <div class="purchasedService_itemRT">{{itemData.name}}</div>
@@ -39,6 +39,9 @@
           this.initEv();
       },
       methods:{
+        oderInfoEv(id){
+          this.$router.push({name:'detail',params:{type:2,id:id}});
+        },
         initEv(){
           this.$request({
             url:'app/index.php?i=1&c=entry&eid=88&act=mealorderlist',
