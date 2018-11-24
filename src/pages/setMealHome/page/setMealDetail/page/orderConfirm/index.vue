@@ -33,7 +33,7 @@
         <div class="content-right">
           <div class="content-right-top">
             <div>{{dataList.mdata===undefined?'':dataList.mdata.name}}</div>
-            <div @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</div>
+            <div @click="()=>{this.$router.push({name:'setMealDetail',params:{ids:dataList.mdata===undefined?'':dataList.mdata.id}})}">查看详情</div>
           </div>
           <div class="content-right-middle">
             <div>{{dataList.mdata===undefined?'':dataList.mdata.description}}</div>
@@ -140,7 +140,7 @@
     },
     methods: {
       submitEvent(){
-        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids+"&message="+LeavingMessage;
+        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids+"&message="+this.LeavingMessage;
       },
       addressItem(i){
         this.initEvnt({orderid:this.ids,is_send:1,addressid:i});

@@ -17,7 +17,7 @@
         <div class="title-top">
           <span class="title-top-name">{{dataList.name}}</span>
         </div>
-        <div class="title-middle" v-html="dataList.content"></div>
+        <div class="title-middle" v-html="dataList.description"></div>
         <div class="title-bottom">
           <span class="price">￥{{dataList.price}}</span>
           <span class="notPrice">￥{{dataList.o_price}}</span>
@@ -28,7 +28,7 @@
       <!--产品详情-->
       <div class="presentation" ref="presentation">
         <p class="presentation-title">产品详情</p>
-        <div class="presentation-content" v-html="dataList.description"></div>
+        <div class="presentation-content" v-html="dataList.content"></div>
       </div>
 
 

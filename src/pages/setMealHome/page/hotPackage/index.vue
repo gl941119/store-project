@@ -28,7 +28,7 @@
       indexReques(){
         // vip=1 热门套餐
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=153&dom=meal&act=list&vip=1',
+          url:'app/index.php?i=1&c=entry&eid=90&act=list&vip=1',
           type:'post'
         }).then(res=>{
           if(res.status){
