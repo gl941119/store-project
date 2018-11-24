@@ -1,7 +1,12 @@
 <template>
-  <div>
-    <van-tabs v-model="active" @change="tabChange" sticky :swipeable="true">
-      <van-tab title="全部">
+  <div class="wrap">
+    <van-tabs v-model="active" @change="tabChange" sticky :swipeable="true" >
+      <van-tab title="全部" >
+
+
+
+
+
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
@@ -130,6 +135,10 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .wrap{
+    background-color: white;
+    height: 100%;
+    width: 100%;
+  }
 </style>

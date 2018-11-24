@@ -530,7 +530,7 @@ let router = new Router({
       component: resolve => require(['../pages/serviceCharges'], resolve)
     },
     {//取消预约
-      path: '/staff/cancelReservation',
+      path: '/staff/cancelReservation/:orderid',//订单id
       name: 'cancelReservation',
       title: '取消预约',
       meta: {keepAlive: false},

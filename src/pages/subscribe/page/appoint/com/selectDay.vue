@@ -69,6 +69,7 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        background-color: white;
         > p {
           height: 17px;
           font-size: 12px;

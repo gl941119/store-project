@@ -95,6 +95,8 @@
           this.$toast.fail('请输入预约姓名')
           return;
         }
+
+
           if (this.Is_member === '1') {//会员
             this.$dialog.confirm({
               title: '是否预约',

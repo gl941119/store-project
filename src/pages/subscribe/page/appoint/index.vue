@@ -16,7 +16,9 @@
     </div>
 
     <div class="cosmetologist">
-      <cosmetologist-card :Data="item" v-for="item in member" :key="item.id" class="cosmetologist-card"></cosmetologist-card>
+
+      <cosmetologist-card :Data="item" v-for="item in member" v-if="member" :key="item.id" class="cosmetologist-card"></cosmetologist-card>
+      <p v-else>暂无美师</p>
     </div>
 
   </div>
@@ -35,9 +37,7 @@
         service: {},
         member: [],
         show:false,//弹出层
-
       }
-
     },
     mounted() {
       this.request()
@@ -83,7 +83,6 @@
       margin-left: 10px;
       flex: 1;
       > dt {
-
         height: 18px;
         font-size: 13px;
         font-family: PingFangSC-Regular;
@@ -94,7 +93,6 @@
         height: 14px;
         font-size: 10px;
         font-family: PingFangSC-Regular;
-
         color: rgba(153, 153, 153, 1);
       }
     }
@@ -105,20 +103,20 @@
       height: 30px;
       background: url("../../../../assets/image/tel1.png") no-repeat;
       background-size: 30px 30px;
-
-
     }
   }
-
   .fill {
     margin: 0 auto;
     width: 345px;
     height: 1px;
     background: rgba(216, 216, 216, 1);
   }
-
   .appoint {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     background-color: #F4F4F4;
+    padding:  0 !important;
     .product {
       width: 100%;
       background-color: white;
@@ -126,15 +124,22 @@
       &-card{
         box-shadow: 0 0;
         margin: 0 auto  !important;
-
       }
     }
     .cosmetologist {
+      flex: 1;
       margin-top: 10px;
       padding: 13px 0;
       background-color: white;
       &-card {
         margin-bottom: 15px;
+      }
+      >p{
+        color: #999999;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 10px;
       }
     }
     .popup{

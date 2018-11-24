@@ -22,7 +22,7 @@
                @click="videoClick($event,val.avatar)" :key="num"></video>
         <div class="uploadmgIPre" v-for="val,num in item.imgs" :key="num">
           <van-icon name="close" class="innerPhotoItemClose" @click="innerPhotoItemClose(index,num)"/>
-          <img class="upload-img" :src="val.avatar" alt="">
+          <img class="upload-img" :src="val.avatar" alt="" v-on:click="showImage(index,num)">
         </div>
         <div class="upload-img dashed">
           <img src="../../../../../../assets/image/appraise.png" alt="">
@@ -72,7 +72,7 @@
   import cache from '../../../../../../utils/cache'
   import axios from 'axios'
   import wxHandle from '../../../../../../utils/wx'
-
+  import {ImagePreview  } from 'vant';
   export default {
     name: "index",
     data() {
@@ -97,9 +97,15 @@
       circleEvent() {
         this.show = false;
       },
+      showImage(index, num){
+        let arr = this.arr[index].imgs
+        ImagePreview({
+          images: arr,
+          startPosition: num,
+        });
+      },
       innerPhotoItemClose(index, num) {
         this.arr[index].imgs.splice(num, 1);
-
       },
       getLocalImgData(id, thisa) {
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
