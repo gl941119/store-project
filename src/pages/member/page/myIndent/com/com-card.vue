@@ -155,7 +155,6 @@
         })
 
       },
-
       goAppraise(id) {//跳转评价
         let arr = []
         this.good.goods.forEach((item) => {
@@ -172,7 +171,7 @@
         })
         cache.setSession('appraise', arr)
         console.log(arr)
-        this.$router.push({name: 'appraise', params: {id: id, data: arr}})//id 订单号id
+        this.$router.push({name: 'appraise', params: {id: id}})//id 订单号id
       }
     }
   }

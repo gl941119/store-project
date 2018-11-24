@@ -58,11 +58,8 @@
               }else{//不付款
                 return   false
               }
-
             }
         }
-
-
       }
     },
     data() {

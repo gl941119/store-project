@@ -55,7 +55,7 @@ let router = new Router({
       path: '/serverEvaluate/:orderid',
       name: "serverEvaluate",
       title: '我的评价',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/index/serverEvaluate'], resolve)
     },
     {//首页--分类页
@@ -245,25 +245,26 @@ let router = new Router({
       path: '/member/userManage',
       name: 'userManage',
       title: '账号管理',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/userManage'], resolve)
     },
     {//会员中心--用户管理--修改
       path: '/member/userManage/userChange/:type/:message',
       name: 'userChange',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/userManage/page/userChange'], resolve)
     },
     {//会员中心--用户管理--地址
       path: '/member/userManage/address/:type',//0 购物时选择状态 1 会员中心编辑状态  0弃用
       name: 'address',
       title: '收货地址',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/userManage/page/address/address'], resolve)
     },
     {//会员中心--用户管理--修改+增加地址
       path: '/member/userManage/changeAddress/:id',
       name: 'changeAddress',
+      title:'编辑地址',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/userManage/page/address/chengAddress'], resolve)
     },
@@ -292,7 +293,7 @@ let router = new Router({
       path: '/indentConfirme',
       name: 'indentConfirme',
       title: '订单确认',
-      meta: {keepAlive: true},
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/pay/indentConfirme'], resolve)
     },
     {//订单详情
@@ -305,7 +306,7 @@ let router = new Router({
     {//支付
       path: '/pay',
       name: 'pay',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/pay'], resolve)
     },
     {//支付成功跳转页面
@@ -326,105 +327,105 @@ let router = new Router({
       path: '/member/beautyFund',
       name: 'beautyFund',
       title: '美丽基金',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund'], resolve)
     },
     {//我的一级美丽代言
       path: '/beautyFund/oneEndorsement',
       name: 'oneEndorsement',
       title: '我的一级美丽代言',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/oneEndorsement'], resolve)
     },
     {//我的二级美丽代言
       path: '/beautyFund/twoEndorsement',
       name: 'twoEndorsement',
       title: '我的二级美丽代言',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/twoEndorsement'], resolve)
     },
     {//我的上级美丽代言
       path: '/beautyFund/superiorEndorsement',
       name: 'superiorEndorsement',
       title: '我的上级美丽代言',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/superiorEndorsement'], resolve)
     },
     {//积分兑换
       path: '/beautyFund/exchange',
       name: 'exchange',
       title: '积分兑换',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/exchange'], resolve)
     },
     {//积分排行榜
       path: '/beautyFund/IntegralRanking',
       name: 'IntegralRanking',
       title: '积分排行榜',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/IntegralRanking'], resolve)
     },
     {//基金提现
       path: '/beautyFund/fundPresentation',
       name: 'fundPresentation',
       title: '美丽基金',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/fundPresentation'], resolve)
     },
     {//基金提现 - 成功
       path: '/beautyFund/fundPresentationOk',
       name: 'fundPresentationOk',
       title: '美丽基金',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/fundPresentationOk'], resolve)
     },
     {//积分兑换 - 成功
       path: '/beautyFund/exchangeOk/:je',
       name: 'exchangeOk',
       title: '积分兑换',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/exchangeOk'], resolve)
     },
     {//账号绑定
       path: '/bindAccount',
       name: 'bindAccount',
       title: '账号绑定',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/bindAccount'], resolve)
     },
     {//美师主页
       path: '/subscribe/page/appoint/DetailsBeautyDivision/:id/:sid',
       name: 'DetailsBeautyDivision',
       title: '美师主页',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/DetailsBeautyDivision'], resolve)
     },
     {//美丽代言说明
       path: '/beautyFund/beautifulEndorsement',
       name: 'beautifulEndorsement',
       title: '美丽代言说明',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/beautifulEndorsement'], resolve)
     },
     {//银行卡列表
       path: '/beautyFund/choiceBanks',
       name: 'choiceBanks',
       title: '选择银行',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/member/page/beautyFund/choiceBanks'], resolve)
     },
     {//员工个人资料
       path: '/staff/employeeInformation',
       name: 'employeeInformation',
       title: '员工端个人资料',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/staff/employeeInformation'], resolve)
     },
     {//员工个人编辑
       path: '/staff/editEmployeeInformation/:type',
       name: 'editEmployeeInformation',
       title: '员工端个人资料',
-      meta: {keepAlive: false}, // 不需要被缓存
+      meta: {keepAlive: false},
       component: resolve => require(['../pages/staff/editEmployeeInformation'], resolve)
     },
 

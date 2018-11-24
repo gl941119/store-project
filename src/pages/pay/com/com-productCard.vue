@@ -19,7 +19,7 @@
             :max="item.total"
             :step="1"
             @change="cheng"
-            v-on:click.native="saveGoodsid(item.goodsid,item)"
+            v-on:click.native.stop="saveGoodsid(item.goodsid,item)"
             class="stepper"
           />
         </div>

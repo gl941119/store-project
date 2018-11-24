@@ -38,7 +38,7 @@
     </van-popup>
     <!--主体-->
     <div class="main">
-      <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"></com-prodectcard>
+      <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request" v-on:click.native="goDetail(item.id)"></com-prodectcard>
       <div class="fill"></div>
       <div class="cell">
         <span class="cell-name">买家留言:</span>
@@ -48,8 +48,8 @@
     <!--<div class="balance">-->
     <!--<span class="cell-right">￥&nbsp;{{freight}}</span>-->
     <!--</div>-->
-    <van-cell title="美丽积分券" class="balance">
-      <span class="balance-right">{{allprice}}</span>
+    <van-cell title="美丽积分券" class="balance" v-if="address.score_nex">
+      <span class="balance-right">{{address.score_nex}}</span>
     </van-cell>
     <div class="aggregate">
       <van-cell title="商品金额" class="cell">
@@ -111,6 +111,7 @@
         //   province: undefined,
         //   realname: undefined,
         // },
+        ordersn:window.sessionStorage.getItem('ordersn'),
         address: null,
         addressList: [],
         store:null,
@@ -155,6 +156,9 @@
       this.request()
     },
     methods: {
+      goDetail(id){
+        this.$router.push({name:"detail",params:{type:'1',id:id}})
+      },
       goChangeAddress() {//无地址情况下去添加
         this.$router.push({name: 'address', params: {type: '1'}})
       },
@@ -179,7 +183,7 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
           data: {
-            ordersn: window.sessionStorage.getItem('ordersn'),
+            ordersn: this.ordersn,
           }
         }).then((res) => {
           this.goodslist = res.data.goodslist
@@ -200,7 +204,7 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
           data: {
-            ordersn: window.sessionStorage.getItem('ordersn'),
+            ordersn: this.ordersn,
             is_send:this.status,
             message:this.message,
             addressid:this.address.id,
@@ -213,7 +217,6 @@
             }else{//需要付款
              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
            }
-
           }
         })
       },
@@ -222,15 +225,15 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=payorder',
           type: 'post',
           data: {
-            ordersn: window.sessionStorage.getItem('ordersn')
+            ordersn:this.ordersn
           }
         }).then(res => {
           if (res.code === 100) {
             this.$toast.success('提交成功')
             let thia = this
-            setTimeout(function () {
-              thia.$router.push({name: 'success'})
-            }, 500)
+
+              this.$router.push({name: 'success',params:{orderid:this.ordersn,type:'1'}})
+
           }
         })
       },

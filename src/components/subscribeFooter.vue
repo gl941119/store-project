@@ -26,8 +26,10 @@
       <!--<p>预约</p>-->
       <!--</router-link>-->
 
-      <router-link tag="li" :to="{name:'userCenter'}"
+      <router-link tag="li" :to="{}"
                    v-bind:class="{li_hover:hover===2}"
+                   v-on:click="infoUrl"
+
       >
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>我的</p>
@@ -53,7 +55,21 @@
         return this.$store.state.sub_hover
       }
     },
-    methods: {}
+    methods: {
+
+      infoUrl() {
+        if (window.sessionStorage.getItem('is_bind') === '1') {//已绑定
+          if (window.sessionStorage.getItem('store') === '0') {//用户
+            this.$router.push({name: 'storeUser'});
+            // this.$store.commit('setHover',4)
+          } else {//美师
+            this.$router.push({name: 'userCenter'});
+          }
+        } else {//未绑定
+          this.$router.push({name: 'bindAccount'});
+        }
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>

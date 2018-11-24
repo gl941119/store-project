@@ -9,7 +9,7 @@
         <staff-card :Data = 'item' v-for="item in staffList" :collect="true"  @refresh = 'request' :key="item.id"></staff-card>
       </van-tab>
     </van-tabs>
-    <product-card :Data="item" v-for="item in productList"   :collect="true"  @refresh = 'request' :key="item.id" v-if="type==='1'"></product-card>
+    <product-card :Data="item" v-for="item in productList"   :collect="true"  @refresh = 'request' :key="item.id" v-if="type=='1'"></product-card>
   </div>
 </template>
 
@@ -35,7 +35,7 @@
       request() {
         console.log(this.type)
         let status
-        if(this.type === '1'){//商品
+        if(this.type == '1'){//商品
           status = 1
         }else if(this.active === 0){//服务
           status = 2

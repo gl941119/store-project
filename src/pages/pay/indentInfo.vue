@@ -113,7 +113,7 @@
 
       <van-button round plain type="default" class="confirmBtn"
                   v-if="status== '3'"
-
+                v-on:click="goAppraise"
       >
         评价
       </van-button>
@@ -124,10 +124,12 @@
 </template>
 
 <script>
+  import cache from  '../../utils/cache'
   export default {
     name: "indentInfo",
     data(){
       return {
+        ordersn:window.sessionStorage.getItem('ordersn'),
         user:{},
         goodslist:[],
         get_score_nex:undefined,//美丽积分券
@@ -135,7 +137,7 @@
         score_nex:undefined,//积分券抵扣
         freight:undefined,//运费
         allmoney:undefined,//订单总价
-        ordersn:undefined,//订单编号
+        // ordersn:undefined,//订单编号
         createtime:undefined,//
         pay_time:undefined,
         send_time:undefined,
@@ -174,6 +176,27 @@
       this.request()
     },
     methods:{
+
+      goAppraise(id) {//跳转评价
+        let arr = []
+        this.goodslist.forEach((item) => {
+          let obj = {
+            thumb: item.thumb,
+            goodsid: item.goodsid,
+            "content": undefined,
+            "score": 4,
+            "tip": undefined,//匿名
+            videos: [],
+            imgs: []
+          }
+          arr.push(obj)
+        })
+
+
+        cache.setSession('appraise', arr)
+        console.log(arr)
+        this.$router.push({name: 'appraise', params: {id: id}})//id 订单号id
+      },
       goDetail(id){
         this.$router.push({name:'detail',params:{type:'1',id:id}})
       },
@@ -192,7 +215,7 @@
           url:'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
           type:'get',
           data:{
-            ordersn: window.sessionStorage.getItem('ordersn'),
+            ordersn: this.ordersn,
             status: status
           }
         }).then(res=>{
@@ -219,7 +242,7 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
           data: {
-            ordersn: window.sessionStorage.getItem('ordersn')
+            ordersn: this.ordersn
           }
         }).then(res => {
           if (res.code === 100) {
@@ -230,7 +253,7 @@
             this.score_nex = res.data.allrecord.score_nex;  //积分券抵扣
             this.freight = res.data.freight.freight;//运费
             this.allmoney = res.data.allrecord.money;  //总金额
-            this.ordersn = res.data.ordersn; //订单编号
+            // this.ordersn = res.data.ordersn; //订单编号
             this.createtime = res.data.createtime;
             this.pay_time = res.data.pay_time;
             this.send_time = res.data.send_time;

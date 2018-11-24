@@ -14,22 +14,34 @@
     name: "transfer",
     data() {
       return {
-        orderid:this.$route.params.orderid,//订单号
-        type:this.$route.params.type,//1 商品  2 服务   3 套餐
+        orderid: this.$route.params.orderid,//订单号
+        type: this.$route.params.type,//1 商品  2 服务   3 套餐
         second: 3,
         tiem: null
       }
     },
     mounted() {
-      this.time()
+      // this.time()
     },
     methods: {
       goMyIndent() {
-        this.$router.push({name: 'indentInfo'})
+        if (this.type == '1') {//商品
+          window.sessionStorage.setItem('ordersn', this.orderid)
+          this.$router.push({name: 'indentInfo'})
+        } else if (this.type == '2') {//服务
+          this.$router.push({name: 'serviceInfo', params: {orderid: this.orderid}})
+        } else {//套餐
+        }
         clearInterval(window.tiem)
       },
       goIndex() {
-        this.$router.push({name: 'index'})
+        if (this.type == '1') {//商品
+          this.$router.push({name: 'index'})
+        } else if (this.type == '2') {//服务
+          this.$router.push({name: 'subscribeHome'})
+        } else {//套餐
+          this.$router.push({name: 'setMealHome'})
+        }
         clearInterval(window.tiem)
       },
       time(time) {
@@ -38,8 +50,7 @@
           if (thia.second > 0) {
             thia.second -= 1
           } else {
-            clearInterval(window.tiem)
-            thia.$router.push({name: 'index'})
+            this.goIndex()
           }
         }, 1000)
       }

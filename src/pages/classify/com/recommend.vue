@@ -3,13 +3,13 @@
     <img class="recommend-banner" :src="adv.bimg" alt="" v-on:click="goLink(adv.link)">
     <div class="server">
       <div class="server-title">
-        <span class="server-title-name">推荐服务</span>
+        <span class="server-title-name">推荐</span>
         <!--<span class="server-title-more" v-on:click="routerPush('/subscribe/1')">查看更多</span>-->
         <!--<van-icon name="arrow" class="server-title-icon"></van-icon>-->
       </div>
       <div class="server-img">
         <img v-for="item in services" :key="item.id" :src="item.simg" alt=""
-             v-on:click="routerPush('/detail/2/'+item.id)">
+             v-on:click="routerPush('/detail/1/'+item.id)">
       </div>
     </div>
     <div class="product">
