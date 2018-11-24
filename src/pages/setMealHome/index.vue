@@ -18,7 +18,7 @@
         </div>
 
         <div class="subscribeHomePage_list">
-          <div class="subscribeHomePage_item" v-for="item in vipdata">
+          <div class="subscribeHomePage_item" v-for="item in vipdata" @click="setMealInfo(item.id)">
             <div class="subscribeHom_height167"><img :src="item.simg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">{{item.name}}</div>
           </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="subscribeHomePage_list">
-          <div class="subscribeHomePage_item" v-for="item in mdata">
+          <div class="subscribeHomePage_item" v-for="item in mdata" @click="setMealInfo(item.id)">
             <div class="subscribeHom_height167"><img :src="item.simg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">{{item.name}}</div>
           </div>
@@ -66,6 +66,9 @@
       this.indexReques();
     },
     methods:{
+      setMealInfo(id){
+this.$router.push({name:'setMealDetail',params:{ids:id}})
+      },
       goLink(url){
         window.location.href = url;
       },

@@ -283,7 +283,7 @@ let router = new Router({
       component: resolve => require(['../pages/member/page/myIndent/page/appraise'], resolve)
     },
     {//会员中心--我的订单--查看物流
-      path: '/member/myIndent/logistics/:ordersn', //  ordersn 订单号id
+      path: '/member/myIndent/logistics/:ordersn/:status', //  ordersn 订单号id status 套餐订单状态
       name: 'logistics',
       title: '查看物流',
       meta: {keepAlive: false},
@@ -655,6 +655,13 @@ let router = new Router({
       title: '订单详情',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/goodsToBeReceived'], resolve)
+    },
+    {//商品详情
+      path: '/setMealHome/page/setMealDetail/:ids',
+      name: 'setMealDetail',
+      title: '商品详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealDetail'], resolve)
     }
 
   ]

@@ -24,13 +24,11 @@
 
 <div class="purchasedService_itemBottom"></div>
     <div class="package_to_be_received" v-if="goodsToBeReceived(item.is_send,item.status)">
-      <div class="packageBtnFind">查看物流</div>
-      <div class="packageBtnOk">确认收货</div>
+      <div class="packageBtnFind" @click="viewLogistics(item.orderid)">查看物流</div>
+      <div class="packageBtnOk" @click="confirmReceipt(item.orderid)">确认收货</div>
     </div>
 
   </div>
-
-
 
 
 
@@ -50,6 +48,31 @@
 
       },
       methods:{
+        confirmReceipt(id){
+          this.$dialog.confirm({
+            title: '确认收货！'
+          }).then(() => {
+            // on confirm
+            this.$request({
+              url:"app/index.php?i=1&c=entry&eid=90&act=orderstatus",
+              type:'post',
+              data:{
+                orderid:id,
+                status:3
+              }
+            }).then((res)=>{
+              if(res.status){
+this.$emit('refreshList')
+              }
+            });
+          }).catch(() => {
+            // on cancel
+          });
+
+        },
+        viewLogistics(id){
+          this.$router.push({name:'logistics',params:{ordersn:id,status:id}})
+        },
         statusInfo(oId){
           this.$router.push({name:'setMealOrderinfo',params:{ids:oId}});
         },
