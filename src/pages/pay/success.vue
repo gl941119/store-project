@@ -31,6 +31,7 @@
         } else if (this.type == '2') {//服务
           this.$router.push({name: 'serviceInfo', params: {orderid: this.orderid}})
         } else {//套餐
+          this.$router.push({name: 'setMealOrderinfo', params: {ids: this.orderid}})
         }
         clearInterval(window.tiem)
       },
