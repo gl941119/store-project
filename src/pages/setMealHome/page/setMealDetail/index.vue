@@ -72,33 +72,18 @@ ids:this.$route.params.ids,
 
     methods: {
       onceBuy() {//立即购买
-        if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定账号
-          this.$router.push({name: 'bindAccount'});
-          return
-        }
-        if (this.specs.length === this.num) {//是否选择规格
-          this.$request({
-            url: 'app/index.php?i=1&c=entry&eid=85&act=orderconfirm',
-            type: 'post',
-            data: {
-              goods: JSON.stringify([{
-                id: this.id,
-                optionid: this.specs.join('_'),
-                num: this.buyNum
-              }])
-            }
-          }).then(res => {
-            if (res.code === 100) {
-              window.sessionStorage.setItem('ordersn', res.data.ordersn)
-              this.$router.push({name: 'indentConfirme'})
-            }
-          })
-        } else {//未选择
-          this.status = '2' // 立即购买状态
-          //   this.$set(this.status,'2')
-          console.log(this.status)
-          this.$store.commit('setShowBuySpecification', true)
-        }
+
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=90&act=orderconfirm',
+          type: 'post',
+          data: {
+       id:this.ids
+          }
+        }).then(res => {
+          if (res.status) {
+this.$router.push({name:'orderConfirm',params:{ids:res.data.orderid}})
+          }
+        })
       },
       onClick(index, title) {//锚点
 
@@ -129,36 +114,7 @@ ids:this.$route.params.ids,
             this.dataList=res.data.meal;
           }
         });
-        // let url
-        // if (this.type == '1') { // 商品列表
-        //   url = 'app/index.php?i=1&c=entry&eid=85&act=goods'
-        // } else {
-        //   url = 'app/index.php?i=1&c=entry&eid=86&act=service'
-        // }
-        // this.$request({
-        //   url: url,
-        //   type: 'get',
-        //   data: {
-        //     id: this.$route.params.id
-        //   }
-        // }).then((res) => {
-        //   if (res.code === 100) {
-        //     if (this.type == '2') {//服务
-        //       this.Data = res.data.service
-        //       this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
-        //     } else if (this.type == '1') {//商品
-        //       this.Data = res.data.goods
-        //       this.goods_spec = res.data.goods_spec //容量
-        //       // this.alreadybought.length === 0 ? '请选择规格 := `${res.data.goods.title},1瓶` //已购
-        //       this.address = res.data.address
-        //       this.num = res.data.num //规格数量
-        //       this.is_collect = res.data.collection === 0 ? false : true; //是否收藏
-        //       this.cart_num = res.data.cart_num
-        //     }
-        //     this.discuss = res.data.discuss // 评论
-        //
-        //   }
-        // })
+
       },
 
     }

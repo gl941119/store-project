@@ -310,7 +310,7 @@ let router = new Router({
       component: resolve => require(['../pages/pay'], resolve)
     },
     {//支付成功跳转页面
-      path: '/success/:orderid/:type',// orderid 订单号   type  1 商品   2服务
+      path: '/success/:orderid/:type',// orderid 订单号   type  1 商品   2服务  3套餐
       name: 'success',
       title: '支付成功',
       meta: {keepAlive: false},
@@ -649,19 +649,19 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/'], resolve)
     },
-    {//待收货
-      path: '/setMealHome/page/setMealOrderinfo/goodsToBeReceived',
-      name: 'goodsToBeReceived',
-      title: '订单详情',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/goodsToBeReceived'], resolve)
-    },
     {//商品详情
       path: '/setMealHome/page/setMealDetail/:ids',
       name: 'setMealDetail',
       title: '商品详情',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/setMealDetail'], resolve)
+    },
+    {//订单确认
+      path: '/setMealHome/page/setMealDetail/page/orderConfirm/:ids',
+      name: 'orderConfirm',
+      title: '订单确认',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealDetail/page/orderConfirm/'], resolve)
     }
 
   ]
