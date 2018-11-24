@@ -15,6 +15,7 @@
       data(){
           return{
             ordersn:this.$route.params.ordersn,
+            st:this.$route.params.status,
             info:[]
           }
       },
@@ -23,8 +24,14 @@
       },
       methods:{
           request(){
+            let url='';
+            if(this.st){
+              url='app/index.php?i=1&c=entry&eid=90&act=expresslist';
+            }else{
+              url='app/index.php?i=1&c=entry&eid=85&act=expresslist';
+            }
             this.$request({
-              url:'app/index.php?i=1&c=entry&eid=85&act=expresslist',
+              url:url,
               type:'post',
               data:{
                 ordersn:this.ordersn

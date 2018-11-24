@@ -2,13 +2,13 @@
     <div class="purchasedCommodities">
       <van-tabs swipeable @click="tabsEv">
         <van-tab title="全部">
-          <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
+          <ComAllPurcjased :Data="dataList" @refreshList="initEv(1)"></ComAllPurcjased>
       </van-tab>
         <van-tab title="已留店">
           <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
         </van-tab>
         <van-tab title="待发货">
-          <ComAllPurcjased :Data="dataList"></ComAllPurcjased>
+          <ComAllPurcjased :Data="dataList" @refreshList="initEv(1)"></ComAllPurcjased>
         </van-tab>
         <van-tab title="待收货">
           <ComAllPurcjased :Data="dataList"></ComAllPurcjased>

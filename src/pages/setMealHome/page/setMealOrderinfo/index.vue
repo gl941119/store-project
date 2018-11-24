@@ -1,82 +1,90 @@
 <template>
     <div class="setMealOrderinfo">
-<div class="setMealOrderinfo_b">{{arrData.transactionStatus}}</div>
-      <div class="setMealOrderinfo_p">
-        <div class="setMealOrderinfo_fl">
-          <div class="setMealOrderinfo_flInfo">
-            <div class="setMealOrderinfo_Name">{{arrData.realname}}</div>
-            <div class="setMealOrderinfo_Phone" v-if="arrData.mobileShow">{{arrData.mobile}}</div>
-          </div>
-          <div class="setMealOrderinfo_status">{{arrData.status_name}}</div>
-        </div>
-
-
-        <div class="setMealOrderinfo_address">{{arrData.addres}}</div>
-
-        <div class="setMealOrderinfo_commodity">
-          <div class="commodity_img"><img :src="mdata.simg"></div>
-          <div class="commodity_info">
-            <div class="commodity_title">
-              <div class="commodity_titleTxt">{{mdata.name}}</div>
-              <div class="commodity_seeInfo" @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</div>
+      <div class="setMealOrderinfo_height">
+        <div class="setMealOrderinfo_b">{{arrData.transactionStatus}}</div>
+        <div class="setMealOrderinfo_p">
+          <div class="setMealOrderinfo_fl">
+            <div class="setMealOrderinfo_flInfo">
+              <div class="setMealOrderinfo_Name">{{arrData.realname}}</div>
+              <div class="setMealOrderinfo_Phone" v-if="arrData.mobileShow">{{arrData.mobile}}</div>
             </div>
-            <div class="commodity_content">{{mdata.description}}</div>
-            <div class="price_num">
-              <div class="commodity_price">¥{{mdata.price}}</div>
-              <div class="commodity_num">x{{odata.num}}</div>
+            <div class="setMealOrderinfo_status">{{arrData.status_name}}</div>
+          </div>
+
+
+          <div class="setMealOrderinfo_address">{{arrData.addres}}</div>
+
+          <div class="setMealOrderinfo_commodity">
+            <div class="commodity_img"><img :src="mdata.simg"></div>
+            <div class="commodity_info">
+              <div class="commodity_title">
+                <div class="commodity_titleTxt">{{mdata.name}}</div>
+                <div class="commodity_seeInfo" @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</div>
+              </div>
+              <div class="commodity_content">{{mdata.description}}</div>
+              <div class="price_num">
+                <div class="commodity_price">¥{{mdata.price}}</div>
+                <div class="commodity_num">x{{odata.num}}</div>
+              </div>
             </div>
+          </div>
+
+
+        </div>
+        <div class="null"></div>
+        <div class="price_calculationBox">
+          <div class="price_calculation">
+            <div class="price_calculation_title">套餐金额</div>
+            <div class="price_calculation_price">¥ {{mdata.price}}</div>
+          </div>
+          <div class="price_calculation">
+            <div class="price_calculation_title">运费</div>
+            <div class="price_calculation_price">¥ {{odata.dispatchprice}}</div>
+          </div>
+          <div class="price_calculation">
+            <div class="price_calculation_title">合计</div>
+            <div class="price_calculation_price">¥ {{odata.orderprice}}</div>
+          </div>
+        </div>
+        <div class="null"></div>
+
+        <div class="oderInfo">
+          <div class="oderInfo_top">
+            <div class="oderInfo_icon"></div>
+            <div class="oderInfo_txt">订单信息</div>
+          </div>
+          <div class="oderInfo_list">
+            <div>订单编号</div>
+            <div>{{odata.orderid}}</div>
+          </div>
+          <div class="oderInfo_list">
+            <div>创建时间</div>
+            <div>{{odata.createtime}}</div>
+          </div>
+          <div class="oderInfo_list">
+            <div>付款时间</div>
+            <div>{{odata.pay_time}}</div>
+          </div>
+          <div class="oderInfo_list" v-if="arrData.deliverGoods">
+            <div>发货时间</div>
+            <div>{{arrData.deliverGoodsT}}</div>
+          </div>
+          <div class="oderInfo_list" v-if="arrData.receivingGoods">
+            <div>收货时间</div>
+            <div>{{arrData.take_time}}</div>
           </div>
         </div>
 
+        <div class="null"></div>
+
 
       </div>
-      <div class="null"></div>
-      <div class="price_calculationBox">
-        <div class="price_calculation">
-          <div class="price_calculation_title">套餐金额</div>
-          <div class="price_calculation_price">¥ {{mdata.price}}</div>
-        </div>
-        <div class="price_calculation">
-          <div class="price_calculation_title">运费</div>
-          <div class="price_calculation_price">¥ {{odata.dispatchprice}}</div>
-        </div>
-        <div class="price_calculation">
-          <div class="price_calculation_title">合计</div>
-          <div class="price_calculation_price">¥ {{odata.orderprice}}</div>
-        </div>
+      <div class="go"v-if="arrData.btnShow" @click="()=>{this.$router.go(-1)}">返回</div>
+
+      <div class="goodsToBeReceived_btn" v-else>
+        <div @click="viewLogistics">查看物流</div>
+        <div @click="confirmReceipt">确认收货</div>
       </div>
-      <div class="null"></div>
-
-      <div class="oderInfo">
-<div class="oderInfo_top">
-  <div class="oderInfo_icon"></div>
-  <div class="oderInfo_txt">订单信息</div>
-</div>
-        <div class="oderInfo_list">
-          <div>订单编号</div>
-          <div>{{odata.orderid}}</div>
-        </div>
-        <div class="oderInfo_list">
-          <div>创建时间</div>
-          <div>{{odata.createtime}}</div>
-        </div>
-        <div class="oderInfo_list">
-          <div>付款时间</div>
-          <div>{{odata.pay_time}}</div>
-        </div>
-        <div class="oderInfo_list" v-if="arrData.deliverGoods">
-          <div>发货时间</div>
-          <div>{{arrData.deliverGoodsT}}</div>
-        </div>
-        <div class="oderInfo_list" v-if="arrData.receivingGoods">
-          <div>收货时间</div>
-          <div>{{arrData.take_time}}</div>
-        </div>
-      </div>
-
-      <div class="null"></div>
-<div class="go" @click="()=>{this.$router.go(-1)}">返回</div>
-
 
     </div>
 </template>
@@ -99,6 +107,31 @@
 this.initEv();
       },
       methods:{
+        confirmReceipt(){
+          this.$dialog.confirm({
+            title: '确认收货！'
+          }).then(() => {
+            // on confirm
+            this.$request({
+              url:"app/index.php?i=1&c=entry&eid=90&act=orderstatus",
+              type:'post',
+              data:{
+                orderid:this.id,
+                status:3
+              }
+            }).then((res)=>{
+              if(res.status){
+                this.initEv();
+              }
+            });
+          }).catch(() => {
+            // on cancel
+          });
+
+        },
+        viewLogistics(){
+          this.$router.push({name:'logistics',params:{ordersn:this.id,status:this.id}})
+        },
 initEv(){
   this.$request({
     url:'app/index.php?i=1&c=entry&eid=90&act=orderinfo',
@@ -120,6 +153,7 @@ this.arrData={
   mobileShow:false,
   deliverGoods:false,
   receivingGoods:false,
+  btnShow:true,
   addres:d.store.addres,
   status_name:'留店',
   transactionStatus:'交易完成'
@@ -132,6 +166,7 @@ this.arrData={
           mobileShow:true,
           deliverGoods:false,
           receivingGoods:false,
+          btnShow:true,
           addres:d.user.address,
           status_name:'发送到家',
           transactionStatus:'待发货'
@@ -145,22 +180,24 @@ this.arrData={
           mobileShow:true,
           deliverGoods:true,
           receivingGoods:false,
+          btnShow:false,
           addres:d.user.address,
-          status_name:'发送到家',
-          transactionStatus:'待发货',
+          status_name:'已发货',
+          transactionStatus:'待收货',
           deliverGoodsT:d.odata.send_time
         };
       }
-      if(parseInt(d.odata.is_send)===1&&parseInt(d.odata.status)===2){
+      if(parseInt(d.odata.is_send)===1&&parseInt(d.odata.status)===3){
         this.arrData={
           realname:d.user.realname,
           mobile:d.user.mobile,
           mobileShow:true,
           deliverGoods:true,
           receivingGoods:true,
+          btnShow:true,
           addres:d.user.address,
-          status_name:'发送到家',
-          transactionStatus:'待发货',
+          status_name:'交易完成',
+          transactionStatus:'已发货',
           deliverGoodsT:d.odata.send_time,
           take_time:d.odata.take_time
         };
@@ -177,6 +214,10 @@ this.arrData={
 .setMealOrderinfo{
   background-color: #fff;
   padding-bottom: 0px;
+}
+.setMealOrderinfo_height{
+  overflow-y: auto;
+  height: calc(100vh - 50px);
 }
   .setMealOrderinfo_b{
     height:103px;
@@ -362,5 +403,28 @@ justify-content: flex-start;
   font-family:PingFangSC-Regular;
   font-weight:400;
   color:rgba(255,255,255,1);
+}
+.goodsToBeReceived_btn{
+  display: $flex;
+  align-items: center;
+}
+.goodsToBeReceived_btn div{
+  width: 50%;
+  height: 49px;
+  text-align: center;
+  line-height: 49px;
+}
+.goodsToBeReceived_btn div:nth-child(1){
+  font-size:18px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(102,102,102,1);
+}
+.goodsToBeReceived_btn div:nth-child(2){
+  font-size:18px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  background-color: #71B3FF;
 }
 </style>
