@@ -662,6 +662,13 @@ let router = new Router({
       title: '订单确认',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/setMealDetail/page/orderConfirm/'], resolve)
+    },
+    {//会员列表
+      path: '/setMealHome/page/MembershipCardList/:id',
+      name: 'MembershipCardList',
+      title: '会员列表',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/MembershipCardList'], resolve)
     }
 
   ]

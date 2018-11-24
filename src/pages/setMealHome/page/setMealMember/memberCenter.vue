@@ -27,13 +27,13 @@
         </div>
       </div>
       <div class="member_bannerImg">
-        <div class="member_swipe">
-          <van-swipe :autoplay="3000">
-            <van-swipe-item><img src="../../../../assets/image/banner_ffyuan.png"/></van-swipe-item>
-            <van-swipe-item><img src="../../../../assets/image/banner_ffyuan.png"/></van-swipe-item>
-            <van-swipe-item><img src="../../../../assets/image/banner_ffyuan.png"/></van-swipe-item>
-            <van-swipe-item><img src="../../../../assets/image/banner_ffyuan.png"/></van-swipe-item>
-          </van-swipe>
+        <div class="member_swipe" @click="()=>{this.$router.push({name:'MembershipCardList'})}">
+<img :src="bImg">
+          <div class="member_bannerImg-box">
+            <div>已购：{{taoNum}}份套餐</div>
+            <div><span @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</span></div>
+          </div>
+
         </div>
 
       </div>
@@ -77,7 +77,9 @@
     name: "memberCenter",//会员
     data(){
       return {
-user:{}
+user:{},
+        bImg:'',
+        taoNum:0
       }
     },
     mounted(){
@@ -95,6 +97,8 @@ this.$request({
   if(res.status){
     let d=res.data;
     this.user=d.user;
+    this.bImg=d.adv[1].bimg;
+    this.taoNum=d.buymealcount;
   }
 });
       },
@@ -243,5 +247,33 @@ this.$request({
   .member_swipe{
     width: 100%;
     height: 100px;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    img{
+      position: absolute;
+      top:0px;
+      left:0px;
+      z-index: 1;
+    }
+  }
+  .member_bannerImg-box{
+    position: relative;
+    z-index: 10;
+    font-size:14px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    div:nth-child(1){
+      padding: 15px 30px 0 0;
+    }
+    div:nth-child(2){
+      padding: 31px 30px 0 0;
+    }
+  }
+  .member_bannerSwip{
+    position:relative;
   }
 </style>

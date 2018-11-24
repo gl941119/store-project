@@ -140,16 +140,7 @@
     },
     methods: {
       submitEvent(){
-        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids;
-        // this.$request({
-        //   url:'app/index.php?i=1&c=entry&eid=90&act=payorder',
-        //   type:'post',
-        //   data:{
-        //     orderid:this.ids,
-        //   }
-        // }).then(res=>{
-        //
-        // });
+        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids+"&message="+LeavingMessage;
       },
       addressItem(i){
         this.initEvnt({orderid:this.ids,is_send:1,addressid:i});
