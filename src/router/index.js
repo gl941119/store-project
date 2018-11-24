@@ -654,6 +654,13 @@ let router = new Router({
       title: '订单详情',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/setMealOrderinfo/goodsToBeReceived'], resolve)
+    },
+    {//商品详情
+      path: '/setMealHome/page/setMealDetail/:ids',
+      name: 'setMealDetail',
+      title: '商品详情',
+      meta: {keepAlive: false},
+      component: resolve => require(['../pages/setMealHome/page/setMealDetail'], resolve)
     }
 
   ]
