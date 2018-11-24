@@ -1,13 +1,13 @@
 <template>
   <div class="user_body">
     <div class="user_flex user_box">
-      <div class="user_header"><img src="../../assets/image/s_1.jpg"></div>
+      <div class="user_header"><img :src="Data.avatar"></div>
       <div class="user_right">
         <div class="user_flex user_padding">
-          <div class="user_name">雷斯然</div>
-          <div class="user_endorsement">七星代言人</div>
+          <div class="user_name">{{Data.nick}}</div>
+          <img class="user_endorsement" :src="Data.level_img" v-if="Data.level_img"></img>
         </div>
-        <div class="user_signature">晚来天欲雪，能饮一杯无？</div>
+        <div class="user_signature">{{Data.signature}}</div>
       </div>
     </div>
     <div class="user_content">
@@ -61,12 +61,28 @@
 <script>
   export default {
     name: "index",
+    data(){
+      return {
+        Data:{}
+      }
+    },
     created() {
       this.$store.commit('setHover', 4)//footer颜色
     },
     mounted() {
-
+    this.request()
     },
+    methods:{
+      request() {
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=88&act=ucenter',
+          type: 'get',
+        }).then((res) => {
+
+          this.Data = res.data.user;
+        })
+      }
+    }
 
   }
 </script>

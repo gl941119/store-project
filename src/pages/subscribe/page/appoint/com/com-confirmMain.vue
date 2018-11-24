@@ -230,13 +230,15 @@
         line-height: 23px;
       }
       > dd {
-        height: 40px;
+        /*height: 40px;*/
         overflow: hidden;
         font-size: 12px;
-        font-family: PingFangSC-Regular;
-
         color: rgba(153, 153, 153, 1);
         line-height: 17px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+
       }
       > p {
         position: absolute;

@@ -13,12 +13,13 @@
     </div>
     <div class="null"></div>
     <div class="indentInfo_padding1">
-      <div class="flex_start indentInfo_padding2" v-for="item,index in goodslist" :key="index" v-on:click="goDetail(item.goodsid)">
+      <div class="flex_start indentInfo_padding2" v-for="item,index in goodslist" :key="index"
+           v-on:click="goDetail(item.goodsid)">
         <div class="InsComm_listImg"><img src="item.thumb"></div>
         <div class="InsComm_listRight">
           <div>
             <div class="InsComm_listName">
-                {{item.title}}
+              {{item.title}}
             </div>
             <div class="InsComm_listRightTop">
               {{item.description}}
@@ -55,7 +56,8 @@
     <div class="null"></div>
     <div class="indentInfo_padding1">
       <div class="flex_start indentInfo_pad">
-        <div class="indentInfo_solid"></div><div class="indentInfo_title">订单信息</div>
+        <div class="indentInfo_solid"></div>
+        <div class="indentInfo_title">订单信息</div>
       </div>
       <div class="flex_start indentInfo_pad" v-if="get_score_nex">
         <div class="indentInfo_title1">美丽积分券</div>
@@ -93,16 +95,16 @@
       </van-button>
       <van-button round plain type="default" class="confirmBtn"
                   v-if="status== '0'"
-
+                  v-on:click="payHandle"
       >
         去付款
       </van-button>
       <van-button round plain type="default" class="confirmBtn"
                   v-if="status== '2'||status== '1'"
+                  v-on:click="confirmHandle"
       >
         确认收货
       </van-button>
-
 
 
       <van-button round plain type="default" class="cancelBtn" v-if="status== '2'"
@@ -113,7 +115,7 @@
 
       <van-button round plain type="default" class="confirmBtn"
                   v-if="status== '3'"
-                v-on:click="goAppraise"
+                  v-on:click="goAppraise"
       >
         评价
       </van-button>
@@ -124,32 +126,33 @@
 </template>
 
 <script>
-  import cache from  '../../utils/cache'
+  import cache from '../../utils/cache'
+
   export default {
     name: "indentInfo",
-    data(){
+    data() {
       return {
-        ordersn:window.sessionStorage.getItem('ordersn'),
-        user:{},
-        goodslist:[],
-        get_score_nex:undefined,//美丽积分券
-        allprice:undefined,//商品金额
-        score_nex:undefined,//积分券抵扣
-        freight:undefined,//运费
-        allmoney:undefined,//订单总价
+        ordersn: window.sessionStorage.getItem('ordersn'),
+        user: {},
+        goodslist: [],
+        get_score_nex: undefined,//美丽积分券
+        allprice: undefined,//商品金额
+        score_nex: undefined,//积分券抵扣
+        freight: undefined,//运费
+        allmoney: undefined,//订单总价
         // ordersn:undefined,//订单编号
-        createtime:undefined,//
-        pay_time:undefined,
-        send_time:undefined,
-        take_time:undefined,
-        status:undefined,//状态
-        is_send:undefined,//是否留店
+        createtime: undefined,//
+        pay_time: undefined,
+        send_time: undefined,
+        take_time: undefined,
+        status: undefined,//状态
+        is_send: undefined,//是否留店
 
       }
     },
-    computed:{
+    computed: {
 
-      statusTitle:function () {
+      statusTitle: function () {
         switch (this.status) {
           case '0':
             return '等待买家付款';
@@ -171,14 +174,37 @@
     },
 
 
-    mounted(){
+    mounted() {
 
       this.request()
     },
-    methods:{
+    methods: {
+      payHandle(){//支付
 
+        if(window.sessionStorage.getItem('is_member')== '0'){//非會員
+          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+        }else{//會員
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=85&act=payorder',
+            type: 'post',
+            data: {
+              orderid: this.$route.params.orderid
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('提交成功');
+              let thia = this;
+              setTimeout(function () {
+                thia.$router.push({name: 'success',params:{orderid:this.ordersn,type:'1'}})
+              }, 500)
+            }
+          })
+        }
+
+
+      },
       goAppraise(id) {//跳转评价
-        let arr = []
+        let arr = [];
         this.goodslist.forEach((item) => {
           let obj = {
             thumb: item.thumb,
@@ -188,17 +214,17 @@
             "tip": undefined,//匿名
             videos: [],
             imgs: []
-          }
+          };
           arr.push(obj)
-        })
+        });
 
 
-        cache.setSession('appraise', arr)
-        console.log(arr)
+        cache.setSession('appraise', arr);
+        console.log(arr);
         this.$router.push({name: 'appraise', params: {id: id}})//id 订单号id
       },
-      goDetail(id){
-        this.$router.push({name:'detail',params:{type:'1',id:id}})
+      goDetail(id) {
+        this.$router.push({name: 'detail', params: {type: '1', id: id}})
       },
       cancelHandle() {//取消订单
         this.$dialog.confirm({
@@ -210,34 +236,44 @@
           // on cancel
         });
       },
+      confirmHandle() {//确认收货
+        this.$dialog.confirm({
+          title: '是否确认收货',
+        }).then(() => {
+          this.reqChange('3')
+        }).catch(() => {
+          // on cancel
+        });
+
+      },
       reqChange(status) {//修改订单状态
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
-          type:'get',
-          data:{
+          url: 'app/index.php?i=1&c=entry&eid=85&act=orderstatus',
+          type: 'get',
+          data: {
             ordersn: this.ordersn,
             status: status
           }
-        }).then(res=>{
+        }).then(res => {
           if (res.code === 100) {
             if (staus === -1) {
-              this.$toast.success('取消成功')
-              let thia = this
+              this.$toast.success('取消成功');
+              let thia = this;
               setTimeout(function () {
                 thia.$route.go(-1)
               }, 1000)
             }
             if (staus === 3) {
-              this.$toast.success('收货成功')
-              let thia = this
+              this.$toast.success('收货成功');
+              let thia = this;
               setTimeout(function () {
-                // thia.$emit('refresh')
+                thia.$route.go(-1)
               }, 1000)
             }
           }
         })
       },
-      request(){
+      request() {
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
@@ -246,7 +282,7 @@
           }
         }).then(res => {
           if (res.code === 100) {
-          this.user = res.data.user;
+            this.user = res.data.user;
             this.goodslist = res.data.goodslist;
             this.get_score_nex = res.data.get_score_nex; //美丽积分券
             this.allprice = res.data.allrecord.allprice;  //商品金额
@@ -257,7 +293,7 @@
             this.createtime = res.data.createtime;
             this.pay_time = res.data.pay_time;
             this.send_time = res.data.send_time;
-            this.take_time  = res.data.take_time;
+            this.take_time = res.data.take_time;
             this.status = res.data.status;//状态
             this.is_send = res.data.is_send
 
@@ -270,15 +306,16 @@
 </script>
 
 <style lang="scss" scoped>
-  .border{
+  .border {
     position: absolute;
     bottom: 0;
     height: 1px;
     width: 100%;
     margin: 12px 0 0;
-    background-color: rgba(216,216,216,1);
+    background-color: rgba(216, 216, 216, 1);
   }
-  .more{
+
+  .more {
     border-top: 1px solid #999;
     border-right: 1px solid #999;
     transform: rotate(45deg);
@@ -286,197 +323,225 @@
     width: 9px;
     height: 9px;
   }
-  .space_between{
+
+  .space_between {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .flex_start{
+
+  .flex_start {
 
     display: flex;
     align-items: center;
     justify-content: flex-start;
   }
-  .null{
+
+  .null {
     width: 100%;
     height: 10px;
-    background-color: rgba(244,244,244,1);
+    background-color: rgba(244, 244, 244, 1);
   }
-  .indentInfo{
+
+  .indentInfo {
     padding-bottom: 0px;
     background-color: #f4f4f4;
     height: 100%;
 
   }
-  .indentInfo_padding2{
+
+  .indentInfo_padding2 {
     position: relative;
     overflow: hidden;
     height: 110px;
 
   }
-  .indentInfo_top{
-    height:103px;
-    font-size:18px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(255,255,255,1);
+
+  .indentInfo_top {
+    height: 103px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
     line-height: 103px;
     text-align: center;
-    background:linear-gradient(135deg,rgba(170,242,255,1) 0%,rgba(113,179,255,1) 100%);
+    background: linear-gradient(135deg, rgba(170, 242, 255, 1) 0%, rgba(113, 179, 255, 1) 100%);
   }
-  .indentInfo_padding{
+
+  .indentInfo_padding {
     padding: 12px 15px;
     background-color: white;
   }
-  .indentInfo_padding1{
+
+  .indentInfo_padding1 {
     padding: 15px;
     background-color: white;
   }
-  .indentInfo_name{
-    font-size:15px;
-    font-family:PingFangSC-Medium;
-    font-weight:500;
-    color:rgba(51,51,51,1);
+
+  .indentInfo_name {
+    font-size: 15px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
   }
-  .indentInfo_phone{
-    font-size:15px;
-    font-family:PingFangSC-Medium;
-    font-weight:500;
-    color:rgba(51,51,51,1);
+
+  .indentInfo_phone {
+    font-size: 15px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
     padding-left: 21px;
   }
-  .indentInfo_address{
-    font-size:14px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(51,51,51,1);
+
+  .indentInfo_address {
+    font-size: 14px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
   }
-  .indentInfo_transportMode{
-    font-size:12px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(153,153,153,1);
+
+  .indentInfo_transportMode {
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
   }
-  .InsComm_listImg{
+
+  .InsComm_listImg {
     overflow: hidden;
   }
-  .InsComm_listImg,.InsComm_listImg img{
+
+  .InsComm_listImg, .InsComm_listImg img {
     width: 80px;
     height: 80px;
   }
-  .InsComm_listRight{
+
+  .InsComm_listRight {
     height: 80px;
     width: 256px;
     padding-left: 10px;
   }
-  .InsComm_listName{
-    margin-top:2px ;
+
+  .InsComm_listName {
+    margin-top: 2px;
     height: 23px;
     overflow: hidden;
-    font-size:16px;
-    font-weight:400;
-    color:rgba(72,72,72,1);
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(72, 72, 72, 1);
   }
-  .InsComm_listRightTop{
+
+  .InsComm_listRightTop {
     height: 35px;
-    font-size:12px;
-    line-height:17px;
-    font-weight:400;
-    color:rgba(153,153,153,1);
+    font-size: 12px;
+    line-height: 17px;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
     overflow: hidden;
-    text-overflow:ellipsis;//文本溢出显示省略号
+    text-overflow: ellipsis; //文本溢出显示省略号
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 
   }
-  .InsCommPay_price{
-    font-size:15px;
-    font-family:PingFangSC-Medium;
-    font-weight:500;
-    color:rgba(222,25,25,1);
+
+  .InsCommPay_price {
+    font-size: 15px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(222, 25, 25, 1);
   }
-  .InsCommOrder{
-    font-size:12px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(153,153,153,1);
+
+  .InsCommOrder {
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
     padding-right: 15px;
   }
-  .indentInfo_l{
-    font-size:15px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(51,51,51,1);
+
+  .indentInfo_l {
+    font-size: 15px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
   }
-  .indentInfo_r{
-    font-size:15px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(231,59,61,1);
+
+  .indentInfo_r {
+    font-size: 15px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(231, 59, 61, 1);
   }
-  .indentInfo_title{
-    font-size:16px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(51,51,51,1);
+
+  .indentInfo_title {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
     padding-left: 8px;
   }
-  .indentInfo_solid{
+
+  .indentInfo_solid {
     width: 3px;
     height: 16px;
     background-color: #71B3FF;
   }
-  .indentInfo_title1{
+
+  .indentInfo_title1 {
     width: 60px;
-    font-size:12px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(51,51,51,1);
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
   }
-  .indentInfo_title11{
-    font-size:12px;
-    font-family:PingFangSC-Regular;
-    font-weight:400;
-    color:rgba(153,153,153,1);
+
+  .indentInfo_title11 {
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
     padding-left: 12px;
   }
-  .indentInfo_pad{
+
+  .indentInfo_pad {
     padding-bottom: 6px;
   }
-  .indentInfo_pading{
-    padding-bottom: 4px;
-  }
-  .indentInfo_padding4{
+
+  .indentInfo_pading {
     padding-bottom: 4px;
   }
 
-  .footer{
+  .indentInfo_padding4 {
+    padding-bottom: 4px;
+  }
+
+  .footer {
     width: 100%;
     background-color: white;
     position: fixed;
     bottom: 0;
     display: flex;
     justify-content: flex-end;
-    .confirmBtn{
-      margin:12px 15px 8px 0;
+    .confirmBtn {
+      margin: 12px 15px 8px 0;
       width: 90px;
       height: 30px;
       background-color: #71B3FF;
       border-radius: 30px;
-      font-size:14px;
-      color:rgba(255,255,255,1);
-      line-height:30px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 1);
+      line-height: 30px;
 
     }
     .cancelBtn {
-      margin:12px 15px 8px 0;
+      margin: 12px 15px 8px 0;
       width: 90px;
       height: 30px;
       background-color: white;
-      font-size:14px;
-      color:rgba(151,151,151,1);
-      line-height:30px;
+      font-size: 14px;
+      color: rgba(151, 151, 151, 1);
+      line-height: 30px;
       border-radius: 30px;
     }
   }

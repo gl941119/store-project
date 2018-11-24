@@ -24,13 +24,13 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
   }
 
   if (process.env.NODE_ENV === 'development') {
-    url = url.replace('eid=84', 'eid=153&dom=index');
-    url = url.replace('eid=85', 'eid=153&dom=goods');
-    url = url.replace('eid=86', 'eid=153&dom=service');
-    url = url.replace('eid=87', 'eid=153&dom=comm');
-    url = url.replace('eid=88', 'eid=153&dom=ucenter');
-    url = url.replace('eid=89', 'eid=153&dom=card');
-    url = url.replace('eid=90', 'eid=153&dom=meal');
+    url = url.replace('eid=84', 'eid=175&dom=index');
+    url = url.replace('eid=85', 'eid=175&dom=goods');
+    url = url.replace('eid=86', 'eid=175&dom=service');
+    url = url.replace('eid=87', 'eid=175&dom=comm');
+    url = url.replace('eid=88', 'eid=175&dom=ucenter');
+    url = url.replace('eid=89', 'eid=175&dom=card');
+    url = url.replace('eid=90', 'eid=175&dom=meal');
   } else {
     let config =  Cache.getConfig()
     let key = config.binds;
@@ -42,7 +42,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
 
   // url=url+'&openid=TfikQA';//会员
   // url=url+'&openid=p3qYOh';//非会s员
-  url=url+'&openid=TFI8Rs';//美师
+  // url=url+'&openid=TFI8Rs';//美师
 
   type = type.toUpperCase();
   let uk = store.state.uk || Cache.getSession('uk');

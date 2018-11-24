@@ -6,6 +6,7 @@
           <img :src="item.bimg" v-if="item.bimg" v-on:click="goLink(item.link)">
         </van-swipe-item>
       </van-swipe>
+
       <div class="subscribeHomePage_null"></div>
       <div class="subscribeHomePage_content">
         <div class="subscribeHomePage_header">
@@ -18,21 +19,18 @@
             <img src="../../assets/image/icon-enter.png" class="subscribeHomePage_more_img">
           </div>
         </div>
-
         <div class="subscribeHomePage_list">
           <div class="subscribeHomePage_item" v-for="item in  sdata" :key="item.id" v-on:click="goDetails(item.id)" >
             <div class="subscribeHom_height167"><img :src="item.simg" class="subscribeHomePage_item_img"></div>
             <div class="subscribeHomePage_item_txt">{{item.name}}</div>
           </div>
-
         </div>
       </div>
-      <div class="subscribeHome_height"><img :src="adv[0].bimg" v-if="adv[0].bimg" class="subscribeHomePage_advertisement" v-on:click="goLink(adv[0].link)"></div>
+      <div class="subscribeHome_height"><img :src="adv[0].bimg"  class="subscribeHomePage_advertisement" v-on:click="goLink(adv[0].link)"></div>
       <div class="subscribeHomePage_null"></div>
-      <div class="subscribeHome_height"><img :src="adv[1].bimg" v-if="adv[1].bimg" class="subscribeHomePage_advertisement" v-on:click="goLink(adv[0].link)"></div>
+      <div class="subscribeHome_height"><img :src="adv[1].bimg"  class="subscribeHomePage_advertisement" v-on:click="goLink(adv[0].link)"></div>
       <div class="subscribeHomePage_null"></div>
     </div>
-
   </div>
 </template>
 
@@ -51,6 +49,7 @@
       this.request()
     },
     methods:{
+
       goDetails(id){
         this.$router.push({name:'detail',params:{type:'2',id:id}})
       },
@@ -58,7 +57,6 @@
         window.location.href = link
       },
       request(){//
-
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=86&act=indexdata',
           type:'get',
@@ -67,10 +65,9 @@
             this.adv = res.data.adv
             this.sdata =res.data.sdata
             this.slide = res.data.slide
-
+            window.sessionStorage.setItem('is_bind', res.data.is_bind)
           }
         })
-
       },
       goSubscribe(){//热门服务
         this.$router.push({name:'subscribe',params:{type:'1',ishot:'1'}})
@@ -80,6 +77,7 @@
 </script>
 
 <style lang="scss" scoped>
+
   .subscribeHomePage_body {
     height: calc(100vh - 50px);
     overflow-y: auto;

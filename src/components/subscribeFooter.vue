@@ -28,7 +28,7 @@
 
       <router-link tag="li" :to="{}"
                    v-bind:class="{li_hover:hover===2}"
-                   v-on:click="infoUrl"
+                   v-on:click.native="infoUrl"
 
       >
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
@@ -58,12 +58,13 @@
     methods: {
 
       infoUrl() {
+
         if (window.sessionStorage.getItem('is_bind') === '1') {//已绑定
           if (window.sessionStorage.getItem('store') === '0') {//用户
-            this.$router.push({name: 'storeUser'});
+            this.$router.push({name: 'userCenter'});
             // this.$store.commit('setHover',4)
           } else {//美师
-            this.$router.push({name: 'userCenter'});
+            this.$router.push({name: 'staff'});
           }
         } else {//未绑定
           this.$router.push({name: 'bindAccount'});

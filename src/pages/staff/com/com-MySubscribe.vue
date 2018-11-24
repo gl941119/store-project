@@ -65,9 +65,8 @@
       },
       startBtn(){
         this.statusBtn=false;
-        Dialog.confirm({
-          title: '订单',
-          message: '订单开始'
+       this.$dialog.confirm({
+          title: '是否开始',
         }).then(() => {
           // on confirm
           //订单开始

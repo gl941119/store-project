@@ -261,5 +261,8 @@ a:focus {
 .van-rate__item{
   width: 17px !important;
 }
-
+/*.van-tabs__content{*/
+  /*min-height: 700px !important;*/
+  /*background-color: white !important;*/
+/*}*/
 
