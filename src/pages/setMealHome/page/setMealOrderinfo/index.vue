@@ -19,7 +19,7 @@
             <div class="commodity_info">
               <div class="commodity_title">
                 <div class="commodity_titleTxt">{{mdata.name}}</div>
-                <div class="commodity_seeInfo" @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</div>
+                <div class="commodity_seeInfo" @click="chaKanInfo(mdata.id)">查看详情</div>
               </div>
               <div class="commodity_content">{{mdata.description}}</div>
               <div class="price_num">
@@ -107,6 +107,9 @@
 this.initEv();
       },
       methods:{
+        chaKanInfo(id){
+            this.$router.push({name:'setMealDetail',params:{ids:id}})
+          },
         confirmReceipt(){
           this.$dialog.confirm({
             title: '确认收货！'
@@ -145,7 +148,7 @@ initEv(){
       this.mdata=d.mdata;
       this.odata=d.odata;
       this.store=d.store;
-      if(parseInt(d.odata.is_send)===0&&parseInt(d.odata.status)===3){
+      if(parseInt(d.odata.is_send)===0){
 this.addres=d.store.addres;
 this.arrData={
   realname:d.store.name,

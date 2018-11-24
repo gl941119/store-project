@@ -34,7 +34,8 @@
         cont:'',
         avatar:'',
         name:'',
-        code:''
+        code:'',
+        webshare:{},
       }
     },
     mounted(){
@@ -46,10 +47,10 @@
       },
       shareEv(){
         wxHandle('onMenuShareAppMessage', {
-          title: '', // 分享标题
-          desc: '', // 分享描述
-          link: '', // 分享链接
-          imgUrl: '', // 分享图标
+          title: 'titt', // 分享标题
+          desc: 'rewrw', // 分享描述
+          link: this.webshare, // 分享链接
+          imgUrl: this.webshare, // 分享图标
           type: 'link', // 分享类型,music、video或link，不填默认为link
           dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
           success: function () {
@@ -72,6 +73,7 @@
             this.cont=scgc.content;
             this.name=d.user.name;
             this.avatar=d.user.avatar;
+            this.webshare=d.webshare;
           }
         });
       }

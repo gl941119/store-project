@@ -1,7 +1,7 @@
 <template>
     <div class="commonSetMeal">
 
-      <div class="commonSetMeal_box" v-for="item in dataList">
+      <div class="commonSetMeal_box" v-for="item in dataList" @click="commonEv(item.id)">
         <div class="commonSetMeal_imgBox"><img :src="item.simg"></div>
         <div class="commonSetMeal_right">
           <div class="commonSetMeal_title">{{item.name}}</div>
@@ -25,10 +25,13 @@
         this.indexReques();
       },
       methods:{
+        commonEv(id){
+            this.$router.push({name:'setMealDetail',params:{ids:id}})
+          },
         indexReques(){
           // vip=1 热门套餐
           this.$request({
-            url:'app/index.php?i=1&c=entry&eid=153&dom=meal&act=list&vip=0',
+            url:'app/index.php?i=1&c=entry&eid=90&act=list&vip=0',
             type:'post'
           }).then(res=>{
             if(res.status){

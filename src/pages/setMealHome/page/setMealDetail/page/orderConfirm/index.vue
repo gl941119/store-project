@@ -248,6 +248,7 @@ this.storeShow=true;
       font-family: PingFangSC-Regular;
       line-height: 24px;
       border: 1px solid #333333;
+      margin-left: 24px;
     }
     .hover_btn {
       border: 1px solid #71B3FF;
