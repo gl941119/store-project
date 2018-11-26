@@ -6,8 +6,15 @@ function wxHandle(title, callback) {
   let config = {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   };
+let ul=window.location.href;
+ let betUrl=  btoa(encodeURIComponent(ul).replace(/%([0-9A-F]{2})/g,
+    function toSolidBytes(match, p1) {
+      return String.fromCharCode('0x' + p1);
+    }));
 
-  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid.eid + '&dom='+Vue.prototype.$eid.dom+'&act=weixinscan&url=' + window.location.href;
+// let cUrl=ul.replace('?from=groupmessage&isappinstalled=0','');
+//   let curUrl=cUrl.split('#')[0];
+  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid.eid + '&dom='+Vue.prototype.$eid.dom+'&act=weixinscan&url=' + betUrl;
 
   axios.post(r, null, config)
     .then((res) => {
