@@ -88,9 +88,6 @@ this.$router.push({name:'setMealDetail',params:{ids:id}})
             this.vipdata=d.vipdata;
             this.isMember=res.user.is_member;
             localStorage.setItem('mealIsMember',res.user.is_member)
-            alert(parseInt(d.is_bind))
-            alert(d.is_bind)
-            alert(res.user.is_member)
             localStorage.setItem('isBind',d.is_bind)
             // 1 memberCenter 会员
             // 0 setMealMember 非会员
