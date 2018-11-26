@@ -64,7 +64,6 @@
         if (!this.$store.state.SelectDayStatus) {
           return Object.keys(this.time)[0]
         } else {
-          console.log(2)
           return this.$store.state.SelectDayStatus
         }
       },
