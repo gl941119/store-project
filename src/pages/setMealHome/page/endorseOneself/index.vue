@@ -16,10 +16,32 @@
     <div class="endorseOneself_yTitle">邀请码</div>
     <div class="endorseOneself_code">{{code}}</div>
     <div class="endorseOneself_subBox">
-      <div class="endorseOneself_sub" @click="shareEv">去分享</div>
+      <div class="endorseOneself_sub" @click="sherEv">去分享</div>
     </div>
   </div>
 </div>
+  <van-popup v-model="popShow" class="popCss">
+    <div class="popBox"  @click="clickOverlay">
+      <div class="popImgBox"><div><img src="../../../../assets/image/sher_2.png" class="popImg"></div></div>
+      <div class="popImgBox1">
+        <div><img src="../../../../assets/image/sher_3.png"></div>
+        <div class="popImgTxt">
+          <div>点击右上角按钮</div>
+          <div>分享邀请码</div>
+        </div>
+      </div>
+      <div class="popImgBox2">
+        <div>
+          <img src="../../../../assets/image/sher_4.png" class="popImgBox2Img">
+          <div class="popImgTxt1">
+            <div>我知道了</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </van-popup>
 </div>
 </template>
 
@@ -38,12 +60,22 @@
         code:'',
         webshare:{},
         urlParam:'',
+        popShow:false,
       }
+    },
+    created(){
+
     },
     mounted(){
       this.initEv();
     },
     methods:{
+      clickOverlay(){
+        this.popShow=false;
+      },
+      sherEv(){
+        this.popShow=true;
+      },
       beautifulEndorsementSub(){
         this.$router.push({name:'endorseOneself'});
       },
@@ -56,71 +88,72 @@
         let url=window.location.href.split('#');
         let rep=url[1].replace('endorseOneself','endorseOneself/endorsementSharing');
         let curUrl=url[0]+'#'+rep+'?'+pU+'&code='+code;
-//         let config = {
-//           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-//         };
-//         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + url[0]+'#'+url[1];
-//         axios.post(r, null, config)
-//           .then((res) => {
-//             if (res.data.status) {
-//               var d = res.data.data.config;
-//               wx.config({
-//                 debug: false, // 开启调试模式,
-//                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
-//                 timestamp: d.timestamp, // 必填，生成签名的时间戳
-//                 nonceStr: d.nonceStr, // 必填，生成签名的随机串
-//                 signature: d.signature,// 必填，签名，见附录1
-//                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-//               });
-//               wx.ready(function () {
-//                 let wxUrl=url[0]+'#'+url[1]+'?'+pU;
-// //                 wx.onMenuShareAppMessage({
-// //                   title: '分享标题a', // 分享标题
-// //                   desc: '在不行劳资特么打死你算了', // 分享描述
-// //                   link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-// //                   imgUrl: u, // 分享图标
-// //                   type: '', // 分享类型,music、video或link，不填默认为link
-// //                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-// //                   success: function () {
-// // // 用户点击了分享后执行的回调函数
-// //                   }
-// //                 });
-//                 wx.updateAppMessageShareData({
-//                   title: '120去哪了', // 分享标题
-//                   desc: '让我死了吧天啊太难了', // 分享描述
-//                   link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-//                   imgUrl: u, // 分享图标
-//                   success: function () {
-//                     // 设置成功
-//                   }
-//                 });
-//                 wx.error(function (res) {
-//                   var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
-//                   alert(s)
-//                   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-//                 });
-//               });
-//             }
-//           }).catch((res) => {
-//           var ss = res + 'catch请求失败';
-//           alert(ss)
-//         });
-        wxHandle('updateAppMessageShareData',{
-          title: title, // 分享标题
-          desc: description, // 分享描述
-          link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: u, // 分享图标
-          type: '', // 分享类型,music、video或link，不填默认为link
-          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-          success: function () {
+
+        let config = {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        };
+        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + url[0]+'#'+rep;
+        axios.post(r, null, config)
+          .then((res) => {
+            if (res.data.status) {
+              var d = res.data.data.config;
+              wx.config({
+                debug: false, // 开启调试模式,
+                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+                timestamp: d.timestamp, // 必填，生成签名的时间戳
+                nonceStr: d.nonceStr, // 必填，生成签名的随机串
+                signature: d.signature,// 必填，签名，见附录1
+                jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              });
+              wx.ready(function () {
+                let a=url[0]+'#'+rep;
+                wx.onMenuShareAppMessage({
+                  title: title, // 分享标题
+                  desc: description, // 分享描述
+                  link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  imgUrl: u, // 分享图标
+                  type: '', // 分享类型,music、video或link，不填默认为link
+                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                  success: function () {
 // 用户点击了分享后执行的回调函数
-            alert('用户点击了分享后执行的回调函数')
-          },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert('用户取消分享后执行的回调函数')
+                  }
+                });
+                wx.updateAppMessageShareData({
+                  title: title, // 分享标题
+                  desc: description, // 分享描述
+                  link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  imgUrl: u, // 分享图标
+                  success: function () {
+                    // 设置成功
+                  }
+                });
+                wx.error(function (res) {
+                  var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
+                  alert(s)
+                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                });
+              });
             }
+          }).catch((res) => {
+          var ss = res + 'catch请求失败';
+          alert(ss)
         });
+//         wxHandle('updateAppMessageShareData',{
+//           title: title, // 分享标题
+//           desc: description, // 分享描述
+//           link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+//           imgUrl: u, // 分享图标
+//           type: '', // 分享类型,music、video或link，不填默认为link
+//           dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+//           success: function () {
+// // 用户点击了分享后执行的回调函数
+//             alert('用户点击了分享后执行的回调函数')
+//           },
+//             cancel: function () {
+//               // 用户取消分享后执行的回调函数
+//               alert('用户取消分享后执行的回调函数')
+//             }
+//         });
 
         // wxHandle('updateAppMessageShareData', {
         //   title: '分享标题', // 分享标题
@@ -157,6 +190,7 @@
             this.name=d.user.name;
             this.avatar=d.user.avatar;
             this.webshare=d.webshare;
+            this.shareEv();
           }
         });
       }
@@ -248,4 +282,79 @@
   .endorseOneself_subBox{
     padding-bottom: 40px;
   }
+  .popCss{
+    background-color: transparent;
+  }
+  .popBox{
+height:100vh;
+    width:100vw;
+  }
+  .popImg{
+    width: 58px;
+    height: 125px;
+  }
+  .popImgBox{
+    display: flex;
+    align-self: center;
+    justify-content: flex-end;
+  }
+  .popImgBox1{
+
+    display: flex;
+    align-self: center;
+    justify-content: center;
+  }
+  .popImgBox:nth-child(1){
+    padding-right: 20px;
+  }
+.popImgBox1{
+position: relative;
+  z-index: 1;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+.popImgBox1:nth-child(1) img{
+  width: 198px;
+  height: 69px;
+}
+  .popImgTxt{
+    position: absolute;
+    z-index: 10;
+    color: #fff;
+    font-size:16px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+  }
+  .popImgBox2{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    padding-top: 25px;
+  }
+.popImgBox2 > div{
+  position: relative;
+}
+  .popImgBox2:nth-child(1),.popImgBox2Img{
+width: 118px;
+    height: 51px;
+  }
+
+.popImgTxt1{
+  position: absolute;
+  z-index: 10;
+  top:17px;
+  left:34px;
+  font-size:15px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+}
+
 </style>
