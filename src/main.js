@@ -47,6 +47,8 @@ import SelectBar from './components/selectBar'
 import Search from './components/search'
 import PriceList from './components/priceList' //金额列表
 
+import MealFooter from './components/mealFooter'
+
 Vue.component('my-footer', MyFooter);
 Vue.component('subscribe-footer',subFooter)
 Vue.component('navbar', Navbar);
@@ -58,6 +60,7 @@ Vue.component('cell', Cell);
 Vue.component('select-bar', SelectBar);
 Vue.component('search', Search);
 Vue.component('price-list', PriceList);
+Vue.component('meal-footer', MealFooter);
 
 
 Vue.prototype.$baidu = function () {//联系卖家
@@ -99,6 +102,11 @@ router.beforeEach((to, from, next) => {
     store.commit('setSub_showFooter', true);
   } else {
     store.commit('setSub_showFooter', false);
+  }
+  if (to.matched.some(record => record.meta.meal_showFooter)) {
+    store.commit('setMeal_showFooter', true);
+  } else {
+    store.commit('setMeal_showFooter', false);
   }
   next()
 });

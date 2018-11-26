@@ -541,21 +541,21 @@ let router = new Router({
       path: '/setMealHome',
       name: 'setMealHome',
       title: 'S+艾司商城',
-      meta: {keepAlive: false},
+      meta: {keepAlive: false,meal_showFooter: true},
       component: resolve => require(['../pages/setMealHome/'], resolve)
     },
     {//套餐非会员中心
       path: '/setMealHome/page/setMealMember',
       name: 'setMealMember',
       title: '会员中心',
-      meta: {keepAlive: false},
+      meta: {keepAlive: false,meal_showFooter: true},
       component: resolve => require(['../pages/setMealHome/page/setMealMember/index'], resolve)
     },
     {//套餐会员中心
       path: '/setMealHome/page/setMealMember/memberCenter',
       name: 'memberCenter',
       title: '会员中心',
-      meta: {keepAlive: false},
+      meta: {keepAlive: false,meal_showFooter: true},
       component: resolve => require(['../pages/setMealHome/page/setMealMember/memberCenter'], resolve)
     },
     {//普通套餐
