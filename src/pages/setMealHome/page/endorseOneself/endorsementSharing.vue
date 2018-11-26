@@ -43,7 +43,7 @@
       },
       reques(){
         let ul=window.location.href;
-        let cde=ul.split('&')[1].split('=')[1];
+        let cde=ul.split('code=')[1];
 this.$request({
   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
   type:'post',

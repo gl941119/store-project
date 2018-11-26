@@ -3,7 +3,7 @@
     <div></div>
 
     <div ref="myDiv">
-      <div class="oneDyList" >
+      <div class="oneDyList" v-if="parseInt(mealIsMember)===1">
         <div class="oneDyListImg"><img :src="imgSrc"></div>
         <div class="oneDyListL">
           <p class="oneDyBottom">{{ names }}</p>
@@ -14,6 +14,7 @@
           <p class="oneDyTxtJe">¥{{ money }}</p>
         </div>
       </div>
+
       <div class="integralRanking">销售排行榜</div>
       <div class="oneDyList integralRankingSolid" v-for="item in arr">
         <div class="oneDyListImg"><img :src="item.avatar"></div>
@@ -48,6 +49,7 @@
         currListLen:0,
         status:false,
         pages:0,
+        mealIsMember:0
       }
     },
     mounted(){
@@ -71,6 +73,7 @@
             this.arr=list;
             this.listLen=list.length;
             this.pages=res.data.page.p;
+            this.mealIsMember=res.user.is_member;
           }
         });
       },

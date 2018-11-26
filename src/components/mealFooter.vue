@@ -11,9 +11,7 @@
 
       <router-link tag="li" :to="{}"
                    v-bind:class="{li_hover:hover===1}"
-                   v-on:click.native="infoUrl"
-
-      >
+                   v-on:click.native="infoUrl">
         <span class="icon-d"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         <p>我的</p>
       </router-link>
@@ -31,7 +29,7 @@
       },
       computed: {
         isShow() {
-          return this.$store.state.sub_showFooter
+          return this.$store.state.meal_showFooter
         },
         hover() {
           return this.$store.state.sub_hover
@@ -40,7 +38,8 @@
       methods: {
 
         infoUrl() {
-          // parseInt(this.isMember)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
+          let isM=localStorage.getItem('mealIsMember');
+          parseInt(isM)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
         }
       }
     }

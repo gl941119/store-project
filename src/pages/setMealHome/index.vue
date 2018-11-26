@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-<div @click="infoEv">会员中心</div>
+
   </div>
 </template>
 
@@ -75,11 +75,6 @@ this.$router.push({name:'setMealDetail',params:{ids:id}})
       findMore(str){
         this.$router.push({name:str})
       },
-      infoEv(){//是否是会员
-        // 1 memberCenter 会员
-        // 0 setMealMember 非会员
-        parseInt(this.isMember)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
-      },
       indexReques(){
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=90&act=indexdata',
@@ -91,6 +86,9 @@ this.$router.push({name:'setMealDetail',params:{ids:id}})
             this.mdata=d.mdata;
             this.vipdata=d.vipdata;
             this.isMember=res.user.is_member;
+            localStorage.setItem('mealIsMember',res.user.is_member)
+            // 1 memberCenter 会员
+            // 0 setMealMember 非会员
           }
         })
       }
