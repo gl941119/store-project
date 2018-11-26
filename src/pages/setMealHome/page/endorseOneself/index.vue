@@ -37,6 +37,7 @@
         name:'',
         code:'',
         webshare:{},
+        urlParam:'',
       }
     },
     mounted(){
@@ -48,75 +49,79 @@
       },
       shareEv(){
         let u=this.webshare.back;
+        let pU=this.urlParam;
+        let description=this.webshare.description;
+        let title=this.webshare.share_text;
         let url=window.location.href.split('#');
-        let config = {
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        };
-        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + url[0]+'#'+url[1];
-        axios.post(r, null, config)
-          .then((res) => {
-            if (res.data.status) {
-              var d = res.data.data.config;
-              wx.config({
-                debug: false, // 开启调试模式,
-                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
-                timestamp: d.timestamp, // 必填，生成签名的时间戳
-                nonceStr: d.nonceStr, // 必填，生成签名的随机串
-                signature: d.signature,// 必填，签名，见附录1
-                jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-              });
-              wx.ready(function () {
-                let hp=url[0].split('://');
-                let wxUrl=url[0]+'#'+url[1];
-//                 wx.onMenuShareAppMessage({
-//                   title: '分享标题a', // 分享标题
-//                   desc: '在不行劳资特么打死你算了', // 分享描述
+        let rep=url[1].replace('endorseOneself','endorseOneself/endorsementSharing/');
+        let curUrl=url[0]+'#'+rep+'?'+pU;
+//         let config = {
+//           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+//         };
+//         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + url[0]+'#'+url[1];
+//         axios.post(r, null, config)
+//           .then((res) => {
+//             if (res.data.status) {
+//               var d = res.data.data.config;
+//               wx.config({
+//                 debug: false, // 开启调试模式,
+//                 appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+//                 timestamp: d.timestamp, // 必填，生成签名的时间戳
+//                 nonceStr: d.nonceStr, // 必填，生成签名的随机串
+//                 signature: d.signature,// 必填，签名，见附录1
+//                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+//               });
+//               wx.ready(function () {
+//                 let wxUrl=url[0]+'#'+url[1]+'?'+pU;
+// //                 wx.onMenuShareAppMessage({
+// //                   title: '分享标题a', // 分享标题
+// //                   desc: '在不行劳资特么打死你算了', // 分享描述
+// //                   link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+// //                   imgUrl: u, // 分享图标
+// //                   type: '', // 分享类型,music、video或link，不填默认为link
+// //                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+// //                   success: function () {
+// // // 用户点击了分享后执行的回调函数
+// //                   }
+// //                 });
+//                 wx.updateAppMessageShareData({
+//                   title: '120去哪了', // 分享标题
+//                   desc: '让我死了吧天啊太难了', // 分享描述
 //                   link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 //                   imgUrl: u, // 分享图标
-//                   type: '', // 分享类型,music、video或link，不填默认为link
-//                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 //                   success: function () {
-// // 用户点击了分享后执行的回调函数
+//                     // 设置成功
 //                   }
 //                 });
-                wx.updateAppMessageShareData({
-                  title: '120去哪了', // 分享标题
-                  desc: '让我死了吧天啊太难了', // 分享描述
-                  link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                  imgUrl: u, // 分享图标
-                  success: function () {
-                    // 设置成功
-                  }
-                });
-                wx.error(function (res) {
-                  var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
-                  alert(s)
-                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-                });
-              });
-            }
-          }).catch((res) => {
-          var ss = res + 'catch请求失败';
-          alert(ss)
-        });
-//         wxHandle('onMenuShareAppMessage',{
-//           title: '分享标题de', // 分享标题
-//           desc: '测试时', // 分享描述
-//           link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-//           imgUrl: u, // 分享图标
-//           type: '', // 分享类型,music、video或link，不填默认为link
-//           dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-//           success: function () {
-// // 用户点击了分享后执行的回调函数
-//             alert('用户点击了分享后执行的回调函数')
-//           },
-//             cancel: function () {
-//               // 用户取消分享后执行的回调函数
-//               alert('用户取消分享后执行的回调函数')
+//                 wx.error(function (res) {
+//                   var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
+//                   alert(s)
+//                   // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+//                 });
+//               });
 //             }
+//           }).catch((res) => {
+//           var ss = res + 'catch请求失败';
+//           alert(ss)
 //         });
+        wxHandle('updateAppMessageShareData',{
+          title: title, // 分享标题
+          desc: description, // 分享描述
+          link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: u, // 分享图标
+          type: '', // 分享类型,music、video或link，不填默认为link
+          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          success: function () {
+// 用户点击了分享后执行的回调函数
+            alert('用户点击了分享后执行的回调函数')
+          },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert('用户取消分享后执行的回调函数')
+            }
+        });
 
-        // wxHandle('onMenuShareAppMessage', {
+        // wxHandle('updateAppMessageShareData', {
         //   title: '分享标题', // 分享标题
         //   link: url, // 分享链接
         //   imgUrl: u, // 分享图标
@@ -131,6 +136,14 @@
         // });
       },
       initEv(){
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=87&act=get_url_param',
+        type:'post'
+        }).then(res=>{
+          if(res.status){
+            this.urlParam=res.data.param;
+          }
+        });
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
           type:'post'

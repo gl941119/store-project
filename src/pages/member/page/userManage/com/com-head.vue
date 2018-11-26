@@ -69,8 +69,6 @@
             },
 
           }).then(imgMeg => {
-            let a=imgMeg.data.code+'---'+imgMeg.data.message+'==='+imgMeg.data;
-            alert(a)
             if (imgMeg.data.code === 100) {
               thisa.showJinDu=false;
                   thisa.$toast('上传成功');
