@@ -20,7 +20,7 @@
       </li>
       <li class="mt6" v-if="data.score">
         <span>服务评价</span>
-        <span>{{data.score}}</span>
+        <span>{{data.score}}星</span>
       </li>
       <li class="mt6" v-if="data.cancel_time">
         <span>取消时间</span>
