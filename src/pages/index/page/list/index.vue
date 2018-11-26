@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
 
     <select-bar @emitSort="setSort"></select-bar>
     <div class="main" >
@@ -49,5 +49,8 @@
 <style lang="scss" scoped>
   .main{
     margin-top: 52px;
+  }
+  .wrap{
+    background-color: white;
   }
 </style>

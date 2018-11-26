@@ -195,6 +195,7 @@
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=optionstock',
           type: 'get',
+          isToast:false,
           data: {
             goodsid: this.id,
             specs: this.specs.join('_'),

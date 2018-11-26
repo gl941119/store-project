@@ -35,7 +35,7 @@ let router = new Router({
     {
       path: '/',
       redirect: {
-        name: 'subscribeHome',
+        name: 'index',
       },
     },
     {//官网展示

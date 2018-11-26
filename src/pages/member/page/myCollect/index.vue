@@ -1,15 +1,18 @@
 <template>
   <div class="wrap">
 
-    <van-tabs v-model="active" @click="onClick" :swipeable="true" sticky v-if="type==='2'">
+    <van-tabs v-model="active" @click="onClick"  sticky v-if="type==='2'">
       <van-tab title="服务">
-        <server-card :Data = 'item' v-for="item in serverList" :key="item.id"  :collect="true"  @refresh = 'request'  v-on:click.native="goDetails(item.id)"></server-card>
+        <p class="notCollect" v-if="serverList.length===0">暂无收藏</p>
+        <server-card v-else :Data = 'item' v-for="item in serverList" :key="item.id"  :collect="true"  @refresh = 'request'  v-on:click.native="goDetails(item.id)"></server-card>
       </van-tab>
       <van-tab title="美师">
-        <staff-card :Data = 'item' v-for="item in staffList" :collect="true"  @refresh = 'request' :key="item.id"></staff-card>
+        <p class="notCollect" v-if="staffList.length===0">暂无收藏</p>
+        <staff-card v-else :Data = 'item' v-for="item in staffList" :collect="true"  @refresh = 'request' :key="item.id"></staff-card>
       </van-tab>
     </van-tabs>
-    <product-card :Data="item" v-for="item in productList"   :collect="true"  @refresh = 'request' :key="item.id" v-if="type=='1'"></product-card>
+    <p class="notCollect" v-if="productList.length===0">暂无收藏</p>
+    <product-card v-else :Data="item" v-for="item in productList"   :collect="true"  @refresh = 'request' :key="item.id" v-if="type=='1'"></product-card>
   </div>
 </template>
 
@@ -71,6 +74,11 @@
   }
 </script>
 
-<style scoped>
-
+<style class="scss" scoped>
+.notCollect{
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 90px;
+}
 </style>
