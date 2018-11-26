@@ -8,7 +8,7 @@
         <span class="member_setting" @click="tab('userManage')"><img src="../../../../assets/image/setting_icon.png"/></span>
       </div>
       <div class="member_name">
-        <div class="member_nameBox">{{user.name}}</div>
+        <div class="member_nameBox">{{user.nick}}</div>
         <div class="member_icon"><img src="../../../../assets/image/icon_vip.png"/></div>
       </div>
       <div class="member_time">会员到期时间：{{timeSplic(user.duedate)}}</div>
