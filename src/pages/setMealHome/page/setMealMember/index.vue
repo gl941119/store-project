@@ -212,6 +212,7 @@ padding: 18px 0 27px 0;
     flex-flow: wrap;
     align-items: center;
     justify-content: space-around;
+    padding-bottom: 20px;
   }
   .member_item{
     width: 20%;

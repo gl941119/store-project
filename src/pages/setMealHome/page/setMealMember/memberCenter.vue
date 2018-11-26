@@ -221,6 +221,7 @@ this.$request({
     flex-flow: wrap;
     align-items: center;
     justify-content: space-around;
+    padding-bottom: 20px;
   }
   .member_item{
     width: 20%;
