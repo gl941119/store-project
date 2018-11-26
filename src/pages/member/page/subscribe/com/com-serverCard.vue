@@ -71,21 +71,8 @@
 
       pay(orderid){
 
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
-          type: 'post',
-          data: {
-            orderid: orderid
-          }
-        }).then(res => {
-          if (res.code === 100) {
-            this.$toast.success('提交成功')
-            let thia = this
-            setTimeout(function () {
-              thia.$router.push({name: 'success',params:{orderid:orderid,type:'2'}})
-            }, 500)
-          }
-        })
+
+        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid162.eid + '&dom=' + this.$eid162.dom + '&act=payorder&orderid=' + orderid
 
 
         //

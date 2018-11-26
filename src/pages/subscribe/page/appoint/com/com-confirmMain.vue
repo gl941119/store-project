@@ -73,10 +73,10 @@
         <dd>{{data.score}}星</dd>
       </li>
       <div class="fill"></div>
-      <li class="list-li">
-        <dt>预约费用</dt>
-        <dd class="colorRed">￥ {{data.o_amount}}</dd>
-      </li>
+      <!--<li class="list-li">-->
+        <!--<dt>预约费用</dt>-->
+        <!--<dd class="colorRed">￥ {{data.o_amount}}</dd>-->
+      <!--</li>-->
       <div class="fill"></div>
       <li class="list-li">
       <dt>服务费用</dt>
