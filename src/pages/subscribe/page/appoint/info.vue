@@ -91,7 +91,7 @@
 
 
 
-        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid162.eid + '&dom=' + this.$eid162.dom + '&act=payorder&orderid=' + window.sessionStorage.getItem('ordersn')
+        window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid162.eid + '&dom=' + this.$eid162.dom + '&act=payorder&orderid=' + this.orderid
 
 
 
@@ -146,6 +146,9 @@
         }).then((res) => {
           this.store = res.data.store
           this.service = res.data.service
+
+
+
           this.user = res.data.user
           this.date = res.data.date
           this.beauty = res.data.member.beauty

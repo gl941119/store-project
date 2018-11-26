@@ -182,6 +182,13 @@
         Is_member: window.sessionStorage.getItem('is_member')
       }
     },
+    watch:{
+      service(){
+        if(this.service.description.length>40){
+          this.service.description =  this.service.description.slice(0,40)+'...'
+        }
+      }
+    },
     computed:{
       leaveMessage:{
         get(){
@@ -235,9 +242,9 @@
         font-size: 12px;
         color: rgba(153, 153, 153, 1);
         line-height: 17px;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        /*display: -webkit-box;*/
+        /*-webkit-box-orient: vertical;*/
+        /*-webkit-line-clamp: 2;*/
 
       }
       > p {
@@ -269,6 +276,9 @@
       align-items: center;
       >input{
         flex: 1;
+        height: 20px;
+        font-size: 14px;
+        color: rgba(51, 51, 51, 1);
       }
       dt {
 

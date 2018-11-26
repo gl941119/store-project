@@ -5,25 +5,30 @@
       <dl>
         <dt>
           <span>{{item.service_name}}</span>
-          <span>{{type}}</span>
+          <span>{{item.status_name}}</span>
         </dt>
-        <dd>
-          <span>{{item.displayorder}}号美师</span>
+        <dd v-if="item.servicetime">
+          <span>服务时间{{item.servicetime}}</span>
+        </dd>
+        <dd v-else>
+          <!--<span>{{item.displayorder}}号美师</span>-->
           <span>预计{{item.plan_date}}到店</span>
         </dd>
-        <p>¥{{item.price}}</p>
+        <p>
+          <span>¥{{item.price}}</span>
+          <span v-if="item.service_amount != '0.00'"><div>服务费</div>¥{{item.price}}</span>
+        </p>
       </dl>
     </div>
     <div class="address">
       <img src="../../../assets/image/exhibition2.png" alt="">
       <span>{{item.address}}店</span>
-      <p>共一件商品 合计：{{item.price}}元</p>
+      <p>合计：{{item.price}}元</p>
     </div>
     <div class="bottom">
 
       <span>服务星级：</span>
       <van-rate v-model="score"
-                disabled
                 disabled-color="#ffd21e"
                 class="icon"/>
       <!--取消-->
@@ -148,7 +153,7 @@
           height: 17px;
           font-size: 12px;
           font-family: PingFangSC-Regular;
-          color: rgba(233, 58, 61, 1);
+          color: #999999;
           line-height: 17px;
         }
       }
@@ -174,7 +179,28 @@
         font-family: PingFangSC-Medium;
         font-weight: 500;
         color: rgba(233, 58, 61, 1);
-        line-height: 23px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span:first-child{
+
+        }
+        span:last-child{
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+         >div{
+           margin-right: 8px;
+           font-size:10px;
+           font-family:PingFangSC-Medium;
+           font-weight:500;
+           color:rgba(153,153,153,1);
+
+
+         }
+        }
+
       }
     }
   }

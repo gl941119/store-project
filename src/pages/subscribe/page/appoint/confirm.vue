@@ -141,8 +141,9 @@
           title: '是否取消预约',
           message: ''
         }).then(() => {
+
           this.$request({
-            url: 'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
+            url: 'app/index.php?i=1&c=entry&eid=86&act=cancelsporder',
             type: 'post',
             data: {
               orderid: this.orderid,
@@ -172,6 +173,10 @@
         }).then((res) => {
           this.store = res.data.store;
           this.service = res.data.service;
+
+
+
+
           this.user = res.data.user;
           this.stype = res.data.service.stype;//体验项目状态
           this.surplus = res.data.surplus;

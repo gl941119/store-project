@@ -72,19 +72,20 @@ Vue.prototype.$request = request;
 Vue.prototype.$sp = speedProgress;
 Vue.prototype.$wx = Wx;
 
-Vue.prototype.$setInterval = setInterval(function () {//长轮询
-  Vue.prototype.$request({
+
+window.long = setInterval(function () {//长轮询
+  request({
     url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
     type: 'post',
     isToast: false
   }).then(res => {
     if (res.data.is_discuss == '0') {
-      window.clearInterval(Vue.prototype.$setInterval);
+
+      window.clearInterval(window.long);
       router.push({name: "serverEvaluate", params: {orderid: res.data.orderid}})
     }
   });
 }, 10000)
-
 
 
 //导航守卫

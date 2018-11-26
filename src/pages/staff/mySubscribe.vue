@@ -4,10 +4,10 @@
       <van-tab title="全部">
         <com-card :item="item" v-for="item,index in appoint" :key="index"></com-card>
       </van-tab>
-      <van-tab title="已预约">
+      <van-tab title="未服务">
         <com-card :item="item" v-for="item,index in appoint" :key="index"></com-card>
       </van-tab>
-      <van-tab title="已完成">
+      <van-tab title="已结束">
         <com-card :item="item" v-for="item,index in appoint" :key="index"></com-card>
       </van-tab>
 

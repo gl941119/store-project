@@ -112,7 +112,7 @@
 
       },
       quXiaoBtn(){
-        this.$router.push({name:'cancelReservation'});
+        this.$router.push({name:'cancelReservation',params:{orderid:this.mySub.orderId}});
 
 
       }

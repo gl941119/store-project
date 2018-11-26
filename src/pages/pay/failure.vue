@@ -3,7 +3,7 @@
     <img src="../../assets/image/failure.png" alt="">
     <dt>尊贵的会员，您的余额不足<br/>请购买会员卡充值余额</dt>
     <p>{{second}}秒后自动跳转首页</p>
-    <van-button type="default" class="btn" v-on:click="goMyIndent">购买会员卡</van-button>
+    <van-button type="default" class="btn" v-on:click="goMyIndent">购买套餐</van-button>
     <van-button type="default" class="back" v-on:click="goIndex">返回首页</van-button>
   </div>
 </template>
@@ -24,6 +24,7 @@
       goMyIndent() {
         // this.$router.push({name: 'myIndent', params: {type: '2'}})
         // clearInterval(window.tiem)
+        this.$router.push({name: 'index'})
       },
       goIndex() {
         this.$router.push({name: 'index'})

@@ -5,8 +5,8 @@
         <div class="cancelReservation_imgBox">
           <div class="cancelReservation_img"><img src="../../assets/image/fish.png"></div>
         </div>
-        <div class="cancelReservation_center cancelReservation_center1">该客户已4次取消预约</div>
-        <div class="cancelReservation_center cancelReservation_centerPading">本次取消将扣除预约次数</div>
+        <div class="cancelReservation_center cancelReservation_center1">{{tip}}</div>
+        <!--<div class="cancelReservation_center cancelReservation_centerPading">本次取消将扣除预约次数</div>-->
         <textarea class="cancelReservation_cont" v-model="status_message" placeholder="具体理由"></textarea>
       </div>
     </div>
@@ -22,15 +22,31 @@
     name: "cancelReservation",
     data() {
       return {
-        status_message: undefined
+        status_message: undefined,
+        tip:undefined
       }
     },
+    mounted(){
+      this.request()
+    },
     methods: {
+      request(){
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=86&act=confirmcancelorder',
+          type: 'post',
+          data: {
+            orderid: this.$route.params.orderid,
+          }
+        }).then((res) => {
+          if (res.status) {
+            this.tip  = res.data.status_message
+          }
+        });
+      },
       noQuXiao() {
         this.$router.go(-1)
       },
       quXiaoBtn() {
-// on confirm
         //取消订单
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=86&act=cancelorder',
@@ -38,14 +54,12 @@
           data: {
             orderid: this.$route.params.orderid,
             status_message: this.status_message
-
           }
         }).then((res) => {
           if (res.status) {
+            this.$toast.success('取消成功')
               this.$router.go(-1)
-
           }
-
         });
       }
     }

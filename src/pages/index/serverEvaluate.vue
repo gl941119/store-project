@@ -126,6 +126,23 @@
 
   export default {
     name: "com-serverEvaluate",
+
+    beforeRouteLeave (to, from, next) {
+      window.long = setInterval(()=> {//长轮询
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
+          type: 'post',
+          isToast: false
+        }).then(res => {
+          if (res.data.is_discuss == '0') {
+            console.log(123)
+            window.clearInterval(window.long);
+            this.$router.push({name: "serverEvaluate", params: {orderid: res.data.orderid}})
+          }
+        });
+      }, 10000)
+      next()
+    },
     data() {
       return {
         member: {},//美师数据
@@ -226,6 +243,7 @@
       getLocalImgData(id, thisa) {
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
         let urlR = thisa.$upUrl + 'app/index.php?' + thisa.$i + '&c=entry&eid=' + thisa.$eid.eid + '&dom=' + thisa.$eid.dom + '&act=fileupload&uk=' + uk;
+        alert(urlR)
         wxHandle('getLocalImgData', {
           localId: id, // 图片的localID
           success: function (getLocal) {
@@ -251,7 +269,7 @@
             }).then(res => {
               if (res.data.code === 100) {
                 thisa.showJinDu = false;
-                this.serviceEvaluate.img.push(res.data.data.imgs)
+                thisa.serviceEvaluate.img.push(res.data.data.imgs)
                 // this.arrUpImg=res.data.data.imgs
                 // res.data.data.imgs
               } else {
