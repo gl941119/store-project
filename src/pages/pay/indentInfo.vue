@@ -15,7 +15,7 @@
     <div class="indentInfo_padding1">
       <div class="flex_start indentInfo_padding2" v-for="item,index in goodslist" :key="index"
            v-on:click="goDetail(item.goodsid)">
-        <div class="InsComm_listImg"><img src="item.thumb"></div>
+        <div class="InsComm_listImg"><img :src="item.thumb"></div>
         <div class="InsComm_listRight">
           <div>
             <div class="InsComm_listName">
