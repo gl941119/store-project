@@ -8,13 +8,13 @@
           <input type="text"placeholder="请输入好友邀请码" v-model="yqCode" class="bindYqInput"/>
         </div>
 
-        <div class="bindAccountTopRBox">
-          <div class="bindAccountTopR" v-on:click="saoMiao">
-            <div class="bindAccountTopRIg"></div>
-            <div>扫一扫</div>
-          </div>
-          <div class="bindAccountTopRTxt">请好友打开二维码</div>
-        </div>
+        <!--<div class="bindAccountTopRBox">-->
+          <!--<div class="bindAccountTopR" v-on:click="saoMiao">-->
+            <!--<div class="bindAccountTopRIg"></div>-->
+            <!--<div>扫一扫</div>-->
+          <!--</div>-->
+          <!--<div class="bindAccountTopRTxt">请好友打开二维码</div>-->
+        <!--</div>-->
 
       </div>
 
@@ -60,7 +60,7 @@
       name: "index",
       data(){
         return{
-          yqCode:'',
+          yqCode:localStorage.getItem('mealCode'),
           phone:'',
           names:'',
           codes:'',
