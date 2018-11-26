@@ -71,27 +71,43 @@
 
       pay(orderid){
 
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
+          type: 'post',
+          data: {
+            orderid: orderid
+          }
+        }).then(res => {
+          if (res.code === 100) {
+            this.$toast.success('提交成功')
+            let thia = this
+            setTimeout(function () {
+              thia.$router.push({name: 'success',params:{orderid:orderid,type:'2'}})
+            }, 500)
+          }
+        })
 
 
-        if(window.sessionStorage.getItem('is_member')== '0'){//非會員
-          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
-        }else{//會員
-          this.$request({
-            url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
-            type: 'post',
-            data: {
-              orderid: orderid
-            }
-          }).then(res => {
-            if (res.code === 100) {
-              this.$toast.success('提交成功')
-              let thia = this
-              setTimeout(function () {
-                thia.$router.push({name: 'success',params:{orderid:orderid,type:'2'}})
-              }, 500)
-            }
-          })
-        }
+        //
+        // if(window.sessionStorage.getItem('is_member')== '0'){//非會員
+        //   window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+        // }else{//會員
+        //   this.$request({
+        //     url: 'app/index.php?i=1&c=entry&eid=86&act=payorder',
+        //     type: 'post',
+        //     data: {
+        //       orderid: orderid
+        //     }
+        //   }).then(res => {
+        //     if (res.code === 100) {
+        //       this.$toast.success('提交成功')
+        //       let thia = this
+        //       setTimeout(function () {
+        //         thia.$router.push({name: 'success',params:{orderid:orderid,type:'2'}})
+        //       }, 500)
+        //     }
+        //   })
+        // }
       },
       goBaidu(){
         this.$baidu()
