@@ -109,7 +109,7 @@
                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
               wx.ready(function () {
-
+alert(title)
                 wx.onMenuShareAppMessage({
                   title: title, // 分享标题
                   desc: description, // 分享描述
