@@ -85,6 +85,7 @@
     },
     mounted(){
       this.initEv();
+      this.$store.commit('setMeal_hover', 1)
     },
     methods:{
       tab(str){

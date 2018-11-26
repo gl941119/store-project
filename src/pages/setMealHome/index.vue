@@ -62,7 +62,7 @@
       }
     },
     mounted(){
-      this.$store.commit('setSub_hover',0);
+      this.$store.commit('setMeal_hover',0);
       this.indexReques();
     },
     methods:{

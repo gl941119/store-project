@@ -39,6 +39,9 @@ export default new Vuex.Store({
     setSub_hover(state,val){
       state.sub_hover = val
     },
+    setMeal_hover(state,val){
+      state.meal_hover = val
+    },
     setShowBuySpecification(state, val) {
       state.ShowBuySpecification = val
     },
