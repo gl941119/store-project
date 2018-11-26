@@ -47,19 +47,12 @@
         this.$router.push({name:'endorseOneself'});
       },
       shareEv(){
-        // let u=this.webshare.back+'/#/http://dev-cd.vasterroad.com/addons/xc_beauty/mobile/index.html';
         let u=this.webshare.back;
         let url=window.location.href.split('#');
-        //this.webshare.back=http://dev-cd.vasterroad.com/attachment/images/1/2018/11/fa104RWa00rArZ2G174WvR3W2g2Pw9.jpg
-
         let config = {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
-
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + url[0]+'#'+url[1];
-        alert(u)
-        alert(url)
-        alert(r)
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -74,22 +67,18 @@
               });
               wx.ready(function () {
                 let hp=url[0].split('://');
-                let wxUrl='https://'+hp[1]+'#'+url[1];
-                alert(wxUrl)
-                alert(url[0])
-                alert(url[1])
-                alert('onMenuShareAppMessage')
-                wx.onMenuShareAppMessage({
-                  title: '分享标题a', // 分享标题
-                  desc: '在不行劳资特么打死你算了', // 分享描述
-                  link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                  imgUrl: u, // 分享图标
-                  type: '', // 分享类型,music、video或link，不填默认为link
-                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                  success: function () {
-// 用户点击了分享后执行的回调函数
-                  }
-                });
+                let wxUrl=url[0]+'#'+url[1];
+//                 wx.onMenuShareAppMessage({
+//                   title: '分享标题a', // 分享标题
+//                   desc: '在不行劳资特么打死你算了', // 分享描述
+//                   link: wxUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+//                   imgUrl: u, // 分享图标
+//                   type: '', // 分享类型,music、video或link，不填默认为link
+//                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+//                   success: function () {
+// // 用户点击了分享后执行的回调函数
+//                   }
+//                 });
                 wx.updateAppMessageShareData({
                   title: '120去哪了', // 分享标题
                   desc: '让我死了吧天啊太难了', // 分享描述

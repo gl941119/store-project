@@ -140,46 +140,9 @@
       this.initEvnt({orderid:this.ids});
     },
     methods: {
-      requestMode(params){
-        let a= this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$meal.eid + '&dom='+this.$meal.dom+'&act=payorder&orderid=' +this.ids+'&message='+this.LeavingMessage;
-        console.log(a)
-        window.location.href =a;
-        // window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids;
-        // this.$request({
-        //   url:'app/index.php?i=1&c=entry&eid=90&act=orderinfo',
-        //   type:'post',
-        //   data:params
-        // }).then(res=>{
-        //   if(res.status){
-        //     let a= this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids+'&message='+this.LeavingMessage;
-        //     console.log(a)
-        //     // window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eidpay.eid + '&dom='+this.$eidpay.dom+'&act=payorder&orderid=' +this.ids;
-        //   }
-        // });
-      },
       submitEvent(){
         let a= this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$meal.eid + '&dom='+this.$meal.dom+'&act=payorder&orderid=' +this.ids+'&message='+this.LeavingMessage;
-        alert(a)
         window.location.href =a;
-// if(this.cssSelect===1){
-//   let pa={
-//     orderid:this.ids,
-//     // is_send:this.cssSelect,
-//     message:this.LeavingMessage,
-//     // storeid:this.dataList.store.id
-//   }
-//   this.requestMode(pa);
-// }else if(this.cssSelect===2){
-//   let pa={
-//     orderid:this.ids,
-//     // is_send:this.cssSelect,
-//     message:this.LeavingMessage,
-//     // addressid:this.addressId
-//   }
-//   this.requestMode(pa);
-// }
-
-
       },
       addressItem(i){
         this.initEvnt({orderid:this.ids,is_send:1,addressid:i});
