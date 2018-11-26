@@ -88,11 +88,17 @@
         let url=window.location.href.split('#');
         let rep=url[1].replace('endorseOneself','endorseOneself/endorsementSharing');
         let curUrl=url[0]+'#'+rep+'?'+pU+'&code='+code;
-
+        let betUrl=  btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
+          function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+          }));
         let config = {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
-        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + url[0]+'#'+rep;
+        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
+       alert(r)
+        alert(betUrl)
+        alert(url[0])
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -106,7 +112,7 @@
                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
               wx.ready(function () {
-                let a=url[0]+'#'+rep;
+
                 wx.onMenuShareAppMessage({
                   title: title, // 分享标题
                   desc: description, // 分享描述

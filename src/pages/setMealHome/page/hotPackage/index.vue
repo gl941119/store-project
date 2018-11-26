@@ -6,7 +6,7 @@
       <div class="commonSetMeal_right">
         <div class="commonSetMeal_title">{{item.name}}</div>
         <div class="commonSetMeal_cont"></div>
-        <div class="commonSetMeal_price">¥{{item.o_price}}</div>
+        <div class="commonSetMeal_price">¥{{item.price}}</div>
       </div>
     </div>
 
