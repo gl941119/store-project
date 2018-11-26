@@ -3,19 +3,20 @@
     <div class="endorseOneself_b">
       <div class="endorseOneself_body">
         <div class="endorseOneself_headerBox endorseOneself_headPadding">
-          <div class="endorseOneself_header"><img src="../../../../assets/image/log.png"></div>
+          <div class="endorseOneself_header"><img :src="webshare.avatar"></div>
         </div>
         <div class="endorseOneself_headerBox endorseOneself_headPadding1">
-          <div class="endorseOneself_name">雷斯然</div>
+          <div class="endorseOneself_name">{{webshare.name}}</div>
         </div>
-        <div>
-          <div class="endorseOneself_sharing">邀请您成为艾司科美美丽代言人</div>
-          <div class="endorseOneself_sharing1">美丽人生等你代言</div>
-        </div>
-        <div class="endorseOneself_cont">S+艾司普勒斯科技美容集团运营总部位于香港。经过10多年的不断探索与发展，己经成为享誉业界的集科技美容、医学美容、生物科技为一体的综合性美容集团。</div>
+        <div class="endorseOneself_cont" v-html="webshare.content"></div>
+        <!--<div>-->
+          <!--<div class="endorseOneself_sharing">邀请您成为艾司科美美丽代言人</div>-->
+          <!--<div class="endorseOneself_sharing1">美丽人生等你代言</div>-->
+        <!--</div>-->
+        <!--<div class="endorseOneself_cont">S+艾司普勒斯科技美容集团运营总部位于香港。经过10多年的不断探索与发展，己经成为享誉业界的集科技美容、医学美容、生物科技为一体的综合性美容集团。</div>-->
         <div class="endorseOneself_border"></div>
         <div class="endorseOneself_yTitle">邀请码</div>
-        <div class="endorseOneself_code">Y0000520</div>
+        <div class="endorseOneself_code">{{codes}}</div>
         <div class="endorseOneself_subBox">
           <div class="endorseOneself_sub" @click="linkHome('setMealHome')">去商城</div>
         </div>
@@ -27,10 +28,37 @@
 <script>
   export default {
     name: "index",
+    data(){
+      return {
+        webshare:{},
+        codes:''
+      }
+    },
+    mounted(){
+      this.reques();
+    },
     methods:{
       linkHome(str){
         this.$router.push({name:str})
-      }
+      },
+      reques(){
+        let ul=window.location.href;
+        let cde=ul.split('&')[0].split('=')[1];
+        this.codes=cde;
+this.$request({
+  url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
+  type:'post',
+  data:{
+    code:cde
+  }
+}).then(res=>{
+  if(res.status){
+    let d=res.data;
+    let scgc=d.article['a_4'];
+    this.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title};
+  }
+});
+  }
     }
   }
 </script>
