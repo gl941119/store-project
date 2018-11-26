@@ -1,11 +1,7 @@
 <template>
   <div class="wrap">
-    <van-tabs v-model="active" @change="tabChange" sticky :swipeable="true" >
+    <van-tabs v-model="active" @change="tabChange" sticky  >
       <van-tab title="全部" >
-
-
-
-
 
         <com-card v-for="item,key in goodslist"
                   :key="key"
@@ -68,7 +64,7 @@
     },
     data() {
       return {
-        active: undefined,
+        active: 0,
         index: 0,
         ltype: 1,
         status: 0,
@@ -76,7 +72,7 @@
       }
     },
     mounted() {
-      this.tabChange()
+      // this.tabChange()
       this.active =this.$route.params.type
     },
     methods: {
@@ -88,6 +84,7 @@
 
       },
       request() {
+        // console.log('addevent')
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=88&act=myorderlist',
           type: 'POST',
@@ -100,7 +97,6 @@
         })
       },
       tabChange(index) {
-
 
         switch (index) {
           case 0:

@@ -31,7 +31,7 @@
     top: 0;
     z-index: 100;
     padding: 0 7px;
-    border-top: 1px solid #D8D8D8;
+    /*border-top: 1px solid #D8D8D8;*/
     border-bottom: 1px solid #D8D8D8;
     display: flex;
     justify-content: space-around;

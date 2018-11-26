@@ -2,20 +2,19 @@
   <div class="address">
 
     <ul class="list">
-      <li v-for="item,index in listData" :key="item.id" class="list-card" v-on:click="goIndentConfirme(item)" >
+      <li v-for="item,index in listData" :key="item.id" class="list-card" v-on:click="goIndentConfirme(item)">
         <div class="list-card-top">
           <span class="list-card-top-realname">{{item.realname}}</span>
           <span class="list-card-top-mobile">{{item.mobile}}</span>
           <img src="../../../../../../assets/image/address.png" alt=""
                class="list-card-top-img"
-               v-on:click.stop="goChangeAddress(item.id)"
-          >
+               v-on:click.stop="goChangeAddress(item.id)">
         </div>
         <div class="list-card-bottom">
 
           <div class="list-card-bottom-address">
             <div class="default" v-if="item.isdefault==='1'">默认</div>
-          <div :class="{'list-card-bottom-padding':showCss(listData.length,index)}">{{item.address}}</div>
+            <div :class="{'list-card-bottom-padding':showCss(listData.length,index)}">{{item.address}}</div>
           </div>
         </div>
         <div :class="{fill:showCss(listData.length,index)}"></div>
@@ -37,19 +36,19 @@
       this.request()
     },
     methods: {
-      showCss(len,index){
-        return len-1===index?false:true
+      showCss(len, index) {
+        return len - 1 === index ? false : true
       },
-      goAddAddress(){
-        this.$router.push({name:"changeAddress",params:{id:0}})
+      goAddAddress() {
+        this.$router.push({name: "changeAddress", params: {id: 0}})
       },
-      goChangeAddress(id){
-          this.$router.push({name:"changeAddress",params:{id:id}})
+      goChangeAddress(id) {
+        this.$router.push({name: "changeAddress", params: {id: id}})
       },
-      goIndentConfirme(item){//购物车地址点击
-        if(this.$route.params.type === '0'){
-          window.sessionStorage.setItem('address',JSON.stringify(item))
-          this.$router.push({name:'indentConfirme'})
+      goIndentConfirme(item) {//购物车地址点击
+        if (this.$route.params.type === '0') {
+          window.sessionStorage.setItem('address', JSON.stringify(item))
+          this.$router.push({name: 'indentConfirme'})
         }
 
 
@@ -92,7 +91,7 @@
           font-size: 15px;
           font-weight: 500;
           color: rgba(51, 51, 51, 1);
-          font-family:PingFangSC-Medium;
+          font-family: PingFangSC-Medium;
         }
         &-mobile {
           flex: 1;
@@ -119,6 +118,7 @@
           text-align: center;
           line-height: normal;
           width: 30px;
+          height: 15px;
           border-radius: 2px;
           border: 1px solid rgba(231, 59, 61, 1);
           font-size: 10px;
@@ -128,14 +128,14 @@
           align-items: center;
         }
         &-address {
-display: flex;
+          display: flex;
           align-items: center;
           justify-content: flex-start;
           font-size: 14px;
           color: rgba(102, 102, 102, 1);
           line-height: 18px;
         }
-        &-padding{
+        &-padding {
           padding-left: 5px;
         }
       }

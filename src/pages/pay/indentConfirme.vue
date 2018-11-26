@@ -9,10 +9,11 @@
       </van-button>
     </div>
     <!--留店-->
-    <com-store v-if="status==='0'&&store"  v-on:click.native="selectStore" :store="store"></com-store>
+    <com-store v-if="status==='0'&&store" v-on:click.native="selectStore" :store="store"></com-store>
     <!--留店弹出层-->
     <van-popup v-model="show_store" position="right" :overlay="false" class="popup">
-      <com-store  :store="store" v-for="store,index in storeList" :key="store.id" v-on:click.native="confirmeStore(index)" ></com-store>
+      <com-store :store="store" v-for="store,index in storeList" :key="store.id"
+                 v-on:click.native="confirmeStore(index)"></com-store>
     </van-popup>
     <!--收货地址-->
     <ul class="list" v-if="status==='1'">
@@ -38,7 +39,8 @@
     </van-popup>
     <!--主体-->
     <div class="main">
-      <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request" v-on:click.native="goDetail(item.id)"></com-prodectcard>
+      <com-prodectcard :item="item" v-for="item in goodslist" :key="item.id" @refrech="request"
+                       v-on:click.native="goDetail(item.id)"></com-prodectcard>
       <div class="fill"></div>
       <div class="cell">
         <span class="cell-name">买家留言:</span>
@@ -111,11 +113,11 @@
         //   province: undefined,
         //   realname: undefined,
         // },
-        ordersn:window.sessionStorage.getItem('ordersn'),
+        ordersn: window.sessionStorage.getItem('ordersn'),
         address: null,
         addressList: [],
-        store:null,
-        storeList:[],
+        store: null,
+        storeList: [],
         goodslist: [],
         freight: undefined,
         message: undefined,//买家留言
@@ -130,14 +132,14 @@
     watch: {
       show_store: function (val) {//监听弹窗
         if (val === true) {
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=87&act=storelist',
-          type:'get',
-          isToast:false
-        }).then(res=>{
-          this.storeList = res.data.storelist
-          console.log(this.storeList)
-        })
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=87&act=storelist',
+            type: 'get',
+            isToast: false
+          }).then(res => {
+            this.storeList = res.data.storelist
+            console.log(this.storeList)
+          })
         }
       },
       show_address: function (val) {//监听弹窗
@@ -145,7 +147,7 @@
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=88&act=addresslist',
             type: 'get',
-            isToast:false
+            isToast: false
           }).then((res) => {
             this.addressList = res.data.list
           })
@@ -156,8 +158,8 @@
       this.request()
     },
     methods: {
-      goDetail(id){
-        this.$router.push({name:"detail",params:{type:'1',id:id}})
+      goDetail(id) {
+        this.$router.push({name: "detail", params: {type: '1', id: id}})
       },
       goChangeAddress() {//无地址情况下去添加
         this.$router.push({name: 'address', params: {type: '1'}})
@@ -166,7 +168,7 @@
         // this.$router.push({name: 'selectAddress'});
         this.show_store = true
       },
-      confirmeStore(index){//确认门店
+      confirmeStore(index) {//确认门店
         this.store = this.storeList[index]
         this.show_store = false
       },
@@ -199,24 +201,24 @@
           this.allmoney = res.data.allrecord.money  //总金额
         })
       },
-      submitHandle(){//提交订单
+      submitHandle() {//提交订单
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
           data: {
             ordersn: this.ordersn,
-            is_send:this.status,
-            message:this.message,
-            addressid:this.address.id,
-            storeid:this.store.id
+            is_send: this.status,
+            message: this.message,
+            addressid: this.address.id,
+            storeid: this.store.id
           }
         }).then((res) => {
-          if(res.code === 100){
-           if(this.allmoney === 0){//实际扣款为0 跳转页面
-             this.payorder()
-            }else{//需要付款
-             window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
-           }
+          if (res.code === 100) {
+            if (this.allmoney === 0) {//实际扣款为0 跳转页面
+              this.payorder()
+            } else {//需要付款
+              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+            }
           }
         })
       },
@@ -225,14 +227,14 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=payorder',
           type: 'post',
           data: {
-            ordersn:this.ordersn
+            ordersn: this.ordersn
           }
         }).then(res => {
           if (res.code === 100) {
             this.$toast.success('提交成功')
             let thia = this
 
-              this.$router.push({name: 'success',params:{orderid:this.ordersn,type:'1'}})
+            this.$router.push({name: 'success', params: {orderid: this.ordersn, type: '1'}})
 
           }
         })
@@ -307,8 +309,6 @@
       color: white;
     }
   }
-
-
 
   .indentConfirme {
     background-color: #F4F4F4;

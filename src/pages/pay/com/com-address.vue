@@ -6,7 +6,7 @@
       <van-icon name="arrow" class="list-card-top-icon"/>
     </div>
     <div class="list-card-bottom">
-      <div class="list-card-bottom-default" v-if="address.isdefault==='1'">默认</div>
+      <div class="list-card-bottom-default" align="left" v-if="address.isdefault==='1'">默认</div>
       <span class="list-card-bottom-address">{{address.address}}</span>
     </div>
     <div class="fill"></div>
@@ -59,27 +59,35 @@
       }
     }
     &-bottom {
+      /*margin-top: 4px;*/
+      /*overflow: hidden;*/
+      /*width: 270px;*/
+      /*line-height: 5px;*/
+      /*display: block;*/
+      /*text-overflow: ellipsis;*/
       margin-top: 4px;
       overflow: hidden;
-      width: 270px;
-      line-height: 5px;
-      display: block;
-      text-overflow: ellipsis;
+      width: 250px;
+      display: flex;
+      justify-content: flex-start;
+
+
+
       &-default {
-        float: left;
-        margin-top: 3px;
-        margin-right: 5px;
-        width: 30px;
+
+        text-align: center;
+        line-height: normal;
+        width: 40px;
         height: 15px;
         border-radius: 2px;
         border: 1px solid rgba(231, 59, 61, 1);
         font-size: 10px;
         color: rgba(233, 88, 79, 1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+        /*float: left;*/
       }
       &-address {
+        text-overflow: ellipsis;
         font-size: 14px;
         color: rgba(102, 102, 102, 1);
         line-height: 18px;

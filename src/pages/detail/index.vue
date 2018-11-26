@@ -567,7 +567,7 @@
       height: 100%;
       font-size: 12px;
       color: rgba(153, 153, 153, 1);
-      line-height: 17px;
+
     }
     &-content {
       margin-left: 10px;
@@ -575,7 +575,7 @@
       height: 100%;
       font-size: 14px;
       color: rgba(51, 51, 51, 1);
-      line-height: 20px;
+
     }
     &-right {
       > div {

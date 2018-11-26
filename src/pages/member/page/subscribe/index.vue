@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-tabs v-model="active" @change="change" sticky :swipeable="true">
+    <van-tabs v-model="active" @change="change" sticky >
       <van-tab title="全部">
         <com-servercard :item="item" v-for="item,index in appoint" :key="index" @refresh="request" v-on:click.native="goServiceInfo(item.orderid)"></com-serverCard>
       </van-tab>
