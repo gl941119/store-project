@@ -53,7 +53,7 @@
         let description=this.webshare.share_text;
         let title=this.webshare.share_title;
         let url=window.location.href.split('#');
-        let rep=url[1].replace('endorseOneself','endorseOneself/endorsementSharing/');
+        let rep=url[1].replace('endorseOneself','endorseOneself/endorsementSharing');
         let curUrl=url[0]+'#'+rep+'?'+pU;
 //         let config = {
 //           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
