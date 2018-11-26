@@ -43,7 +43,7 @@
     getLocalImgData(id,thisa){
 
       let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
-      let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eids.eid+'&&dom='+thisa.$eids.dom+'act=fileupload&uk='+uk;
+      let urlR=thisa.$upUrl+'app/index.php?'+thisa.$i+'&c=entry&eid='+thisa.$eids.eid+'&dom='+thisa.$eids.dom+'&act=fileupload&uk='+uk;
       wxHandle('getLocalImgData',{
         localId: id, // 图片的localID
         success: function (getLocal) {
@@ -68,32 +68,19 @@
               }
             },
 
-          }).then(res => {
-            if (res.data.code === 100) {
+          }).then(imgMeg => {
+            let a=imgMeg.data.code+'---'+imgMeg.data.message+'==='+imgMeg.data;
+            alert(a)
+            if (imgMeg.data.code === 100) {
               thisa.showJinDu=false;
                   thisa.$toast('上传成功');
                   thisa.$emit('Refresh')
             }else{
               thisa.showJinDu=false;
-              thisa.$toast(res.data.message);
+              thisa.$toast(imgMeg.data.message);
             }
           })
-          // thisa.$request({
-          //   url:urlR,
-          //   type:'post',
-          //   data:{
-          //     filestr:str
-          //   }
-          // }).then((res)=>{
-          //   if (res.code === 100) {
-          //     thisa.$toast('上传成功');
-          //     thisa.$emit('Refresh')
-          //   }else{
-          //     thisa.$toast(res.message);
-          //   }
-          // }).catch((res)=>{
-          //
-          // });
+
 
         }
       });

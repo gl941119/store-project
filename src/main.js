@@ -29,6 +29,7 @@ if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$eid162 = {eid:config.binds['86'].eid,dom:config.binds['86'].dom}; //支付
   Vue.prototype.$eid161 = {eid:config.binds['85'].eid,dom:config.binds['85'].dom}; //支付
   Vue.prototype.$eids = {eid:config.binds['88'].eid,dom:config.binds['88'].dom}; //支付
+  Vue.prototype.$meal = {eid:config.binds['90'].eid,dom:config.binds['90'].dom}; //支付
 }
 
 
