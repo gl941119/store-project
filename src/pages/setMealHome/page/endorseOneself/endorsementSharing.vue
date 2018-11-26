@@ -16,7 +16,7 @@
         <!--<div class="endorseOneself_cont">S+艾司普勒斯科技美容集团运营总部位于香港。经过10多年的不断探索与发展，己经成为享誉业界的集科技美容、医学美容、生物科技为一体的综合性美容集团。</div>-->
         <div class="endorseOneself_border"></div>
         <div class="endorseOneself_yTitle">邀请码</div>
-        <div class="endorseOneself_code">{{}}</div>
+        <div class="endorseOneself_code">{{codes}}</div>
         <div class="endorseOneself_subBox">
           <div class="endorseOneself_sub" @click="linkHome('setMealHome')">去商城</div>
         </div>
