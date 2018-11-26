@@ -110,6 +110,8 @@
 
 <style lang="scss" scoped>
   .member_center{
+    height: calc(100vh - 50px);
+    overflow-y: auto;
     background-color: #fff;
     position: relative;
   }
