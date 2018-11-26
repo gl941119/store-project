@@ -72,18 +72,23 @@ ids:this.$route.params.ids,
 
     methods: {
       onceBuy() {//立即购买
+        let isBind=localStorage.getItem('isBind');
+        if(parseInt(isBind)===1){
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=90&act=orderconfirm',
+            type: 'post',
+            data: {
+              id:this.ids
+            }
+          }).then(res => {
+            if (res.status) {
+              this.$router.push({name:'orderConfirm',params:{ids:res.data.orderid}})
+            }
+          })
+        }else{
+          this.$router.push({name: 'bindAccount'});
+        }
 
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=90&act=orderconfirm',
-          type: 'post',
-          data: {
-       id:this.ids
-          }
-        }).then(res => {
-          if (res.status) {
-this.$router.push({name:'orderConfirm',params:{ids:res.data.orderid}})
-          }
-        })
       },
       onClick(index, title) {//锚点
 
