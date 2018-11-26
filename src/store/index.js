@@ -11,6 +11,7 @@ export default new Vuex.Store({
     sub_showFooter:true,//预约主页footer状态
     hover:0,//footer颜色
     sub_hover:0,//预约主页footer颜色
+    meal_hover:0,//预约主页footer颜色
     classify_hover:-1,//分类栏选择
     is: '2',
     ShowBuySpecification: false,

@@ -32,7 +32,7 @@
           return this.$store.state.meal_showFooter
         },
         hover() {
-          return this.$store.state.sub_hover
+          return this.$store.state.meal_hover
         }
       },
       methods: {

@@ -70,7 +70,9 @@
 this.$router.push({name:'setMealDetail',params:{ids:id}})
       },
       goLink(url){
-        window.location.href = url;
+        url?window.location.href = url:'';
+        console.log(url)
+        // window.location.href = url;
       },
       findMore(str){
         this.$router.push({name:str})

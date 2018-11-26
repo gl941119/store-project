@@ -21,7 +21,7 @@ let ul=window.location.href;
       if (res.data.status) {
         var d = res.data.data.config;
         wx.config({
-          debug: false, // 开启调试模式,
+          debug: true, // 开启调试模式,
           appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
           timestamp: d.timestamp, // 必填，生成签名的时间戳
           nonceStr: d.nonceStr, // 必填，生成签名的随机串
