@@ -66,22 +66,23 @@
       display: block;
       text-overflow: ellipsis;
       &-default {
-        display: inline-block;
-        margin-right: 5px;
+        float: left;
         margin-top: 3px;
-        text-align: center;
+        margin-right: 5px;
         width: 30px;
         height: 15px;
-        line-height: 13px;
         border-radius: 2px;
         border: 1px solid rgba(231, 59, 61, 1);
         font-size: 10px;
         color: rgba(233, 88, 79, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       &-address {
         font-size: 14px;
         color: rgba(102, 102, 102, 1);
-        line-height: 20px;
+        line-height: 18px;
       }
     }
   }
