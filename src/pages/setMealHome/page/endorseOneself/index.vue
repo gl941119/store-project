@@ -96,9 +96,6 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
-       alert(r)
-        alert(betUrl)
-        alert(url[0])
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -176,14 +173,14 @@
         // });
       },
       initEv(){
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=87&act=get_url_param',
-        type:'post'
-        }).then(res=>{
-          if(res.status){
-            this.urlParam=res.data.param;
-          }
-        });
+        // this.$request({
+        //   url:'app/index.php?i=1&c=entry&eid=87&act=get_url_param',
+        // type:'post'
+        // }).then(res=>{
+        //   if(res.status){
+        //     this.urlParam=res.data.param;
+        //   }
+        // });
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
           type:'post'
@@ -196,6 +193,7 @@
             this.name=d.user.name;
             this.avatar=d.user.avatar;
             this.webshare=d.webshare;
+            this.urlParam=d.param;
             this.shareEv();
           }
         });

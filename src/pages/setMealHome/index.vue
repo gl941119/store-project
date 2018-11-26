@@ -59,10 +59,11 @@
         mdata:[],//普通套餐
         vipdata:[],//vip套餐
         isMember:null,//会员状态
+        isBind:null
       }
     },
     mounted(){
-      this.$store.commit('setSub_hover',0);
+      this.$store.commit('setMeal_hover',0);
       this.indexReques();
     },
     methods:{
@@ -87,6 +88,7 @@ this.$router.push({name:'setMealDetail',params:{ids:id}})
             this.vipdata=d.vipdata;
             this.isMember=res.user.is_member;
             localStorage.setItem('mealIsMember',res.user.is_member)
+            localStorage.setItem('isBind',d.is_bind)
             // 1 memberCenter 会员
             // 0 setMealMember 非会员
           }

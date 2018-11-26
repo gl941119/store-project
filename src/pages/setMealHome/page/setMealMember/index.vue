@@ -85,6 +85,7 @@
     },
     mounted(){
       this.initEv();
+      this.$store.commit('setMeal_hover', 1)
     },
     methods:{
       tab(str){
@@ -110,6 +111,8 @@
 
 <style lang="scss" scoped>
   .member_center{
+    height: calc(100vh - 50px);
+    overflow-y: auto;
     background-color: #fff;
     position: relative;
   }
@@ -210,6 +213,7 @@ padding: 18px 0 27px 0;
     flex-flow: wrap;
     align-items: center;
     justify-content: space-around;
+    padding-bottom: 20px;
   }
   .member_item{
     width: 20%;

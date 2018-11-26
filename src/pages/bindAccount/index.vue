@@ -161,8 +161,13 @@
     align-items: flex-start;
     justify-content: space-around;
   }
+  .accountFlexNone{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   .bindAccountTopL{
-    width:143px;
+    /*width:143px;*/
     border-bottom:1px solid rgba(216,216,216,1);
     display: flex;
     align-items: center;
@@ -179,7 +184,7 @@ background-size: $width $height;
   }
 .bindYqInput{
   margin-left: 15px;
-  width: 110px;
+  width: 270px;
   height: 20px;
   line-height: 20px;
   font-size:13px;
