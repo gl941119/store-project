@@ -42,7 +42,13 @@
 
         infoUrl() {
           let isM=localStorage.getItem('mealIsMember');
-          parseInt(isM)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
+          let isBind=localStorage.getItem('isBind');
+          if(parseInt(isBind)===1){
+            parseInt(isM)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
+          }else{
+            this.$router.push({name: 'bindAccount'});
+          }
+
         }
       }
     }

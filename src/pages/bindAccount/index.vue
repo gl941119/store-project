@@ -2,7 +2,7 @@
   <div>
 
     <div class="bindAccount">
-      <div class="bindAccountBox accountFlex">
+      <div class="bindAccountBox accountFlexNone">
         <div class="bindAccountTopL">
           <div class="bindAccountYqCode"></div>
           <input type="text"placeholder="请输入好友邀请码" v-model="yqCode" class="bindYqInput"/>
@@ -160,6 +160,11 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
+  }
+  .accountFlexNone{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
   .bindAccountTopL{
     width:143px;
