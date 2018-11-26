@@ -27,6 +27,9 @@
       data() {
         return {}
       },
+      mounted(){
+
+      },
       computed: {
         isShow() {
           return this.$store.state.meal_showFooter
