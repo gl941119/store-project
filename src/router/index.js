@@ -541,7 +541,7 @@ let router = new Router({
       path: '/setMealHome',
       name: 'setMealHome',
       title: 'S+艾司商城',
-      meta: {keepAlive: false},
+      meta: {keepAlive: false,meal_showFooter: true},
       component: resolve => require(['../pages/setMealHome/'], resolve)
     },
     {//套餐非会员中心

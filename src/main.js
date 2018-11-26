@@ -102,6 +102,11 @@ router.beforeEach((to, from, next) => {
   } else {
     store.commit('setSub_showFooter', false);
   }
+  if (to.matched.some(record => record.meta.meal_showFooter)) {
+    store.commit('setMeal_showFooter', true);
+  } else {
+    store.commit('setMeal_showFooter', false);
+  }
   next()
 });
 
