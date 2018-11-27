@@ -61,6 +61,8 @@
         webshare:{},
         urlParam:'',
         popShow:false,
+        uk:'',
+        is_member:''
       }
     },
     created(){
@@ -84,8 +86,10 @@
         let title=this.webshare.share_title;
         let url=window.location.href.split('#');
         let rep=url[1].replace('endorseOneself','endorseOneself/transferPage');
-        let curUrl=url[0]+'#'+rep+'?code='+code+'&eid=405';
-        let baseUrl= btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
+        let curUrl=url[0]+'#'+rep+'?'+pU+'&code='+code+'&uk='+this.uk+'&is_member='+this.is_member;
+        let cur=url[0]+'#'+rep;
+        alert(cur)
+        let baseUrl= btoa(encodeURIComponent(cur).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
@@ -93,7 +97,6 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + baseUrl;
-
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -154,6 +157,8 @@
             this.avatar=d.user.avatar;
             this.webshare=d.webshare;
             this.urlParam=d.param;
+            this.uk=res.uk;
+            this.is_member=d.user.is_member;
             this.shareEv();
           }
         });

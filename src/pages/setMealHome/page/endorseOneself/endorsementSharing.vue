@@ -47,22 +47,18 @@ code:this.$route.params.cde,
       initRequest(){
         let self=this;
         // let cde=localStorage.getItem('mealCode');
-        // let cde=localStorage.getItem('mealCode');
         let config = {
           headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
         };
-        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
-
+        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
         var params = new URLSearchParams();
         params.append('code', this.code);
-alert(this.code)
-        alert(this.eid)
         axios.post(r, params, config)
           .then((res) => {
             if (res.data.status) {
                   let d=res.data.data;
                   let scgc=d.article['a_4'];
-                  self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
+                  self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:this.code};
 
             }
           }).catch((res) => {
