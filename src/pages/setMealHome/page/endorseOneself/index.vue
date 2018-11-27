@@ -84,7 +84,7 @@
         let title=this.webshare.share_title;
         let url=window.location.href.split('#');
         let rep=url[1].replace('endorseOneself','endorseOneself/transferPage');
-        let curUrl=url[0]+'#'+rep+'?'+pU+'?&code='+code;
+        let curUrl=url[0]+'#'+rep+'?code='+code+'&eid=405';
         let baseUrl= btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
