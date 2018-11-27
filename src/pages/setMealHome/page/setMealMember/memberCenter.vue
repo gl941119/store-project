@@ -1,73 +1,76 @@
 <template>
   <div class="member_center">
-    <img src="../../../../assets/image/header_banner.png" class="member_headerBanner">
-    <div class="member_top">
-      <div class="member_topHeader">
-        <img :src="user.avatar" v-if="user.avatar"/>
-        <img src="../../../../assets/image/defaule.jpg" v-else/>
-        <span class="member_setting" @click="tab('userManage')"><img src="../../../../assets/image/setting_icon.png"/></span>
-      </div>
-      <div class="member_name">
-        <div class="member_nameBox">{{user.nick}}</div>
-        <div class="member_icon"><img src="../../../../assets/image/icon_vip.png"/></div>
-      </div>
-      <div class="member_time">会员到期时间：{{timeSplic(user.duedate)}}</div>
-      <div class="member_moneyBox">
-        <div class="member_tab" @click="tab('beautifulPoints')">
-          <div class="member_number">{{user.score}}</div>
-          <div class="member_txt">美丽积分</div>
+    <div class="mHeight">
+      <img src="../../../../assets/image/header_banner.png" class="member_headerBanner">
+      <div class="member_top">
+        <div class="member_topHeader">
+          <img :src="user.avatar" v-if="user.avatar"/>
+          <img src="../../../../assets/image/defaule.jpg" v-else/>
+          <span class="member_setting" @click="tab('userManage')"><img src="../../../../assets/image/setting_icon.png"/></span>
         </div>
-        <div class="member_tab" @click="tab('setMealbeautyFund')">
-          <div class="member_number">{{user.share_amount}}</div>
-          <div class="member_txt">美丽基金</div>
+        <div class="member_name">
+          <div class="member_nameBox">{{user.nick}}</div>
+          <div class="member_icon"><img src="../../../../assets/image/icon_vip.png"/></div>
         </div>
-        <div class="member_tab" @click="tab('beautifulIntegrals')">
-          <div class="member_number">{{user.score_nex}}</div>
-          <div class="member_txt">美丽积分券</div>
+        <div class="member_time">会员到期时间：{{timeSplic(user.duedate)}}</div>
+        <div class="member_moneyBox">
+          <div class="member_tab" @click="tab('beautifulPoints')">
+            <div class="member_number">{{user.score}}</div>
+            <div class="member_txt">美丽积分</div>
+          </div>
+          <div class="member_tab" @click="tab('setMealbeautyFund')">
+            <div class="member_number">{{user.share_amount}}</div>
+            <div class="member_txt">美丽基金</div>
+          </div>
+          <div class="member_tab" @click="tab('beautifulIntegrals')">
+            <div class="member_number">{{user.score_nex}}</div>
+            <div class="member_txt">美丽积分券</div>
+          </div>
         </div>
-      </div>
-      <div class="member_bannerImg">
-        <div class="member_swipe" @click="()=>{this.$router.push({name:'MembershipCardList'})}">
-<img :src="bImg">
-          <div class="member_bannerImg-box">
-            <div>已购：{{taoNum}}份套餐</div>
-            <div><span @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</span></div>
+        <div class="member_bannerImg">
+          <div class="member_swipe" @click="()=>{this.$router.push({name:'MembershipCardList'})}">
+            <img :src="bImg">
+            <div class="member_bannerImg-box">
+              <div>已购：{{taoNum}}份套餐</div>
+              <div><span @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</span></div>
+            </div>
+
           </div>
 
         </div>
-
-      </div>
-      <div class="member_list member_list1">
-        <div class="member_item" @click="tab('purchasedCommodities')">
-          <div class="member_listImg"><img src="../../../../assets/image/icon_5.png"/></div>
-          <div class="member_listName">已购商品</div>
+        <div class="member_list member_list1">
+          <div class="member_item" @click="tab('purchasedCommodities')">
+            <div class="member_listImg"><img src="../../../../assets/image/icon_5.png"/></div>
+            <div class="member_listName">已购商品</div>
+          </div>
+          <div class="member_item" @click="tab('purchasedService')">
+            <div class="member_listImg"><img src="../../../../assets/image/icon_3.png"/></div>
+            <div class="member_listName">已购服务</div>
+          </div>
+          <div class="member_item" @click="tab('myTeam')">
+            <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
+            <div class="member_listName">我的团队</div>
+          </div>
+          <div class="member_item"@click="tab('IntegralRanking')">
+            <div class="member_listImg"><img src="../../../../assets/image/icon_4.png"/></div>
+            <div class="member_listName">积分排行榜</div>
+          </div>
         </div>
-        <div class="member_item" @click="tab('purchasedService')">
-          <div class="member_listImg"><img src="../../../../assets/image/icon_3.png"/></div>
-          <div class="member_listName">已购服务</div>
+        <div class="member_list">
+          <div class="member_item"  @click="tab('beautifulEndorsements')">
+            <div class="member_listImg"><img src="../../../../assets/image/icon_2.png"/></div>
+            <div class="member_listName">代言说明</div>
+          </div>
+          <div class="member_item" @click="tab('endorseOneself')">
+            <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
+            <div class="member_listName">发展代言人</div>
+          </div>
+          <div class="member_item"></div>
+          <div class="member_item"></div>
         </div>
-        <div class="member_item" @click="tab('myTeam')">
-          <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
-          <div class="member_listName">我的团队</div>
-        </div>
-        <div class="member_item"@click="tab('IntegralRanking')">
-          <div class="member_listImg"><img src="../../../../assets/image/icon_4.png"/></div>
-          <div class="member_listName">积分排行榜</div>
-        </div>
-      </div>
-      <div class="member_list">
-        <div class="member_item"  @click="tab('beautifulEndorsements')">
-          <div class="member_listImg"><img src="../../../../assets/image/icon_2.png"/></div>
-          <div class="member_listName">代言说明</div>
-        </div>
-        <div class="member_item" @click="tab('endorseOneself')">
-          <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
-          <div class="member_listName">发展代言人</div>
-        </div>
-        <div class="member_item"></div>
-        <div class="member_item"></div>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -120,9 +123,12 @@ this.$request({
 
 <style lang="scss" scoped>
   .member_center{
-    height: calc(100vh - 50px);
-    overflow-y: auto;
     background-color: #fff;
+    position: relative;
+  }
+  .mHeight{
+    height: calc(100vh - 51px);
+    overflow-y: auto;
     position: relative;
   }
   .member_headerBanner{

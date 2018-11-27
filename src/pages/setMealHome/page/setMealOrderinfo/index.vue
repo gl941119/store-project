@@ -133,7 +133,7 @@ this.initEv();
 
         },
         viewLogistics(){
-          this.$router.push({name:'logistics',params:{ordersn:this.id,status:this.id}})
+          this.$router.push({name:'logistics',params:{ordersn:this.id,status:'1'}})
         },
 initEv(){
   this.$request({

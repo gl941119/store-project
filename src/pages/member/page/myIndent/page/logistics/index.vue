@@ -25,10 +25,12 @@
       methods:{
           request(){
             let url='';
-            if(this.st){
-              url='app/index.php?i=1&c=entry&eid=90&act=expresslist';
-            }else{
+
+
+            if(this.st=='2'){//预约and商品
               url='app/index.php?i=1&c=entry&eid=85&act=expresslist';
+            }else{//套餐
+              url='app/index.php?i=1&c=entry&eid=90&act=expresslist';
             }
             this.$request({
               url:url,
