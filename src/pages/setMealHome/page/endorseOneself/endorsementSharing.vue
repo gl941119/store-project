@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import wx from 'weixin-js-sdk'
+  import axios from 'axios';
   export default {
     name: "index",
     data(){
@@ -49,7 +51,7 @@
         let ul=window.location.href;
         let cde=ul.split('code=')[1];
         localStorage.setItem('mealCode',cde);
-        let betUrl=  btoa(encodeURIComponent(ul[0]).replace(/%([0-9A-F]{2})/g,
+        let betUrl=  btoa(encodeURIComponent(ul).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
@@ -57,6 +59,8 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
+        alert(ul)
+        alert(r)
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -70,8 +74,7 @@
                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
               wx.ready(function () {
-                alert(cde)
-                this.$request({
+                self.$request({
                   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
                   type:'post',
                   data:{
