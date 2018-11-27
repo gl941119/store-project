@@ -18,7 +18,7 @@
     <!--收货地址-->
     <ul class="list" v-if="status==='1'">
       <!--无收货地址-->
-      <div v-if="address=== null" class="list-notCard" v-on:click="selectAddress">
+      <div v-if="address.address== ''" class="list-notCard" v-on:click="selectAddress">
         <span>请选择收货地址</span>
         <van-icon name="arrow" class="list-icon"/>
       </div>
@@ -28,7 +28,7 @@
     <!--地址弹出层-->
     <van-popup v-model="show_address" position="right" :overlay="false" class="popup">
       <!--无收货地址-->
-      <van-button type="default" v-if="address=== null" class="popup-addAddress" v-on:click="goChangeAddress">去添加地址
+      <van-button type="default" v-if="address.address== ''" class="popup-addAddress" v-on:click="goChangeAddress">去添加地址
       </van-button>
       <!--有收货地址-->
       <com-address v-else

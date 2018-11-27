@@ -261,14 +261,14 @@
           }
         }).then(res => {
           if (res.code === 100) {
-            if (staus === -1) {
+            if (status === -1) {
               this.$toast.success('取消成功');
               let thia = this;
               setTimeout(function () {
                 thia.$route.go(-1)
               }, 1000)
             }
-            if (staus === 3) {
+            if (status === 3) {
               this.$toast.success('收货成功');
               let thia = this;
               setTimeout(function () {

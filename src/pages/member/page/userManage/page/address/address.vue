@@ -14,7 +14,8 @@
 
           <div class="list-card-bottom-address">
             <div class="default" v-if="item.isdefault==='1'">默认</div>
-            <div :class="{'list-card-bottom-padding':showCss(listData.length,index)}">{{item.address}}</div>
+            <!--<div :class="{'list-card-bottom-padding':showCss(listData.length,index)}"></div>-->
+            {{item.address}}
           </div>
         </div>
         <div :class="{fill:showCss(listData.length,index)}"></div>
@@ -110,11 +111,12 @@
       &-bottom {
         margin-top: 4px;
         overflow: hidden;
-        width: 250px;
-        line-height: 5px;
-        display: block;
-        text-overflow: ellipsis;
+
+        font-size: 14px;
+        color: rgba(102, 102, 102, 1);
+        line-height: 18px;
         .default {
+          float: left;
           text-align: center;
           line-height: normal;
           width: 30px;
@@ -128,9 +130,7 @@
           align-items: center;
         }
         &-address {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
+          width: 300px;
           font-size: 14px;
           color: rgba(102, 102, 102, 1);
           line-height: 18px;

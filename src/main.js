@@ -83,7 +83,6 @@ window.long = setInterval(function () {//长轮询
     isToast: false
   }).then(res => {
     if (res.data.is_discuss == '0') {
-
       window.clearInterval(window.long);
       router.push({name: "serverEvaluate", params: {orderid: res.data.orderid}})
     }

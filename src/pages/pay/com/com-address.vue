@@ -7,7 +7,8 @@
     </div>
     <div class="list-card-bottom">
       <div class="list-card-bottom-default" align="left" v-if="address.isdefault==='1'">默认</div>
-      <span class="list-card-bottom-address">{{address.address}}</span>
+      <!--<span class="list-card-bottom-address"></span>-->
+      {{address.address}}
     </div>
     <div class="fill"></div>
   </li>
@@ -65,32 +66,30 @@
       /*line-height: 5px;*/
       /*display: block;*/
       /*text-overflow: ellipsis;*/
-      margin-top: 4px;
+      /*margin-top: 4px;*/
       overflow: hidden;
-      width: 250px;
-      display: flex;
-      justify-content: flex-start;
-
-
-
+      width: 300px;
+      /*display: flex;*/
+      /*justify-content: flex-start;*/
+      font-size: 14px;
+      color: rgba(102, 102, 102, 1);
+      line-height: 18px;
       &-default {
-
         text-align: center;
         line-height: normal;
-        width: 40px;
+        width: 30px;
         height: 15px;
         border-radius: 2px;
         border: 1px solid rgba(231, 59, 61, 1);
         font-size: 10px;
         color: rgba(233, 88, 79, 1);
-
-        /*float: left;*/
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       &-address {
         text-overflow: ellipsis;
-        font-size: 14px;
-        color: rgba(102, 102, 102, 1);
-        line-height: 18px;
       }
     }
   }
