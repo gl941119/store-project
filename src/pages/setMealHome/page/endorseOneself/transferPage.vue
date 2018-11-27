@@ -15,10 +15,13 @@
         let url=window.location.href;
         let ce=url.split('code=')[1];
         setTimeout(()=>{
+          localStorage.setItem('mealCode',ce);
           Toast.clear();
-          alert(url.split('#')[0])
-          // window.location.href
-          this.$router.push({name:'endorsementSharing',params:{cde:ce}});
+          let a=url.split('?')[0];
+          let aa=a+'#/setMealHome/page/endorseOneself/transferPage';
+          alert(aa)
+          window.location.href=aa;
+          // this.$router.push({name:'endorsementSharing',params:{cde:ce}});
         },1000)
 
       }

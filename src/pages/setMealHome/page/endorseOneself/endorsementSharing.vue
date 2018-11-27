@@ -28,7 +28,7 @@
     name: "index",
     data(){
       return {
-        cde:this.$route.params.cde,
+
         webshare:{},
         codes:''
       }
@@ -45,20 +45,17 @@
       },
       initRequest(){
         let self=this;
-        let cde=this.cde;
+        let cde=localStorage.getItem('mealCode');
         let config = {
           headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
         };
-        localStorage.setItem('mealCode',cde);
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
 
         var params = new URLSearchParams();
         params.append('code', cde);
-
+alert(cde)
         axios.post(r, params, config)
           .then((res) => {
-            alert(res.data.status)
-            alert(res.data.data.status)
             if (res.data.status) {
                   let d=res.data.data;
                   let scgc=d.article['a_4'];
