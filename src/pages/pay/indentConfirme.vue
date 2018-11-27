@@ -215,11 +215,11 @@
           }
         }).then((res) => {
           if (res.code === 100) {
-            if (this.allmoney === 0) {//实际扣款为0 跳转页面
-              this.payorder()
-            } else {//需要付款
-              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
-            }
+            // if (this.allmoney === 0) {//实际扣款为0 跳转页面
+            //   this.payorder()
+            // } else {//需要付款
+            //   window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+            // }
           }
         })
       },
