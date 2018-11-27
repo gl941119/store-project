@@ -72,7 +72,6 @@
                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
               wx.ready(function () {
-                alert(cde)
                 self.$request({
                   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
                   type:'post',
