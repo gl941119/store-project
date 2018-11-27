@@ -87,9 +87,7 @@
         let url=window.location.href.split('#');
         let rep=url[1].replace('endorseOneself','endorseOneself/transferPage');
         let curUrl=url[0]+'#'+rep+'?'+pU+'&code='+code+'&uk='+this.uk+'&is_member='+this.is_member;
-        let cur=url[0]+'#'+rep;
-        alert(cur)
-        let baseUrl= btoa(encodeURIComponent(cur).replace(/%([0-9A-F]{2})/g,
+        let baseUrl= btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
