@@ -9,11 +9,7 @@
           <div class="endorseOneself_name">{{webshare.name}}</div>
         </div>
         <div class="endorseOneself_cont" v-html="webshare.content"></div>
-        <!--<div>-->
-          <!--<div class="endorseOneself_sharing">邀请您成为艾司科美美丽代言人</div>-->
-          <!--<div class="endorseOneself_sharing1">美丽人生等你代言</div>-->
-        <!--</div>-->
-        <!--<div class="endorseOneself_cont">S+艾司普勒斯科技美容集团运营总部位于香港。经过10多年的不断探索与发展，己经成为享誉业界的集科技美容、医学美容、生物科技为一体的综合性美容集团。</div>-->
+
         <div class="endorseOneself_border"></div>
         <div class="endorseOneself_yTitle">邀请码</div>
         <div class="endorseOneself_code">{{webshare.codes}}</div>
@@ -40,27 +36,63 @@
 
     },
     mounted(){
-      this.reques();
+      setTimeout(()=>{this.initRequest();},500);
     },
     methods:{
       linkHome(str){
         this.$router.push({name:str})
+      },
+      initRequest(){
+        let ul=window.location.href;
+        let cde=ul.split('code=')[1];
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
+          type:'post',
+          data:{
+            code:cde
+          }
+        }).then(resMsg=>{
+          if(resMsg.status){
+            let d=resMsg.data;
+            let scgc=d.article['a_4'];
+            self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
+          }
+        }).catch(res=>{
+
+        });
       },
       reques(){
         let self=this;
         let ul=window.location.href;
         let cde=ul.split('code=')[1];
         localStorage.setItem('mealCode',cde);
-        let betUrl=  btoa(encodeURIComponent(ul.split('#')[0]).replace(/%([0-9A-F]{2})/g,
+        let isNav;
+
+        var u = navigator.userAgent;
+
+        if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1){ //android终端
+          let isUrl=ul.split('#')[0];
+          let a='android终端'+isUrl;
+          alert(a)
+          isNav=isUrl.replace('from=groupmessage','from=groupmessage&isappinstalled=0');
+        }else if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){ //ios终端
+          isNav=ul.split('#')[0];
+          let a='ios终端'+isNav;
+          alert(a)
+        }else{
+          let a='pc'+ul;
+          alert(a)
+          isNav=ul;
+        }
+        let betUrl=  btoa(encodeURIComponent(isNav).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
         let config = {
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
-alert(r)
-        alert(ul.split('#')[0])
+        alert(isNav)
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -73,22 +105,10 @@ alert(r)
                 signature: d.signature,// 必填，签名，见附录1
                 jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
               });
+              alert(cde+'1')
               wx.ready(function () {
-                self.$request({
-                  url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
-                  type:'post',
-                  data:{
-                    code:cde
-                  }
-                }).then(resMsg=>{
-                  if(resMsg.status){
-                    let d=resMsg.data;
-                    let scgc=d.article['a_4'];
-                    self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
-                  }
-                }).catch(res=>{
+                alert(cde+'2')
 
-                });
 
                 wx.error(function (res) {
                   var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
