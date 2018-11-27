@@ -77,7 +77,7 @@
       </van-actionsheet>
       <!--商品购买栏-->
       <van-goods-action class="buy" v-if="type== '1'">
-        <van-goods-action-mini-btn :icon="star" :class="{is_collect:is_collect}" @click="onClickCollect"/>
+        <van-goods-action-mini-btn :icon="'star'" :class="{is_collect:is_collect}" @click="onClickCollect"/>
         <van-goods-action-mini-btn icon="cart" @click="goButCart"/>
         <van-goods-action-big-btn text="加入购物车" @click="addBuyCart" class="addBuy"/>
         <van-goods-action-big-btn text="立即购买" @click="onceBuy" primary class="buyNow"/>
@@ -94,7 +94,7 @@
       </van-goods-action>
       <!--服务购买栏-->
       <van-goods-action class="buy" v-else>
-        <van-goods-action-mini-btn :icon="star" :class="{is_collect:is_collect}" @click="onClickCollect"/>
+        <van-goods-action-mini-btn :icon="'star'" :class="{is_collect:is_collect}" @click="onClickCollect"/>
         <van-goods-action-big-btn text="立即预约" @click="goAppoint" primary class="buyNow"/>
       </van-goods-action>
     </div>
