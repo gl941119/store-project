@@ -2,7 +2,6 @@
   <div class="wrap">
     <van-tabs v-model="active" @change="tabChange" sticky  >
       <van-tab title="全部" >
-
         <com-card v-for="item,key in goodslist"
                   :key="key"
                   :good="item"
