@@ -37,7 +37,7 @@
 
     },
     mounted(){
-      setTimeout(()=>{this.initRequest();},500);
+      setTimeout(()=>{this.initRequest();},1200);
     },
     methods:{
       linkHome(str){
