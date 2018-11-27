@@ -92,7 +92,7 @@
             return String.fromCharCode('0x' + p1);
           }));
         let config = {
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + baseUrl;
         axios.post(r, null, config)
