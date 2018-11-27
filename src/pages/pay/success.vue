@@ -51,7 +51,7 @@
           if (thia.second > 0) {
             thia.second -= 1
           } else {
-            this.goIndex()
+            thia.goIndex()
 
           }
         }, 1000)
