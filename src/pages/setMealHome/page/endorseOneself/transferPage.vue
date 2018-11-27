@@ -15,7 +15,10 @@
         let url=window.location.href;
         let ce=url.split('code=')[1];
         setTimeout(()=>{
-          this.$router.push({name:'endorsementSharing',params:{cde:ce}})
+          Toast.clear();
+          alert(url.split('#')[0])
+          // window.location.href
+          this.$router.push({name:'endorsementSharing',params:{cde:ce}});
         },1000)
 
       }
