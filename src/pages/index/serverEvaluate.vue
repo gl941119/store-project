@@ -10,7 +10,6 @@
       </div>
 
       <div class="serverEvaluateCom_box">
-
         <div class="serverEvaluateCom_cTop">
           <div class="serverEvaluateCom_cSolid">
             <div class="serverEvaluateCom_cTopL">

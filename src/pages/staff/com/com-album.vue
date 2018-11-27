@@ -14,8 +14,8 @@
         </div>
         <div class="innerPhoto">
           <div  v-for="(item,index,k) in album.listImg"  ref="imgBoxs" class="innerPhotoItem"  >
-            <img :src="item" alt="" class="innerPhotoImg" :data-k="index" @click="clickMax(album.listImg,index)" @touchstart="innerPhotoItemEv($event,index)" @touchend="innerPhotoItemEnd($event,index)">
-            <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  @click="innerPhotoItemClose(index)"/>
+            <img :src="item" alt="" class="innerPhotoImg"  v-on:click.stop="clickMax(album.listImg,index)" @touchstart="innerPhotoItemEv($event,index)" @touchend="innerPhotoItemEnd($event,index)">
+            <van-icon name="close" ref="imgBox" class="innerPhotoItemClose"  v-on:click.stop="innerPhotoItemClose(index)"/>
           </div>
         </div>
 
@@ -72,6 +72,8 @@
         for(let item in list){
           arr.push(list[item]);
         }
+
+
         ImagePreview({
           images: arr,
           startPosition: k,
@@ -352,8 +354,8 @@
   }
   .innerPhotoItemClose{
     position: absolute;
-    top:-17px;
-    right:-17px;
+    top:-12px;
+    right:-12px;
     background-color: #000;
     color: #fff;
     font-size: 20px;
