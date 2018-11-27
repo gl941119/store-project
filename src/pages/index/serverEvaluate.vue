@@ -83,7 +83,7 @@
           <div class="serverEvaluateCom_upImg">
 
             <div class="serverEvaluateCom_upImgs" v-for="item,index in serviceEvaluate.img">
-              <img :src="item" class="serverEvaluateCom_upImgs">
+              <img :src="item" class="serverEvaluateCom_upImgs" v-on:click.stop="show_imgs(item,index)">
               <van-icon name="clear" class="upImgClose" v-on:click.stop="upImgClose(item,index)"/>
             </div>
 
@@ -125,6 +125,7 @@
 <script>
   import wxHandle from '../../utils/wx'
   import axios from 'axios'
+  import { ImagePreview } from 'vant';
 
   export default {
     name: "com-serverEvaluate",
@@ -235,6 +236,15 @@
       serverTab(i, text) {//服务选项
 
       },
+      show_imgs(val,k){//显示图片
+
+        ImagePreview({
+          images: this.serviceEvaluate.img,
+          startPosition: k,
+
+        });
+
+      },
       upImgClose(val, k) {//删除图片
         this.serviceEvaluate.img.splice(k, 1)
         this.submit_imgs.splice(k, 1)
@@ -245,7 +255,7 @@
       getLocalImgData(id, thisa) {
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
         let urlR = thisa.$upUrl + 'app/index.php?' + thisa.$i + '&c=entry&eid=' + thisa.$eid.eid + '&dom=' + thisa.$eid.dom + '&act=fileupload&uk=' + uk;
-        alert(urlR)
+        // alert(urlR)
         wxHandle('getLocalImgData', {
           localId: id, // 图片的localID
           success: function (getLocal) {
@@ -270,8 +280,8 @@
               },
             }).then(res => {
               if (res.data.code === 100) {
-                alert(thisa.serviceEvaluate.avatar)
-                alert(res.data.data.avatar)
+                // alert(thisa.serviceEvaluate.avatar)
+                // alert(res.data.data.avatar)
                 thisa.showJinDu = false;
                 thisa.serviceEvaluate.img.push(res.data.data.avatar)
                 thisa.submit_imgs.push(res.data.data.imgs)
@@ -305,7 +315,9 @@
 
 <style lang="scss" scoped>
   .serverEvaluateCom {
-
+    width: 100%;
+    height: 100%;
+    background-color: white;
   }
 
   .serverEvaluateCom_p {
@@ -526,10 +538,10 @@
   }
 
   .serverEvaluateCom_upImgs {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     width: 78px;
     height: 78px;
-    /*position: relative;*/
+    position: relative;
     margin-right: 20px;
     margin-bottom: 10px;
     >img{
