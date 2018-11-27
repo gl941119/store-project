@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <van-tabs v-model="active" @change="tabChange" sticky  >
+    <van-tabs v-model="active"  sticky  >
       <van-tab title="全部" >
         <com-card v-for="item,key in goodslist"
                   :key="key"
@@ -63,7 +63,7 @@
     },
     data() {
       return {
-        active: 0,
+        active: undefined,
         index: 0,
         ltype: 1,
         status: 0,
@@ -72,15 +72,18 @@
     },
     mounted() {
       // this.tabChange()
+
       this.active =this.$route.params.type
+    },
+    watch:{
+      active(val){
+        this.tabChange(val)
+      }
     },
     methods: {
       goIndentInfo(ordersn){//跳转详情
-        console.log(ordersn)
         window.sessionStorage.setItem('ordersn',ordersn)
         this.$router.push({name:'indentInfo'})
-
-
       },
       request() {
         // console.log('addevent')
@@ -96,7 +99,6 @@
         })
       },
       tabChange(index) {
-
         switch (index) {
           case 0:
             this.ltype = 1;
