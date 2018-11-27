@@ -140,46 +140,9 @@
           var ss = res + 'catch请求失败';
           alert(ss)
         });
-//         wxHandle('updateAppMessageShareData',{
-//           title: title, // 分享标题
-//           desc: description, // 分享描述
-//           link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-//           imgUrl: u, // 分享图标
-//           type: '', // 分享类型,music、video或link，不填默认为link
-//           dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-//           success: function () {
-// // 用户点击了分享后执行的回调函数
-//             alert('用户点击了分享后执行的回调函数')
-//           },
-//             cancel: function () {
-//               // 用户取消分享后执行的回调函数
-//               alert('用户取消分享后执行的回调函数')
-//             }
-//         });
 
-        // wxHandle('updateAppMessageShareData', {
-        //   title: '分享标题', // 分享标题
-        //   link: url, // 分享链接
-        //   imgUrl: u, // 分享图标
-        //   success: function () {
-        //     // 用户确认分享后执行的回调函数
-        //     alert('分享给朋友成功')
-        //   },
-        //   cancel: function () {
-        //     // 用户取消分享后执行的回调函数
-        //     alert('分享给朋友成功1')
-        //   }
-        // });
       },
       initEv(){
-        // this.$request({
-        //   url:'app/index.php?i=1&c=entry&eid=87&act=get_url_param',
-        // type:'post'
-        // }).then(res=>{
-        //   if(res.status){
-        //     this.urlParam=res.data.param;
-        //   }
-        // });
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=88&act=ucenter',
           type:'post'

@@ -35,7 +35,7 @@
       }
     },
     created(){
-      window.location.reload();
+
     },
     mounted(){
       this.reques();
@@ -45,25 +45,60 @@
         this.$router.push({name:str})
       },
       reques(){
+        let self=this;
         let ul=window.location.href;
         let cde=ul.split('code=')[1];
         localStorage.setItem('mealCode',cde);
-alert(cde)
-this.$request({
-  url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
-  type:'post',
-  data:{
-    code:cde
-  }
-}).then(res=>{
-  if(res.status){
-    let d=res.data;
-    let scgc=d.article['a_4'];
-    this.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
-  }
-}).catch(res=>{
+        let betUrl=  btoa(encodeURIComponent(ul[0]).replace(/%([0-9A-F]{2})/g,
+          function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+          }));
+        let config = {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        };
+        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
+        axios.post(r, null, config)
+          .then((res) => {
+            if (res.data.status) {
+              var d = res.data.data.config;
+              wx.config({
+                debug: false, // 开启调试模式,
+                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+                timestamp: d.timestamp, // 必填，生成签名的时间戳
+                nonceStr: d.nonceStr, // 必填，生成签名的随机串
+                signature: d.signature,// 必填，签名，见附录1
+                jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              });
+              wx.ready(function () {
+                alert(cde)
+                this.$request({
+                  url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
+                  type:'post',
+                  data:{
+                    code:cde
+                  }
+                }).then(resMsg=>{
+                  if(resMsg.status){
+                    let d=resMsg.data;
+                    let scgc=d.article['a_4'];
+                    self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
+                  }
+                }).catch(res=>{
 
-});
+                });
+
+                wx.error(function (res) {
+                  var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
+                  alert(s)
+                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                });
+              });
+            }
+          }).catch((res) => {
+          var ss = res + 'catch请求失败';
+          alert(ss)
+        });
+
   }
     }
   }
