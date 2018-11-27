@@ -18,9 +18,10 @@
           localStorage.setItem('mealCode',ce);
           Toast.clear();
           let a=url.split('?')[0];
-          let aa=a+'#/setMealHome/page/endorseOneself/endorsementSharing?';
+          let cc=url.split('?')[2].split('&')[0].replace('=%3D%3F','==');
+          let aa=a+'#/setMealHome/page/endorseOneself/endorsementSharing?'+cc;
           alert(aa)
-          alert(url.split('?'))
+          alert(cc)
           window.location.href=aa;
           // this.$router.push({name:'endorsementSharing',params:{cde:ce}});
         },1000)
