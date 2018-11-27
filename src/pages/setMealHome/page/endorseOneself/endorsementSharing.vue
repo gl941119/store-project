@@ -37,7 +37,7 @@
 
     },
     mounted(){
-      setTimeout(()=>{this.initRequest();},1200);
+      setTimeout(()=>{this.initRequest();},500);
     },
     methods:{
       linkHome(str){
@@ -54,14 +54,16 @@
 
         var params = new URLSearchParams();
         params.append('code', cde);
-        alert(r)
-        alert(cde)
+
         axios.post(r, params, config)
           .then((res) => {
+            alert(res.data.status)
+            alert(res.data.data.status)
             if (res.data.status) {
-                  let d=res.data;
+                  let d=res.data.data;
                   let scgc=d.article['a_4'];
                   self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
+
             }
           }).catch((res) => {
           var ss = res + 'catch请求失败';
