@@ -283,7 +283,7 @@ let router = new Router({
       component: resolve => require(['../pages/member/page/myIndent/page/appraise'], resolve)
     },
     {//会员中心--我的订单--查看物流
-      path: '/member/myIndent/logistics/:ordersn/:status', //  ordersn 订单号id status 套餐订单状态
+      path: '/member/myIndent/logistics/:ordersn/:status', //  ordersn 订单号id status 套餐订单状态  1套餐  2 商品and服务
       name: 'logistics',
       title: '查看物流',
       meta: {keepAlive: false},

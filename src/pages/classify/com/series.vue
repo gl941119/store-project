@@ -43,7 +43,7 @@
           url: 'app/index.php?i=1&c=entry&eid=85&act=category',
           type: 'get',
           data: {
-            type: 2,
+            type: 3,
             cate: this.cate
           }
         }).then(res => {

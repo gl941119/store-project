@@ -42,6 +42,8 @@
 
       <van-button round plain type="default" class="cancelBtn" v-if="good.status== '2'"
                   v-on:click.stop="logisticsHandle(good.goods[0].ordersn)"
+
+
       >
         查看物流
       </van-button>
@@ -102,7 +104,7 @@
       },
       logisticsHandle(ordersn) {//查看物流
         console.log(ordersn)
-        this.$router.push({name: "logistics", params: {ordersn: ordersn}})
+        this.$router.push({name: "logistics", params: {ordersn: ordersn,status:'2'}})
 
       },
       gobaidu() {

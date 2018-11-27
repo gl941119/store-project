@@ -79,10 +79,7 @@
         <div class="indentInfo_title1">发货时间</div>
         <div class="indentInfo_title11">{{send_time}}</div>
       </div>
-      <div class="flex_start indentInfo_pad" v-if="take_time">
-        <div class="indentInfo_title1">收货时间</div>
-        <div class="indentInfo_title11">{{take_time}}</div>
-      </div>
+
     </div>
     <div class="null"></div>
     <div class="footer">
@@ -108,7 +105,7 @@
 
 
       <van-button round plain type="default" class="cancelBtn" v-if="status== '2'"
-
+                  v-on:click.stop="logisticsHandle"
       >
         查看物流
       </van-button>
@@ -179,6 +176,9 @@
       this.request()
     },
     methods: {
+      logisticsHandle(){
+        this.$router.push({name: "logistics", params: {ordersn: this.$route.params.orderid,status:'2'}})
+      },
       payHandle(){//支付
 
         if(window.sessionStorage.getItem('is_member')== '0'){//非會員
@@ -344,7 +344,7 @@
   }
 
   .indentInfo {
-    padding-bottom: 0px;
+    /*padding-bottom: 0px;*/
     background-color: #f4f4f4;
     height: 100%;
 

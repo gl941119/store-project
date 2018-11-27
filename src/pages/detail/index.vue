@@ -67,7 +67,7 @@
       <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
         <com-buy-specification :goods_spec="goods_spec"
                                :num='num'
-                               v-bind:goods="Data"
+                               v-bind:goods.sync="Data"
                                v-bind:buyNum.sync="buyNum"
                                v-bind:alreadybought.sync="alreadybought"
                                v-bind:specs.sync="specs"
@@ -153,7 +153,7 @@
         //   nick: undefined,
         //   score: undefined
         // },
-        discuss:[],//评论
+        discuss: [],//评论
         address: undefined,//收货地址
         goodsData: null,
         SpecificationData: null,

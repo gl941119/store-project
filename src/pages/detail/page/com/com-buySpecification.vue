@@ -3,7 +3,7 @@
     <div class="product">
       <img :src="goods.thumb" alt="" class="product-left">
       <div class="product-right">
-        <span class="my-price">${{goods.marketprice}}</span>
+        <span class="my-price">￥{{goods.marketprice}}</span>
         <span class="my-subPrice">{{goods.productprice}}</span>
         <div class="product-right-content">
           <span class="product-right-content-left">已选</span>
@@ -61,7 +61,7 @@
 <script>
   export default {
     name: "com-buySpecification",
-    props: ['status','goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs','cart_num'],
+    props: ['status', 'goods_spec', 'goods', 'num', 'buyNum', 'alreadybought', 'specs', 'cart_num'],
     data() {
       return {
         id: this.$route.params.id,//商品id
@@ -174,17 +174,33 @@
         let specs = [this.oneSel, this.twoSel, this.threeSel, this.fourSel, this.fiveSel].filter(item => {
           return item
         })
-
         if (specs.length == this.num) {//选择完成传值
-
           if (specs.length === 1) {//后台格式需要
             specs[0] = specs[0] + "_"
           }
-
           this.$emit('update:specs', specs)//商品id
           this.$emit('update:alreadybought', alreadybought)//商品名称
           this.disabled = false;
+          this.priceMessage(specs)
+
         }
+      },
+      priceMessage(specs) {//价格获取
+        this.$request({
+          url: 'app/index.php?i=1&c=entry&eid=85&act=freight',
+          type: "post",
+          isToast: false,
+          data: {
+            specs: specs.join('_'),
+            id: this.$route.params.id
+          }
+        }).then(res => {
+          if (res.code===100){
+            this.goods.marketprice = res.data.marketprice
+            this.goods.productprice = res.data.productprice
+            this.$emit('update:goods',this.goods)//修改父组件价格
+          }
+        })
       },
       change(val) {//数量查询
         if (this.specs.length === 1) {//后台格式需要
@@ -195,7 +211,7 @@
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=optionstock',
           type: 'get',
-          isToast:false,
+          isToast: false,
           data: {
             goodsid: this.id,
             specs: this.specs.join('_'),
