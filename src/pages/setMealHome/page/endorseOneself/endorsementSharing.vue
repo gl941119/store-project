@@ -45,7 +45,7 @@
         let ul=window.location.href;
         let cde=ul.split('code=')[1];
         localStorage.setItem('mealCode',cde);
-
+alert(cde)
 this.$request({
   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
   type:'post',
