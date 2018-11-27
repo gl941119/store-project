@@ -21,7 +21,7 @@
       }
     },
     mounted() {
-      // this.time()
+      this.time()
     },
     methods: {
       goMyIndent() {
@@ -45,7 +45,7 @@
         }
         clearInterval(window.tiem)
       },
-      time(time) {
+      time() {
         let thia = this
         window.tiem = setInterval(function () {
           if (thia.second > 0) {
