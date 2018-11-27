@@ -1,5 +1,5 @@
 <template>
-  <div class="staffCard">
+  <div class="staffCard" v-on:click="goDetailsBeautyDivision">
     <img :src="Data.avatar" alt="">
     <dl>
       <van-button plain type="primary" class="cancelBtn" v-on:click.stop="cancelCollect(Data.id)" v-if="collect">取消收藏</van-button>
@@ -20,6 +20,9 @@
       }
     },
     methods:{
+      goDetailsBeautyDivision(){
+        this.$router.push({name:'DetailsBeautyDivision',params:{id:this.Data.id,sid:'0'}})
+      },
       cancelCollect(id){
         this.$dialog.confirm({
           title: '是否取消收藏',

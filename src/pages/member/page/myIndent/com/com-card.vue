@@ -107,17 +107,17 @@
       //   });
       // },
       payHandle(ordersn) {//支付
-          this.$dialog.confirm({
-            title: '是否支付？',
-          }).then(() => {
-            if (this.allmoney === 0) {//实际扣款为0 跳转页面
-              this.payorder(ordersn)
-            } else {//需要付款
-              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + ordersn
-            }
-          }).catch(() => {
-            // on cancel
-          });
+        this.$dialog.confirm({
+          title: '是否支付？',
+        }).then(() => {
+          if (this.allmoney === 0) {//实际扣款为0 跳转页面
+            this.payorder(ordersn)
+          } else {//需要付款
+            window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + ordersn
+          }
+        }).catch(() => {
+          // on cancel
+        });
       },
       payorder(ordersn) {//支付判定是否会员
         if (window.sessionStorage.getItem('is_member') == '0') {//非会员
@@ -144,7 +144,7 @@
 
       logisticsHandle(ordersn) {//查看物流
         console.log(ordersn)
-        this.$router.push({name: "logistics", params: {ordersn: ordersn,status:'2'}})
+        this.$router.push({name: "logistics", params: {ordersn: ordersn, status: '2'}})
 
       },
       gobaidu() {
@@ -237,6 +237,7 @@
       color: rgba(233, 58, 61, 1);
     }
     &-top {
+      margin-top: 2px;
       display: flex;
       justify-content: space-between;
       /*margin-bottom: 7px;*/

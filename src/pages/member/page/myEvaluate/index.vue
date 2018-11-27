@@ -15,7 +15,6 @@
         </div>
       </div>
 
-
       <div class="main-bottom" v-on:click="goDetail(2,item.sid)">
         <img :src="item.goodslist[0].thumb" alt="">
         <dl>
@@ -27,8 +26,8 @@
         </dl>
       </div>
       <div class="main-bottomExtend">
-        <p class="main-bottomExtend-title">对8号美师评价：</p>
-        <p class="main-bottomExtend-content">服务很热情，技术很熟练，唯一美中不足就是，生意太好啦，每次想约都约不到啊。</p>
+        <p class="main-bottomExtend-title">对{{item.displayorder}}号美师评价：</p>
+        <p class="main-bottomExtend-content">{{item.member_content}}</p>
       </div>
 
 
@@ -185,32 +184,32 @@
           }
         }
       }
-
     }
     &-bottomExtend{
       /*height: 52px;*/
-
+      padding-bottom: 3px;
       width: 100%;
       background-color: #F8F8F8;
       display: flex;
       justify-content: flex-start;
-
       &-title{
-
-        width: 95px;
         margin-top: 12px;
-        margin-left: 7px;
+        white-space: normal;
+        /*width: 95px;*/
+        /*margin-top: 12px;*/
+        /*margin-left: 7px;*/
         font-size:10px;
         color:rgba(102,102,102,1);
 
 
       }
       &-content{
+        margin-top: 12px;
         /*height: 80px;*/
         flex: 1;
-        margin-top: 12px;
-        margin-bottom: 5px;
-        display: inline;
+        /*margin-top: 12px;*/
+        /*margin-bottom: 5px;*/
+        /*display: inline;*/
       }
 
     }

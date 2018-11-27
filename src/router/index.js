@@ -400,6 +400,13 @@ let router = new Router({
       meta: {keepAlive: false},
       component: resolve => require(['../pages/subscribe/page/appoint/DetailsBeautyDivision'], resolve)
     },
+    {//美师主页--美丽印象
+      path: '/subscribe/page/appoint/staffEvaluate/:id',//id 美师id
+      name: 'staffEvaluate',
+      title: '美丽印象',
+      meta: {keepAlive: true},
+      component: resolve => require(['../pages/subscribe/page/appoint/staffEvaluate'], resolve)
+    },
     {//美丽代言说明
       path: '/beautyFund/beautifulEndorsement',
       name: 'beautifulEndorsement',
