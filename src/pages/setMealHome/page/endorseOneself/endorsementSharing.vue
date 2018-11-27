@@ -51,7 +51,7 @@
         let ul=window.location.href;
         let cde=ul.split('code=')[1];
         localStorage.setItem('mealCode',cde);
-        let betUrl=  btoa(encodeURIComponent(ul).replace(/%([0-9A-F]{2})/g,
+        let betUrl=  btoa(encodeURIComponent(ul.split('#')[0]).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
@@ -59,8 +59,7 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
-        alert(ul)
-        alert(r)
+
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
