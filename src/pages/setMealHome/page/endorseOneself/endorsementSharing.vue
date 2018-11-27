@@ -34,6 +34,9 @@
         codes:''
       }
     },
+    created(){
+      window.location.reload();
+    },
     mounted(){
       this.reques();
     },
