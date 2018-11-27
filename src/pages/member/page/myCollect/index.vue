@@ -75,6 +75,11 @@
 </script>
 
 <style class="scss" scoped>
+  .wrap{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+  }
 .notCollect{
   font-size: 18px;
   font-weight: 600;
