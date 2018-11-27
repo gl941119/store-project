@@ -59,7 +59,8 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
-
+alert(r)
+        alert(ul.split('#')[0])
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
