@@ -81,10 +81,12 @@
                       v-model="serviceEvaluate.leaveMessage"></textarea>
           </div>
           <div class="serverEvaluateCom_upImg">
+
             <div class="serverEvaluateCom_upImgs" v-for="item,index in serviceEvaluate.img">
               <img :src="item" class="serverEvaluateCom_upImgs">
-              <van-icon name="clear" class="upImgClose" @click="upImgClose(item,index)"/>
+              <van-icon name="clear" class="upImgClose" v-on:click.stop="upImgClose(item,index)"/>
             </div>
+
             <div class="serverEvaluateCom_upImgBtn" @click="upLoadImg">
               <div>
                 <div><img src="../../assets/image/appraise.png"/></div>
@@ -127,8 +129,8 @@
   export default {
     name: "com-serverEvaluate",
 
-    beforeRouteLeave (to, from, next) {
-      window.long = setInterval(()=> {//长轮询
+    beforeRouteLeave(to, from, next) {
+      window.long = setInterval(() => {//长轮询
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=87&act=discuss',
           type: 'post',
@@ -160,7 +162,8 @@
         showJinDu: false,
         textJinDu: '',
         serverArr: [],
-        serverId: []
+        serverId: [],
+        submit_imgs: [],//上传所用imgs
       }
     },
     mounted() {
@@ -192,7 +195,6 @@
       submit() {
 
 
-
         console.log(this.serverId)
         this.$dialog.confirm({
           title: '是否提交评论',
@@ -205,7 +207,7 @@
               orderid: this.$route.params.orderid,
               content: this.serviceEvaluate.leaveMessage, //项目评价内容
               member_content: this.leaveMessage,  //美师评价内容
-              imgs: JSON.stringify(this.serviceEvaluate.img),
+              imgs: JSON.stringify(this.submit_imgs),
               score: this.serviceEvaluate.rate,//项目评分
               tip: this.serviceEvaluate.anonymity === true ? '1' : '0',//是否匿名
               evals: JSON.stringify(this.evals),//美师热评
@@ -235,11 +237,11 @@
       },
       upImgClose(val, k) {//删除图片
         this.serviceEvaluate.img.splice(k, 1)
+        this.submit_imgs.splice(k, 1)
       },
       circleEvent() {
         this.showJinDu = false;
       },
-
       getLocalImgData(id, thisa) {
         let uk = thisa.$store.state.uk || sessionStorage.getItem('uk');
         let urlR = thisa.$upUrl + 'app/index.php?' + thisa.$i + '&c=entry&eid=' + thisa.$eid.eid + '&dom=' + thisa.$eid.dom + '&act=fileupload&uk=' + uk;
@@ -268,8 +270,12 @@
               },
             }).then(res => {
               if (res.data.code === 100) {
+                alert(thisa.serviceEvaluate.avatar)
+                alert(res.data.data.avatar)
                 thisa.showJinDu = false;
-                thisa.serviceEvaluate.img.push(res.data.data.imgs)
+                thisa.serviceEvaluate.img.push(res.data.data.avatar)
+                thisa.submit_imgs.push(res.data.data.imgs)
+
                 // this.arrUpImg=res.data.data.imgs
                 // res.data.data.imgs
               } else {
@@ -516,14 +522,21 @@
     align-items: center;
     justify-content: flex-start;
     flex-flow: wrap;
+
   }
 
   .serverEvaluateCom_upImgs {
-    width: 80px;
-    height: 80px;
-    position: relative;
-    margin-right: 25px;
-    margin-bottom: 15px;
+    border: 1px solid red;
+    width: 78px;
+    height: 78px;
+    /*position: relative;*/
+    margin-right: 20px;
+    margin-bottom: 10px;
+    >img{
+      width: 78px;
+      height: 78px;
+    }
+
   }
 
   .serverEvaluateCom_upImgBtn {
@@ -534,6 +547,8 @@
     justify-content: center;
     border: 1px #979797 dashed;
     text-align: center;
+    margin-right: 20px;
+    margin-bottom: 8px;
   }
 
   .serverEvaluateCom_upAddImg {
@@ -592,8 +607,8 @@
 
   .upImgClose {
     position: absolute;
-    top: -15px;
-    right: -15px;
+    top: -10px;
+    right: -11px;
     font-size: 20px;
   }
 </style>
