@@ -7,9 +7,6 @@ import {Toast} from 'vant';
 // import config from './config';
 
 
-
-
-
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://192.168.3.23:80' : Cache.getConfig().domain
 axios.defaults.withCredentials = true;
 
@@ -32,11 +29,11 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=89', 'eid=175&dom=card');
     url = url.replace('eid=90', 'eid=175&dom=meal');
   } else {
-    let config =  Cache.getConfig()
+    let config = Cache.getConfig()
     let key = config.binds;
     url = url.replace('i=1', 'i=' + config.uid);
-    for(let item in key){
-      url = url.replace('eid=' + key[item].id, 'eid=' + key[item].eid+'&dom='+key[item].dom);
+    for (let item in key) {
+      url = url.replace('eid=' + key[item].id, 'eid=' + key[item].eid + '&dom=' + key[item].dom);
     }
   }
 

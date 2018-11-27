@@ -10,7 +10,6 @@
       </div>
 
       <div class="serverEvaluateCom_box">
-
         <div class="serverEvaluateCom_cTop">
           <div class="serverEvaluateCom_cSolid">
             <div class="serverEvaluateCom_cTopL">
@@ -81,7 +80,6 @@
                       v-model="serviceEvaluate.leaveMessage"></textarea>
           </div>
           <div class="serverEvaluateCom_upImg">
-
             <div class="serverEvaluateCom_upImgs" v-for="item,index in serviceEvaluate.img">
               <img :src="item" class="serverEvaluateCom_upImgs" v-on:click.stop="show_imgs(item,index)">
               <van-icon name="clear" class="upImgClose" v-on:click.stop="upImgClose(item,index)"/>
@@ -125,7 +123,7 @@
 <script>
   import wxHandle from '../../utils/wx'
   import axios from 'axios'
-  import { ImagePreview } from 'vant';
+  import {ImagePreview} from 'vant';
 
   export default {
     name: "com-serverEvaluate",
@@ -236,7 +234,7 @@
       serverTab(i, text) {//服务选项
 
       },
-      show_imgs(val,k){//显示图片
+      show_imgs(val, k) {//显示图片
 
         ImagePreview({
           images: this.serviceEvaluate.img,
@@ -544,7 +542,7 @@
     position: relative;
     margin-right: 20px;
     margin-bottom: 10px;
-    >img{
+    > img {
       width: 78px;
       height: 78px;
     }
@@ -619,8 +617,8 @@
 
   .upImgClose {
     position: absolute;
-    top: -10px;
-    right: -11px;
+    top: -12px;
+    right: -12px;
     font-size: 20px;
   }
 </style>

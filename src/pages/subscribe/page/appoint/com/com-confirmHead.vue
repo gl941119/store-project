@@ -13,7 +13,7 @@
     <div class="fill"></div>
     <div class="name">
       <span v-if="inputStatus">预约姓名:&nbsp;&nbsp;
-      <input type="text" v-model="val" class="input" placeholder="请务必留真实姓名">
+      <input type="text" v-model="val" class="input" placeholder="请留真实姓名方便联系">
       </span>
       <span v-else>预约姓名:&nbsp;&nbsp;{{user.name}}</span>
       <!--<input type="text" class="ml5" v-model="name">-->
