@@ -38,7 +38,7 @@
 
 
     <div class="remove" v-if="id != 0" v-on:click="deleteSubmit">
-      <p>删除收获地址</p>
+      <p>删除收货地址</p>
     </div>
     <div class="addBtn" v-if="id == 0">
       <van-button type="primary" v-on:click="addSubmit">确定</van-button>

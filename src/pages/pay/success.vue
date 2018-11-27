@@ -52,6 +52,7 @@
             thia.second -= 1
           } else {
             this.goIndex()
+
           }
         }, 1000)
       }

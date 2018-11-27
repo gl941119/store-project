@@ -72,6 +72,7 @@
       this.$store.commit('setSub_hover', 1)
     },
     mounted() {
+      console.log(1232)
       this.handle()
       document.title = this.name
     },
@@ -87,6 +88,9 @@
         this.handle()
       },
       handle() {
+        console.log('handle')
+
+
         if (this.type === '1') {//服务
           this.reqServer()
         } else if (this.type === '2') {//商品

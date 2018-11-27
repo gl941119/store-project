@@ -1,5 +1,5 @@
 <template>
-  <ul class="selectBar">
+  <ul class="selectBar" :class="{is_fixed:is_fixed}">
     <li @click="clickHandle('1')" v-bind:class="{li_hover: hover=== '1' }">综合</li>
     <li @click="clickHandle('2')" v-bind:class="{li_hover: hover=== '2' }">销量</li>
     <li @click="clickHandle('3')" v-bind:class="{li_hover: hover=== '3' }">价格</li>
@@ -9,6 +9,11 @@
 <script>
   export default {
     name: "selectBar",
+    props:{
+      is_fixed:{
+        default:true
+      }
+    },
     data(){
       return{
         hover:'1'
@@ -24,12 +29,15 @@
 </script>
 
 <style lang="scss" scoped>
-  .selectBar {
-    width: 100%;
-    background-color: white;
+  .is_fixed{
     position: fixed;
     top: 0;
     z-index: 100;
+  }
+  .selectBar {
+    width: 100%;
+    background-color: white;
+
     padding: 0 7px;
     /*border-top: 1px solid #D8D8D8;*/
     border-bottom: 1px solid #D8D8D8;

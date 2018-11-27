@@ -5,7 +5,8 @@
       <div class="search-input">
         <van-icon name="search" class="icon"/>
         <input type="text" v-model="value" placeholder="请输入关键字" class="input">
-        <img :class="{show_close:show_close}"  v-on:click="closeHandle" src="../../assets/image/cancle.png" alt="" class="close">
+        <img :class="{show_close:show_close}" v-on:click="closeHandle" src="../../assets/image/cancle.png" alt=""
+             class="close">
       </div>
       <van-button type="primary" class="search-btn" @click="request()">搜索</van-button>
     </div>
@@ -20,8 +21,8 @@
       </div>
     </div>
     <div class="result" v-if="showSearch == 1">
-      <select-bar @emitSort="request()"></select-bar>
-      <product-card v-for="item in searchResult" :key="item.id" :Data="item"></product-card>
+      <select-bar @emitSort="request" :is_fixed="false"></select-bar>
+      <product-card v-for="item,index in searchResult" :key="index" :Data="item"></product-card>
     </div>
     <div class="notResult" v-if="showSearch == 2">
       <img src="../../assets/image/search.png" alt="" class="notResult-img">
@@ -45,7 +46,7 @@
         showSearch: 0, //0 1 2
         searchResult: null,
         history: JSON.parse(window.localStorage.getItem('searchHistory')),//历史地址
-        show_close:false
+        show_close: false
       }
     },
     watch: {
@@ -53,9 +54,9 @@
         if (val.length === 0) {
           this.showSearch = 0
         }
-        if(!!val){//显示关闭
+        if (!!val) {//显示关闭
           this.show_close = true
-        }else{
+        } else {
           this.show_close = false
         }
 
@@ -65,7 +66,7 @@
 
     },
     methods: {
-      closeHandle(){
+      closeHandle() {
         this.value = ''
       },
       request(val = null) {//搜索
@@ -173,10 +174,9 @@
         height: 12px;
         margin-right: 7px;
       }
-      .show_close{
+      .show_close {
         display: block;
       }
-
 
     }
     &-btn {
@@ -225,31 +225,32 @@
         color: rgba(102, 102, 102, 1);
         text-align: center;
         line-height: 30px;
-        font-family:PingFangSC-Regular;
+        font-family: PingFangSC-Regular;
 
       }
 
     }
 
   }
-  .notResult{
+
+  .notResult {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    >P{
+    > P {
       margin-top: 75px;
-      width:150px;
-      height:21px;
-      font-size:15px;
-      font-family:PingFangSC-Regular;
+      width: 150px;
+      height: 21px;
+      font-size: 15px;
+      font-family: PingFangSC-Regular;
 
-      color:rgba(167,167,167,1);
-      line-height:21px;
+      color: rgba(167, 167, 167, 1);
+      line-height: 21px;
     }
-    &-img{
+    &-img {
       margin-top: 90px;
       width: 124px;
       height: 132px;

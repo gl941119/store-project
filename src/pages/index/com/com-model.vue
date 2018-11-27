@@ -32,7 +32,7 @@
     methods: {
       doThat() {//查看更多
         if(this.data.name === '热门'){
-          this.$router.push({path: '/subscribe/2'})
+          this.$router.push({path: '/subscribe/2/3'})
         }else{//推荐
           this.$router.push({name:'classify'})
         }
