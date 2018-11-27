@@ -45,6 +45,7 @@
         let ul=window.location.href;
         let cde=ul.split('code=')[1];
         localStorage.setItem('mealCode',cde);
+
 this.$request({
   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
   type:'post',
@@ -57,6 +58,8 @@ this.$request({
     let scgc=d.article['a_4'];
     this.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
   }
+}).catch(res=>{
+
 });
   }
     }
