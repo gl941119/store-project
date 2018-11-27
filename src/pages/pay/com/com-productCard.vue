@@ -8,7 +8,7 @@
           <span>{{item.title}}</span>
         </div>
         <p class="content-right-middle">
-          {{item.description}}
+          {{item.description.length >40 ?  item.description.slice(0,40)+'...':item.description}}
         </p>
         <div class="content-right-bottom">
           <span class="my-price">¥{{item.marketprice}}</span>
@@ -41,16 +41,13 @@
       saveGoodsid(id, item) {//暂存商品id
         console.log(id, item)
         this.goodsid = id
-
       },
       cheng(val) {  //修改订单数量
-
         let goods  = [{
           id: this.item.id,
           optionid: this.item.optionid,
           num: val
         }]
-
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=updateorder',
           type: 'post',
@@ -63,7 +60,6 @@
           if (res.code === 100) {
             this.$emit('refrech')
           }
-
         })
 
 

@@ -24,7 +24,7 @@
       <!--<span class="card-bottom-connection" v-on:click.stop="gobaidu">联系卖家</span>-->
       <van-button round plain type="default" class="confirmBtn"
                   v-if="good.status== '0'"
-                  v-on:click.stop="goindentConfirme(good.goods[0].ordersn)"
+                  v-on:click.stop="payHandle(good.goods[0].ordersn)"
       >
         去付款
       </van-button>
@@ -92,16 +92,56 @@
       }
     },
     methods: {
-      goindentConfirme(ordersn) {
-        this.$dialog.confirm({
-          title: '是否跳转付款页面？',
-        }).then(() => {
-          window.sessionStorage.setItem('ordersn', ordersn)
-          this.$router.push({name: 'indentConfirme'})
-        }).catch(() => {
-          // on cancel
-        });
+      // goindentConfirme(ordersn) {
+      //   this.$dialog.confirm({
+      //     title: '是否跳转付款页面？',
+      //   }).then(() => {
+      //     window.sessionStorage.setItem('ordersn', ordersn)
+      //     this.$router.push({name: 'indentConfirme'})
+      //
+      //
+      //
+      //
+      //   }).catch(() => {
+      //     // on cancel
+      //   });
+      // },
+      payHandle(ordersn) {//支付
+          this.$dialog.confirm({
+            title: '是否支付？',
+          }).then(() => {
+            if (this.allmoney === 0) {//实际扣款为0 跳转页面
+              this.payorder(ordersn)
+            } else {//需要付款
+              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + ordersn
+            }
+          }).catch(() => {
+            // on cancel
+          });
       },
+      payorder(ordersn) {//支付判定是否会员
+        if (window.sessionStorage.getItem('is_member') == '0') {//非会员
+          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + ordersn
+        } else {//会员
+          this.$request({
+            url: 'app/index.php?i=1&c=entry&eid=85&act=payorder',
+            type: 'post',
+            data: {
+              ordersn: ordersn
+            }
+          }).then(res => {
+            if (res.code === 100) {
+              this.$toast.success('支付成功');
+              let thia = this;
+              setTimeout(function () {
+                thia.$router.push({name: 'success', params: {orderid: ordersn, type: '1'}})
+              }, 500)
+            }
+          })
+        }
+
+      },
+
       logisticsHandle(ordersn) {//查看物流
         console.log(ordersn)
         this.$router.push({name: "logistics", params: {ordersn: ordersn,status:'2'}})

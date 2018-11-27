@@ -202,6 +202,7 @@
         })
       },
       submitHandle() {//提交订单
+
         this.$request({
           url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
           type: 'post',
@@ -232,8 +233,6 @@
         }).then(res => {
           if (res.code === 100) {
             this.$toast.success('提交成功')
-            let thia = this
-
             this.$router.push({name: 'success', params: {orderid: this.ordersn, type: '1'}})
 
           }
