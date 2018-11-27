@@ -22,7 +22,7 @@
               {{item.title}}
             </div>
             <div class="InsComm_listRightTop">
-              {{item.description}}
+              {{item.description.length >40 ? item.description.slice(0,40)+'...':item.description}}
             </div>
           </div>
           <div class="space_between">
@@ -176,31 +176,36 @@
       this.request()
     },
     methods: {
-      logisticsHandle(){
-        this.$router.push({name: "logistics", params: {ordersn: this.$route.params.orderid,status:'2'}})
+      logisticsHandle() {//查看物流
+        this.$router.push({name: "logistics", params: {ordersn: this.ordersn, status: '2'}})
       },
-      payHandle(){//支付
-
-        if(window.sessionStorage.getItem('is_member')== '0'){//非會員
-          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
-        }else{//會員
+      payHandle() {//支付
+        if (this.allmoney === 0) {//实际扣款为0 跳转页面
+          this.payorder()
+        } else {//需要付款
+          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + this.ordersn
+        }
+      },
+      payorder() {//支付判定是否会员
+        if (window.sessionStorage.getItem('is_member') == '0') {//非会员
+          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + this.ordersn
+        } else {//会员
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=85&act=payorder',
             type: 'post',
             data: {
-              orderid: this.$route.params.orderid
+              ordersn: this.ordersn
             }
           }).then(res => {
             if (res.code === 100) {
               this.$toast.success('提交成功');
               let thia = this;
               setTimeout(function () {
-                thia.$router.push({name: 'success',params:{orderid:this.ordersn,type:'1'}})
+                thia.$router.push({name: 'success', params: {orderid: this.ordersn, type: '1'}})
               }, 500)
             }
           })
         }
-
 
       },
       goAppraise(id) {//跳转评价
