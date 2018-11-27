@@ -21,7 +21,7 @@
         <video class="upload-img" :src="val.avatar" v-for="val,num in item.videos"
                @click="videoClick($event,val.avatar)" :key="num"></video>
         <div class="uploadmgIPre" v-for="val,num in item.imgs" :key="num">
-          <van-icon name="close" class="innerPhotoItemClose" @click="innerPhotoItemClose(index,num)"/>
+          <van-icon name="close" class="innerPhotoItemClose" v-on:click.stop="innerPhotoItemClose(index,num)"/>
           <img class="upload-img" :src="val.avatar" alt="" v-on:click="showImage(index,num)">
         </div>
         <div class="upload-img dashed">
@@ -98,7 +98,18 @@
         this.show = false;
       },
       showImage(index, num){
+
+
         let arr = this.arr[index].imgs
+
+        let new_arr = []
+        arr.forEach(item=>{
+          new_arr.push(item.avatar)
+        })
+        alert(arr)
+        alert(this.arr[this.index].imgs)
+        alert(index,num)
+
         ImagePreview({
           images: arr,
           startPosition: num,
@@ -485,8 +496,8 @@
 
   .innerPhotoItemClose {
     position: absolute;
-    top: -17px;
-    right: -17px;
+    top: -15px;
+    right: -15px;
     background-color: #000;
     color: #fff;
     font-size: 20px;

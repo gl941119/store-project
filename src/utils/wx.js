@@ -2,27 +2,28 @@ import wx from 'weixin-js-sdk'
 import request from './request'
 import Vue from 'vue'
 import axios from 'axios';
+
 function wxHandle(title, callback) {
   let config = {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   };
-let ul=window.location.href;
+  let ul = window.location.href;
 
 // let cUrl=ul.replace('?from=groupmessage&isappinstalled=0','');
-  let curUrl=ul.split('#')[0];
- let betUrl=  btoa(encodeURIComponent(curUrl).replace(/%([0-9A-F]{2})/g,
+  let curUrl = ul.split('#')[0];
+  let betUrl = btoa(encodeURIComponent(curUrl).replace(/%([0-9A-F]{2})/g,
     function toSolidBytes(match, p1) {
       return String.fromCharCode('0x' + p1);
     }));
 
-  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid.eid + '&dom='+Vue.prototype.$eid.dom+'&act=weixinscan&url=' + betUrl+'&weburl='+ul;
+  let r = Vue.prototype.$upUrl + 'app/index.php?' + Vue.prototype.$i + '&c=entry&eid=' + Vue.prototype.$eid.eid + '&dom=' + Vue.prototype.$eid.dom + '&act=weixinscan&url=' + betUrl + '&weburl=' + ul;
 
   axios.post(r, null, config)
     .then((res) => {
       if (res.data.status) {
         var d = res.data.data.config;
         wx.config({
-          debug: false, // 开启调试模式,
+          debug: true, // 开启调试模式,
           appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
           timestamp: d.timestamp, // 必填，生成签名的时间戳
           nonceStr: d.nonceStr, // 必填，生成签名的随机串
