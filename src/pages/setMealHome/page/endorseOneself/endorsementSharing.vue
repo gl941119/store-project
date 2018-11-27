@@ -73,7 +73,7 @@
               });
               wx.ready(function () {
                 alert(cde)
-                this.$request({
+                self.$request({
                   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
                   type:'post',
                   data:{
