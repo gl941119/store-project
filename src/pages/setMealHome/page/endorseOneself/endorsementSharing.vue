@@ -28,6 +28,7 @@
     name: "index",
     data(){
       return {
+        cde:this.$route.params.cde,
         webshare:{},
         codes:''
       }
@@ -43,23 +44,44 @@
         this.$router.push({name:str})
       },
       initRequest(){
-        let ul=window.location.href;
-        let cde=ul.split('code=')[1];
-        this.$request({
-          url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
-          type:'post',
-          data:{
-            code:cde
-          }
-        }).then(resMsg=>{
-          if(resMsg.status){
-            let d=resMsg.data;
-            let scgc=d.article['a_4'];
-            self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
-          }
-        }).catch(res=>{
+        let self=this;
+        let cde=this.cde;
+        let config = {
+          headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
+        };
+        localStorage.setItem('mealCode',cde);
+        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
 
+        var params = new URLSearchParams();
+        params.append('code', cde);
+        alert(r)
+        alert(cde)
+        axios.post(r, params, config)
+          .then((res) => {
+            if (res.data.status) {
+                  let d=res.data;
+                  let scgc=d.article['a_4'];
+                  self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
+            }
+          }).catch((res) => {
+          var ss = res + 'catch请求失败';
+          alert(ss)
         });
+        // this.$request({
+        //   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
+        //   type:'post',
+        //   data:{
+        //     code:cde
+        //   }
+        // }).then(resMsg=>{
+        //   if(resMsg.status){
+        //     let d=resMsg.data;
+        //     let scgc=d.article['a_4'];
+        //     self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
+        //   }
+        // }).catch(res=>{
+        //
+        // });
       },
       reques(){
         let self=this;

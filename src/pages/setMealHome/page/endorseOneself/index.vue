@@ -76,9 +76,6 @@
       sherEv(){
         this.popShow=true;
       },
-      beautifulEndorsementSub(){
-        this.$router.push({name:'endorseOneself'});
-      },
       shareEv(){
         let u=this.webshare.back;
         let pU=this.urlParam;
@@ -86,16 +83,17 @@
         let description=this.webshare.share_text;
         let title=this.webshare.share_title;
         let url=window.location.href.split('#');
-        let rep=url[1].replace('endorseOneself','endorseOneself/endorsementSharing');
-        let curUrl=url[0]+'#'+rep+'?'+pU+'&code='+code;
-        let betUrl=  btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
+        let rep=url[1].replace('endorseOneself','endorseOneself/transferPage');
+        let curUrl=url[0]+'#'+rep+'?'+pU+'?&code='+code;
+        let baseUrl= btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
         let config = {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         };
-        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
+        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + baseUrl;
+
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
