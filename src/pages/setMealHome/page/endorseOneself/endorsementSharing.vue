@@ -28,8 +28,6 @@
     name: "index",
     data(){
       return {
-code:this.$route.params.cde,
-        eid:this.$route.params.eid,
         webshare:{},
         codes:''
       }
@@ -38,7 +36,8 @@ code:this.$route.params.cde,
 
     },
     mounted(){
-      setTimeout(()=>{this.initRequest();},500);
+      // setTimeout(()=>{this.initRequest();},500);
+      this.initRequest();
     },
     methods:{
       linkHome(str){
@@ -46,44 +45,43 @@ code:this.$route.params.cde,
       },
       initRequest(){
         let self=this;
-        // let cde=localStorage.getItem('mealCode');
-        // let cde=localStorage.getItem('mealCode');
-        let config = {
-          headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
-        };
-        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
-
-        var params = new URLSearchParams();
-        params.append('code', this.code);
-alert(this.code)
-        alert(this.eid)
-        axios.post(r, params, config)
-          .then((res) => {
-            if (res.data.status) {
-                  let d=res.data.data;
-                  let scgc=d.article['a_4'];
-                  self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
-
-            }
-          }).catch((res) => {
-          var ss = res + 'catch请求失败';
-          alert(ss)
-        });
-        // this.$request({
-        //   url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
-        //   type:'post',
-        //   data:{
-        //     code:cde
-        //   }
-        // }).then(resMsg=>{
-        //   if(resMsg.status){
-        //     let d=resMsg.data;
-        //     let scgc=d.article['a_4'];
-        //     self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:cde};
-        //   }
-        // }).catch(res=>{
+        let url=window.location.href;
+        let code=url.split('&code=')[1];
+        alert(code)
+        // // let cde=localStorage.getItem('mealCode');
+        // let config = {
+        //   headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
+        // };
+        // let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
+        // var params = new URLSearchParams();
+        // params.append('code', this.code);
+        // axios.post(r, params, config)
+        //   .then((res) => {
+        //     if (res.data.status) {
+        //           let d=res.data.data;
+        //           let scgc=d.article['a_4'];
+        //           self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:this.code};
         //
+        //     }
+        //   }).catch((res) => {
+        //   var ss = res + 'catch请求失败';
+        //   alert(ss)
         // });
+        this.$request({
+          url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
+          type:'post',
+          data:{
+            code:code
+          }
+        }).then(resMsg=>{
+          if(resMsg.data.status){
+            let d=resMsg.data;
+            let scgc=d.article['a_4'];
+            self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:code};
+          }
+        }).catch(res=>{
+
+        });
       },
       reques(){
         let self=this;

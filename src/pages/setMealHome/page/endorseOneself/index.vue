@@ -61,6 +61,8 @@
         webshare:{},
         urlParam:'',
         popShow:false,
+        uk:'',
+        is_member:''
       }
     },
     created(){
@@ -80,20 +82,20 @@
         let u=this.webshare.back;
         let pU=this.urlParam;
         let code=this.code;
+        let links=this.webshare.link+'&code='+code;
         let description=this.webshare.share_text;
         let title=this.webshare.share_title;
         let url=window.location.href.split('#');
         let rep=url[1].replace('endorseOneself','endorseOneself/transferPage');
-        let curUrl=url[0]+'#'+rep+'?code='+code+'&eid=405';
+        let curUrl=url[0]+'#'+rep+'?'+pU+'&code='+code+'&uk='+this.uk+'&is_member='+this.is_member;
         let baseUrl= btoa(encodeURIComponent(url[0]).replace(/%([0-9A-F]{2})/g,
           function toSolidBytes(match, p1) {
             return String.fromCharCode('0x' + p1);
           }));
         let config = {
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods':'POST, GET, OPTIONS'}
         };
         let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + baseUrl;
-
         axios.post(r, null, config)
           .then((res) => {
             if (res.data.status) {
@@ -110,7 +112,7 @@
                 wx.onMenuShareAppMessage({
                   title: title, // 分享标题
                   desc: description, // 分享描述
-                  link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  link: links, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: u, // 分享图标
                   type: '', // 分享类型,music、video或link，不填默认为link
                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -121,7 +123,7 @@
                 wx.updateAppMessageShareData({
                   title: title, // 分享标题
                   desc: description, // 分享描述
-                  link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  link: links, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: u, // 分享图标
                   success: function () {
                     // 设置成功
