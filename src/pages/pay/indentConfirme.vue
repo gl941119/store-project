@@ -35,7 +35,8 @@
                    v-for="address,index in addressList"
                    :key="index"
                    :address="address"
-                   v-on:click.native="confirmeAddress(index)"></com-address>
+                   :data-index="index"
+                   v-on:click.native="confirmeAddress($event,index)"></com-address>
     </van-popup>
     <!--主体-->
     <div class="main">
@@ -176,7 +177,8 @@
       selectAddress() {//选择地址
         this.show_address = true
       },
-      confirmeAddress(index) {//弹窗确认地址
+      confirmeAddress(e,index) {//弹窗确认地址
+        alert(0)
         this.show_address = false
         this.address = this.addressList[index]
       },

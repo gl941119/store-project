@@ -32,7 +32,7 @@
             <img :src="bImg">
             <div class="member_bannerImg-box">
               <div>已购：{{taoNum}}份套餐</div>
-              <div><span @click="()=>{this.$router.push({name:'packageDetails'})}">查看详情</span></div>
+              <div><span @click="()=>{this.$router.push({name:'MembershipCardList'})}">查看详情</span></div>
             </div>
 
           </div>
