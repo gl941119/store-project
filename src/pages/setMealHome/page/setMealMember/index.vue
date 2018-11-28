@@ -63,7 +63,8 @@
     <van-popup class="showDiv" v-model="showDiv">
       <div>
         <div class="member_popup"><img src="../../../../assets/image/pop_01.jpg"></div>
-        <div class="member_popupCont" v-html="cont">
+        <div class="member_popupCont">
+          <div class="member_popupCont_height" v-html="cont"></div>
         </div>
         <div class="member_popupBtnBox">
           <div class="member_popupBtn" @click="tab('setMealHome')">成为会员</div>
@@ -292,5 +293,8 @@ width: 45px;
     align-items: center;
     justify-content: center;
     padding: 27px 0 21px 0;
+  }
+  .member_popupCont_height{
+    min-height: 90px;
   }
 </style>
