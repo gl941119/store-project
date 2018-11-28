@@ -114,7 +114,7 @@
         //   realname: undefined,
         // },
         ordersn: window.sessionStorage.getItem('ordersn'),
-        address: null,
+        address: '',
         addressList: [],
         store: null,
         storeList: [],

@@ -3,7 +3,7 @@
 <div class="MembershipCardList_p">
       <div class="MembershipCardList_list" v-for="item in dList" @click="onClick(item.mealid)">
         <img :src="item.banner">
-        <!--<div class="MembershipCardList_n">{{item.name}}</div>-->
+        <div class="MembershipCardList_n">{{item.name}}</div>
       </div>
 </div>
 </div>
@@ -59,7 +59,7 @@ this.dList=res.data.meallist;
 }
   .MembershipCardList_n{
     margin-top: 28px;
-    top:28px;
+    top:50px;
     left: 50%;
     height: 27px;
     line-height: 27px;
