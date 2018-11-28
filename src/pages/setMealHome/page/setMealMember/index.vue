@@ -39,7 +39,7 @@
           </div>
           <div class="member_item" @click="tab('myTeam')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
-            <div class="member_listName">我的团队</div>
+            <div class="member_listName">美丽分享</div>
           </div>
           <div class="member_item" @click="tab('IntegralRanking')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_4.png"/></div>
@@ -53,7 +53,7 @@
           </div>
           <div class="member_item" @click="tab('endorseOneself')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
-            <div class="member_listName">发展代言人</div>
+            <div class="member_listName">美丽代言码</div>
           </div>
           <div class="member_item"></div>
           <div class="member_item"></div>

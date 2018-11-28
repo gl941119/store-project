@@ -32,7 +32,7 @@
             <img :src="bImg">
             <div class="member_bannerImg-box">
               <div>已购：{{taoNum}}份套餐</div>
-              <div><span @click="()=>{this.$router.push({name:'MembershipCardList'})}">查看详情</span></div>
+              <div><span @click="()=>{this.$router.push({name:'MembershipCardList'})}">我的卡包</span></div>
             </div>
 
           </div>
@@ -49,7 +49,7 @@
           </div>
           <div class="member_item" @click="tab('myTeam')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
-            <div class="member_listName">我的团队</div>
+            <div class="member_listName">美丽分享</div>
           </div>
           <div class="member_item"@click="tab('IntegralRanking')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_4.png"/></div>
@@ -63,7 +63,7 @@
           </div>
           <div class="member_item" @click="tab('endorseOneself')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_1.png"/></div>
-            <div class="member_listName">发展代言人</div>
+            <div class="member_listName">美丽代言码</div>
           </div>
           <div class="member_item"></div>
           <div class="member_item"></div>
@@ -260,7 +260,6 @@ this.$request({
     position: relative;
     text-align: center;
     display: flex;
-    align-items: center;
     justify-content: flex-end;
     img{
       position: absolute;
@@ -273,14 +272,15 @@ this.$request({
     position: relative;
     z-index: 10;
     font-size:14px;
+    text-align: right;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(255,255,255,1);
     div:nth-child(1){
-      padding: 15px 30px 0 0;
+      padding: 15px 30px 31px 0;
     }
     div:nth-child(2){
-      padding: 31px 30px 0 0;
+      padding: 0px 30px 0 0;
     }
   }
   .member_bannerSwip{

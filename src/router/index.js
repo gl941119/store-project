@@ -673,7 +673,7 @@ let router = new Router({
     {//会员列表
       path: '/setMealHome/page/MembershipCardList',
       name: 'MembershipCardList',
-      title: '会员列表',
+      title: '会员卡列表',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/MembershipCardList'], resolve)
     }
