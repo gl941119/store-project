@@ -24,7 +24,7 @@
     </div>
 
     <!--提示-->
-    <com-tip></com-tip>
+    <com-tip :Data="service.notice"></com-tip>
 
     <!--<div class="memberBtn" v-if="Is_member==='1'">-->
     <!--<van-button type="primary" class="memberBtn-confirm" v-on:click="memberConfirmHandel">预约</van-button>-->
@@ -78,7 +78,8 @@
           "description": undefined,
           "price": undefined,
           "stype": undefined,
-          thumb: undefined
+          thumb: undefined,
+          notice:'',
         },
         tel: undefined,
         nike: undefined,
