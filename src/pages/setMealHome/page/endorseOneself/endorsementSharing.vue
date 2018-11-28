@@ -22,8 +22,7 @@
 </template>
 
 <script>
-  import wx from 'weixin-js-sdk'
-  import axios from 'axios';
+  import {Toast} from 'vant';
   export default {
     name: "index",
     data(){
@@ -36,8 +35,12 @@
 
     },
     mounted(){
-      // setTimeout(()=>{this.initRequest();},500);
-      this.initRequest();
+      Toast.loading({
+        duration: 0,
+        mask: true,
+        message: '加载中...'
+      });
+      setTimeout(()=>{this.initRequest();},500);
     },
     methods:{
       linkHome(str){
@@ -47,26 +50,8 @@
         let self=this;
         let url=window.location.href;
         let code=url.split('&code=')[1];
-        alert(code)
-        // // let cde=localStorage.getItem('mealCode');
-        // let config = {
-        //   headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
-        // };
-        // let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=invitationuser';
-        // var params = new URLSearchParams();
-        // params.append('code', this.code);
-        // axios.post(r, params, config)
-        //   .then((res) => {
-        //     if (res.data.status) {
-        //           let d=res.data.data;
-        //           let scgc=d.article['a_4'];
-        //           self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:this.code};
-        //
-        //     }
-        //   }).catch((res) => {
-        //   var ss = res + 'catch请求失败';
-        //   alert(ss)
-        // });
+        localStorage.setItem('mealCode',code);
+
         this.$request({
           url:'app/index.php?i=1&c=entry&eid=87&act=invitationuser',
           type:'post',
@@ -74,77 +59,16 @@
             code:code
           }
         }).then(resMsg=>{
-          if(resMsg.data.status){
+          if(resMsg.status){
             let d=resMsg.data;
             let scgc=d.article['a_4'];
             self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:code};
+            Toast.clear();
           }
         }).catch(res=>{
 
         });
-      },
-      reques(){
-        let self=this;
-        let ul=window.location.href;
-        let cde=ul.split('code=')[1];
-        localStorage.setItem('mealCode',cde);
-        let isNav;
-
-        var u = navigator.userAgent;
-
-        if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1){ //android终端
-          let isUrl=ul.split('#')[0];
-          let a='android终端'+isUrl;
-          alert(a)
-          isNav=isUrl.replace('from=groupmessage','from=groupmessage&isappinstalled=0');
-        }else if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){ //ios终端
-          isNav=ul.split('#')[0];
-          let a='ios终端'+isNav;
-          alert(a)
-        }else{
-          let a='pc'+ul;
-          alert(a)
-          isNav=ul;
-        }
-        let betUrl=  btoa(encodeURIComponent(isNav).replace(/%([0-9A-F]{2})/g,
-          function toSolidBytes(match, p1) {
-            return String.fromCharCode('0x' + p1);
-          }));
-        let config = {
-          headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH'}
-        };
-        let r = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid.eid + '&dom='+this.$eid.dom+'&act=weixinscan&url=' + betUrl;
-        alert(isNav)
-        axios.post(r, null, config)
-          .then((res) => {
-            if (res.data.status) {
-              var d = res.data.data.config;
-              wx.config({
-                debug: false, // 开启调试模式,
-                appId: d.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
-                timestamp: d.timestamp, // 必填，生成签名的时间戳
-                nonceStr: d.nonceStr, // 必填，生成签名的随机串
-                signature: d.signature,// 必填，签名，见附录1
-                jsApiList: ['scanQRCode', 'getLocalImgData', 'downloadImage', 'uploadImage', 'chooseImage', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-              });
-              alert(cde+'1')
-              wx.ready(function () {
-                alert(cde+'2')
-
-
-                wx.error(function (res) {
-                  var s = res + 'config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。';
-                  alert(s)
-                  // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-                });
-              });
-            }
-          }).catch((res) => {
-          var ss = res + 'catch请求失败';
-          alert(ss)
-        });
-
-  }
+      }
     }
   }
 </script>
