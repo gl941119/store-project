@@ -19,7 +19,7 @@
     <div class="payBtn" v-if="type===1">
         <span class="payBtn-all">合计：</span>
         <span class="payBtn-price">￥ {{data.allprice}}</span>
-      <van-button plain type="primary" class="payBtn-pay" v-on:click.native="payHandle">支付</van-button>
+      <van-button plain type="primary" class="payBtn-pay" v-on:click.native="payHandle" v-if="isStore">支付</van-button>
     </div>
     <!--支付完成-->
     <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===2">支付完成</van-button>
@@ -70,7 +70,7 @@
     mounted() {
       this.request()
       let storeInt = this.$store.state.Store || sessionStorage.getItem('store');
-      this.isStore = storeInt === 1 ? false : true;
+      this.isStore = storeInt > 0 ? false : true;
     },
     computed:{
       titleName(){
