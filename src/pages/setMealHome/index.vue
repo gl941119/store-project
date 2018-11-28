@@ -63,8 +63,20 @@
       }
     },
     mounted(){
+    let stu=  window.sessionStorage.getItem('store');
+    let isB=window.sessionStorage.getItem('is_bind');
+    if(stu>0){
+      if(isB===1){
+        this.$router.push({name: 'staff'});
+      }else{
+        this.$router.push({name: 'bindAccount'});
+      }
+
+    }else{
       this.$store.commit('setMeal_hover',0);
       this.indexReques();
+    }
+
     },
     methods:{
       setMealInfo(id){
