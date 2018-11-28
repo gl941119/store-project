@@ -1,6 +1,6 @@
 <template>
     <div class="yiYuan">
-      <img src="../../assets/image/yygy.png" class="yYuan">
+      <!--<img src="../../assets/image/yygy.png" class="yYuan">-->
     </div>
 </template>
 

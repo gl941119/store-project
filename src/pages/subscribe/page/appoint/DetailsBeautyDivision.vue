@@ -472,7 +472,7 @@
   }
 
   .DetailsBeautyDivisionContTitleTxtSpan {
-    margin: 0 5px 10px 0px;
+    margin: 0 10px 10px 0px;
     line-height: 25px;
   }
 
