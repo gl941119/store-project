@@ -87,25 +87,31 @@
     </div>
 
     <van-popup v-model="storeShow" position="right" class="popup" :overlay="false">
-      <div class="model" v-for="item,k in storelist" @click="storeEvList(item.id)">
-        <p class="title">{{item.name}}</p>
-        <p class="subTitle">{{item.address}}</p>
-        <van-icon name="arrow" class="icon"/>
+      <div class="popupHeight">
+        <div class="model" v-for="item,k in storelist" @click="storeEvList(item.id)">
+          <p class="title">{{item.name}}</p>
+          <p class="subTitle">{{item.address}}</p>
+          <van-icon name="arrow" class="icon"/>
+        </div>
       </div>
+      <div class="popupReturn" @click="popupReturns">返回</div>
     </van-popup>
     <van-popup v-model="addressShow" position="right" class="popup" :overlay="false">
-      <div class="list-card" v-for="item in addressList" @click="addressItem(item.id)">
-        <div class="list-card-top">
-          <span class="list-card-top-realname">{{item.realname}}</span>
-          <span class="list-card-top-mobile">{{item.mobile}}</span>
-          <van-icon name="arrow" class="list-card-top-icon"/>
+      <div class="popupHeight">
+        <div class="list-card" v-for="item in addressList" @click="addressItem(item.id)">
+          <div class="list-card-top">
+            <span class="list-card-top-realname">{{item.realname}}</span>
+            <span class="list-card-top-mobile">{{item.mobile}}</span>
+            <van-icon name="arrow" class="list-card-top-icon"/>
+          </div>
+          <div class="list-card-bottom">
+            <div class="list-card-bottom-default" v-if="parseInt(item.isdefault)===1">默认</div>
+            <span class="list-card-bottom-address">{{item.address}}</span>
+          </div>
+          <div class="fill"></div>
         </div>
-        <div class="list-card-bottom">
-          <div class="list-card-bottom-default" v-if="parseInt(item.isdefault)===1">默认</div>
-          <span class="list-card-bottom-address">{{item.address}}</span>
-        </div>
-        <div class="fill"></div>
       </div>
+      <div class="popupReturn" @click="popupReturns">返回</div>
     </van-popup>
   </div>
 </template>
@@ -140,6 +146,10 @@
       this.initEvnt({orderid:this.ids});
     },
     methods: {
+      popupReturns(){
+        this.addressShow=false;
+        this.storeShow=false;
+      },
       subimt(){
         let a= this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$meal.eid + '&dom='+this.$meal.dom+'&act=payorder&orderid=' +this.ids+'&message='+this.LeavingMessage;
         window.location.href =a;
@@ -668,5 +678,21 @@ width: 200px;
 
       }
     }
+  }
+  .popupHeight{
+    height: calc(100vh -  50px);
+    overflow-y: auto;
+  }
+  .popupReturn{
+height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 100%;
+    background:rgba(113,179,255,1);
+    box-shadow:0px 5px 7px 0px rgba(204,226,249,1);
+    font-size:18px;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
   }
 </style>
