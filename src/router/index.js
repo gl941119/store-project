@@ -676,16 +676,6 @@ let router = new Router({
       title: '会员列表',
       meta: {keepAlive: false},
       component: resolve => require(['../pages/setMealHome/page/MembershipCardList'], resolve)
-    },
-    {//分享中转页面
-      path: '/setMealHome/page/endorseOneself/transferPage',
-      name: 'transferPage',
-      title: '美丽代言说明',
-      // redirect: {path:'/setMealHome/page/endorseOneself/endorsementSharing',query:{cde:'a'}},
-
-      // redirect: '/setMealHome/page/endorseOneself/endorsementSharing/:cde',
-      meta: {keepAlive: false},
-      component: resolve => require(['../pages/setMealHome/page/endorseOneself/transferPage'], resolve)
     }
 
   ]
