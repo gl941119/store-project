@@ -82,6 +82,7 @@
         let u=this.webshare.back;
         let pU=this.urlParam;
         let code=this.code;
+        let links=this.webshare.link+'&code='+code;
         let description=this.webshare.share_text;
         let title=this.webshare.share_title;
         let url=window.location.href.split('#');
@@ -111,7 +112,7 @@
                 wx.onMenuShareAppMessage({
                   title: title, // 分享标题
                   desc: description, // 分享描述
-                  link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  link: links, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: u, // 分享图标
                   type: '', // 分享类型,music、video或link，不填默认为link
                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -122,7 +123,7 @@
                 wx.updateAppMessageShareData({
                   title: title, // 分享标题
                   desc: description, // 分享描述
-                  link: curUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  link: links, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: u, // 分享图标
                   success: function () {
                     // 设置成功
@@ -155,8 +156,6 @@
             this.avatar=d.user.avatar;
             this.webshare=d.webshare;
             this.urlParam=d.param;
-            this.uk=res.uk;
-            this.is_member=d.user.is_member;
             this.shareEv();
           }
         });

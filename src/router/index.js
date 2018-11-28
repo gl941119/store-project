@@ -594,7 +594,7 @@ let router = new Router({
       component: resolve => require(['../pages/setMealHome/page/endorseOneself/'], resolve)
     },
     {//代言分享
-      path: '/setMealHome/page/endorseOneself/endorsementSharing/:cde/:eid',
+      path: '/setMealHome/page/endorseOneself/endorsementSharing',
       name: 'endorsementSharing',
       title: '美丽代言说明',
       meta: {keepAlive: false},
