@@ -33,7 +33,7 @@
   }
 
   .view {
-    height: 100%;
+    /*height: 100%;*/
     padding-bottom: 50px;
     /*box-sizing: content-box;*/
     min-height: 100%;

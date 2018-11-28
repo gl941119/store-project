@@ -66,7 +66,7 @@
   .card {
     overflow: hidden;
     position: relative;
-    margin: 10px auto 0;
+    margin: 10px auto 2px;
     width: 345px;
     height: 115px;
     background: rgba(255, 255, 255, 1);
