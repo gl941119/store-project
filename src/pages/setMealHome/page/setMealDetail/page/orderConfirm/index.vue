@@ -140,9 +140,19 @@
       this.initEvnt({orderid:this.ids});
     },
     methods: {
-      submitEvent(){
+      subimt(){
         let a= this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$meal.eid + '&dom='+this.$meal.dom+'&act=payorder&orderid=' +this.ids+'&message='+this.LeavingMessage;
         window.location.href =a;
+      },
+      submitEvent(){
+        console.log(this.cssSelect)
+        if(this.cssSelect===2){
+          this.initEvnt({orderid:this.ids,is_send:1,addressid:this.addressId});
+          this.subimt();
+        }else{
+          this.subimt();
+        }
+
       },
       addressItem(i){
         this.initEvnt({orderid:this.ids,is_send:1,addressid:i});
@@ -184,10 +194,14 @@ this.storeShow=true;
         }).then(res=>{
           if(res.status){
             this.dataList=res.data;
+            let self=this;
             setTimeout(()=>{
-              let list=this.addressList.filter(item=>{ return parseInt(item.id)===parseInt(res.data.user.addressid)});
-              this.isdefault=parseInt(list[0].isdefault);
-              this.addressId=parseInt(list[0].id);
+              let ressId=parseInt(res.data.user.addressid);
+              let list=self.addressList.filter(item=>{ return parseInt(item.id) === ressId});
+             if(ressId){
+               self.isdefault=parseInt(list[0].isdefault);
+               self.addressId=parseInt(list[0].id);
+             }
             },500)
 
           }
