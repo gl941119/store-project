@@ -202,26 +202,33 @@
         })
       },
       submitHandle() {//提交订单
+          if(!this.address.id){
+            this.$toast.fail('请选择收货地址')
+            return
+          }else{
+            this.$request({
+              url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
+              type: 'post',
+              data: {
+                ordersn: this.ordersn,
+                is_send: this.status,
+                message: this.message,
+                addressid: this.address.id,
+                storeid: this.store.id
+              }
+            }).then((res) => {
+              if (res.code === 100) {
+                if (this.allmoney === 0) {//实际扣款为0 跳转页面
+                  this.payorder()
+                } else {//需要付款
+                  window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
+                }
+              }
+            })
+          }
 
-        this.$request({
-          url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
-          type: 'post',
-          data: {
-            ordersn: this.ordersn,
-            is_send: this.status,
-            message: this.message,
-            addressid: this.address.id,
-            storeid: this.store.id
-          }
-        }).then((res) => {
-          if (res.code === 100) {
-            if (this.allmoney === 0) {//实际扣款为0 跳转页面
-              this.payorder()
-            } else {//需要付款
-              window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + window.sessionStorage.getItem('ordersn')
-            }
-          }
-        })
+
+
       },
       payorder() {//实际扣款为0 跳转页面
         this.$request({

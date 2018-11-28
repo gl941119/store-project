@@ -106,12 +106,12 @@
         arr.forEach(item=>{
           new_arr.push(item.avatar)
         })
-        alert(arr)
-        alert(this.arr[this.index].imgs)
-        alert(index,num)
-
+        // alert(arr)
+        // alert(this.arr[this.index].imgs)
+        // alert(index,num)
+        //
         ImagePreview({
-          images: arr,
+          images: new_arr,
           startPosition: num,
         });
       },
