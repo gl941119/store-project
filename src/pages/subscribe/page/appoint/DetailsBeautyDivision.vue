@@ -473,6 +473,7 @@
 
   .DetailsBeautyDivisionContTitleTxtSpan {
     margin: 0 5px 10px 0px;
+    line-height: 25px;
   }
 
   .video {
