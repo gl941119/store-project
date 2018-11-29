@@ -28,7 +28,7 @@
           </div>
           <div class="eInformationHImg">
             <div class="eInformationTxt3" v-if="status">{{ nick }}</div>
-            <div class="eInformationTxt3" v-else><input type="text" @blur="blurEvt()" v-model="nick" ref="name" autofocus="autofocus"></div>
+            <div class="eInformationTxt3" v-else><input type="text" @blur="blurEvt()" v-model="nick" ref="name" class="eInformationInput" autofocus="autofocus"></div>
             <div class="exchangeIcon"></div>
           </div>
         </div>
@@ -354,4 +354,7 @@
 .circleTxt{
   background-color: #fff;
 }
+  .eInformationInput{
+    text-align: right;
+  }
 </style>

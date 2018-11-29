@@ -593,6 +593,7 @@
     color: rgba(51, 51, 51, 1);
     display: flex;
     align-items: center;
+    padding-bottom: 1px;
   }
 
   .serverEvaluateCom_submit {

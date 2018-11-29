@@ -21,7 +21,7 @@
           <dt>{{item.goodslist[0].title}}</dt>
           <dd>
             <span class="price">¥{{item.goodslist[0].price}}</span>
-            <span class="type">{{Math.ceil(parseInt(item.score)/2)}}星好评</span>
+            <span class="type">{{Math.ceil(parseInt(item.score))}}星好评</span>
           </dd>
         </dl>
       </div>

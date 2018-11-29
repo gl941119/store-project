@@ -178,6 +178,7 @@
     text-align: center;
     line-height: 18px;
     color: #333;
+    overflow: hidden;
   }
 .editYgInfosItemSelect{
   border:1px solid #FA65CF;
@@ -187,6 +188,7 @@
   margin: 0 5px 10px 5px;
   width:96px;
   height:20px;
+  overflow: hidden;
   border-radius:4px;
 }
 </style>
