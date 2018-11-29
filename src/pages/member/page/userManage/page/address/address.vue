@@ -30,6 +30,8 @@
     name: "Address",
     data() {
       return {
+        type:this.$route.params.type,
+        oId:this.$route.params.oId,
         listData: []
       }
     },
@@ -47,9 +49,13 @@
         this.$router.push({name: "changeAddress", params: {id: id}})
       },
       goIndentConfirme(item) {//购物车地址点击
-        if (this.$route.params.type === '0') {
+        if (this.type === '0') {
           window.sessionStorage.setItem('address', JSON.stringify(item))
           this.$router.push({name: 'indentConfirme'})
+        }else if(this.type === '2'){ //套餐
+          this.$router.push({name: 'orderConfirm',params:{ids:localStorage.getItem('oderId')}})
+        }else if(this.type === '1'){ //商城
+
         }
 
 

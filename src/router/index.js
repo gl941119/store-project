@@ -255,7 +255,7 @@ let router = new Router({
       component: resolve => require(['../pages/member/page/userManage/page/userChange'], resolve)
     },
     {//会员中心--用户管理--地址
-      path: '/member/userManage/address/:type',//0 购物时选择状态 1 会员中心编辑状态  0弃用
+      path: '/member/userManage/address/:type',//type string 0 会员中心编辑状态  1 商城选择状态 2 套餐选择状态
       name: 'address',
       title: '收货地址',
       meta: {keepAlive: false},

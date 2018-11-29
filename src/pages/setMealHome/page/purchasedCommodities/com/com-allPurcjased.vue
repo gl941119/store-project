@@ -77,7 +77,7 @@ this.$emit('refreshList')
           this.$router.push({name:'setMealOrderinfo',params:{ids:oId}});
         },
         oderInfoEv(id){
-          this.$router.push({name:'detail',params:{type:1,id:id}});
+          this.$router.push({name:'detail',params:{type:'1',id:id}});
         },
         receivedStatus(send,status){
             let s=parseInt(status);

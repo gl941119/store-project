@@ -15,7 +15,7 @@
     </div>
 
 
-  <div class="list-card" v-if="cssSelect === 2" @click="addressEven">
+  <div class="list-card" v-if="cssSelect === 2 && addressId > 0" @click="addressEven">
     <div class="list-card-top">
       <span class="list-card-top-realname">{{dataList.user===undefined?'':dataList.user.realname}}</span>
       <span class="list-card-top-mobile">{{dataList.user===undefined?'':dataList.user.mobile}}</span>
@@ -27,6 +27,10 @@
     </div>
     <div class="fill"></div>
   </div>
+    <div class="list-notCard" v-if="cssSelect === 2 && addressId === 0" @click="addressPage">
+      <span>请添加收货地址</span>
+      <van-icon name="arrow" class="list-icon"/>
+    </div>
     <div class="card">
       <div class="content">
         <img :src="dataList.mdata===undefined?'':dataList.mdata.simg" alt="">
@@ -146,6 +150,10 @@
       this.initEvnt({orderid:this.ids});
     },
     methods: {
+      addressPage(){
+        localStorage.setItem('oderId',this.ids);
+        this.$router.push({name: 'address', params: {type: '2'}})
+      },
       popupReturns(){
         this.addressShow=false;
         this.storeShow=false;
@@ -155,10 +163,15 @@
         window.location.href =a;
       },
       submitEvent(){
-        console.log(this.cssSelect)
+
         if(this.cssSelect===2){
-          this.initEvnt({orderid:this.ids,is_send:1,addressid:this.addressId});
-          this.subimt();
+          if(this.addressId===0){
+            this.$toast.fail('请添加收货地址');
+          }else{
+            this.initEvnt({orderid:this.ids,is_send:1,addressid:this.addressId});
+            this.subimt();
+          }
+
         }else{
           this.subimt();
         }
@@ -173,6 +186,7 @@
       this.storeShow=false;
       },
       addressEven(){
+        console.log(this.addressId)
         this.addressShow=true;
       },
       storeEv(){

@@ -64,7 +64,7 @@
       <div ref="evaluation"></div>
       <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss"></ComEvaluation>
       <!--选择规格-->
-      <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
+      <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'" @chenage="aa(ShowSpecification)">
         <com-buy-specification :goods_spec="goods_spec"
                                :num='num'
                                v-bind:goods.sync="Data"
@@ -250,8 +250,7 @@
         }
       },
       onceBuy() {//立即购买
-        let a=this.specs.length +'==='+ this.num
-        console.log(a)
+
         if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定账号
           this.$router.push({name: 'bindAccount'});
           return
@@ -276,7 +275,7 @@
         } else {//未选择
           this.status = '2' // 立即购买状态
             // this.$set(this.status,'2')
-
+alert(0)
           this.$store.commit('setShowBuySpecification', true)
         }
       },

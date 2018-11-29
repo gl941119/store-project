@@ -178,7 +178,6 @@
         this.show_address = true
       },
       confirmeAddress(e,index) {//弹窗确认地址
-        alert(0)
         this.show_address = false
         this.address = this.addressList[index]
       },
