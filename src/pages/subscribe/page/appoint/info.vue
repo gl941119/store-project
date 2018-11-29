@@ -10,11 +10,11 @@
     <com-indentinfo class="indentInfo" :type="'success'"
                     :data="data"></com-indentinfo>
     <!--提示,已预约状态下才有-->
-    <com-tip v-if="type===0" :Data="notice"></com-tip>
+    <com-tip v-if="type===0&&bool" :Data="notice"></com-tip>
 
     <!--<van-button type="default" v-if="isStore" class="overBtn" v-on:click="overHandle">已完成预约</van-button>-->
 
-    <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===0">已预约</van-button>
+    <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===0&&bool">已预约</van-button>
       <!--支付-->
     <div class="payBtn" v-if="type===1">
         <span class="payBtn-all">合计：</span>
@@ -22,7 +22,7 @@
       <van-button plain type="primary" class="payBtn-pay" v-on:click.native="payHandle" v-if="isStore">支付</van-button>
     </div>
     <!--支付完成-->
-    <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===2">支付完成</van-button>
+    <van-button plain type="primary" class="btn" v-on:click="goIndex" v-if="type===2&&bool">支付完成</van-button>
     <!--已取消-->
     <van-button plain type="primary" class="btn" v-on:click="gorouter" v-if="type== -1">返回</van-button>
   </div>
@@ -64,7 +64,8 @@
         },
         date: undefined, //预约时间
         beauty: undefined,
-        isStore: null
+        isStore: null,
+        bool:false,
 
       }
     },
@@ -159,18 +160,19 @@
           let status = res.data.status,
             sp_status = res.data.sp_status,
             is_use = res.data.is_use;
+          if (is_use == '0' && status == '0') { //已预约
+            this.type = 0
+          } else if (is_use == '1' && status == '0') {//待付款
+            this.type = 1
+          } else if (is_use == '1' && status == '1') {// 支付完成
+            this.type = 2
+          } else if (is_use == '0' && status == '-1') {//已取消
+            this.type = -1
+          }
 if(res.user.store>0){
-  this.type = 10000
+this.bool=false;
 }else{
-  if (is_use == '0' && status == '0') { //已预约
-    this.type = 0
-  } else if (is_use == '1' && status == '0') {//待付款
-    this.type = 1
-  } else if (is_use == '1' && status == '1') {// 支付完成
-    this.type = 2
-  } else if (is_use == '0' && status == '-1') {//已取消
-    this.type = -1
-  }
+  this.bool=true;
 }
 
 

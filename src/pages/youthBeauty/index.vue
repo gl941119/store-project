@@ -1,12 +1,38 @@
 <template>
 <div class="youthBeauty">
-  <!--<img src="../../assets/image/qcmf.png" class="youthBeautyImg">-->
+  <div v-html="htm"></div>
 </div>
 </template>
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+      data(){
+          return {
+            htm:''
+          }
+      },
+      mounted(){
+          let url=window.location.href;
+          let id=url.split('&id=')[1];
+          let _this=this;
+          setTimeout(()=>{
+            _this.$request({
+              url:'app/index.php?i=1&c=entry&eid=87&dom=comm&act=article',
+              type:'post',
+              data:{
+                id:id
+              }
+            }).then((res)=>{
+              if(res.status){
+                let d=res.data;
+                _this.htm=d.content;
+                document.title=d.title;
+              }
+            });
+          },500)
+
+      }
     }
 </script>
 

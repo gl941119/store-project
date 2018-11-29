@@ -67,7 +67,7 @@
           <div class="member_popupCont_height" v-html="cont"></div>
         </div>
         <div class="member_popupBtnBox">
-          <div class="member_popupBtn" @click="tab('setMealHome')">成为会员</div>
+          <div class="member_popupBtn" @click="tab('hotPackage')">成为会员</div>
         </div>
       </div>
     </van-popup>
@@ -103,8 +103,8 @@
             let d=res.data;
             this.user=d.user;
             let scgc=d.article['a_1'];
-            this.cont=scgc.content;
-            this.bImg=d.adv[0].bimg;
+            this.cont=scgc===undefined?'':scgc.content;
+            this.bImg=d.adv[0]===undefined?'':d.adv[0].bimg;
           }
         });
       },

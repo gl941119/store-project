@@ -250,6 +250,8 @@
         }
       },
       onceBuy() {//立即购买
+        let a=this.specs.length +'==='+ this.num
+        console.log(a)
         if (window.sessionStorage.getItem('is_bind') === '0') {//未绑定账号
           this.$router.push({name: 'bindAccount'});
           return
@@ -273,8 +275,8 @@
           })
         } else {//未选择
           this.status = '2' // 立即购买状态
-          //   this.$set(this.status,'2')
-          console.log(this.status)
+            // this.$set(this.status,'2')
+
           this.$store.commit('setShowBuySpecification', true)
         }
       },
