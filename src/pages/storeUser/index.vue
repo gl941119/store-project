@@ -49,7 +49,7 @@
         <van-icon name="arrow" class="icon"/>
       </router-link>
       <div class="fill"></div>
-      <router-link tag="li" :to="{path: '/member/userManage/address/2'}" class="list-li">
+      <router-link tag="li" :to="{path: '/member/userManage/address/0'}" class="list-li">
         <span>地址管理</span>
         <van-icon name="arrow" class="icon"/>
       </router-link>
