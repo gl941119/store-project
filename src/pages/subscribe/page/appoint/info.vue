@@ -10,7 +10,7 @@
     <com-indentinfo class="indentInfo" :type="'success'"
                     :data="data"></com-indentinfo>
     <!--提示,已预约状态下才有-->
-    <com-tip v-if="type===0"></com-tip>
+    <com-tip v-if="type===0" :Data="notice"></com-tip>
 
     <!--<van-button type="default" v-if="isStore" class="overBtn" v-on:click="overHandle">已完成预约</van-button>-->
 
@@ -55,7 +55,8 @@
           "description": undefined,
           "price": undefined,
           "stype": undefined,
-          thumb: undefined
+          thumb: undefined,
+          notice:'',
         },
         store: {
           name: undefined,
@@ -158,17 +159,19 @@
           let status = res.data.status,
             sp_status = res.data.sp_status,
             is_use = res.data.is_use;
-
-          if (is_use == '0' && status == '0') { //已预约
-            this.type = 0
-          } else if (is_use == '1' && status == '0') {//待付款
-            this.type = 1
-          } else if (is_use == '1' && status == '1') {// 支付完成
-            this.type = 2
-          } else if (is_use == '0' && status == '-1') {//已取消
-            this.type = -1
-          }
-          console.log(this.type)
+if(res.user.store>0){
+  this.type = 10000
+}else{
+  if (is_use == '0' && status == '0') { //已预约
+    this.type = 0
+  } else if (is_use == '1' && status == '0') {//待付款
+    this.type = 1
+  } else if (is_use == '1' && status == '1') {// 支付完成
+    this.type = 2
+  } else if (is_use == '0' && status == '-1') {//已取消
+    this.type = -1
+  }
+}
 
 
         })
