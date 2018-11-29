@@ -186,7 +186,6 @@
       this.storeShow=false;
       },
       addressEven(){
-        console.log(this.addressId)
         this.addressShow=true;
       },
       storeEv(){

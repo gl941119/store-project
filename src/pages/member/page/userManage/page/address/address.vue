@@ -49,16 +49,15 @@
         this.$router.push({name: "changeAddress", params: {id: id}})
       },
       goIndentConfirme(item) {//购物车地址点击
-        if(this.type==='0'){
-          return
-        }else{
+
           window.sessionStorage.setItem('address', JSON.stringify(item))
           if(this.type === '2'){ //套餐
             this.$router.go(-1)
           }else if(this.type === '1'){ //商城
             this.$router.go(-1)
           }
-        }
+
+
 
 
 
