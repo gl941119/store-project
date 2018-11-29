@@ -151,7 +151,7 @@
     },
     methods: {
       addressPage(){
-        localStorage.setItem('oderId',this.ids);
+        window.sessionStorage.setItem('oderId',this.ids);
         this.$router.push({name: 'address', params: {type: '2'}})
       },
       popupReturns(){
