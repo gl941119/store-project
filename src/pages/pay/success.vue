@@ -51,6 +51,7 @@
           if (thia.second > 0) {
             thia.second -= 1
           } else {
+            // alert('goIndex')
             thia.goIndex()
 
           }

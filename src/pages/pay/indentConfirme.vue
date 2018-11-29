@@ -203,7 +203,12 @@
         })
       },
       submitHandle() {//提交订单
-          if(!this.address.id||this.status==='1'){
+        console.log(this.address.id,this.status)
+
+
+
+
+          if(!this.address.id){
             this.$toast.fail('请选择收货地址')
             return
           }else{
