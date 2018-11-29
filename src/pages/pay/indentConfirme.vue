@@ -190,7 +190,13 @@
           }
         }).then((res) => {
           this.goodslist = res.data.goodslist
-          this.address = res.data.user//地址
+
+          if(window.sessionStorage.getItem('address')){
+            this.address = JSON.parse(window.sessionStorage.getItem('address'))
+          }else{
+            this.address = res.data.user//地址
+          }
+
           this.store = res.data.store//门店
           // this.score_nex = res.data.user.score_nex      //美丽
           // this.amount = res.data.allrecord.amount // 美丽余额
@@ -203,15 +209,17 @@
         })
       },
       submitHandle() {//提交订单
-        console.log(this.address.id,this.status)
 
-
-
-
+       if(this.status=='1'){//寄送
           if(!this.address.id){
             this.$toast.fail('请选择收货地址')
             return
-          }else{
+          }
+        }
+          // if(!this.address.id||this.status==='1'){
+          //   this.$toast.fail('请选择收货地址')
+          //   return
+          // }else{
             this.$request({
               url: 'app/index.php?i=1&c=entry&eid=85&act=orderinfo',
               type: 'post',
@@ -231,7 +239,7 @@
                 }
               }
             })
-          }
+          // }
 
 
 
