@@ -64,7 +64,7 @@
       <div ref="evaluation"></div>
       <ComEvaluation :good_rate="Data.good_rate" :discuss="discuss"></ComEvaluation>
       <!--选择规格-->
-      <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'" @chenage="aa(ShowSpecification)">
+      <van-actionsheet v-model="ShowSpecification" title="选择规格" v-if="type=== '1'">
         <com-buy-specification :goods_spec="goods_spec"
                                :num='num'
                                v-bind:goods.sync="Data"
@@ -275,7 +275,6 @@
         } else {//未选择
           this.status = '2' // 立即购买状态
             // this.$set(this.status,'2')
-alert(0)
           this.$store.commit('setShowBuySpecification', true)
         }
       },
