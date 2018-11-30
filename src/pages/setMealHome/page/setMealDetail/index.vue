@@ -68,7 +68,7 @@
 
     methods: {
       onceBuy() {//立即购买
-        let isBind = localStorage.getItem('isBind');
+        let isBind =window.sessionStorage.getItem('is_bind');
         if (parseInt(isBind) === 1) {
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=90&act=orderconfirm',
