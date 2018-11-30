@@ -44,7 +44,12 @@
     },
     methods:{
       linkHome(str){
-        this.$router.push({name:str})
+        let store=window.sessionStorage.getItem('store');
+        if(store>0){
+          this.$router.push({name:'staff'})
+        }else{
+          this.$router.push({name:str})
+        }
       },
       initRequest(){
         let self=this;
