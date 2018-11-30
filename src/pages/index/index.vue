@@ -21,6 +21,7 @@
     <com-model :data="goods_essence"></com-model>
     <img :src="advTwo.bimg" alt="" v-on:click="goOne(advTwo.link)" class="img">
     <img :src="advThree.bimg" alt="" v-on:click="goTwo(advThree.link)" class="img">
+    <div class="fillBlock"></div>
   </div>
 </template>
 
@@ -119,6 +120,11 @@
 </script>
 
 <style lang="scss" scoped>
+  .fillBlock{
+    height: 50px;
+    width: 100%;
+  }
+
   .test{
     width: 100px;
     height: 100px;
