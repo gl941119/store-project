@@ -118,6 +118,8 @@
                   this.fundCodeTxt=num+'秒';
                 }
               },1000);
+            }else{
+              this.$toast.success(res.message)
             }
           });
 
