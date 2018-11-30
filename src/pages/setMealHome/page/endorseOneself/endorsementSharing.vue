@@ -142,7 +142,8 @@
   }
   .endorseOneself_code{
     /*padding-bottom: 27px;*/
-    font-size:40px;
+    /*font-size:40px;*/
+    font-size:20px;
     font-weight:bolder;
     text-align: center;
     font-family:PingFangSC-Semibold;
