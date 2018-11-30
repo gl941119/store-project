@@ -72,7 +72,6 @@
     > img {
       width: 67px;
       height: 67px;
-
     }
     > dt {
       margin-top: 27px;

@@ -9,7 +9,7 @@
       <!--banner-->
       <van-swipe class="swipe">
         <van-swipe-item v-for="item in dataList.bimg">
-          <img :src="item"  alt="" class="swipe-img">
+          <img :src="item" alt="" class="swipe-img">
         </van-swipe-item>
       </van-swipe>
       <!--详情-->
@@ -49,15 +49,13 @@
 <script>
 
 
-
-
   export default {
     name: "detail",
 
     data() {
       return {
-ids:this.$route.params.ids,
-        dataList:{}
+        ids: this.$route.params.ids,
+        dataList: {}
 
       }
     },
@@ -66,26 +64,24 @@ ids:this.$route.params.ids,
 
     },
 
-    computed: {
-
-    },
+    computed: {},
 
     methods: {
       onceBuy() {//立即购买
-        let isBind=localStorage.getItem('isBind');
-        if(parseInt(isBind)===1){
+        let isBind = localStorage.getItem('isBind');
+        if (parseInt(isBind) === 1) {
           this.$request({
             url: 'app/index.php?i=1&c=entry&eid=90&act=orderconfirm',
             type: 'post',
             data: {
-              id:this.ids
+              id: this.ids
             }
           }).then(res => {
             if (res.status) {
-              this.$router.push({name:'orderConfirm',params:{ids:res.data.orderid}})
+              this.$router.push({name: 'orderConfirm', params: {ids: res.data.orderid}})
             }
           })
-        }else{
+        } else {
           this.$router.push({name: 'bindAccount'});
         }
 
@@ -109,14 +105,14 @@ ids:this.$route.params.ids,
       },
       request() {
         this.$request({
-          url:'app/index.php?i=1&c=entry&eid=90&act=mealinfo',
-          type:'post',
-          data:{
-            id:this.ids
+          url: 'app/index.php?i=1&c=entry&eid=90&act=mealinfo',
+          type: 'post',
+          data: {
+            id: this.ids
           }
-        }).then(res=>{
-          if(res.status){
-            this.dataList=res.data.meal;
+        }).then(res => {
+          if (res.status) {
+            this.dataList = res.data.meal;
           }
         });
 
