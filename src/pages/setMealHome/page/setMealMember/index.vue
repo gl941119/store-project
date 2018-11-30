@@ -105,6 +105,8 @@
             let scgc=d.article['a_1'];
             this.cont=scgc===undefined?'':scgc.content;
             this.bImg=d.adv[0]===undefined?'':d.adv[0].bimg;
+            localStorage.setItem('mealIsMember',res.user.is_member)
+            localStorage.setItem('isBind',d.is_bind)
           }
         });
       },
