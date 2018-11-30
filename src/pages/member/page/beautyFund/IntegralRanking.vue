@@ -9,22 +9,22 @@
           <p class="oneDyBottom">{{ names }}</p>
           <p class="oneDyTxt">排名{{ num }}名</p>
         </div>
-        <div>
-          <p class="oneDyBottom">销售额</p>
-          <p class="oneDyTxtJe">¥{{ money }}</p>
+        <div class="oneAllscore">
+          <p class="oneDyBottom">积分</p>
+          <p class="oneDyTxtJe">{{ money }}</p>
         </div>
       </div>
 
-      <div class="integralRanking">销售排行榜</div>
+      <div class="integralRanking">积分排行榜</div>
       <div class="oneDyList integralRankingSolid" v-for="item in arr">
         <div class="oneDyListImg"><img :src="item.avatar"></div>
         <div class="oneDyListL">
           <p class="oneDyBottom">{{ item.name }}</p>
           <p class="oneDyTxt">排名{{ item.num }}名</p>
         </div>
-        <div>
-          <p class="oneDyBottom">销售额</p>
-          <p class="oneDyTxtJe">¥{{ item.allscore }}</p>
+        <div class="oneAllscore">
+          <p class="oneDyBottom">积分</p>
+          <p class="oneDyTxtJe">{{ item.allscore }}</p>
         </div>
       </div>
 
@@ -175,5 +175,8 @@
   .oneDyListImg img{
     width: 50px;
     height: 50px;
+  }
+  .oneAllscore{
+    text-align: center;
   }
 </style>
