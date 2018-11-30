@@ -81,7 +81,6 @@
         var listHeight=e.target.scrollTop+this.myBox.offsetHeight;
         var listScrollTop=this.myScroll.offsetHeight;
         var c=listScrollTop-listHeight;
-        console.log(this.currListLen!=this.listLen,this.currListLen,this.listLen,this.status)
         if(!this.status&&this.currListLen!=this.listLen&&c < 100){
           this.status=true;
           this.$request({

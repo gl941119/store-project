@@ -138,7 +138,8 @@ let url=window.location.href.split('&go=').length;
               if(res.status){
 
                 this.$toast.success('绑定成功')
-                window.sessionStorage.setItem('is_bind','1')
+                window.sessionStorage.setItem('is_bind','1');
+                window.sessionStorage.setItem('mealIsMember',res.user.is_member)
                 if(url>1){
                   this.$router.push({name:'setMealMember'});
                 }else{
