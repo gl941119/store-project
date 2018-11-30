@@ -68,8 +68,17 @@
           fundCodeTxt:'59秒'
         }
       },
+      created(){
+
+      },
       mounted() {
-        this.initScao();
+        let isB=window.sessionStorage.getItem('is_bind');
+        // alert(isB)
+        if(parseInt(isB)===1){
+          this.$router.go(1)
+        }else{
+          this.initScao();
+        }
       },
       methods:{
         initScao(){

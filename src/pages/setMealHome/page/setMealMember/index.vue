@@ -27,7 +27,7 @@
             <div class="member_txt">美丽积分券</div>
           </div>
         </div>
-        <div class="member_bannerImg"><img :src="bImg" @click="tab('setMealHome')"/></div>
+        <div class="member_bannerImg"><img :src="bImg" @click="tab('hotPackage')"/></div>
         <div class="member_list member_list1">
           <div class="member_item" @click="tab('purchasedCommodities')">
             <div class="member_listImg"><img src="../../../../assets/image/icon_5.png"/></div>
