@@ -15,7 +15,7 @@
           <div class="endorseOneself_yTitle">邀请码</div>
           <div class="endorseOneself_code">{{webshare.codes}}</div>
         </div>
-        <div class="codeImageBox"><img :src="codeImage"></div>
+        <div class="codeImageBox"><img :src="webshare.codeImage"></div>
         <div class="endorseOneself_subBox">
           <div class="endorseOneself_sub" @click="linkHome('setMealHome')">去商城</div>
         </div>
@@ -31,7 +31,7 @@
     data(){
       return {
         webshare:{},
-        codes:''
+        codes:'',
       }
     },
     created(){
@@ -70,7 +70,7 @@
           if(resMsg.status){
             let d=resMsg.data;
             let scgc=d.article['a_4'];
-            self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:code};
+            self.webshare={name:d.name,avatar:d.avatar,content:scgc.content,title:scgc.title,codes:code,codeImage:d.code_image};
             Toast.clear();
           }
         }).catch(res=>{
