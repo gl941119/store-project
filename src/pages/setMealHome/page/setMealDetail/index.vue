@@ -8,8 +8,8 @@
     <div class="detali-product product">
       <!--banner-->
       <van-swipe class="swipe">
-        <van-swipe-item >
-          <img src="../../../../assets/image/s_1.jpg" alt="" class="swipe-img">
+        <van-swipe-item v-for="item in dataList.bimg">
+          <img :src="item"  alt="" class="swipe-img">
         </van-swipe-item>
       </van-swipe>
       <!--详情-->
