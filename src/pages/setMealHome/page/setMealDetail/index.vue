@@ -8,7 +8,7 @@
     <div class="detali-product product">
       <!--banner-->
       <van-swipe class="swipe">
-        <van-swipe-item v-for="item in dataList.bimg">
+        <van-swipe-item v-for="item,index in dataList.bimg" :key="index">
           <img :src="item" alt="" class="swipe-img">
         </van-swipe-item>
       </van-swipe>
