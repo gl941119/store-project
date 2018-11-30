@@ -41,8 +41,8 @@
       methods: {
 
         infoUrl() {
-          let isM=localStorage.getItem('mealIsMember');
-          let isBind=localStorage.getItem('isBind');
+          let isM=window.sessionStorage.getItem('mealIsMember');
+          let isBind=window.sessionStorage.getItem('is_bind');
           if(parseInt(isBind)===1){
             parseInt(isM)===1?this.$router.push({name:'memberCenter'}):this.$router.push({name:'setMealMember'});
           }else{
