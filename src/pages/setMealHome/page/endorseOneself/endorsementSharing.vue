@@ -11,8 +11,11 @@
         <div class="endorseOneself_cont" v-html="webshare.content"></div>
 
         <div class="endorseOneself_border"></div>
-        <div class="endorseOneself_yTitle">邀请码</div>
-        <div class="endorseOneself_code">{{webshare.codes}}</div>
+        <div class="endorseOneselfFlex">
+          <div class="endorseOneself_yTitle">邀请码</div>
+          <div class="endorseOneself_code">{{webshare.codes}}</div>
+        </div>
+        <div class="codeImageBox"><img :src="codeImage"></div>
         <div class="endorseOneself_subBox">
           <div class="endorseOneself_sub" @click="linkHome('setMealHome')">去商城</div>
         </div>
@@ -124,7 +127,7 @@
     background-color: #E8E8E8;
   }
   .endorseOneself_yTitle{
-    padding: 17px 0 12px 0;
+    padding: 0px 13px 0px 0;
     font-size:18px;
     font-family:PingFangSC-Semibold;
     font-weight:600;
@@ -138,7 +141,7 @@
     color:rgba(102,102,102,1);
   }
   .endorseOneself_code{
-    padding-bottom: 27px;
+    /*padding-bottom: 27px;*/
     font-size:40px;
     font-weight:bolder;
     text-align: center;
@@ -175,5 +178,20 @@
   }
   .endorseOneself_sharing1{
     padding-bottom: 25px;
+  }
+  .codeImageBox{
+    text-align: center;
+    margin-bottom: 31px;
+    height: 113px;
+    img{
+      width: 113px;
+      height: 113px;
+    }
+  }
+  .endorseOneselfFlex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 0 23px 0;
   }
 </style>

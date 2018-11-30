@@ -5,16 +5,16 @@
       <div class="bindAccountBox accountFlex">
         <div class="bindAccountTopL">
           <div class="bindAccountYqCode"></div>
-          <input type="text"placeholder="请输入好友邀请码" v-model="yqCode" class="bindYqInput"/>
+          <input type="text"placeholder="请输入好友邀请码" v-model="yqCode"  class="bindYqInput"/>
         </div>
 
-        <!--<div class="bindAccountTopRBox">-->
-          <!--<div class="bindAccountTopR" v-on:click="saoMiao">-->
-            <!--<div class="bindAccountTopRIg"></div>-->
-            <!--<div>扫一扫</div>-->
-          <!--</div>-->
-          <!--<div class="bindAccountTopRTxt">请好友打开二维码</div>-->
-        <!--</div>-->
+        <div class="bindAccountTopRBox">
+          <div class="bindAccountTopR" v-on:click="saoMiao">
+            <div class="bindAccountTopRIg"></div>
+            <div>扫一扫</div>
+          </div>
+          <div class="bindAccountTopRTxt">请好友打开二维码</div>
+        </div>
 
       </div>
 
@@ -201,7 +201,8 @@ background-size: $width $height;
   }
 .bindYqInput{
   margin-left: 15px;
-  width: 270px;
+  /*width: 270px;*/
+  width: 120px;
   height: 20px;
   line-height: 20px;
   font-size:13px;

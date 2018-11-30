@@ -13,8 +13,11 @@
     </div>
     <div class="endorseOneself_cont" v-html="cont"></div>
     <div class="endorseOneself_border"></div>
-    <div class="endorseOneself_yTitle">邀请码</div>
-    <div class="endorseOneself_code">{{code}}</div>
+    <div class="endorseOneselfFlex">
+      <div class="endorseOneself_yTitle">邀请码</div>
+      <div class="endorseOneself_code">{{code}}</div>
+    </div>
+    <div class="codeImageBox"><img :src="codeImage"></div>
     <div class="endorseOneself_subBox">
       <div class="endorseOneself_sub" @click="sherEv">去分享</div>
     </div>
@@ -24,7 +27,7 @@
     <div class="popBox"  @click="clickOverlay">
       <div class="popImgBox"><div><img src="../../../../assets/image/sher_2.png" class="popImg"></div></div>
       <div class="popImgBox1">
-        <div><img src="../../../../assets/image/sher_3.png"></div>
+        <div><img src="../../../../assets/image/sher_3.png" class="popImgBox1_img"></div>
         <div class="popImgTxt">
           <div>点击右上角按钮</div>
           <div>分享邀请码</div>
@@ -62,7 +65,8 @@
         urlParam:'',
         popShow:false,
         uk:'',
-        is_member:''
+        is_member:'',
+        codeImage:'',
       }
     },
     created(){
@@ -156,6 +160,7 @@
             this.avatar=d.user.avatar;
             this.webshare=d.webshare;
             this.urlParam=d.param;
+            this.codeImage=d.user.code_image;
             this.shareEv();
           }
         });
@@ -209,7 +214,7 @@
     background-color: #E8E8E8;
   }
   .endorseOneself_yTitle{
-    padding: 45px 0 12px 0;
+    padding: 0px 13px 0px 0;
     font-size:18px;
     font-family:PingFangSC-Semibold;
     font-weight:600;
@@ -223,8 +228,8 @@
     color:rgba(102,102,102,1);
   }
   .endorseOneself_code{
-    padding-bottom: 27px;
-    font-size:40px;
+    /*padding-bottom: 27px;*/
+    font-size:20px;
     font-weight:bolder;
     text-align: center;
     font-family:PingFangSC-Semibold;
@@ -280,9 +285,9 @@ position: relative;
   align-self: center;
   justify-content: center;
 }
-.popImgBox1:nth-child(1) img{
-  width: 198px;
-  height: 69px;
+.popImgBox1_img{
+  width: 100%;
+  /*height: 69px;*/
 }
   .popImgTxt{
     position: absolute;
@@ -323,5 +328,19 @@ width: 118px;
   font-weight:400;
   color:rgba(255,255,255,1);
 }
-
+.codeImageBox{
+  text-align: center;
+  margin-bottom: 31px;
+  height: 113px;
+  img{
+    width: 113px;
+    height: 113px;
+  }
+}
+.endorseOneselfFlex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 0 23px 0;
+}
 </style>
