@@ -3,26 +3,26 @@
 
     <ul class="list">
       <li class="list-cell">
-        <div class="list-cell-title">收货人</div>
+        <p class="list-cell-title">收货人</p>
         <input type="text" v-model="realname" class="list-cell-content" placeholder="姓名">
         <div class="fill"></div>
       </li>
 
       <li class="list-cell">
-        <div class="list-cell-title">联系人</div>
+        <p class="list-cell-title">联系人</p>
         <input type="text" v-model="mobile" class="list-cell-content" placeholder="手机号码">
         <div class="fill"></div>
       </li>
 
       <li class="list-cell" v-on:click="show = true">
-        <div class="list-cell-title">所在地区</div>
+        <p class="list-cell-title">所在地区</p>
         <input type="text" disabled v-model="area" class="list-cell-content">
         <van-icon name="arrow" class="list-cell-icon"/>
         <div class="fill"></div>
       </li>
 
       <li class="list-cell">
-        <div class="list-cell-title">详细地址</div>
+        <p class="list-cell-title">详细地址</p>
         <input type="text" v-model="address" class="list-cell-content" placeholder="详细地址需填写楼层或房间号">
         <van-icon name="close" class="list-cell-icon" v-on:click="address = undefined"/>
         <div class="fill"></div>
@@ -32,7 +32,7 @@
     </ul>
 
     <div class="default">
-      <div class="default-title">设为默认地址</div>
+      <p class="default-title">设为默认地址</p>
       <van-switch v-model="checked" class="default-icon defaultIcon"/>
     </div>
 
@@ -226,20 +226,22 @@
       width: 375px;
       height: 45px;
       background: rgba(255, 255, 255, 1);
-      overflow: hidden;
+      /*overflow: hidden;*/
       position: relative;
+      display: flex;
+      justify-content: space-between;
       &-title {
-        float: left;
-        width: 60px;
+        /*float: left;*/
+        /*width: 60px;*/
         height: 21px;
         font-size: 15px;
         color: rgba(153, 153, 153, 1);
         line-height: 21px;
       }
       &-content {
-        float: left;
-        margin-left: 10px;
-        width: 255px;
+        /*float: left;*/
+        /*margin-left: 10px;*/
+        width: 260px;
         height: 21px;
         font-size: 15px;
         color: rgba(51, 51, 51, 1);
@@ -247,7 +249,9 @@
         background-color: white;
       }
       &-icon {
-        float: right;
+        /*float: right;*/
+        position: absolute;
+        right: 15px;
         top: 50%;
         margin-top: -6px;
         vertical-align: middle;

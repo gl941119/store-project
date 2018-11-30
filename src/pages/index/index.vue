@@ -125,11 +125,6 @@
     width: 100%;
   }
 
-  .test{
-    width: 100px;
-    height: 100px;
-    background-color: #3a3a3a;
-  }
   .index {
     background-color: #F4F4F4;
   }
