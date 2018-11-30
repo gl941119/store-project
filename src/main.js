@@ -17,22 +17,20 @@ import './utils/vant'
 if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$i = 'i=1';
   Vue.prototype.$upUrl = 'http://192.168.3.23:80/';
-  Vue.prototype.$eid = {id:156,dom:'comm'}; //图片视频上传  87
-  Vue.prototype.$eids = {id:157,dom:'ucenter'}; //会员头像上传 88
-  Vue.prototype.$eidpay = {id:158,dom:'card'}; //支付
+  Vue.prototype.$eid = {id: 156, dom: 'comm'}; //图片视频上传  87
+  Vue.prototype.$eids = {id: 157, dom: 'ucenter'}; //会员头像上传 88
+  Vue.prototype.$eidpay = {id: 158, dom: 'card'}; //支付
 } else {
   let config = Cache.getConfig()
   Vue.prototype.$i = 'i=' + config.uid;
   Vue.prototype.$upUrl = config.domain + '/';
-  Vue.prototype.$eid = {eid:config.binds['87'].eid,dom:config.binds['87'].dom}; //图片视频上传
-  Vue.prototype.$eidpay = {eid:config.binds['89'].eid,dom:config.binds['89'].dom}; //支付
-  Vue.prototype.$eid162 = {eid:config.binds['86'].eid,dom:config.binds['86'].dom}; //支付
-  Vue.prototype.$eid161 = {eid:config.binds['85'].eid,dom:config.binds['85'].dom}; //支付
-  Vue.prototype.$eids = {eid:config.binds['88'].eid,dom:config.binds['88'].dom}; //支付
-  Vue.prototype.$meal = {eid:config.binds['90'].eid,dom:config.binds['90'].dom}; //支付
+  Vue.prototype.$eid = {eid: config.binds['87'].eid, dom: config.binds['87'].dom}; //图片视频上传
+  Vue.prototype.$eidpay = {eid: config.binds['89'].eid, dom: config.binds['89'].dom}; //支付
+  Vue.prototype.$eid162 = {eid: config.binds['86'].eid, dom: config.binds['86'].dom}; //支付
+  Vue.prototype.$eid161 = {eid: config.binds['85'].eid, dom: config.binds['85'].dom}; //支付
+  Vue.prototype.$eids = {eid: config.binds['88'].eid, dom: config.binds['88'].dom}; //支付
+  Vue.prototype.$meal = {eid: config.binds['90'].eid, dom: config.binds['90'].dom}; //支付
 }
-
-
 Vue.config.productionTip = false
 //全局组件
 import MyFooter from './components/footer'
@@ -46,11 +44,10 @@ import Cell from './components/cell'
 import SelectBar from './components/selectBar'
 import Search from './components/search'
 import PriceList from './components/priceList' //金额列表
-
 import MealFooter from './components/mealFooter'
 
 Vue.component('my-footer', MyFooter);
-Vue.component('subscribe-footer',subFooter)
+Vue.component('subscribe-footer', subFooter)
 Vue.component('navbar', Navbar);
 Vue.component('product-card', ProductCard);
 Vue.component('server-card', ServerCard);
@@ -87,7 +84,7 @@ window.long = setInterval(function () {//长轮询
       router.push({name: "serverEvaluate", params: {orderid: res.data.orderid}})
     }
   });
-}, 10000)
+}, 10000);
 
 
 //导航守卫

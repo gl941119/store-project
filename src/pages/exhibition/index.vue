@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <img src="../../assets/image/image-1.png" alt="" class="banner">
     <div class="aboutUs">
       <p class="bg">ABOUT US</p>
@@ -136,6 +136,11 @@
 </script>
 
 <style lang="scss" scoped>
+  .wrap{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+  }
   .banner {
     width: 375px;
     height: 208px;

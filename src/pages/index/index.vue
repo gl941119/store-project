@@ -11,8 +11,9 @@
         </van-swipe-item>
       </van-swipe>
     </div>
+
     <!--分类列表-->
-    <com-list :data="data.cate"></com-list>
+    <com-list :data="data.cate" ></com-list>
     <!--热门-->
     <com-model :data="goods_hot"></com-model>
     <img :src="advOne.bimg" alt="" v-on:click="goThree(advOne.link)" class="img">
@@ -38,9 +39,7 @@
       return {
         data: {},
         goods_essence: {},
-
         goods_hot:{},
-
         adv: [],
         value: undefined,
         advOne: {
@@ -120,12 +119,14 @@
 </script>
 
 <style lang="scss" scoped>
+  .test{
+    width: 100px;
+    height: 100px;
+    background-color: #3a3a3a;
+  }
   .index {
     background-color: #F4F4F4;
-
-
   }
-
   .search {
     padding: 5px 15px;
     overflow: hidden;

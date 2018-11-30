@@ -144,7 +144,6 @@
         take_time: undefined,
         status: undefined,//状态
         is_send: undefined,//是否留店
-
       }
     },
     computed: {
@@ -180,11 +179,22 @@
         this.$router.push({name: "logistics", params: {ordersn: this.ordersn, status: '2'}})
       },
       payHandle() {//支付
-        if (this.allmoney === 0) {//实际扣款为0 跳转页面
-          this.payorder()
-        } else {//需要付款
-          window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + this.ordersn
-        }
+        this.$dialog.confirm({
+          title: '是否支付？',
+        }).then(() => {
+
+          if (this.allmoney === 0) {//实际扣款为0 跳转页面
+            this.payorder()
+          } else {//需要付款
+            window.location.href = this.$upUrl + 'app/index.php?' + this.$i + '&c=entry&eid=' + this.$eid161.eid + '&dom=' + this.$eid161.dom + '&act=payorder&ordersn=' + this.ordersn
+          }
+        }).catch(() => {
+          // on cancel
+        });
+
+
+
+
       },
       payorder() {//支付判定是否会员
         if (window.sessionStorage.getItem('is_member') == '0') {//非会员
