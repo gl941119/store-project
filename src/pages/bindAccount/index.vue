@@ -68,8 +68,17 @@
           fundCodeTxt:'59秒'
         }
       },
+      created(){
+
+      },
       mounted() {
-        this.initScao();
+        let isB=window.sessionStorage.getItem('is_bind');
+        // alert(isB)
+        if(parseInt(isB)===1){
+          this.$router.go(1)
+        }else{
+          this.initScao();
+        }
       },
       methods:{
         initScao(){
@@ -115,7 +124,7 @@
 
         },
         bindAccountSubmit(){
-
+let url=window.location.href.split('&go=').length;
             this.$request({
               url:'app/index.php?i=1&c=entry&eid=87&act=binduser',
               type:'post',
@@ -127,10 +136,14 @@
               }
             }).then((res) => {
               if(res.status){
-                // this.$router.push({name:'member'});
+
                 this.$toast.success('绑定成功')
                 window.sessionStorage.setItem('is_bind','1')
-                this.$router.go(-1)
+                if(url>1){
+                  this.$router.push({name:'setMealMember'});
+                }else{
+                  this.$router.go(-1)
+                }
               }
             });
 
