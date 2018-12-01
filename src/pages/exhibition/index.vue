@@ -128,19 +128,23 @@
 
 
 </template>
-
 <script>
+
   export default {
-    name: "exhibition"
+    name: "exhibition",
+
   }
 </script>
 
 <style lang="scss" scoped>
-  .wrap{
+
+
+  .wrap {
     width: 100%;
     height: 100%;
     background-color: white;
   }
+
   .banner {
     width: 375px;
     height: 208px;

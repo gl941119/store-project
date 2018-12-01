@@ -3,7 +3,7 @@
 
     <select-bar @emitSort="setSort"></select-bar>
     <div class="main" >
-    <product-card v-for="item in Data" :key="Data.id" :Data="item" ></product-card>
+    <product-card v-for="item,index in Data" :key="index" :Data="item" ></product-card>
     </div>
   </div>
 </template>

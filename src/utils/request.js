@@ -28,7 +28,7 @@ async function ajaxRequest(url = '', data = {}, type = 'POST', isToast = true) {
     url = url.replace('eid=88', 'eid=175&dom=ucenter');
     url = url.replace('eid=89', 'eid=175&dom=card');
     url = url.replace('eid=90', 'eid=175&dom=meal');
-  } else {
+  } else if(process.env.NODE_ENV === 'production'){
     let config = Cache.getConfig()
     let key = config.binds;
     url = url.replace('i=1', 'i=' + config.uid);
